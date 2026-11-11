@@ -1,0 +1,30 @@
+WORSHIP PAD STUDIO – CARA PASANG DI iPAD (aplikasi mandiri, tanpa Claude)
+=======================================================================
+
+Isi folder ini (upload SEMUA file, jangan diubah namanya):
+  index.html, manifest.webmanifest, sw.js, icon-192.png, icon-512.png, apple-touch-icon.png
+
+A. TARUH DI INTERNET (gratis) – pakai GitHub Pages
+  1. Buka github.com di Safari, login (buat akun kalau belum punya).
+  2. Ketuk "+" > New repository. Nama misalnya: pad-studio. Pilih Public. Create repository.
+  3. Ketuk "uploading an existing file" / Add file > Upload files.
+     Pilih semua file di atas dari aplikasi Files (ekstrak ZIP-nya dulu). Commit changes.
+  4. Buka Settings > Pages. Source: "Deploy from a branch", Branch: main, folder: / (root). Save.
+  5. Tunggu 1-2 menit. Alamatnya: https://NAMA-AKUN-ANDA.github.io/pad-studio/
+
+  (Alternatif tanpa akun GitHub, dari laptop: buka app.netlify.com/drop lalu seret folder ini.)
+
+B. PASANG DI iPAD
+  1. Buka alamat tadi di SAFARI.
+  2. Ketuk tombol Share (kotak dengan panah ke atas) > Add to Home Screen > Add.
+  3. Buka dari ikon "Pad Studio" di Home Screen, ketuk Mulai.
+  4. Setelah dibuka sekali saat ada internet, aplikasi bisa dipakai OFFLINE.
+
+C. CATATAN
+  - Rekaman, SF2, dan suara yang di-import tersimpan di dalam aplikasi Home Screen itu saja
+    (terpisah dari Safari dan dari versi di Claude). Ekspor rekaman penting sebagai cadangan.
+  - Ekspor rekaman di versi mandiri langsung jadi MP3 atau WAV (masuk ke Files > Downloads).
+  - Atur Settings > Display & Brightness > Auto-Lock > Never saat dipakai ibadah.
+  - Kalau nanti index.html diperbarui: upload ulang index.html DAN ubah VERSI di sw.js
+    (misalnya 'wps-v1' jadi 'wps-v2'), lalu buka aplikasi 2x saat online.
+  - Encoder MP3 memakai lamejs (lisensi LGPL), sudah tertanam di index.html.
