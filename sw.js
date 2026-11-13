@@ -1,5 +1,5 @@
 // Worship Pad Studio – cache offline. Naikkan VERSI setiap kali index.html diperbarui.
-const VERSI = 'wps-v12';
+const VERSI = 'wps-v14';
 const FILES = ['./', './index.html', './manifest.webmanifest', './icon-192.png', './icon-512.png', './apple-touch-icon.png', './bells.js', './cues.js'];
 self.addEventListener('install', e => { e.waitUntil(caches.open(VERSI).then(c => c.addAll(FILES)).then(() => self.skipWaiting())); });
 self.addEventListener('activate', e => { e.waitUntil(caches.keys().then(ks => Promise.all(ks.filter(k => k !== VERSI).map(k => caches.delete(k)))).then(() => self.clients.claim())); });

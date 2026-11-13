@@ -200,6 +200,11 @@ details.fx>.controls{border:none;border-top:1px solid var(--line);border-radius:
 .achords{display:flex;flex-wrap:wrap;gap:5px;margin-bottom:4px}.achords button{padding:5px 8px;display:flex;flex-direction:column;align-items:center;min-width:44px;line-height:1.1}
 .achords small{font-size:9px;opacity:.7}
 .alib .sect{margin:10px 4px 6px}
+.altools{display:flex;gap:5px;margin-bottom:6px}
+.akeyrow{display:flex;align-items:center;gap:5px;flex-wrap:wrap;margin:0 0 8px}.akeyrow select{flex:1;min-width:60px;padding:6px}.akeyrow button{padding:6px 8px;font-size:12.5px}.akeyrow .lbl{width:100%;margin-bottom:-2px}.altools button{flex:1;padding:5px 4px;font-size:11.5px}
+.alhead{display:flex;align-items:center;gap:6px;padding:7px 6px;margin:6px 0 5px;border-radius:9px;cursor:pointer;font-size:11.5px;color:var(--mute);text-transform:uppercase;letter-spacing:.5px;background:#1a1d25;border:1px solid var(--line);user-select:none}
+.alhead .car{color:var(--accent);font-size:12px;width:10px}.alhead .tt{flex:1;min-width:0;line-height:1.25}.alhead small{background:var(--panel2);border-radius:8px;padding:1px 7px;font-size:10.5px;letter-spacing:0}
+.alhead.shut{color:#c9cdd8}.alhead:active{background:var(--panel2)}
 .aitem{display:flex;align-items:center;gap:8px;padding:8px 10px;border-radius:10px;background:var(--panel2);border:1px solid var(--line);margin-bottom:6px;cursor:grab;touch-action:none;font-size:14px}
 .aitem i{width:10px;height:10px;border-radius:3px;flex:none}.aitem span{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .aitem small{color:var(--mute);margin-left:auto;font-size:11px;flex:none}
@@ -1054,7 +1059,7 @@ function holdParam(p, t) { if (p.cancelAndHoldAtTime) p.cancelAndHoldAtTime(t); 
 /* ================= state ================= */
 const DEFAULTS = { bpm: 100, sig: 4, clickVol: 70, master: 85, split: false, timbre: 'warm', chord: '5', octave: 0,
   padVol: 70, padBright: 45, padRev: 60, padFade: 30, arpOn: false, arpSound: 'pluck', arpPat: 'up', arpRate: 2, arpVol: 55,
-  kbSound: 'clarity', vel: 96, sfVol: 75, sfRev: 35, kbOct: 48, chVol: 60, chRev: 55, chColl: 60, chDecay: 100, kit: 'edm', drVol: 75, tab: 'pad', recCount: true, recSync: true, gtSound: 'steel', gtKey: 2, gtMinor: false, gtShape: 'full', gtPM: false, gtPat: 'pop', gtVol: 75, gtRev: 30, gtTone: 50, gtDrive: 50, gtChorus: false, gtDelay: false, gtDTime: 'd8', gtDFb: 30, gtDMix: 25, bsSound: 'precision', bsMode: 'auto', bsPat: 'worship', bsTech: 'finger', bsLegato: true, bsRing: false, bsVel: 100, bsVol: 80, bsRev: 12, bsLo: 60, bsMid: 55, bsHi: 42, bsDrive: 0, bsComp: true, bsOct: false, bsChorus: false, bsEnv: false, bsDelay: false, bsDTime: 'd8', bsLink: false, gtOwn: false, gtBpm: 100, gtSpd: 1, bsOwn: false, bsBpm: 100, bsSpd: 1, kbChorus: false, kbDelay: true, kbDTime: 'd8', kbDMix: 28, kbDFb: 35, kbPump: false, kbGlide: false, kbTimed: false, kbHold: 30, kbFade: 20, guideVol: 85, cueOn: true, cueVoice: 'm', cuePre: true, arrClick: false, audVol: 80, audRev: 15, dset: {}, recStack: false, tlView: 'song', drRev: 50, mxLo: 0, mxMid: 0, mxHi: 0, mxGlue: false, mxGlueAmt: 40, mxLim: true, mxMute: {}, mxSolo: {}, mxPan: {} };
+  kbSound: 'clarity', vel: 96, sfVol: 75, sfRev: 35, kbOct: 48, chVol: 60, chRev: 55, chColl: 60, chDecay: 100, kit: 'edm', drVol: 75, tab: 'pad', recCount: true, recSync: true, gtSound: 'steel', gtKey: 2, gtMinor: false, gtShape: 'full', gtPM: false, gtPat: 'pop', gtVol: 75, gtRev: 30, gtTone: 50, gtDrive: 50, gtChorus: false, gtDelay: false, gtDTime: 'd8', gtDFb: 30, gtDMix: 25, bsSound: 'precision', bsMode: 'auto', bsPat: 'worship', bsTech: 'finger', bsLegato: true, bsRing: false, bsVel: 100, bsVol: 80, bsRev: 12, bsLo: 60, bsMid: 55, bsHi: 42, bsDrive: 0, bsComp: true, bsOct: false, bsChorus: false, bsEnv: false, bsDelay: false, bsDTime: 'd8', bsLink: false, gtOwn: false, gtBpm: 100, gtSpd: 1, bsOwn: false, bsBpm: 100, bsSpd: 1, kbChorus: false, kbDelay: true, kbDTime: 'd8', kbDMix: 28, kbDFb: 35, kbPump: false, kbGlide: false, kbTimed: false, kbHold: 30, kbFade: 20, aLibHide: {}, arrKey: -1, arrMinor: -1, guideVol: 85, cueOn: true, cueVoice: 'm', cuePre: true, arrClick: false, audVol: 80, audRev: 15, dset: {}, recStack: false, tlView: 'song', drRev: 50, mxLo: 0, mxMid: 0, mxHi: 0, mxGlue: false, mxGlueAmt: 40, mxLim: true, mxMute: {}, mxSolo: {}, mxPan: {} };
 const S = {}; for (const k in DEFAULTS) S[k] = store.get(k, DEFAULTS[k]);
 S.arpOn = false;
 function save(k) { store.set(k, S[k]); }
@@ -2362,8 +2367,13 @@ function gtrPluck(st, midi, vel, t, pm = S.gtPM, sound = S.gtSound) {
 }
 function gtrDampAll(t, tau) { t = Math.max(t || 0, ctx.currentTime); L({ type: 'gdamp', t }); if (CAP) return; gtr.strings.forEach(v => damp(v, t, tau)); gtr.strings.clear(); }
 /* --- akor --- */
-function chordList(extra) { const flat = FLAT_KEYS.has(S.gtKey), set = CHORDSET[S.gtMinor ? 'min' : 'maj'][extra ? 'extra' : 'main'];
-  return set.map(([iv, q, rn]) => { const pc = (S.gtKey + iv) % 12; return { pc, q, rn, name: noteName(pc, flat) + q }; }); }
+// nada dasar khusus Susun Lagu (−1 = ikut nada dasar Gitar)
+const akey = () => S.arrKey >= 0 ? S.arrKey : S.gtKey, amin = () => S.arrMinor >= 0 ? !!S.arrMinor : S.gtMinor;
+// ejaan akor: kunci minor ikut relatif mayornya (C minor → Eb, Ab, Bb); akor pinjaman bVII / bVI / bIII pakai mol (C → Bb)
+function keyChords(key, minor, extra) { const set = CHORDSET[minor ? 'min' : 'maj'][extra ? 'extra' : 'main'], kf = FLAT_KEYS.has(minor ? (key + 3) % 12 : key);
+  return set.map(([iv, q, rn]) => { const pc = (key + iv) % 12; return { pc, q, rn, name: noteName(pc, kf || /^b/.test(rn)) + q }; }); }
+function chordListK(extra) { return keyChords(akey(), amin(), extra); }
+function chordList(extra) { return keyChords(S.gtKey, S.gtMinor, extra); }
 function curChord() { return CAPCHORD || chordList(gtr.extra)[gtr.chord] || chordList(false)[0]; }
 function curVoicing() { const c = curChord(); return isPower() && !['sus2', 'sus4', 'dim'].includes(c.q) ? powerVoicing(c.pc) : chordVoicing(c.pc, c.q); }
 function strum(dir, vel = 105, t0, onlyTop, pm) {
@@ -3540,40 +3550,63 @@ async function arrLoad(demo) {
 }
 /* --- pustaka --- */
 function arrLibItems() {
-  const L = [{ h: 'Instrumen — pakai akor yang dipilih' },
+  const L = [{ h: 'Instrumen (pakai akor)' },
     { kind: 'pad', name: 'Pad', len: 8 }, { kind: 'kb', name: 'Keyboard akor', len: 8 }, { kind: 'gtr', name: 'Gitar genjreng', len: 8 }, { kind: 'bass', name: 'Bass groove', len: 8 },
-    { h: 'Bagian lagu (suara pemandu) — tarik ke bar' }, { grid: Object.keys(SEC).map(t => ({ kind: 'sec', t, name: SEC[t].s || SEC[t].n, len: 4 })) },
+    { h: 'Bagian lagu (pemandu)' }, { grid: Object.keys(SEC).map(t => ({ kind: 'sec', t, name: SEC[t].s || SEC[t].n, len: 4 })) },
     { h: 'Pola drum' }, ...Object.entries(ARR_PATS).map(([p, v]) => ({ kind: 'pat', name: v.name, len: p === 'fill' ? 4 : 16, d: { p } })),
     { h: 'Pukulan drum' }, ...['kick', 'snare', 'crash', 'crash2', 'crash3', 'splash', 'tom1', 'tom3', 'ride'].map(p => { const d = KITS.std.pads.find(x => x.id === 's_' + p); return { kind: 'shot', name: d.name, len: 1, d: { id: d.id } }; }),
     { h: 'Efek' }, { kind: 'chime', name: 'Chimes sapu naik', len: 4, d: { dir: 1 } }, { kind: 'chime', name: 'Chimes sapu turun', len: 4, d: { dir: -1 } },
     ...['riser', 'revcym', 'impact', 'subdrop'].map(id => { const d = KITS.edm.pads.find(x => x.id === id); return { kind: 'fxs', name: d.name, len: d.sync ? 4 : 2, d: { id } }; }),
-    { h: 'Rekaman Anda (dari tab Rekam)' }];
+    { h: 'Rekaman Anda' }];
   takes.forEach(tk => L.push({ kind: 'take', name: tk.name, len: Math.max(1, Math.round(tk.len / aq())), sec: tk.len, d: { tid: tk.id } }));
   if (!takes.length) L.push({ note: 'Belum ada rekaman.' });
-  L.push({ h: 'Audio Anda (import / mic)' });
+  L.push({ h: 'Audio Anda (import/mic)' });
   arr.aud.forEach(a => L.push({ kind: a.kind, name: a.name, sec: a.sec, len: a.sec / aq(), d: { aid: a.aid } }));
   if (!arr.aud.length) L.push({ note: 'Import file atau rekam mic — hasilnya muncul di sini.' });
   return L;
 }
+// grup pustaka bisa dilipat: ketuk judul untuk sembunyikan / tampilkan isinya
+function libGroup(el, key, title, count) {
+  const hid = !!(S.aLibHide || {})[key], h = document.createElement('div'), g = document.createElement('div');
+  h.className = 'alhead' + (hid ? ' shut' : ''); h.innerHTML = `<span class="car">${hid ? '▸' : '▾'}</span><span class="tt"></span>${count != null ? `<small>${count}</small>` : ''}`; h.querySelector('.tt').textContent = title;
+  h.onclick = () => { S.aLibHide = Object.assign({}, S.aLibHide || {}); S.aLibHide[key] = !hid; save('aLibHide'); renderArrLib(); };
+  g.className = 'algroup'; g.style.display = hid ? 'none' : ''; el.appendChild(h); el.appendChild(g); return g;
+}
 function renderArrLib() {
-  const el = $('#aLib'); if (!el) return; el.innerHTML = '';
-  const cw = document.createElement('div'); cw.className = 'achords';
-  cw.innerHTML = '<div class="sect" style="margin:0 2px 6px">Akor untuk instrumen</div>';
+  const el = $('#aLib'); if (!el) return; const st = el.scrollTop; el.innerHTML = '';
+  const items = arrLibItems(), groups = [];
+  items.forEach(it => { if (it.h) groups.push({ h: it.h, list: [] }); else if (groups.length) groups[groups.length - 1].list.push(it); });
+  const keyOf = h => h.split(/ —| \(/)[0].trim(), keys = ['Akor', ...groups.map(g => keyOf(g.h))];
+  const tb = document.createElement('div'); tb.className = 'altools';
+  tb.innerHTML = '<button class="mini">▾ Buka semua</button><button class="mini">▸ Tutup semua</button>';
+  tb.children[0].onclick = () => { S.aLibHide = {}; save('aLibHide'); renderArrLib(); };
+  tb.children[1].onclick = () => { S.aLibHide = {}; keys.forEach(k => S.aLibHide[k] = true); save('aLibHide'); renderArrLib(); };
+  el.appendChild(tb);
+  const cg = libGroup(el, 'Akor', 'Akor untuk instrumen', null), cw = document.createElement('div'); cw.className = 'achords';
   const mk = (list, x) => list.forEach((c, i) => { const b = document.createElement('button'); b.className = 'mini' + (arr.chord === i && arr.chordX === x ? ' on' : ''); b.innerHTML = `${c.name}<small>${c.rn}</small>`;
     b.onclick = () => { arr.chord = i; arr.chordX = x; renderArrLib(); }; cw.appendChild(b); });
-  mk(chordList(false), false); mk(chordList(true), true); el.appendChild(cw);
-  arrLibItems().forEach(it => {
-    if (it.h) { const h = document.createElement('div'); h.className = 'sect'; h.textContent = it.h; el.appendChild(h); return; }
-    if (it.grid) { const g = document.createElement('div'); g.className = 'asecgrid';
-      it.grid.forEach(x => { const d = document.createElement('div'); d.className = 'asec'; d.style.borderLeftColor = SEC[x.t].c; d.textContent = x.name; d.addEventListener('pointerdown', e => arrLibDrag(e, x)); g.appendChild(d); }); el.appendChild(g); return; }
-    if (it.note) { const n = document.createElement('div'); n.className = 'note'; n.style.padding = '0 4px 6px'; n.textContent = it.note; el.appendChild(n); return; }
-    const d = document.createElement('div'); d.className = 'aitem';
-    d.innerHTML = `<i style="background:${ARR_COL[it.kind]}"></i><span></span><small>${it.len >= 4 ? Math.round(it.len / 4 * 10) / 10 + ' bar' : Math.round(it.len * 10) / 10 + ' ktk'}</small>`;
-    d.querySelector('span').textContent = it.name; d.addEventListener('pointerdown', e => arrLibDrag(e, it)); el.appendChild(d);
+  const kr = document.createElement('div'); kr.className = 'akeyrow';
+  kr.innerHTML = `<span class="lbl">Nada dasar</span><select class="mini" id="aKey">${($('#gtKey') || {}).innerHTML || ''}</select><button class="mini${amin() ? '' : ' on'}" data-m="0">Mayor</button><button class="mini${amin() ? ' on' : ''}" data-m="1">Minor</button>`;
+  kr.querySelector('select').value = akey();
+  kr.querySelector('select').onchange = e => { S.arrKey = +e.target.value; save('arrKey'); if (S.arrMinor < 0) { S.arrMinor = S.gtMinor ? 1 : 0; save('arrMinor'); } arr.chord = 0; arr.chordX = false; renderArrLib(); toast('Akor sekarang mengikuti nada dasar ' + noteName(akey(), FLAT_KEYS.has(akey())) + (amin() ? ' minor' : '') + '.'); };
+  kr.querySelectorAll('button').forEach(b => b.onclick = () => { S.arrMinor = +b.dataset.m; save('arrMinor'); if (S.arrKey < 0) { S.arrKey = S.gtKey; save('arrKey'); } arr.chord = 0; arr.chordX = false; renderArrLib(); });
+  cg.appendChild(kr);
+  mk(chordListK(false), false); mk(chordListK(true), true); cg.appendChild(cw);
+  groups.forEach(G2 => {
+    const n = G2.list.reduce((a, it) => a + (it.grid ? it.grid.length : it.note ? 0 : 1), 0), g = libGroup(el, keyOf(G2.h), G2.h, n);
+    G2.list.forEach(it => {
+      if (it.grid) { const gg = document.createElement('div'); gg.className = 'asecgrid';
+        it.grid.forEach(x => { const d = document.createElement('div'); d.className = 'asec'; d.style.borderLeftColor = SEC[x.t].c; d.textContent = x.name; d.addEventListener('pointerdown', e => arrLibDrag(e, x)); gg.appendChild(d); }); g.appendChild(gg); return; }
+      if (it.note) { const d = document.createElement('div'); d.className = 'note'; d.style.padding = '0 4px 6px'; d.textContent = it.note; g.appendChild(d); return; }
+      const d = document.createElement('div'); d.className = 'aitem';
+      d.innerHTML = `<i style="background:${ARR_COL[it.kind]}"></i><span></span><small>${it.len >= 4 ? Math.round(it.len / 4 * 10) / 10 + ' bar' : Math.round(it.len * 10) / 10 + ' ktk'}</small>`;
+      d.querySelector('span').textContent = it.name; d.addEventListener('pointerdown', e => arrLibDrag(e, it)); g.appendChild(d);
+    });
   });
+  el.scrollTop = st;
 }
 function clipFromItem(it, track, start) {
-  const c = chordList(arr.chordX)[arr.chord] || chordList(false)[0], cc = { pc: c.pc, q: c.q, name: c.name }, d = Object.assign({}, it.d || {});
+  const c = chordListK(arr.chordX)[arr.chord] || chordListK(false)[0], cc = { pc: c.pc, q: c.q, name: c.name }, d = Object.assign({}, it.d || {});
   if (it.kind === 'pad') Object.assign(d, { c: cc, snd: S.timbre });
   if (it.kind === 'kb') Object.assign(d, { c: cc, snd: KB[S.kbSound] || /^gt:/.test(S.kbSound) ? S.kbSound : 'clarity', style: 'hold' });
   if (it.kind === 'gtr') Object.assign(d, { c: cc, snd: S.gtSound, pat: S.gtPat, shape: S.gtShape });
@@ -3728,7 +3761,7 @@ function arrDel(k) {
 function arrEditor(k) {
   const box = $('#aBox'), d = k.d, opt = sel => ($(sel) || {}).innerHTML || '';
   let h = `<h2>${clipLabel(k)}</h2>`;
-  const chordChips = () => `<div class="sect">Akor</div><div class="chips">${[...chordList(false), ...chordList(true)].map(c => `<button class="mini ach ${d.c && c.name === d.c.name ? 'on' : ''}" data-pc="${c.pc}" data-q="${c.q}" data-n="${c.name}">${c.name}</button>`).join('')}</div>`;
+  const chordChips = () => `<div class="sect">Akor</div><div class="chips">${[...chordListK(false), ...chordListK(true)].map(c => `<button class="mini ach ${d.c && c.name === d.c.name ? 'on' : ''}" data-pc="${c.pc}" data-q="${c.q}" data-n="${c.name}">${c.name}</button>`).join('')}</div>`;
   if (k.kind === 'pad') h += chordChips() + `<div class="sect">Suara pad</div><select id="aeSnd">${Object.entries(TIMBRES).map(([v, t]) => `<option value="${v}">${t.name}</option>`).join('')}</select>`;
   if (k.kind === 'kb') h += chordChips() + `<div class="sect">Suara keyboard</div><select id="aeSnd">${opt('#kbSound')}</select><div class="sect">Cara main</div><div class="chips">${[['hold', 'Tahan'], ['beat', 'Tiap ketuk'], ['arp', 'Arpeggio 1/8']].map(([v, n]) => `<button class="mini asty ${d.style === v ? 'on' : ''}" data-v="${v}">${n}</button>`).join('')}</div>`;
   if (k.kind === 'gtr') h += chordChips() + `<div class="sect">Suara gitar</div><select id="aeSnd">${opt('#gtSound')}</select><div class="sect">Pola genjrengan</div><select id="aePat">${opt('#gtPat')}</select><div class="sect">Bentuk</div><div class="chips">${[['full', 'Akor penuh'], ['power', 'Power 2 senar'], ['power3', 'Power + oktaf']].map(([v, n]) => `<button class="mini ashp ${(d.shape || 'full') === v ? 'on' : ''}" data-v="${v}">${n}</button>`).join('')}</div>`;
@@ -3782,7 +3815,7 @@ function renderArrBtns() {
   const m = $('#aMic'); m.textContent = micA ? '■ Stop mic' : '● Mic'; m.classList.toggle('rec', !!micA);
 }
 function arrDemo() {
-  const c = chordList(false), put = (kind, track, start, len, d, name) => { const k = { id: arr.nid++, kind, name: name || kind, track, start, len, d }; arr.clips.push(k); };
+  const c = chordListK(false), put = (kind, track, start, len, d, name) => { const k = { id: arr.nid++, kind, name: name || kind, track, start, len, d }; arr.clips.push(k); };
   const cc = i => ({ pc: c[i].pc, q: c[i].q, name: c[i].name }), prog = [0, 1, 2, 4];
   put('chime', 'fx', 0, 4, { dir: 1 }, 'Chimes sapu naik');
   [0, 1].forEach(r => prog.forEach((ci, i) => put('pad', 'pad', r * 32 + i * 8, 8, { c: cc(ci), snd: 'warm' })));
