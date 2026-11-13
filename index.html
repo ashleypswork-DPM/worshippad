@@ -223,6 +223,7 @@ details.fx>.controls{border:none;border-top:1px solid var(--line);border-radius:
 .alane.alt{background-color:#14171d}.alane.hover{background-color:#1d2a26}
 .agrid.selmode .alane,.agrid.selmode .aclip,.agrid.selmode .arow>.ahead{touch-action:none;cursor:crosshair}
 .arow:not(.aruler):not(.amrow):not(.addrow)>.ahead{cursor:crosshair}
+.actx .mhead,#aCtx .mhead{opacity:.75;font-size:12px;cursor:default;background:none!important}
 .amarq{position:absolute;display:none;z-index:3;border:1.5px dashed #fff;background:rgba(79,195,169,.15);border-radius:4px;pointer-events:none}
 .anm .tn{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis}.anm .tmenu{padding:0 6px;font-size:14px;line-height:18px;border-radius:6px;background:transparent;border:1px solid transparent;color:var(--mute)}
 .anm .tmenu:hover{border-color:var(--line);color:var(--text)}
@@ -545,9 +546,9 @@ details.fx>.controls{border:none;border-top:1px solid var(--line);border-radius:
         <span class="grp"><span class="lbl">Snap</span><select id="aSnap" class="mini"><option value="4">1 bar</option><option value="1">1 ketuk</option><option value="0.5">1/8</option><option value="0.25">1/16</option></select></span>
         <span class="grp"><span class="lbl">Zoom</span><button id="aZoomOut" class="mini">−</button><button id="aZoomIn" class="mini">+</button></span>
         <span class="vsep"></span>
-        <button id="aMic" class="mini" title="Rekam suara dari mikrofon">● Mic</button><button id="aImp" class="mini">⤓ Import</button><input id="aFile" type="file" accept="audio/*" hidden>
+        <button id="aMic" class="mini" title="Rekam langsung ke Susun Lagu: Pad, Keyboard, Gitar, Bass, Drum, Chimes, atau mic">● Rekam</button><button id="aImp" class="mini">⤓ Import</button><input id="aFile" type="file" accept="audio/*" hidden>
         <span style="flex:1"></span>
-        <button id="aSelBtn" class="mini" title="Mode pilih (iPad): seret jari untuk memilih banyak clip">⬚ Pilih</button><button id="aUndo" class="mini" title="Undo (Ctrl+Z)">↶</button><button id="aRedo" class="mini" title="Redo (Ctrl+Y)">↷</button><button id="aDel" class="mini" title="Hapus (Delete)">🗑</button><button id="aClear" class="mini">Kosongkan</button><button id="aDemo" class="mini">Contoh</button><button id="aExport" class="mini">Ekspor</button>
+        <button id="aSelBtn" class="mini" title="Mode pilih (iPad): seret jari untuk memilih banyak clip">⬚ Pilih</button><button id="aUndo" class="mini" title="Undo (Ctrl+Z)">↶</button><button id="aRedo" class="mini" title="Redo (Ctrl+Y)">↷</button><button id="aDel" class="mini" title="Hapus (Delete)">🗑</button><button id="aClear" class="mini" title="Kosongkan semua">🧹</button><button id="aDemo" class="mini">Contoh</button><button id="aExport" class="mini">Ekspor</button>
       </div>
       <div class="amain">
         <div class="alib" id="aLib"></div>
@@ -2992,6 +2993,7 @@ function stopRec() {
   clearInterval(rec.timer); const now = ctx.currentTime;
   if (rec.state !== 'rec') return;
   rec.state = 'idle'; renderRecBtn();
+  const AR = rec.arr; rec.arr = null; if (AR) { if (arrPl) arrStop(true); stopClick(); renderArrBtns(); }
   if (rec.stack) stopSong();
   if (now < rec.t0 + 0.1) { toast('Rekaman dibatalkan (belum mulai).'); return; }
   const bars = Math.max(1, Math.ceil((now - rec.t0) / rec.bar - 0.03)), len = bars * rec.bar;
@@ -3001,6 +3003,7 @@ function stopRec() {
   const open = new Map();
   ev.forEach(e => { if (e.type === 'padOn' || e.type === 'kbOn') open.set(e.type[0] + e.id, e); if (e.type === 'padOff') open.delete('p' + e.id); if (e.type === 'kbOff') open.delete('k' + e.id); });
   open.forEach(e => ev.push(e.type === 'padOn' ? { type: 'padOff', id: e.id, t: len - 0.001, f: 0.25 } : { type: 'kbOff', id: e.id, t: len - 0.001, x: false }));
+  if (AR) { arrRecFinish(AR, ev, bars, len); return; }
   const tk = { id: Date.now(), name: 'Rekaman ' + (takes.filter(t => t.type !== 'audio').length + 1), type: 'seq', bpm: rec.bpm, sig: rec.sig, bars, len, events: ev, vol: 80, loop: true };
   if (rec.stack) { tk.name = `Track ${song.tracks.length + 1} · ${instLabel(tk)}`; tk.loop = song.tracks.length === 0 || /Drum/.test(instLabel(tk)); }
   takes.unshift(tk); selTake = tk; saveTakes(); renderTakes();
@@ -3481,7 +3484,7 @@ function trackMenu(x, y, t) {
   showMenu(m, x, y, items);
 }
 function showMenu(m, x, y, items) {
-  m.innerHTML = ''; items.forEach(([t, f]) => { const b = document.createElement('button'); b.textContent = t; b.onclick = () => { m.classList.remove('show'); f(); }; m.appendChild(b); });
+  m.innerHTML = ''; items.forEach(([t, f]) => { const b = document.createElement('button'); b.textContent = t; if (!f) { b.disabled = true; b.className = 'mhead'; } else b.onclick = () => { m.classList.remove('show'); f(); }; m.appendChild(b); });
   m.classList.add('show'); const r = m.getBoundingClientRect(); m.style.left = Math.max(4, Math.min(x, innerWidth - r.width - 8)) + 'px'; m.style.top = Math.max(4, Math.min(y, innerHeight - r.height - 8)) + 'px';
 }
 const aq = () => 60 / S.bpm;
@@ -3578,7 +3581,7 @@ function arrTick() {
     P.idx++;
   }
   const end = sp.t0 + sp.len;
-  if (arr.loop && !sp.only && now > end - 0.25) { arrPlay(0, end); return; }
+  if (arr.loop && !sp.only && !sp.noLoop && now > end - 0.25) { arrPlay(0, end); return; }
   if (now > end + 0.15) arrStop(false, true);
 }
 function arrStop(silent, natural) { const sp = arrPl; if (!sp) return; clearInterval(sp.timer); arrPl = null; if (ctx) sp.parts.forEach(P => P.cue ? (natural || P.srcs.forEach(x => { try { x.stop(); } catch (e) {} })) : killPl(P.pl, natural)); if (!silent) { renderArrBtns(); if (micA) stopMicA(); } }
@@ -3744,12 +3747,23 @@ function drawAClip(k) {
   if (!el) { el = document.createElement('div'); el.className = 'aclip'; el.dataset.id = k.id; el.innerHTML = '<canvas></canvas><div class="t"></div><div class="rz"></div><div class="rzl"></div>'; el.addEventListener('pointerdown', e => arrClipDrag(e, k)); }
   if (el.parentNode !== lane) lane.appendChild(el);
   const len = clipLen(k), w = Math.max(10, Math.round(len * arr.ppb));
-  el.style.left = k.start * arr.ppb + 'px'; el.style.width = (w - 2) + 'px'; el.style.background = ARR_COL[k.kind]; el.classList.toggle('sel', arr.selSet.has(k));
+  el.style.left = k.start * arr.ppb + 'px'; el.style.width = (w - 2) + 'px'; el.style.background = ARR_COL[(k.d && k.d.col) || k.kind]; el.classList.toggle('sel', arr.selSet.has(k));
   el.querySelector('.t').textContent = clipLabel(k) + (k.kind === 'take' && !takeOf(k) ? ' (terhapus)' : '');
   const cv = el.querySelector('canvas'), h = 42; cv.width = w * 2; cv.height = h * 2; const x = cv.getContext('2d'); x.scale(2, 2); x.fillStyle = 'rgba(255,255,255,.55)';
   if (k.kind === 'pat') { const c4 = Math.round((k.d.cut || 0) * 4); for (let b = 0, i = c4; b < len - 1e-6; b += .25, i++) k.d.st.forEach((row, r) => { if (row[i % 16]) x.fillRect(b * arr.ppb + 1, 18 + r * 3.4, Math.max(2, arr.ppb / 4 - 1.5), 2.4); }); }
   else if (['gtr', 'bass', 'kb'].includes(k.kind)) { for (let b = 0; b < len - 1e-6; b += 1) x.fillRect(b * arr.ppb + 2, 30, Math.max(2, arr.ppb - 5), b % 4 === 0 ? 8 : 5); }
   else if (k.kind === 'pad') { x.globalAlpha = .3; x.fillRect(0, 26, w, 12); }
+  else if (k.kind === 'take' && takeOf(k) && takeOf(k).type === 'seq') {   // tampilkan rekaman sebagai pola (drum per baris, not sebagai balok)
+    const tk = takeOf(k), tl = tk.len / aq(), ev = tk.events, ns = ev.filter(e => typeof e.n === 'number').map(e => e.n), lo = Math.min(...ns), hi = Math.max(...ns), yN = n => 33 - (hi > lo ? (n - lo) / (hi - lo) : .5) * 15, P = arr.ppb;
+    for (let o = 0; o < len - 1e-6; o += tl) ev.forEach(e => {
+      const b = o + e.t / aq(); if (b >= len - 1e-6) return; const X = b * P;
+      if (e.type === 'drum') { x.fillRect(X + 1, 17 + drumRow(e.id) * 3.2, Math.max(2, P / 4 - 1.5), 2.4); }
+      else if (e.type === 'padOn' || e.type === 'kbOn') { const ot = e.type === 'padOn' ? 'padOff' : 'kbOff', off = ev.find(f => f.type === ot && f.id === e.id && f.t >= e.t), w = ((off ? off.t : tk.len) - e.t) / aq() * P;
+        x.fillRect(X, e.type === 'padOn' ? 22 : yN(e.n), Math.max(2, Math.min(w, (len - b) * P) - 1), e.type === 'padOn' ? 14 : 2.6); }
+      else if (typeof e.n === 'number') x.fillRect(X, yN(e.n), Math.max(2, Math.min(P / 4, (e.d ? e.d / aq() * P : P / 4)) - 1), 2.6);
+      else if (/chime|chrec/.test(e.type)) x.fillRect(X, 20, 2, 16);
+    }); }
+
   else if (isAud(k)) { const buf = audBuf(k); if (buf) { const d = buf.getChannelData(0), sr = buf.sampleRate, q = aq(), off = k.d.off || 0;
     for (let px = 0; px < w; px++) { const a = Math.floor((px / arr.ppb * q + off) * sr), bq = Math.floor(((px + 1) / arr.ppb * q + off) * sr); let m = 0; for (let i = a; i < bq && i < d.length; i += 8) m = Math.max(m, Math.abs(d[i])); const hh = Math.min(1, m * 1.6) * 13; x.fillRect(px, 31 - hh, 1, hh * 2 + 1); } } }
 }
@@ -3788,7 +3802,7 @@ function arrCtx(x, y, k, lane, beat) {
   if (!k) { items.push(['⬚ Pilih semua clip', () => { arr.selSet = new Set(arr.clips); arr.clips.forEach(drawAClip); toast(arr.clips.length + ' clip dipilih.'); }]);
     if (arr.selSet.size) items.push([`🗑 Hapus yang dipilih (${arr.selSet.size})`, () => arrDel()]);
     items.push([arr.selMode ? '✋ Matikan mode pilih (seret = geser layar)' : '⬚ Mode pilih: seret jari untuk memilih', () => toggleSelMode()]); }
-  m.innerHTML = ''; items.forEach(([t, f]) => { const b = document.createElement('button'); b.textContent = t; b.onclick = () => { m.classList.remove('show'); f(); }; m.appendChild(b); });
+  m.innerHTML = ''; items.forEach(([t, f]) => { const b = document.createElement('button'); b.textContent = t; if (!f) { b.disabled = true; b.className = 'mhead'; } else b.onclick = () => { m.classList.remove('show'); f(); }; m.appendChild(b); });
   m.classList.add('show'); const r = m.getBoundingClientRect(); m.style.left = Math.min(x, innerWidth - r.width - 8) + 'px'; m.style.top = Math.min(y, innerHeight - r.height - 8) + 'px';
 }
 const alaneAt = (x, y) => { const e = document.elementFromPoint(x, y); return e && e.closest ? e.closest('.alane') : null; };
@@ -3892,9 +3906,55 @@ async function arrExport() {
   if (!arr.clips.length) { toast('Timeline masih kosong.'); return; }
   const Ly = arrLayout(0); exportTake({ name: 'Susunan lagu ' + new Date().toISOString().slice(0, 10) }, () => renderMulti(Ly.items, Ly.len));
 }
+/* --- rekam langsung ke Susun Lagu: pilih alat → hitung masuk 1 bar → main → Stop → otomatis jadi clip --- */
+const drumRow = id => { id = String(id).toLowerCase().split('_').pop(); for (const [r, i] of [[/kick|bd|808/, 0], [/snare|clap|rim|sd/, 1], [/ohat|open/, 3], [/hat|hh|shak|tamb/, 2], [/tom1|hitom|hi.?tom/, 4], [/tom2|mid.?tom/, 5], [/floor|tom3|lo.?tom/, 6]]) if (r.test(id)) return i; return 7; };
+const REC_GRP = { padOn: 'pad', padOff: 'pad', kbOn: 'kb', kbOff: 'kb', syn: 'kb', gtr: 'gtr', gdamp: 'gtr', bass: 'bass', bleg: 'bass', boff: 'bass', drum: 'drum', chime: 'fx', chrec: 'fx' };
+const REC_GRP_N = { pad: ['Pad', 'pad'], kb: ['Keyboard', 'kb'], gtr: ['Gitar', 'gtr'], bass: ['Bass', 'bass'], drum: ['Drum', 'pat'], fx: ['Chimes', 'chime'], take: ['Rekaman', 'take'] };
+function arrRecMenu(x, y) {
+  const st = Math.floor(arr.head / 4 + 1e-6) * 4;
+  showMenu($('#aCtx'), x, y, [[`Mulai dari bar ${st / 4 + 1} — mau rekam apa?`, null],
+    ['🎛 Pad', () => arrRecStart('pad')], ['🎹 Keyboard', () => arrRecStart('kb')], ['🎸 Gitar', () => arrRecStart('gtr')], ['🎸 Bass', () => arrRecStart('bass')],
+    ['🥁 Drum Pad', () => arrRecStart('drum')], ['🔔 Chimes', () => arrRecStart('chime')], ['🎤 Mic / vokal', () => startMicA()]]);
+}
+function arrRecStart(tab) {
+  ensureAudio(); if (rec.state !== 'idle') return; stopAllTakes(false); if (micA) stopMicA();
+  const startB = Math.floor(arr.head / 4 + 1e-6) * 4, q = aq(), nb = beatsPerBar(), t0 = ctx.currentTime + 0.12 + nb * beatDur();
+  if (clk.on) stopClick();
+  clk.on = true; clk.beat = 0; clk.next = t0 - nb * beatDur(); clk.queue = []; clk.timer = setInterval(scheduler, 25); scheduler();
+  $('#clickBtn').classList.add('on'); $('#clickBtn').textContent = '■ Stop click';
+  rec.bpm = S.bpm; rec.sig = S.sig; rec.bar = 4 * q; rec.events = []; rec.t0 = t0; rec.state = 'rec'; rec.stack = false; rec.arr = { startB, tab };
+  arr.head = startB; if (arrPlay(startB, t0) && arrPl) arrPl.noLoop = true;
+  setTimeout(() => { if (rec.state !== 'rec' || !pad.voice) return; const v = pad.voice; if (!rec.events.some(e => e.type === 'padOn' && e.id === v.id)) rec.events.unshift({ type: 'padOn', id: v.id, k: v.k, P: v.P, t: 0, f: 0.05 }); }, Math.max(0, (t0 - ctx.currentTime) * 1000 + 30));
+  rec.timer = setInterval(renderRecBtn, 100); renderRecBtn(); renderArrBtns(); requestWake();
+  showTab(tab);
+  toast(`Hitung masuk 1 bar… lalu mainkan mulai bar ${startB / 4 + 1}. Tekan ■ Stop rekam (tombol merah di atas) kalau sudah selesai.`, 5000);
+}
+function arrRecTrack(type, s, e) {
+  const busy = t => arr.clips.some(k => k.track === t.id && k.start < e - 1e-6 && k.start + clipLen(k) > s + 1e-6);
+  const same = arr.tracks.filter(t => t.type === type), free = same.find(t => !busy(t));
+  if (free) return free.id;
+  const t = addTrack(type, same.length ? same[same.length - 1].id : null); return t.id;
+}
+function arrRecFinish(AR, ev, bars, len) {
+  const by = {}; ev.forEach(e => { const g = REC_GRP[e.type] || 'take'; (by[g] = by[g] || []).push(e); });
+  const groups = Object.keys(by).filter(g => by[g].some(e => !/Off|boff|gdamp/.test(e.type)));
+  if (!groups.length) { toast('Tidak ada bunyi yang terekam.'); return; }
+  arrPush(); const n = takes.filter(t => t.type !== 'audio').length + 1, L = bars * 4, made = [];
+  groups.forEach((g, i) => {
+    const [nm, col] = REC_GRP_N[g];
+    const tk = { id: Date.now() + i, name: `Rekaman ${n} · ${nm}`, type: 'seq', bpm: rec.bpm, sig: rec.sig, bars, len, events: by[g], vol: 80, loop: false };
+    takes.unshift(tk);
+    const k = { id: arr.nid++, kind: 'take', name: tk.name, track: arrRecTrack(g, AR.startB, AR.startB + L), start: AR.startB, len: L, d: { tid: tk.id, col } };
+    arr.clips.push(k); made.push(k);
+  });
+  selTake = takes[0]; saveTakes(); renderTakes(); arrSave(); renderArrLib(); showTab('arr'); renderArr();
+  arr.selSet = new Set(made); arr.sel = made[0]; made.forEach(drawAClip);
+  const sc = $('#aScroll'); if (sc) sc.scrollLeft = Math.max(0, AR.startB * arr.ppb - 60);
+  toast(`Masuk ke Susun Lagu: ${made.map(k => trkOf(k.track).name).join(', ')} · bar ${AR.startB / 4 + 1}–${AR.startB / 4 + bars} (${bars} bar). Tekan ● Rekam lagi untuk menumpuk alat berikutnya.`, 5500);
+}
 function renderArrBtns() {
   const p = $('#aPlay'); if (!p) return; const on = !!(arrPl && !arrPl.only); p.textContent = on ? '■ Stop' : '▶ Putar'; p.classList.toggle('on', on);
-  const m = $('#aMic'); m.textContent = micA ? '■ Stop mic' : '● Mic'; m.classList.toggle('rec', !!micA);
+  const m = $('#aMic'), rr = rec.state === 'rec' && rec.arr; m.textContent = micA ? '■ Stop mic' : rr ? '■ Stop rekam' : '● Rekam'; m.classList.toggle('rec', !!(micA || rr));
 }
 function arrDemo() {
   const c = chordListK(false), put = (kind, track, start, len, d, name) => { const k = { id: arr.nid++, kind, name: name || kind, track: (arr.tracks.find(t => t.type === track) || {}).id || track, start, len, d }; arr.clips.push(k); };
@@ -3918,7 +3978,7 @@ function initArr() {
   $('#aDel').onclick = () => arrDel(); $('#aUndo').onclick = arrUndo; $('#aRedo').onclick = arrRedo; $('#aSelBtn').onclick = toggleSelMode;
   $('#aClear').onclick = e => { const b = e.currentTarget; if (b.dataset.c !== '1') { b.dataset.c = '1'; b.textContent = 'Yakin?'; setTimeout(() => { b.dataset.c = ''; b.textContent = 'Kosongkan'; }, 2500); return; } arrStop(); arrPush(); arr.clips = []; arr.marks = []; arr.sel = null; arr.selSet.clear(); arrSave(); renderArr(); };
   $('#aDemo').onclick = () => { arrStop(); arrPush(); arr.clips = []; arr.marks = []; arrDemo(); arrSave(); renderArr(); toast('Contoh lagu dimuat (pakai kunci & suara yang sedang dipilih).'); };
-  $('#aMic').onclick = () => micA ? stopMicA() : startMicA();
+  $('#aMic').onclick = e => { if (micA) return stopMicA(); if (rec.state === 'rec') return stopRec(); const r = e.currentTarget.getBoundingClientRect(); arrRecMenu(r.left, r.bottom + 4); };
   $('#aImp').onclick = () => $('#aFile').click();
   $('#aFile').addEventListener('change', async e => { const f = e.target.files[0]; e.target.value = ''; if (!f) return; ensureAudio();
     try { const buf = await decode(await f.arrayBuffer()); await arrAddAudio(buf, f.name.replace(/\.[^.]+$/, ''), 'audio'); toast('Suara masuk ke track Audio import (juga ada di pustaka kiri).'); }
