@@ -381,7 +381,7 @@ details.fx>.controls{border:none;border-top:1px solid var(--line);border-radius:
       <div class="tool">
         <button id="octDown" class="mini">Oktaf −</button><span id="octLbl" class="note" style="min-width:52px;text-align:center">C3–C5</span><button id="octUp" class="mini">Oktaf +</button>
         <span class="vsep"></span>
-        <button id="sustainBtn" class="mini">Sustain</button>
+        <button id="sustainBtn" class="mini">Sustain</button><button id="midiSusBtn" class="mini" title="Ikuti pedal sustain dari keyboard MIDI (CC64). Matikan kalau semua nada terus berbunyi.">Pedal MIDI</button>
         <button id="kbTimedBtn" class="mini">Sustain waktu</button>
         <span id="kbTimedBox" class="row2">
           <div class="slider" style="max-width:130px;min-width:100px"><div class="row"><span>Tahan</span><span id="kbHoldV"></span></div><input id="kbHold" type="range" min="2" max="80" value="30"></div>
@@ -550,7 +550,7 @@ details.fx>.controls{border:none;border-top:1px solid var(--line);border-radius:
         <span class="vsep"></span>
         <button id="aMic" class="mini" title="Rekam langsung ke Susun Lagu: Pad, Keyboard, Gitar, Bass, Drum, Chimes, atau mic">● Rekam</button><button id="aImp" class="mini">⤓ Import</button><input id="aFile" type="file" accept="audio/*" hidden>
         <span style="flex:1"></span>
-        <button id="aSelBtn" class="mini" title="Mode pilih (iPad): seret jari untuk memilih banyak clip">⬚ Pilih</button><button id="aUndo" class="mini" title="Undo (Ctrl+Z)">↶</button><button id="aRedo" class="mini" title="Redo (Ctrl+Y)">↷</button><button id="aDel" class="mini" title="Hapus (Delete)">🗑</button><button id="aClear" class="mini" title="Kosongkan semua">🧹</button><button id="aDemo" class="mini">Contoh</button><button id="aExport" class="mini">Ekspor</button>
+        <button id="aSelBtn" class="mini" title="Mode pilih (iPad): seret jari untuk memilih banyak clip">⬚ Pilih</button><button id="aUndo" class="mini" title="Undo (Ctrl+Z)">↶</button><button id="aRedo" class="mini" title="Redo (Ctrl+Y)">↷</button><button id="aDel" class="mini" title="Hapus (Delete)">🗑</button><button id="aClear" class="mini" title="Kosongkan semua">🧹</button><button id="aDemo" class="mini" title="Simpan / buka proyek, dan contoh lagu (termasuk 🎄 Overture Natal)">📁 Proyek ▾</button><input id="aProjFile" type="file" accept=".wps,.json,application/json" hidden><button id="aExport" class="mini">Ekspor</button>
       </div>
       <div class="amain">
         <div class="alib" id="aLib"></div>
@@ -651,6 +651,8 @@ details.fx>.controls{border:none;border-top:1px solid var(--line);border-radius:
   <p>Pilih mode <b>Tumpuk</b>, tekan <b>● Rekam track baru</b> lalu mainkan drum. Tekan lagi untuk berhenti — jadi Track 1. Tekan <b>● Rekam track baru</b> lagi: Track 1 ikut diputar dari bar 1 (setelah hitung masuk) sambil Anda merekam keyboard, gitar atau bass — jadi Track 2, dan seterusnya. Tiap track punya Mute, Solo, volume dan <b>⟲ Ulang</b> (track pendek, mis. drum 4 bar, diulang sampai lagu selesai). <b>Gabungkan jadi 1 track</b> me-render semua track menjadi satu track audio (rekaman aslinya tetap ada), lalu Anda bisa terus menumpuk di atasnya. <b>Ekspor lagu</b> = MP3/WAV seluruh lagu.</p>
   <h3>4. Rekam &amp; Sequencer</h3>
   <p>Tekan <b>● Rekam</b> di bar atas (dengan hitung masuk 1 bar mengikuti click), lalu mainkan pad, arp, keyboard, drum, dan chimes dari tab mana saja. Tekan lagi untuk berhenti; panjangnya dibulatkan ke bar penuh. Hasilnya muncul di tab <b>Rekam &amp; Sequencer</b> lengkap dengan tampilan bar. Beberapa rekaman bisa diputar bersamaan, di-loop, diatur volumenya, dan mulai pas di ketukan 1 click. <b>Ekspor</b> menghasilkan file ZIP berisi WAV + MP3 (ketuk ZIP di aplikasi Files untuk membukanya). File audio juga bisa dimasukkan lewat <b>Import audio</b>.</p>
+  <h3>Proyek (simpan &amp; buka) + contoh Overture Natal</h3>
+  <p>Di Susun Lagu tekan <b>📁 Proyek ▾</b>: <b>Simpan proyek</b> membuat file <b>.wps</b> berisi seluruh susunan, rekaman, dan audio — di iPad pilih <i>Simpan ke File</i> lalu Google Drive / iCloud. <b>Buka file proyek</b> memuatnya lagi di perangkat mana saja. Di menu yang sama ada contoh <b>🎄 Overture Natal</b> (±9 menit): intro EDM halus + air terjun, biola Malam Kudus, lalu band + orkestra dengan Joy to the World, Hark the Herald, Deck the Halls, Jingle Bells, modulasi D → B → F# → A♭, dan penutup Malam Kudus. Semua bagian bisa diedit.</p>
   <h3>Suara Natal &amp; kredit sampel</h3>
   <p>Suara bertanda ★ dan grup <b>Orkestra</b> memakai <b>rekaman instrumen asli</b>: lonceng Natal (glockenspiel, handbell, tubular bells, sleigh bells, triangle, mark tree) dan perkusi dari <b>VCSL</b>, serta biola, cello, flute, harpa, timpani, cymbal &amp; gong dari <b>VSCO 2 Community Edition</b> — keduanya karya Versilian Studios, lisensi <b>CC0 (domain publik)</b>. Celesta, kotak musik, lonceng kecil, vibraphone &amp; choir "Aah" dari soundfont <b>Musyng Kite</b>, lisensi <b>Creative Commons Attribution-ShareAlike 3.0</b> (via proyek midi-js-soundfonts). Tiap paket dimuat sekali saat pertama dipakai lalu tersimpan untuk offline. Drum Pad punya kit <b>🎄 Natal</b>, <b>Perkusi</b>, dan <b>Orkestra &amp; ambience</b>. Synth lain diracik meniru karakter synth gratis populer (Vital, Surge XT, Dexed, OB-Xd, TAL-U-NO-LX) — bukan salinan preset aslinya.</p>
   <h3>5. Tips saat ibadah</h3>
@@ -1071,7 +1073,7 @@ function holdParam(p, t) { if (p.cancelAndHoldAtTime) p.cancelAndHoldAtTime(t); 
 /* ================= state ================= */
 const DEFAULTS = { bpm: 100, sig: 4, clickVol: 70, master: 85, split: false, timbre: 'warm', chord: '5', octave: 0,
   padVol: 70, padBright: 45, padRev: 60, padFade: 30, arpOn: false, arpSound: 'pluck', arpPat: 'up', arpRate: 2, arpVol: 55,
-  chReal: false, kbSound: 'clarity', vel: 96, sfVol: 75, sfRev: 35, kbOct: 48, chVol: 60, chRev: 55, chColl: 60, chDecay: 100, kit: 'edm', drVol: 75, tab: 'pad', recCount: true, recSync: true, gtSound: 'steel', gtKey: 2, gtMinor: false, gtShape: 'full', gtPM: false, gtPat: 'pop', gtVol: 75, gtRev: 30, gtTone: 50, gtDrive: 50, gtChorus: false, gtDelay: false, gtDTime: 'd8', gtDFb: 30, gtDMix: 25, bsSound: 'precision', bsMode: 'auto', bsPat: 'worship', bsTech: 'finger', bsLegato: true, bsRing: false, bsVel: 100, bsVol: 80, bsRev: 12, bsLo: 60, bsMid: 55, bsHi: 42, bsDrive: 0, bsComp: true, bsOct: false, bsChorus: false, bsEnv: false, bsDelay: false, bsDTime: 'd8', bsLink: false, gtOwn: false, gtBpm: 100, gtSpd: 1, bsOwn: false, bsBpm: 100, bsSpd: 1, kbChorus: false, kbDelay: true, kbDTime: 'd8', kbDMix: 28, kbDFb: 35, kbPump: false, kbGlide: false, kbTimed: false, kbHold: 30, kbFade: 20, aLibHide: {}, arrKey: -1, arrMinor: -1, guideVol: 85, cueOn: true, cueVoice: 'm', cuePre: true, arrClick: false, audVol: 80, audRev: 15, dset: {}, recStack: false, tlView: 'song', drRev: 50, mxLo: 0, mxMid: 0, mxHi: 0, mxGlue: false, mxGlueAmt: 40, mxLim: true, mxMute: {}, mxSolo: {}, mxPan: {} };
+  chReal: false, projName: '', midiSus: true, kbSound: 'clarity', vel: 96, sfVol: 75, sfRev: 35, kbOct: 48, chVol: 60, chRev: 55, chColl: 60, chDecay: 100, kit: 'edm', drVol: 75, tab: 'pad', recCount: true, recSync: true, gtSound: 'steel', gtKey: 2, gtMinor: false, gtShape: 'full', gtPM: false, gtPat: 'pop', gtVol: 75, gtRev: 30, gtTone: 50, gtDrive: 50, gtChorus: false, gtDelay: false, gtDTime: 'd8', gtDFb: 30, gtDMix: 25, bsSound: 'precision', bsMode: 'auto', bsPat: 'worship', bsTech: 'finger', bsLegato: true, bsRing: false, bsVel: 100, bsVol: 80, bsRev: 12, bsLo: 60, bsMid: 55, bsHi: 42, bsDrive: 0, bsComp: true, bsOct: false, bsChorus: false, bsEnv: false, bsDelay: false, bsDTime: 'd8', bsLink: false, gtOwn: false, gtBpm: 100, gtSpd: 1, bsOwn: false, bsBpm: 100, bsSpd: 1, kbChorus: false, kbDelay: true, kbDTime: 'd8', kbDMix: 28, kbDFb: 35, kbPump: false, kbGlide: false, kbTimed: false, kbHold: 30, kbFade: 20, aLibHide: {}, arrKey: -1, arrMinor: -1, guideVol: 85, cueOn: true, cueVoice: 'm', cuePre: true, arrClick: false, audVol: 80, audRev: 15, dset: {}, recStack: false, tlView: 'song', drRev: 50, mxLo: 0, mxMid: 0, mxHi: 0, mxGlue: false, mxGlueAmt: 40, mxLim: true, mxMute: {}, mxSolo: {}, mxPan: {} };
 const S = {}; for (const k in DEFAULTS) S[k] = store.get(k, DEFAULTS[k]);
 S.arpOn = false;
 function save(k) { store.set(k, S[k]); }
@@ -1720,8 +1722,20 @@ KITS.perc = { name: 'Perkusi: conga, bongo, cajon, shaker (rekaman asli)', pads:
 KITS.orch = { name: 'Orkestra & ambience: timpani, cymbal swell, gong, ombak', pads: [
   ['p_timpl', 'Timpani rendah', '#5a3a2f', 1], ['p_timpm', 'Timpani tengah', '#6a4a2f', 1], ['p_timph', 'Timpani tinggi', '#7a5a2f', 1], ['p_timproll', 'Timpani roll', '#6a3a2f', 1],
   ['p_timproll2', 'Timpani roll 2', '#5a3a3f', 1], ['p_cymswell', 'Cymbal swell (naik)', '#8b8b2f', 1], ['p_cymsoft', 'Cymbal lembut', '#7b7b2f', 1], ['p_cymroll', 'Cymbal roll panjang', '#6b6b2f', 1],
-  ['p_gong', 'Gong besar', '#8b6a2f', 1], ['p_gongl', 'Gong lembut', '#7b5a2f', 1], ['p_ocean', 'Ombak (ocean drum)', '#2f5f8b', 1], ['p_bdorch', 'Bass drum konser', '#5a2f2f', 1],
+  ['p_gong', 'Gong besar', '#8b6a2f', 1], ['p_gongl', 'Gong lembut', '#7b5a2f', 1], ['p_ocean', 'Ombak (ocean drum)', '#2f5f8b', 1], ['p_falls', 'Air terjun (14 dtk)', '#2f6f9b', 1], ['p_bdorch', 'Bass drum konser', '#5a2f2f', 1],
   ['n_markslow', 'Mark tree', '#2f6f8b', 1], ['n_trir', 'Triangle roll', '#7b7b2f', 1]].map(([id, name, color, rev]) => ({ id, name, color, rev })) };
+function makeFalls() {   // gemuruh air terjun (sintesis): rumble + desis air + percikan, 14 detik, stereo, fade in/out supaya bisa disambung
+  const sr = ctx.sampleRate, n = Math.floor(14 * sr), b = ctx.createBuffer(2, n, sr); let seed = 7; const rnd = () => { seed = (seed * 16807) % 2147483647; return seed / 2147483647 * 2 - 1; };
+  for (let c = 0; c < 2; c++) { const d = b.getChannelData(c); let br = 0, lp1 = 0, lp2 = 0, hp = 0, m1 = Math.random() * 6, m2 = Math.random() * 6;
+    for (let i = 0; i < n; i++) { const w = rnd(), t = i / sr; br = (br + 0.02 * w) * 0.995; lp1 += 0.12 * (w - lp1); lp2 += 0.5 * (w - lp2); const hi = lp2 - lp1; hp = hi;
+      const mod = 0.75 + 0.15 * Math.sin(t * 0.7 + m1 + c) + 0.1 * Math.sin(t * 2.3 + m2);
+      d[i] = (br * 2.2 + lp1 * 0.55 + hp * 0.32 * (0.8 + 0.2 * Math.sin(t * 5.1 + c * 2))) * mod; }
+    for (let k = 0; k < 140; k++) { const st = Math.floor(Math.random() * (n - sr)), f = 1400 + Math.random() * 2800, L = Math.floor(sr * (0.015 + Math.random() * 0.03)), a = 0.04 + Math.random() * 0.05;
+      for (let i = 0; i < L; i++) d[st + i] += a * Math.sin(2 * Math.PI * (f + i * 25000 / sr) * i / sr) * Math.exp(-i / (L / 4)); }
+    const fi = Math.floor(1.5 * sr); for (let i = 0; i < fi; i++) { const g = i / fi; d[i] *= g; d[n - 1 - i] *= g; }
+    let pk = 0; for (let i = 0; i < n; i++) pk = Math.max(pk, Math.abs(d[i])); for (let i = 0; i < n; i++) d[i] *= 0.4 / pk; }
+  return b;
+}
 const DRUMS_ALL = Object.values(KITS).flatMap(k => k.pads);
 const drumCache = {}, drumCustom = {};
 /* --- kit drum akustik (sintesis): gaya Yamaha Recording/Stage Custom & gaya head Evans --- */
@@ -1775,6 +1789,7 @@ function drumBuf(id, bar = barDur()) {
   const key = id + (['riser', 'revcym', 'swell'].includes(id) ? '@' + bar.toFixed(3) : '');
   if (drumCache[key]) return drumCache[key];
   let b;
+  if (id === 'p_falls') { b = makeFalls(); drumCache[key] = b; return b; }
   if (SMP_DRUM[id]) { const [inst, k] = SMP_DRUM[id], list = bellBufs[inst]; if (!list) { loadSmp(inst); return null; } const e = list.find(x => x[0] == k); if (!e) return null; let bb = e[1]; const gn = SMP_DRUM[id][2];
     if (gn && gn !== 1) { bb = ctx.createBuffer(e[1].numberOfChannels, e[1].length, e[1].sampleRate); for (let c = 0; c < bb.numberOfChannels; c++) { const src = e[1].getChannelData(c), dst = bb.getChannelData(c); for (let i = 0; i < src.length; i++) dst[i] = src[i] * gn; } }
     drumCache[key] = bb; return bb; }
@@ -3474,18 +3489,25 @@ function setupMIDI() {
     const bind = () => acc.inputs.forEach(inp => inp.onmidimessage = onMidi); bind(); acc.onstatechange = bind;
   }).catch(() => {});
 }
+const midiOn = new Map();   // not MIDI → ke mana dikirim saat ditekan, supaya saat dilepas selalu dimatikan di tempat yang sama
+function midiAllOff() { midiOn.clear(); sfState.held.clear(); setSustain(false); [...sfState.voices.keys()].forEach(n => kbNoteOff(n, true)); }
 function onMidi(ev) {
   const [st, d1, d2] = ev.data, type = st & 0xf0, chn = st & 0x0f, pads = KITS[S.kit].pads;
   if (type === 0x90 && d2 > 0) {
-    if (chn === 9 || S.tab === 'drum') { const d = pads[d1 - 36]; if (d) hitDrum(d); return; }
-    if (S.tab === 'bass') { if (S.bsMode !== 'auto') bassPlay(d1, d2, S.bsTech, 0, 'midi' + d1); else { const pc = d1 % 12; let i = chordList(false).findIndex(c => c.pc === pc); if (i >= 0) pressBassChord(i, false); } return; }
-    if (S.tab === 'gtr') { const pc = d1 % 12; let i = chordList(false).findIndex(c => c.pc === pc); if (i >= 0) pressChord(i, false); else { i = chordList(true).findIndex(c => c.pc === pc); if (i >= 0) pressChord(i, true); } return; }
-    if (S.tab === 'pad') padPress(d1 % 12);
-    else if (S.tab === 'chime') strikeChime(d1 % NBARS, 0, d2 / 127);
-    else { sfState.held.add(d1); kbNoteOn(d1, d2); }
+    const prev = midiOn.get(d1); if (prev === 'kb') { sfState.held.delete(d1); kbNoteOff(d1, true); }
+    if (chn === 9 || S.tab === 'drum') { midiOn.set(d1, 'drum'); const d = pads[d1 - 36]; if (d) hitDrum(d); return; }
+    if (S.tab === 'bass') { midiOn.set(d1, 'bass'); if (S.bsMode !== 'auto') bassPlay(d1, d2, S.bsTech, 0, 'midi' + d1); else { const pc = d1 % 12; let i = chordList(false).findIndex(c => c.pc === pc); if (i >= 0) pressBassChord(i, false); } return; }
+    if (S.tab === 'gtr') { midiOn.set(d1, 'gtr'); const pc = d1 % 12; let i = chordList(false).findIndex(c => c.pc === pc); if (i >= 0) pressChord(i, false); else { i = chordList(true).findIndex(c => c.pc === pc); if (i >= 0) pressChord(i, true); } return; }
+    if (S.tab === 'pad') { midiOn.set(d1, 'pad'); padPress(d1 % 12); }
+    else if (S.tab === 'chime') { midiOn.set(d1, 'chime'); strikeChime(d1 % NBARS, 0, d2 / 127); }
+    else { midiOn.set(d1, 'kb'); sfState.held.add(d1); kbNoteOn(d1, d2); }
   } else if (type === 0x80 || (type === 0x90 && d2 === 0)) {
-    if (S.tab === 'bass' && S.bsMode !== 'auto' && !S.bsRing) bassOffLive('midi' + d1, 0, 0.06); if (chn !== 9 && S.tab === 'kb') { sfState.held.delete(d1); kbNoteOff(d1); } }
-  else if (type === 0xb0 && d1 === 64) setSustain(d2 >= 64);
+    const t = midiOn.get(d1); midiOn.delete(d1);
+    if (t === 'bass' && S.bsMode !== 'auto' && !S.bsRing) bassOffLive('midi' + d1, 0, 0.06);
+    if (t === 'kb') { sfState.held.delete(d1); kbNoteOff(d1); }
+  }
+  else if (type === 0xb0 && d1 === 64) { if (S.midiSus !== false) setSustain(d2 >= 64); }
+  else if (type === 0xb0 && (d1 === 120 || d1 === 123)) midiAllOff();
 }
 
 /* ================= wake lock ================= */
@@ -3679,7 +3701,7 @@ function arrLibItems() {
     { h: 'Pukulan drum' }, ...['kick', 'snare', 'crash', 'crash2', 'crash3', 'splash', 'tom1', 'tom3', 'ride'].map(p => { const d = KITS.std.pads.find(x => x.id === 's_' + p); return { kind: 'shot', name: d.name, len: 1, d: { id: d.id } }; }),
     { h: 'Efek' }, { kind: 'chime', name: 'Chimes sapu naik', len: 4, d: { dir: 1 } }, { kind: 'chime', name: 'Chimes sapu turun', len: 4, d: { dir: -1 } },
     ...['riser', 'revcym', 'impact', 'subdrop'].map(id => { const d = KITS.edm.pads.find(x => x.id === id); return { kind: 'fxs', name: d.name, len: d.sync ? 4 : 2, d: { id } }; }),
-    { h: 'Orkestra, Natal & ambience' }, ...[['p_cymswell', 'Cymbal swell', 4], ['p_timproll', 'Timpani roll', 4], ['p_timpl', 'Timpani', 2], ['p_gong', 'Gong besar', 4], ['p_ocean', 'Ombak (ambience)', 8], ['n_markdn', 'Mark tree turun', 4], ['n_shake', 'Sleigh bells kocok', 2], ['n_trir', 'Triangle roll', 4]].map(([id, name, len]) => ({ kind: 'fxs', name, len, d: { id } })),
+    { h: 'Orkestra, Natal & ambience' }, ...[['p_cymswell', 'Cymbal swell', 4], ['p_timproll', 'Timpani roll', 4], ['p_timpl', 'Timpani', 2], ['p_gong', 'Gong besar', 4], ['p_ocean', 'Ombak (ambience)', 8], ['p_falls', 'Air terjun (ambience)', 7], ['n_markdn', 'Mark tree turun', 4], ['n_shake', 'Sleigh bells kocok', 2], ['n_trir', 'Triangle roll', 4]].map(([id, name, len]) => ({ kind: 'fxs', name, len, d: { id } })),
     { h: 'Rekaman Anda' }];
   takes.forEach(tk => L.push({ kind: 'take', name: tk.name, len: Math.max(1, Math.round(tk.len / aq())), sec: tk.len, d: { tid: tk.id } }));
   if (!takes.length) L.push({ note: 'Belum ada rekaman.' });
@@ -4092,6 +4114,40 @@ function renderArrBtns() {
   const p = $('#aPlay'); if (!p) return; const on = !!(arrPl && !arrPl.only); p.textContent = on ? '■ Stop' : '▶ Putar'; p.classList.toggle('on', on);
   const m = $('#aMic'), rr = rec.state === 'rec' && rec.arr; m.textContent = micA ? '■ Stop mic' : rr ? '■ Stop rekam' : '● Rekam'; m.classList.toggle('rec', !!(micA || rr));
 }
+/* --- proyek: simpan ke file / buka dari file (susunan + rekaman + audio) --- */
+const b64of = ab => { const u = new Uint8Array(ab); let s = ''; for (let i = 0; i < u.length; i += 0x8000) s += String.fromCharCode.apply(null, u.subarray(i, i + 0x8000)); return btoa(s); };
+async function projData(name) {
+  const used = new Set(arr.clips.filter(k => k.kind === 'take').map(k => k.d.tid)), aud = [];
+  for (const a of arr.aud) { const ab = await idb.get('arraud_' + a.aid); if (ab) aud.push({ aid: a.aid, name: a.name, kind: a.kind, sec: a.sec, b64: b64of(ab) }); }
+  return { app: 'WorshipPadStudio', v: 1, name, bpm: S.bpm, sig: S.sig,
+    arr: { clips: arr.clips, marks: arr.marks, tracks: arr.tracks, tr: arr.tr, ppb: arr.ppb, snap: arr.snap, loop: arr.loop, nid: arr.nid },
+    takes: takes.filter(t => used.has(t.id) && t.type === 'seq').map(t => ({ id: t.id, name: t.name, type: 'seq', bpm: t.bpm, sig: t.sig, bars: t.bars, len: t.len, events: t.events, vol: t.vol, loop: t.loop })), aud };
+}
+async function projSave() {
+  const name = prompt('Nama proyek:', S.projName || 'Lagu saya'); if (!name) return; S.projName = name; save('projName');
+  const P = await projData(name); directDownload(name.replace(/[\\/:*?"<>|]+/g, '_') + '.wps', new Blob([JSON.stringify(P)], { type: 'application/json' }));
+  toast('Proyek disimpan sebagai file .wps — di iPad pilih "Simpan ke File" lalu Google Drive / iCloud.', 5000);
+}
+async function projLoad(P, quiet) {
+  if (!P || P.app !== 'WorshipPadStudio' || !P.arr) throw new Error('bukan file proyek Worship Pad Studio');
+  if (!quiet && arr.clips.length && !confirm(`Buka proyek "${P.name || ''}"? Susunan yang sekarang akan diganti (bisa dibatalkan dengan ↶ Undo, rekaman tetap ada di Rekam & Lagu).`)) return;
+  arrStop(); arrPush(); ensureAudio();
+  if (P.bpm && typeof setBpm === 'function') setBpm(P.bpm);
+  (P.takes || []).forEach(t => { if (!takes.some(x => x.id === t.id)) takes.push(Object.assign({}, t)); });
+  for (const a of (P.aud || [])) { if (arr.aud.some(x => x.aid === a.aid)) continue; try { const bin = Uint8Array.from(atob(a.b64), c => c.charCodeAt(0)).buffer; await idb.put('arraud_' + a.aid, bin.slice(0)); arr.aud.push({ aid: a.aid, name: a.name, kind: a.kind, sec: a.sec, buf: await decode(bin) }); } catch (e) {} }
+  const A = JSON.parse(JSON.stringify(P.arr)); if (Array.isArray(A.tracks) && A.tracks.length) arr.tracks = A.tracks;
+  Object.assign(arr, { clips: A.clips || [], marks: A.marks || [], ppb: A.ppb || arr.ppb, snap: A.snap || 1, loop: !!A.loop, nid: Math.max(arr.nid, A.nid || 1), selSet: new Set(), sel: null, head: 0 });
+  arr.tr = Object.assign({}, A.tr || {}); fixTracks(); arr.tracks.forEach(t => { if (!arr.tr[t.id]) arr.tr[t.id] = { vol: 80, mute: false, solo: false }; });
+  S.projName = P.name || S.projName; save('projName');
+  if (arr.marks.length) loadCues(); saveTakes(); renderTakes(); arrSave(); renderArrLib(); renderArr(); if (typeof renderMixer === 'function') try { renderMixer(); } catch (e) {}
+  ensureSamplesFor(arrLayout(0).items.map(i => i.tk));
+  toast(`Proyek "${P.name || ''}" dibuka · ${Math.round(arrEnd() / 4)} bar.`, 4000);
+}
+function loadDemoProject(file, glob) {
+  const go = () => projLoad(window[glob]).catch(e => toast('Gagal: ' + e.message, 4000));
+  if (window[glob]) return go(); toast('Memuat contoh…');
+  const sc = document.createElement('script'); sc.src = file; sc.onload = go; sc.onerror = () => toast('File ' + file + ' tidak ditemukan — pastikan sudah di-upload.', 5000); document.head.appendChild(sc);
+}
 function arrDemo() {
   const c = chordListK(false), put = (kind, track, start, len, d, name) => { const k = { id: arr.nid++, kind, name: name || kind, track: (arr.tracks.find(t => t.type === track) || {}).id || track, start, len, d }; arr.clips.push(k); };
   const cc = i => ({ pc: c[i].pc, q: c[i].q, name: c[i].name }), prog = [0, 1, 2, 4];
@@ -4113,7 +4169,10 @@ function initArr() {
   $('#aZoomOut').onclick = () => { arr.ppb = Math.max(8, arr.ppb - 6); renderArr(); arrSave(); };
   $('#aDel').onclick = () => arrDel(); $('#aUndo').onclick = arrUndo; $('#aRedo').onclick = arrRedo; $('#aSelBtn').onclick = toggleSelMode;
   $('#aClear').onclick = e => { const b = e.currentTarget; if (b.dataset.c !== '1') { b.dataset.c = '1'; b.textContent = 'Yakin?'; setTimeout(() => { b.dataset.c = ''; b.textContent = 'Kosongkan'; }, 2500); return; } arrStop(); arrPush(); arr.clips = []; arr.marks = []; arr.sel = null; arr.selSet.clear(); arrSave(); renderArr(); };
-  $('#aDemo').onclick = () => { arrStop(); arrPush(); arr.clips = []; arr.marks = []; arrDemo(); arrSave(); renderArr(); toast('Contoh lagu dimuat (pakai kunci & suara yang sedang dipilih).'); };
+  $('#aDemo').onclick = e => { const r = e.currentTarget.getBoundingClientRect(); showMenu($('#aCtx'), r.left, r.bottom + 4, [['💾 Simpan proyek ke file… (Files / Google Drive)', projSave], ['📂 Buka file proyek (.wps)…', () => $('#aProjFile').click()], ['Contoh — menggantikan susunan sekarang (simpan dulu kalau perlu):', null],
+    ['♪ Contoh sederhana (kunci & suara yang sedang dipilih)', () => { arrStop(); arrPush(); arr.clips = []; arr.marks = []; arrDemo(); arrSave(); renderArr(); toast('Contoh lagu dimuat (pakai kunci & suara yang sedang dipilih).'); }],
+    ['🎄 Overture Natal (±9 menit, orkestra + band)', () => loadDemoProject('overture.js', 'DEMO_OVERTURE')]]); };
+  $('#aProjFile').onchange = async e => { const f = e.target.files[0]; e.target.value = ''; if (!f) return; try { await projLoad(JSON.parse(await f.text())); } catch (err) { toast('File proyek tidak bisa dibuka: ' + err.message, 4000); } };
   $('#aMic').onclick = e => { if (micA) return stopMicA(); if (rec.state === 'rec') return stopRec(); const r = e.currentTarget.getBoundingClientRect(); arrRecMenu(r.left, r.bottom + 4); };
   $('#aImp').onclick = () => $('#aFile').click();
   $('#aFile').addEventListener('change', async e => { const f = e.target.files[0]; e.target.value = ''; if (!f) return; ensureAudio();
@@ -4347,7 +4406,7 @@ function init() {
   slider('master', 'master', applyLevels, v => v + '%');
   renderSplit();
   $('#splitBtn').addEventListener('click', () => { S.split = !S.split; save('split'); renderSplit(); applySplit(); toast(S.split ? 'Mode ibadah NYALA: click di kiri, musik di kanan.' : 'Mode ibadah MATI: semua suara di kedua sisi.'); });
-  $('#panicBtn').addEventListener('click', () => { arrStop(); if (rec.state === 'rec') stopRec(); if (gtr.auto) setGtrAuto(false); if (ctx) gtrDampAll(); if (bass.auto) stopBassPattern(); bassAllOff(0.03); stopAllTakes(); stopClick(); stopChimeRec(); setArp(false); padStop(); [...sfState.voices.keys()].forEach(n => kbNoteOff(n, true)); setSustain(false); kb.els.forEach(e => e.classList.remove('down')); });
+  $('#panicBtn').addEventListener('click', () => { midiAllOff(); arrStop(); if (rec.state === 'rec') stopRec(); if (gtr.auto) setGtrAuto(false); if (ctx) gtrDampAll(); if (bass.auto) stopBassPattern(); bassAllOff(0.03); stopAllTakes(); stopClick(); stopChimeRec(); setArp(false); padStop(); [...sfState.voices.keys()].forEach(n => kbNoteOff(n, true)); setSustain(false); kb.els.forEach(e => e.classList.remove('down')); });
   $('#wakeBtn').addEventListener('click', () => { if (wake) { wakeWanted = false; wake.release(); wake = null; $('#wakeBtn').classList.remove('on'); } else { wakeWanted = true; requestWake(); } });
   $('#helpBtn').addEventListener('click', () => $('#help').classList.add('show'));
   $('#helpClose').addEventListener('click', () => $('#help').classList.remove('show'));
@@ -4371,6 +4430,7 @@ function init() {
   slider('arpVol', 'arpVol', applyLevels, v => v + '%');
   // keyboard
   fillSoundSelect(); buildKeyboard(); setupKeyboard();
+  { const b = $('#midiSusBtn'); b.classList.toggle('on', S.midiSus !== false); b.addEventListener('click', () => { S.midiSus = S.midiSus === false; save('midiSus'); b.classList.toggle('on', S.midiSus); if (!S.midiSus) setSustain(false); toast(S.midiSus ? 'Pedal sustain dari keyboard MIDI diikuti.' : 'Pedal sustain dari keyboard MIDI diabaikan — nada berhenti saat tuts dilepas.'); }); }
   $('#kbSound').addEventListener('change', e => { S.kbSound = e.target.value; save('kbSound'); [...sfState.voices.keys()].forEach(n => kbNoteOff(n, true)); fillSoundSelect(); kbLastNote = null; if (KB[S.kbSound]) applyKbPreset(S.kbSound); });
   [['kbChorusBtn', 'kbChorus'], ['kbDelayBtn', 'kbDelay'], ['kbPumpBtn', 'kbPump'], ['kbGlideBtn', 'kbGlide']].forEach(([id, k]) => $('#' + id).addEventListener('click', () => { S[k] = !S[k]; save(k); syncKbControls(); updateKbFx(); }));
   $('#kbDTime').addEventListener('change', e => { S.kbDTime = e.target.value; save('kbDTime'); updateKbFx(); });
