@@ -213,7 +213,7 @@ details.fx>.controls{border:none;border-top:1px solid var(--line);border-radius:
 .agrid{position:relative;min-width:100%}
 .arow{display:flex;height:50px;border-bottom:1px solid #222733}
 .arow.aruler{height:28px;position:sticky;top:0;z-index:5;background:#12151b;border-bottom:1px solid var(--line)}
-.ahead{width:150px;flex:none;position:sticky;left:0;z-index:4;background:var(--panel);border-right:1px solid var(--line);padding:2px 8px;display:flex;flex-direction:column;justify-content:center;gap:2px}
+.ahead{width:150px;flex:none;position:sticky;left:0;overflow:hidden;z-index:4;background:var(--panel);border-right:1px solid var(--line);padding:2px 8px;display:flex;flex-direction:column;justify-content:center;gap:2px}
 .aruler .ahead{z-index:6;background:#12151b;font-size:11px;color:var(--mute)}
 .anm{font-weight:650;font-size:13.5px;display:flex;align-items:center;gap:6px;white-space:nowrap}.anm i{width:9px;height:9px;border-radius:3px}
 .actl{display:flex;gap:4px;align-items:center}.actl button{padding:1px 0;width:26px;font-size:12px;font-weight:700;border-radius:7px}
@@ -221,6 +221,11 @@ details.fx>.controls{border:none;border-top:1px solid var(--line);border-radius:
 .actl input{width:70px}
 .alane{position:relative;flex:none;height:100%;background-image:linear-gradient(90deg,#2a2f3a 1px,transparent 1px),linear-gradient(90deg,#1c2029 1px,transparent 1px);background-size:calc(var(--ppb)*4) 100%,var(--ppb) 100%}
 .alane.alt{background-color:#14171d}.alane.hover{background-color:#1d2a26}
+.agrid.selmode .alane{touch-action:none;cursor:crosshair}
+.amarq{position:absolute;display:none;z-index:8;border:1.5px dashed #fff;background:rgba(79,195,169,.15);border-radius:4px;pointer-events:none}
+.anm .tn{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis}.anm .tmenu{padding:0 6px;font-size:14px;line-height:18px;border-radius:6px;background:transparent;border:1px solid transparent;color:var(--mute)}
+.anm .tmenu:hover{border-color:var(--line);color:var(--text)}
+.addrow{height:44px;border-bottom:none}.addrow .ahead{justify-content:center}.addrow .ahead button{padding:6px 8px;font-size:12.5px}
 .arl{position:relative;flex:none;height:100%;cursor:pointer}.arl span{position:absolute;top:6px;font-size:12px;color:var(--mute);transform:translateX(4px)}.arl b{position:absolute;bottom:0;width:1px;height:9px;background:var(--line)}
 .aclip{position:absolute;top:3px;bottom:3px;border-radius:9px;border:1px solid rgba(255,255,255,.18);overflow:hidden;touch-action:none;cursor:grab;box-shadow:0 2px 6px rgba(0,0,0,.35)}
 .aclip .t{position:absolute;left:7px;top:3px;right:12px;font-size:12px;font-weight:700;color:#fff;text-shadow:0 1px 2px rgba(0,0,0,.6);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;pointer-events:none;z-index:2}
@@ -538,7 +543,7 @@ details.fx>.controls{border:none;border-top:1px solid var(--line);border-radius:
         <span class="vsep"></span>
         <button id="aMic" class="mini" title="Rekam suara dari mikrofon">● Mic</button><button id="aImp" class="mini">⤓ Import</button><input id="aFile" type="file" accept="audio/*" hidden>
         <span style="flex:1"></span>
-        <button id="aUndo" class="mini" title="Undo (Ctrl+Z)">↶</button><button id="aRedo" class="mini" title="Redo (Ctrl+Y)">↷</button><button id="aDel" class="mini" title="Hapus (Delete)">🗑</button><button id="aClear" class="mini">Kosongkan</button><button id="aDemo" class="mini">Contoh</button><button id="aExport" class="mini">Ekspor</button>
+        <button id="aSelBtn" class="mini" title="Mode pilih (iPad): seret jari untuk memilih banyak clip">⬚ Pilih</button><button id="aUndo" class="mini" title="Undo (Ctrl+Z)">↶</button><button id="aRedo" class="mini" title="Redo (Ctrl+Y)">↷</button><button id="aDel" class="mini" title="Hapus (Delete)">🗑</button><button id="aClear" class="mini">Kosongkan</button><button id="aDemo" class="mini">Contoh</button><button id="aExport" class="mini">Ekspor</button>
       </div>
       <div class="amain">
         <div class="alib" id="aLib"></div>
@@ -630,7 +635,7 @@ details.fx>.controls{border:none;border-top:1px solid var(--line);border-radius:
   <h3>Drum Pad</h3>
   <p>Kit <b>Standar band</b>: kick, snare, rimshot, cross-stick, hi-hat (tutup/injak/buka), Tom 1, Tom 2, Floor tom, <b>3 crash</b> (16", 18", 20"), splash, ride &amp; ride bell. Ketuk <b>⋯</b> di pojok pad untuk menyetel nada, panjang dengung, volume dan posisi kiri–kanan pad itu (tersimpan &amp; ikut terekam).</p>
   <h3>Susun Lagu (timeline ala FL Studio)</h3>
-  <p>Seperti mengedit video, tapi untuk musik. Pilih <b>akor</b> di kiri atas, lalu <b>tarik</b> Pad / Keyboard akor / Gitar genjreng / Bass groove ke bar yang diinginkan. Pola drum, pukulan (kick, snare, crash 1–3…), chimes, riser &amp; impact juga tinggal ditarik. <b>Geser</b> clip untuk memindah (bisa ke track lain), tarik <b>ujung kanan</b> untuk memanjangkan, <b>ketuk 2×</b> untuk mengedit: ganti akor, suara, pola genjrengan/groove, atau isi kotak-kotak pola drum. Rekaman dari tab Rekam bisa ditarik juga. <b>● Rekam mic</b> memutar lagu sambil merekam suara Anda ke track Vokal; <b>⤓ Import</b> memasukkan file audio. <b>Garis hijau</b> bisa ditarik (jari atau mouse); ketuk bar kosong untuk memindahnya; Putar selalu mulai dari garis hijau. <b>Salin / potong / tempel</b>: di iPad tahan agak lama pada clip (atau bar kosong untuk Tempel di sini); di komputer Ctrl+C, Ctrl+X, Ctrl+V (tempel di garis hijau), Ctrl+D duplikat, Delete hapus, Ctrl+Z undo, Shift/Ctrl+klik untuk memilih beberapa clip, Spasi = putar/stop. Tiap track punya Mute, Solo &amp; volume. Semua tersimpan otomatis; <b>Ekspor</b> = MP3/WAV seluruh lagu. Tempo ikut BPM di bar atas.</p>
+  <p>Seperti mengedit video, tapi untuk musik. Pilih <b>akor</b> di kiri atas, lalu <b>tarik</b> Pad / Keyboard akor / Gitar genjreng / Bass groove ke bar yang diinginkan. Pola drum, pukulan (kick, snare, crash 1–3…), chimes, riser &amp; impact juga tinggal ditarik. <b>Geser</b> clip untuk memindah (bisa ke track lain), tarik <b>ujung kanan</b> untuk memanjangkan, <b>ketuk 2×</b> untuk mengedit: ganti akor, suara, pola genjrengan/groove, atau isi kotak-kotak pola drum. Rekaman dari tab Rekam bisa ditarik juga. <b>● Rekam mic</b> memutar lagu sambil merekam suara Anda ke track Vokal; <b>⤓ Import</b> memasukkan file audio. <b>Garis hijau</b> bisa ditarik (jari atau mouse); ketuk bar kosong untuk memindahnya; Putar selalu mulai dari garis hijau. <b>Salin / potong / tempel</b>: di iPad tahan agak lama pada clip (atau bar kosong untuk Tempel di sini); di komputer Ctrl+C, Ctrl+X, Ctrl+V (tempel di garis hijau), Ctrl+D duplikat, Delete hapus, Ctrl+Z undo, Shift/Ctrl+klik atau <b>seret kotak di area kosong</b> untuk memilih banyak clip (di iPad nyalakan <b>⬚ Pilih</b> dulu), <b>＋ Tambah track</b> di bawah daftar track untuk menambah Pad 2, Efek 2, dst. (menu ⋯ tiap track: ganti nama, duplikat, naik/turun, hapus), Spasi = putar/stop. Tiap track punya Mute, Solo &amp; volume. Semua tersimpan otomatis; <b>Ekspor</b> = MP3/WAV seluruh lagu. Tempo ikut BPM di bar atas.</p>
   <h3>Bagian lagu &amp; suara pemandu (guide)</h3>
   <p>Di Susun Lagu ada jalur <b>Bagian lagu</b> di atas track. Tarik nama bagian (Intro, Verse 1–4, Pre-Chorus, Chorus, Post-Chorus, Bridge, Interlude, Instrumental, Solo gitar/drum/keyboard/bass, Modulasi, Breakdown, Build, Tag, Ulang 2×/3×/4×, Terakhir kali, Semua masuk, Acapella, Tahan, Outro, Ending, Stop) ke bar, atau ketuk jalur itu di bar yang diinginkan. Saat lagu diputar, suara pemandu menyebut nama bagian 1 bar sebelumnya lalu “3, 4” (atau 2 bar sebelumnya lalu “1, 2, 3, 4”) — atur dengan ketuk 2× pada penanda. Kalau lagu dimulai tepat di sebuah bagian, otomatis ada hitung masuk. <b>Modulasi</b> benar-benar menaikkan kunci semua akor pad/keyboard/gitar/bass sesudahnya. Menu <b>🎙 Pemandu</b>: nyala/mati, suara pria/wanita, hitung masuk, dan click yang ikut lagu. Pemandu &amp; click ikut jalur click (Mode ibadah: hanya ke pemain) dan tidak ikut ekspor. Suara pemandu dibuat dengan model TTS <b>Kokoro-82M</b> (lisensi Apache 2.0).</p>
   <h3>Mixer</h3>
@@ -3439,6 +3444,42 @@ const ARR_COL = { pad: '#8a5cf6', kb: '#5b8def', gtr: '#3fb67a', bass: '#3a9be0'
 const ARR_BARS = 40, AHEAD = 150;
 const arr = { clips: [], tr: {}, ppb: 26, snap: 1, loop: false, head: 0, sel: null, selSet: new Set(), clip: null, undo: [], redo: [], marks: [], selMark: null, chord: 0, chordX: false, nid: 1, aud: [] };
 ARR_TRACKS.forEach(([id]) => arr.tr[id] = { vol: 80, mute: false, solo: false });
+const TRK_TYPES = Object.fromEntries(ARR_TRACKS.map(([id, n, c]) => [id, [n, c]]));
+arr.tracks = ARR_TRACKS.map(([id, n]) => ({ id, type: id, name: n }));
+const trkOf = id => arr.tracks.find(t => t.id === id);
+function defTrack(kind) { const ty = ARR_DEF_TRACK[kind] || 'pad'; return (arr.tracks.find(t => t.type === ty) || arr.tracks[0]).id; }
+function fixTracks() {   // pastikan tiap track punya setelan & tiap clip punya track
+  if (!arr.tracks.length) arr.tracks = ARR_TRACKS.map(([id, n]) => ({ id, type: id, name: n }));
+  arr.tracks.forEach(t => { if (!arr.tr[t.id]) arr.tr[t.id] = { vol: 80, mute: false, solo: false }; });
+  arr.clips.forEach(k => { if (!trkOf(k.track)) k.track = defTrack(k.kind); });
+}
+function addTrack(type, afterId, copyFrom) {
+  arrPush(); const base = TRK_TYPES[type][0], same = arr.tracks.filter(t => t.type === type);
+  if (same.length === 1 && same[0].name === base) same[0].name = base + ' 1';
+  const id = type + '_' + Date.now().toString(36) + Math.floor(Math.random() * 99), t = { id, type, name: base + ' ' + (same.length + 1) };
+  arr.tr[id] = { vol: 80, mute: false, solo: false };
+  const after = afterId ? arr.tracks.findIndex(x => x.id === afterId) : arr.tracks.map(x => x.type).lastIndexOf(type);
+  arr.tracks.splice(after >= 0 ? after + 1 : arr.tracks.length, 0, t);
+  if (copyFrom) { const src = trkOf(copyFrom); t.name = src.name + ' (salinan)'; arr.tr[id] = Object.assign({}, arr.tr[copyFrom]);
+    arr.clips.filter(k => k.track === copyFrom).forEach(k => { const n = JSON.parse(JSON.stringify(k)); n.id = arr.nid++; n.track = id; arr.clips.push(n); }); }
+  arrSave(); renderArr(); toast(`Track “${t.name}” ditambahkan.`); return t;
+}
+function trackMenu(x, y, t) {
+  const m = $('#aCtx'), n = arr.clips.filter(k => k.track === t.id).length, i = arr.tracks.indexOf(t), items = [
+    ['✎ Ganti nama', () => { const v = prompt('Nama track:', t.name); if (v && v.trim()) { arrPush(); t.name = v.trim().slice(0, 24); arrSave(); renderArr(); } }],
+    [`＋ Tambah track ${TRK_TYPES[t.type][0]} lagi`, () => addTrack(t.type, t.id)],
+    ['⧉ Duplikat track (beserta clip)', () => addTrack(t.type, t.id, t.id)],
+    ['↑ Naikkan', () => { if (i > 0) { arrPush(); arr.tracks.splice(i, 1); arr.tracks.splice(i - 1, 0, t); arrSave(); renderArr(); } }],
+    ['↓ Turunkan', () => { if (i < arr.tracks.length - 1) { arrPush(); arr.tracks.splice(i, 1); arr.tracks.splice(i + 1, 0, t); arrSave(); renderArr(); } }],
+    ['⬚ Pilih semua clip di track ini', () => { arr.selSet = new Set(arr.clips.filter(k => k.track === t.id)); arr.clips.forEach(drawAClip); }],
+    [`🗑 Hapus track${n ? ' + ' + n + ' clip' : ''}`, () => { if (arr.tracks.length <= 1) { toast('Minimal harus ada 1 track.'); return; } if (n && !confirm(`Hapus track “${t.name}” beserta ${n} clip di dalamnya? (bisa di-undo)`)) return;
+      arrPush(); arr.clips = arr.clips.filter(k => k.track !== t.id); arr.tracks = arr.tracks.filter(x => x !== t); delete arr.tr[t.id]; arr.selSet.clear(); arrSave(); renderArr(); if (arrPl && !arrPl.only) arrPlay(arrBeat()); }]];
+  showMenu(m, x, y, items);
+}
+function showMenu(m, x, y, items) {
+  m.innerHTML = ''; items.forEach(([t, f]) => { const b = document.createElement('button'); b.textContent = t; b.onclick = () => { m.classList.remove('show'); f(); }; m.appendChild(b); });
+  m.classList.add('show'); const r = m.getBoundingClientRect(); m.style.left = Math.max(4, Math.min(x, innerWidth - r.width - 8)) + 'px'; m.style.top = Math.max(4, Math.min(y, innerHeight - r.height - 8)) + 'px';
+}
 const aq = () => 60 / S.bpm;
 const DROWS = [['kick', 'Kick'], ['snare', 'Snare'], ['hat', 'Hi-hat'], ['ohat', 'Hi-hat buka'], ['tom1', 'Tom 1'], ['tom2', 'Tom 2'], ['tom3', 'Floor tom'], ['crash', 'Crash']];
 const dpat = o => DROWS.map(([k]) => Array.from({ length: 16 }, (_, i) => (o[k] || []).includes(i) ? 1 : 0));
@@ -3540,10 +3581,10 @@ function arrStop(silent, natural) { const sp = arrPl; if (!sp) return; clearInte
 function arrBeat() { return arrPl && !arrPl.only ? arrPl.fb + (ctx.currentTime - arrPl.t0) / aq() : arr.head; }
 /* --- penyimpanan --- */
 let arrSaveT = null;
-function arrSave() { clearTimeout(arrSaveT); arrSaveT = setTimeout(() => idb.put('arr_v1', { clips: arr.clips, marks: arr.marks, tr: arr.tr, ppb: arr.ppb, snap: arr.snap, loop: arr.loop, nid: arr.nid, aud: arr.aud.map(a => ({ aid: a.aid, name: a.name, kind: a.kind, sec: a.sec })) }), 500); }
+function arrSave() { clearTimeout(arrSaveT); arrSaveT = setTimeout(() => idb.put('arr_v1', { clips: arr.clips, marks: arr.marks, tracks: arr.tracks, tr: arr.tr, ppb: arr.ppb, snap: arr.snap, loop: arr.loop, nid: arr.nid, aud: arr.aud.map(a => ({ aid: a.aid, name: a.name, kind: a.kind, sec: a.sec })) }), 500); }
 async function arrLoad(demo) {
   const m = await idb.get('arr_v1');
-  if (m && Array.isArray(m.clips)) { arr.marks = Array.isArray(m.marks) ? m.marks : []; if (arr.marks.length) loadCues(); Object.assign(arr, { clips: m.clips, ppb: m.ppb || 26, snap: m.snap || 1, loop: !!m.loop, nid: m.nid || 1 }); Object.assign(arr.tr, m.tr || {});
+  if (m && Array.isArray(m.clips)) { if (Array.isArray(m.tracks) && m.tracks.length) arr.tracks = m.tracks; arr.marks = Array.isArray(m.marks) ? m.marks : []; if (arr.marks.length) loadCues(); Object.assign(arr, { clips: m.clips, ppb: m.ppb || 26, snap: m.snap || 1, loop: !!m.loop, nid: m.nid || 1 }); Object.assign(arr.tr, m.tr || {});
     arr.aud = (m.aud || []).map(a => Object.assign({}, a)); for (const a of arr.aud) { try { const ab = await idb.get('arraud_' + a.aid); if (ab) { ensureAudio(); a.buf = await decode(ab.slice(0)); } } catch (e) {} } }
   else if (demo) arrDemo();
   $('#aSnap').value = arr.snap; $('#aLoop').classList.toggle('on', arr.loop); renderArrLib(); renderArr();
@@ -3623,15 +3664,21 @@ function renderArr() {
   const g = $('#aGrid'); if (!g) return; const W = ARR_BARS * 4 * arr.ppb; g.style.width = (AHEAD + W) + 'px'; g.style.setProperty('--ppb', arr.ppb + 'px');
   g.innerHTML = `<div class="arow aruler"><div class="ahead">BAR</div><div class="arl" id="aRuler" style="width:${W}px">${Array.from({ length: ARR_BARS }, (_, i) => `<span style="left:${i * 4 * arr.ppb}px">${i + 1}</span><b style="left:${i * 4 * arr.ppb}px"></b>`).join('')}</div></div><div class="aph" id="aPh"></div>
     <div class="arow amrow"><div class="ahead"><div class="anm">Bagian lagu</div><button id="aGuide" class="mini aguide">🎙 Pemandu ▾</button></div><div class="amlane" id="aMarks" style="width:${W}px"></div></div>`;
-  ARR_TRACKS.forEach(([id, name, col], ti) => {
-    const t = arr.tr[id], r = document.createElement('div'); r.className = 'arow';
-    r.innerHTML = `<div class="ahead"><div class="anm"><i style="background:${col}"></i>${name}</div><div class="actl"><button class="m ${t.mute ? 'on' : ''}">M</button><button class="s ${t.solo ? 'on' : ''}">S</button><input type="range" min="0" max="120" value="${t.vol}"></div></div><div class="alane ${ti % 2 ? 'alt' : ''}" data-t="${id}" style="width:${W}px"></div>`;
+  fixTracks();
+  arr.tracks.forEach((T, ti) => {
+    const id = T.id, col = TRK_TYPES[T.type][1], t = arr.tr[id], r = document.createElement('div'); r.className = 'arow';
+    r.innerHTML = `<div class="ahead"><div class="anm"><i style="background:${col}"></i><span class="tn"></span><button class="tmenu" title="Menu track">⋯</button></div><div class="actl"><button class="m ${t.mute ? 'on' : ''}">M</button><button class="s ${t.solo ? 'on' : ''}">S</button><input type="range" min="0" max="120" value="${t.vol}"></div></div><div class="alane ${ti % 2 ? 'alt' : ''}" data-t="${id}" style="width:${W}px"></div>`;
     r.querySelector('.m').onclick = () => { t.mute = !t.mute; arrSave(); renderArr(); if (arrPl && !arrPl.only) arrPlay(arrBeat()); };
     r.querySelector('.s').onclick = () => { t.solo = !t.solo; arrSave(); renderArr(); if (arrPl && !arrPl.only) arrPlay(arrBeat()); };
     r.querySelector('input').oninput = e => { t.vol = +e.target.value; if (arrPl) arrPl.parts.filter(P => P.tr === id).forEach(P => BUSN.forEach(n => setP(P.pl.B[n].gain, t.vol / 80))); };
     r.querySelector('input').onchange = arrSave;
+    r.querySelector('.tn').textContent = T.name;
+    r.querySelector('.tmenu').onclick = e => { e.stopPropagation(); const rc = e.currentTarget.getBoundingClientRect(); trackMenu(rc.left, rc.bottom + 4, T); };
     g.appendChild(r);
   });
+  const ar = document.createElement('div'); ar.className = 'arow addrow'; ar.innerHTML = `<div class="ahead"><button class="mini" id="aAddTrk">＋ Tambah track</button></div><div style="width:${W}px"></div>`; g.appendChild(ar);
+  $('#aAddTrk').onclick = e => { e.stopPropagation(); const rc = e.currentTarget.getBoundingClientRect(); showMenu($('#aCtx'), rc.left, rc.top - 330, Object.entries(TRK_TYPES).map(([ty, [n]]) => ['＋ ' + n, () => addTrack(ty)])); };
+  const bx = document.createElement('div'); bx.className = 'amarq'; bx.id = 'aMarq'; g.appendChild(bx); g.classList.toggle('selmode', !!arr.selMode);
   arr.clips.forEach(drawAClip);
   $('#aRuler').addEventListener('pointerdown', e => arrScrub(e));
   $('#aPh').addEventListener('pointerdown', e => arrScrub(e));
@@ -3653,11 +3700,29 @@ function arrScrub(e) {
   const up = () => { removeEventListener('pointermove', mv); removeEventListener('pointerup', up); removeEventListener('pointercancel', up); ph.classList.remove('drag'); if (was) arrPlay(arr.head); else renderArrBtns(); };
   addEventListener('pointermove', mv); addEventListener('pointerup', up); addEventListener('pointercancel', up);
 }
+// seret kotak di area kosong = pilih banyak clip (mouse langsung; iPad nyalakan ⬚ Pilih)
+function arrMarquee(e, beat) {
+  e.preventDefault(); const g = $('#aGrid'), sc = $('#aScroll'), bx = $('#aMarq'), add = e.shiftKey || e.ctrlKey || e.metaKey;
+  const gr0 = g.getBoundingClientRect(), sx = e.clientX - gr0.left, sy = e.clientY - gr0.top; let drawn = false, base = add ? new Set(arr.selSet) : new Set();
+  const mv = ev => { const r = sc.getBoundingClientRect(); if (ev.clientX > r.right - 30) sc.scrollLeft += 14; else if (ev.clientX < r.left + AHEAD + 20) sc.scrollLeft -= 14;
+    const gr = g.getBoundingClientRect(), cx = ev.clientX - gr.left, cy = ev.clientY - gr.top;
+    if (!drawn && Math.hypot(cx - sx, cy - sy) < 5) return; drawn = true;
+    const L = Math.min(sx, cx), T = Math.min(sy, cy), W = Math.abs(cx - sx), H = Math.abs(cy - sy);
+    Object.assign(bx.style, { display: 'block', left: L + 'px', top: T + 'px', width: W + 'px', height: H + 'px' });
+    const box = { l: gr.left + L, t: gr.top + T, r: gr.left + L + W, b: gr.top + T + H }, sel = new Set(base);
+    document.querySelectorAll('.aclip').forEach(el => { const c = el.getBoundingClientRect(); if (c.right > box.l && c.left < box.r && c.bottom > box.t && c.top < box.b) { const k = arr.clips.find(x => x.id == el.dataset.id); if (k) sel.add(k); } });
+    const old = arr.selSet; arr.selSet = sel; arr.sel = [...sel][0] || null; arr.clips.forEach(k => { if (old.has(k) !== sel.has(k)) drawAClip(k); }); };
+  const up = () => { removeEventListener('pointermove', mv); removeEventListener('pointerup', up); removeEventListener('pointercancel', up); bx.style.display = 'none';
+    if (!drawn) { if (!add) arrSel(null); arr.head = Math.max(0, aSnap(beat)); if (arrPl && !arrPl.only) arrPlay(arr.head); }
+    else if (arr.selSet.size) toast(`${arr.selSet.size} clip dipilih — Delete / 🗑 untuk hapus, Ctrl+C untuk salin, atau seret salah satunya untuk memindah semua.`, 3500); };
+  addEventListener('pointermove', mv); addEventListener('pointerup', up); addEventListener('pointercancel', up);
+}
 // ketuk bar kosong = pindah garis hijau ke situ · tahan agak lama = menu Tempel / Putar dari sini
 function arrLaneDown(e, l) {
   if (e.target !== l) return; $('#aCtx').classList.remove('show');
   const x0 = e.clientX, y0 = e.clientY, beat = (x0 - l.getBoundingClientRect().left) / arr.ppb; let moved = false, done = false;
   if (e.button === 2) { e.preventDefault(); arrCtx(x0, y0, null, l.dataset.t, beat); return; }
+  if (e.pointerType === 'mouse' || arr.selMode) { arrMarquee(e, beat); return; }
   const lp = setTimeout(() => { if (!moved) { done = true; arrCtx(x0, y0, null, l.dataset.t, beat); } }, 550);
   const mv = ev => { if (Math.abs(ev.clientX - x0) > 8 || Math.abs(ev.clientY - y0) > 8) { moved = true; clearTimeout(lp); } };
   const up = () => { clearTimeout(lp); removeEventListener('pointermove', mv); removeEventListener('pointerup', up); removeEventListener('pointercancel', up);
@@ -3686,9 +3751,9 @@ function arrSel(k, add) {
   arr.sel = k && arr.selSet.has(k) ? k : [...arr.selSet].pop() || null; old.forEach(drawAClip); arr.selSet.forEach(drawAClip);
 }
 /* --- undo / redo --- */
-function arrSnap() { return JSON.stringify({ c: arr.clips, m: arr.marks }); }
+function arrSnap() { return JSON.stringify({ c: arr.clips, m: arr.marks, t: arr.tracks, r: arr.tr }); }
 function arrPush(snap) { arr.undo.push(snap ?? arrSnap()); if (arr.undo.length > 60) arr.undo.shift(); arr.redo = []; }
-function arrRestore(from, to) { if (!from.length) { toast('Tidak ada yang bisa di-' + (from === arr.undo ? 'undo' : 'redo') + '.'); return; } to.push(arrSnap()); const ids = new Set([...arr.selSet].map(k => k.id)); const o = JSON.parse(from.pop()); arr.clips = Array.isArray(o) ? o : o.c; if (!Array.isArray(o)) arr.marks = o.m || []; arr.selMark = null; arr.selSet = new Set(arr.clips.filter(k => ids.has(k.id))); arr.sel = [...arr.selSet][0] || null; arrSave(); renderArr(); if (arrPl && !arrPl.only) arrPlay(arrBeat()); }
+function arrRestore(from, to) { if (!from.length) { toast('Tidak ada yang bisa di-' + (from === arr.undo ? 'undo' : 'redo') + '.'); return; } to.push(arrSnap()); const ids = new Set([...arr.selSet].map(k => k.id)); const o = JSON.parse(from.pop()); arr.clips = Array.isArray(o) ? o : o.c; if (!Array.isArray(o)) { arr.marks = o.m || []; if (o.t) arr.tracks = o.t; if (o.r) arr.tr = o.r; } arr.selMark = null; fixTracks(); arr.selSet = new Set(arr.clips.filter(k => ids.has(k.id))); arr.sel = [...arr.selSet][0] || null; arrSave(); renderArr(); if (arrPl && !arrPl.only) arrPlay(arrBeat()); }
 const arrUndo = () => arrRestore(arr.undo, arr.redo), arrRedo = () => arrRestore(arr.redo, arr.undo);
 /* --- salin / potong / tempel --- */
 function arrCopy(cut) {
@@ -3712,6 +3777,9 @@ function arrCtx(x, y, k, lane, beat) {
   if (k) items.push(['✎ Edit', () => arrEditor(k)], ['⧉ Salin', () => arrCopy(false)], ['✂ Potong', () => arrCopy(true)], ['⎘ Duplikat ke kanan', arrDup], ['🗑 Hapus', () => arrDel()]);
   if (arr.clip && arr.clip.length) items.push(['📋 Tempel di sini', () => arrPaste(aSnap(beat ?? (k ? k.start : arr.head)), lane)]);
   items.push(['▶ Putar dari sini', () => { arr.head = Math.max(0, aSnap(beat ?? (k ? k.start : 0))); arrPlay(arr.head); }]);
+  if (!k) { items.push(['⬚ Pilih semua clip', () => { arr.selSet = new Set(arr.clips); arr.clips.forEach(drawAClip); toast(arr.clips.length + ' clip dipilih.'); }]);
+    if (arr.selSet.size) items.push([`🗑 Hapus yang dipilih (${arr.selSet.size})`, () => arrDel()]);
+    items.push([arr.selMode ? '✋ Matikan mode pilih (seret = geser layar)' : '⬚ Mode pilih: seret jari untuk memilih', () => toggleSelMode()]); }
   m.innerHTML = ''; items.forEach(([t, f]) => { const b = document.createElement('button'); b.textContent = t; b.onclick = () => { m.classList.remove('show'); f(); }; m.appendChild(b); });
   m.classList.add('show'); const r = m.getBoundingClientRect(); m.style.left = Math.min(x, innerWidth - r.width - 8) + 'px'; m.style.top = Math.min(y, innerHeight - r.height - 8) + 'px';
 }
@@ -3728,7 +3796,7 @@ function arrLibDrag(e, it) {
   mv(e);
   const up = ev => { removeEventListener('pointermove', mv); removeEventListener('pointerup', up); gh.style.display = 'none'; if (over) over.classList.remove('hover');
     const l = alaneAt(ev.clientX, ev.clientY);
-    if (!l) { const k = clipFromItem(it, ARR_DEF_TRACK[it.kind], 0); arrPlay(0, 0, [k]); return; }
+    if (!l) { const k = clipFromItem(it, defTrack(it.kind), 0); arrPlay(0, 0, [k]); return; }
     const rc = l.getBoundingClientRect(), start = Math.max(0, aSnap((ev.clientX - rc.left) / arr.ppb - 0.25)), k = clipFromItem(it, l.dataset.t, start);
     arrPush(); arr.clips.push(k); drawAClip(k); arrSel(k); arrSave();
     toast(`${clipLabel(k)} → bar ${Math.floor(start / 4) + 1} ketuk ${Math.floor(start % 4) + 1}`); if (arrPl && !arrPl.only) arrPlay(arrBeat()); };
@@ -3752,6 +3820,7 @@ function arrClipDrag(e, k) {
   const up = () => { cleanup(); if (moved) { arrPush(snap0); arrSave(); if (arrPl && !arrPl.only) arrPlay(arrBeat()); } };
   addEventListener('pointermove', mv); addEventListener('pointerup', up); addEventListener('pointercancel', up);
 }
+function toggleSelMode() { arr.selMode = !arr.selMode; $('#aSelBtn').classList.toggle('on', arr.selMode); $('#aGrid').classList.toggle('selmode', arr.selMode); toast(arr.selMode ? 'Mode pilih: seret jari di area kosong untuk memilih banyak clip. Matikan lagi untuk menggeser layar.' : 'Mode pilih mati — seret jari kembali untuk menggeser layar.', 3500); }
 function arrDel(k) {
   const sel = k ? [k] : [...arr.selSet]; if (!sel.length) { toast('Ketuk sekali clip yang mau dihapus, lalu tekan Hapus.'); return; }
   arrPush(); arr.clips = arr.clips.filter(x => !sel.includes(x)); sel.forEach(c => { const el = document.querySelector(`.aclip[data-id="${c.id}"]`); if (el) el.remove(); arr.selSet.delete(c); }); arr.sel = null; arrSave();
@@ -3789,7 +3858,7 @@ function arrEditor(k) {
 async function arrAddAudio(buf, name, kind) {
   const aid = Date.now() + '_' + Math.floor(Math.random() * 1e4), a = { aid, name, kind, sec: buf.duration, buf }; arr.aud.push(a);
   try { await idb.put('arraud_' + aid, encodeWav(buf).buffer); } catch (e) {}
-  const track = kind === 'mic' ? 'vox' : 'audio', k = clipFromItem({ kind, name, sec: buf.duration, len: buf.duration / aq(), d: { aid } }, track, aSnap(micA ? micA.startB : arr.head));
+  const track = defTrack(kind), k = clipFromItem({ kind, name, sec: buf.duration, len: buf.duration / aq(), d: { aid } }, track, aSnap(micA ? micA.startB : arr.head));
   if (kind === 'mic') k.d.off = Math.min(0.3, (ctx.baseLatency || 0) + (ctx.outputLatency || 0));
   if (kind === 'mic') k.sec = Math.max(0.1, buf.duration - k.d.off);
   arrPush(); arr.clips.push(k); renderArrLib(); drawAClip(k); arrSel(k); arrSave(); return k;
@@ -3815,7 +3884,7 @@ function renderArrBtns() {
   const m = $('#aMic'); m.textContent = micA ? '■ Stop mic' : '● Mic'; m.classList.toggle('rec', !!micA);
 }
 function arrDemo() {
-  const c = chordListK(false), put = (kind, track, start, len, d, name) => { const k = { id: arr.nid++, kind, name: name || kind, track, start, len, d }; arr.clips.push(k); };
+  const c = chordListK(false), put = (kind, track, start, len, d, name) => { const k = { id: arr.nid++, kind, name: name || kind, track: (arr.tracks.find(t => t.type === track) || {}).id || track, start, len, d }; arr.clips.push(k); };
   const cc = i => ({ pc: c[i].pc, q: c[i].q, name: c[i].name }), prog = [0, 1, 2, 4];
   put('chime', 'fx', 0, 4, { dir: 1 }, 'Chimes sapu naik');
   [0, 1].forEach(r => prog.forEach((ci, i) => put('pad', 'pad', r * 32 + i * 8, 8, { c: cc(ci), snd: 'warm' })));
@@ -3833,7 +3902,7 @@ function initArr() {
   $('#aSnap').onchange = e => { arr.snap = +e.target.value; arrSave(); };
   $('#aZoomIn').onclick = () => { arr.ppb = Math.min(80, arr.ppb + 6); renderArr(); arrSave(); };
   $('#aZoomOut').onclick = () => { arr.ppb = Math.max(8, arr.ppb - 6); renderArr(); arrSave(); };
-  $('#aDel').onclick = () => arrDel(); $('#aUndo').onclick = arrUndo; $('#aRedo').onclick = arrRedo;
+  $('#aDel').onclick = () => arrDel(); $('#aUndo').onclick = arrUndo; $('#aRedo').onclick = arrRedo; $('#aSelBtn').onclick = toggleSelMode;
   $('#aClear').onclick = e => { const b = e.currentTarget; if (b.dataset.c !== '1') { b.dataset.c = '1'; b.textContent = 'Yakin?'; setTimeout(() => { b.dataset.c = ''; b.textContent = 'Kosongkan'; }, 2500); return; } arrStop(); arrPush(); arr.clips = []; arr.marks = []; arr.sel = null; arr.selSet.clear(); arrSave(); renderArr(); };
   $('#aDemo').onclick = () => { arrStop(); arrPush(); arr.clips = []; arr.marks = []; arrDemo(); arrSave(); renderArr(); toast('Contoh lagu dimuat (pakai kunci & suara yang sedang dipilih).'); };
   $('#aMic').onclick = () => micA ? stopMicA() : startMicA();
