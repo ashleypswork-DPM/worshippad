@@ -50,7 +50,7 @@ header h1 small{color:var(--mute);font-weight:400;margin-left:6px}
 #splitBtn{max-width:250px;text-align:left;line-height:1.2;font-size:14px;padding:8px 12px}
 #splitBtn.on{background:var(--accent2);border-color:var(--accent2);color:#04201c}
 nav{display:flex;gap:8px}
-nav button{flex:1;padding:12px;font-weight:600}
+nav button{flex:1;padding:12px 6px;font-weight:600}
 nav button.on{background:var(--text);color:var(--bg);border-color:var(--text)}
 main{flex:1;min-height:0;position:relative}
 .panel{display:none;height:100%;flex-direction:column;gap:10px}
@@ -192,6 +192,45 @@ details.fx[open]>summary::before{transform:rotate(90deg)}
 details.fx>summary .note{font-weight:400}
 details.fx>.controls{border:none;border-top:1px solid var(--line);border-radius:0 0 var(--r) var(--r)}
 .mixwrap{flex:1;display:flex;gap:10px;min-height:0}
+/* ---- Susun Lagu ---- */
+.apos{font-variant-numeric:tabular-nums;min-width:58px;text-align:center;background:#0b0d11;border:1px solid var(--line);border-radius:10px;padding:7px 8px;color:var(--accent2);font-weight:650}
+.amain{flex:1;display:flex;gap:8px;min-height:0}
+.alib{width:214px;flex:none;background:var(--panel);border:1px solid var(--line);border-radius:var(--r);padding:8px;overflow-y:auto}
+.achords{display:flex;flex-wrap:wrap;gap:5px;margin-bottom:4px}.achords button{padding:5px 8px;display:flex;flex-direction:column;align-items:center;min-width:44px;line-height:1.1}
+.achords small{font-size:9px;opacity:.7}
+.alib .sect{margin:10px 4px 6px}
+.aitem{display:flex;align-items:center;gap:8px;padding:8px 10px;border-radius:10px;background:var(--panel2);border:1px solid var(--line);margin-bottom:6px;cursor:grab;touch-action:none;font-size:14px}
+.aitem i{width:10px;height:10px;border-radius:3px;flex:none}.aitem span{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.aitem small{color:var(--mute);margin-left:auto;font-size:11px;flex:none}
+.aarr{flex:1;display:flex;flex-direction:column;background:var(--panel);border:1px solid var(--line);border-radius:var(--r);min-width:0;overflow:hidden}
+.ascroll{flex:1;overflow:auto;position:relative;-webkit-overflow-scrolling:touch}
+.agrid{position:relative;min-width:100%}
+.arow{display:flex;height:50px;border-bottom:1px solid #222733}
+.arow.aruler{height:28px;position:sticky;top:0;z-index:5;background:#12151b;border-bottom:1px solid var(--line)}
+.ahead{width:150px;flex:none;position:sticky;left:0;z-index:4;background:var(--panel);border-right:1px solid var(--line);padding:2px 8px;display:flex;flex-direction:column;justify-content:center;gap:2px}
+.aruler .ahead{z-index:6;background:#12151b;font-size:11px;color:var(--mute)}
+.anm{font-weight:650;font-size:13.5px;display:flex;align-items:center;gap:6px;white-space:nowrap}.anm i{width:9px;height:9px;border-radius:3px}
+.actl{display:flex;gap:4px;align-items:center}.actl button{padding:1px 0;width:26px;font-size:12px;font-weight:700;border-radius:7px}
+.actl .m.on{background:var(--danger);border-color:var(--danger);color:#fff}.actl .s.on{background:var(--click);border-color:var(--click);color:#06122b}
+.actl input{width:70px}
+.alane{position:relative;flex:none;height:100%;background-image:linear-gradient(90deg,#2a2f3a 1px,transparent 1px),linear-gradient(90deg,#1c2029 1px,transparent 1px);background-size:calc(var(--ppb)*4) 100%,var(--ppb) 100%}
+.alane.alt{background-color:#14171d}.alane.hover{background-color:#1d2a26}
+.arl{position:relative;flex:none;height:100%;cursor:pointer}.arl span{position:absolute;top:6px;font-size:12px;color:var(--mute);transform:translateX(4px)}.arl b{position:absolute;bottom:0;width:1px;height:9px;background:var(--line)}
+.aclip{position:absolute;top:3px;bottom:3px;border-radius:9px;border:1px solid rgba(255,255,255,.18);overflow:hidden;touch-action:none;cursor:grab;box-shadow:0 2px 6px rgba(0,0,0,.35)}
+.aclip .t{position:absolute;left:7px;top:3px;right:12px;font-size:12px;font-weight:700;color:#fff;text-shadow:0 1px 2px rgba(0,0,0,.6);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;pointer-events:none;z-index:2}
+.aclip canvas{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
+.aclip .rz{position:absolute;right:0;top:0;bottom:0;width:14px;cursor:ew-resize;background:linear-gradient(90deg,transparent,rgba(255,255,255,.25))}
+.aclip.sel{outline:2px solid #fff;outline-offset:1px}
+.aph{position:absolute;top:0;bottom:0;width:2px;background:var(--accent2);z-index:7;pointer-events:none;box-shadow:0 0 8px var(--accent2)}
+.afoot{padding:6px 10px;border-top:1px solid var(--line);font-size:12.5px;color:var(--mute)}.afoot b{color:var(--text)}
+.aghost{position:fixed;z-index:90;pointer-events:none;padding:8px 12px;border-radius:9px;color:#fff;font-weight:700;font-size:13px;opacity:.92;box-shadow:0 6px 18px rgba(0,0,0,.5)}
+.amod{position:fixed;inset:0;background:rgba(0,0,0,.55);display:none;align-items:center;justify-content:center;z-index:85}
+.amod.show{display:flex}
+.abox{background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:16px;max-width:780px;width:94%;max-height:90vh;overflow-y:auto}
+.abox h2{margin:0 0 4px;font-size:18px}.abox select{max-width:100%;min-width:260px}.abox .sect{margin:10px 0 6px}
+.asteps{display:grid;grid-template-columns:84px repeat(16,1fr);gap:4px;align-items:center;margin-top:8px}.asteps .rn{font-size:12.5px;color:var(--mute)}
+.ast{height:30px;border-radius:7px;background:var(--panel2);border:1px solid var(--line);cursor:pointer}.ast.b{background:#232834}.ast.on{background:var(--accent);border-color:var(--accent)}
+.brow{display:flex;gap:8px;margin-top:14px;flex-wrap:wrap}
 .grp{display:inline-flex;align-items:center;gap:8px;flex-wrap:wrap}
 .bar{flex-wrap:nowrap}.bar .slider{min-width:84px!important;max-width:110px!important;flex:1 1 90px}
 .bar button{padding:9px 12px}.bar #bpm{width:72px;padding:8px 4px}.bar .dots{gap:5px}.bar .dot{width:12px;height:12px}
@@ -262,6 +301,7 @@ details.fx>.controls{border:none;border-top:1px solid var(--line);border-radius:
     <button data-tab="gtr">Gitar</button>
     <button data-tab="bass">Bass</button>
     <button data-tab="drum">Drum Pad</button>
+    <button data-tab="arr">Susun Lagu</button>
     <button data-tab="rec">Rekam &amp; Lagu</button>
     <button data-tab="mix">Mixer</button>
   </nav>
@@ -468,6 +508,26 @@ details.fx>.controls{border:none;border-top:1px solid var(--line);border-radius:
       <div class="takes" id="takes"></div>
     </section>
 
+    <!-- SUSUN LAGU -->
+    <section class="panel" id="tab-arr">
+      <div class="tool">
+        <button id="aPlay" class="mini">▶ Putar</button><button id="aStart" class="mini">⏮</button><span class="apos" id="aPos">1.1</span>
+        <button id="aLoop" class="mini">⟲ Ulang</button>
+        <span class="vsep"></span>
+        <span class="grp"><span class="lbl">Snap</span><select id="aSnap" class="mini"><option value="4">1 bar</option><option value="1">1 ketuk</option><option value="0.5">1/8</option><option value="0.25">1/16</option></select></span>
+        <span class="grp"><span class="lbl">Zoom</span><button id="aZoomOut" class="mini">−</button><button id="aZoomIn" class="mini">+</button></span>
+        <span class="vsep"></span>
+        <button id="aMic" class="mini">● Rekam mic</button><button id="aImp" class="mini">⤓ Import</button><input id="aFile" type="file" accept="audio/*" hidden>
+        <span style="flex:1"></span>
+        <button id="aDel" class="mini">🗑</button><button id="aClear" class="mini">Kosongkan</button><button id="aDemo" class="mini">Contoh</button><button id="aExport" class="mini">Ekspor</button>
+      </div>
+      <div class="amain">
+        <div class="alib" id="aLib"></div>
+        <div class="aarr"><div class="ascroll" id="aScroll"><div class="agrid" id="aGrid"></div></div>
+          <div class="afoot"><b>Tarik</b> suara dari kiri ke bar · <b>geser</b> clip · tarik <b>ujung kanan</b> untuk memanjangkan · <b>ketuk 2×</b> clip untuk mengedit · ketuk angka bar untuk pindah posisi · tempo ikut BPM di atas</div></div>
+      </div>
+    </section>
+
     <!-- MIXER -->
     <section class="panel" id="tab-mix">
       <div class="mixwrap">
@@ -550,6 +610,8 @@ details.fx>.controls{border:none;border-top:1px solid var(--line);border-radius:
   <p><b>Manual: pad nada</b> = 16 tombol besar berisi tangga nada kunci yang dipilih (2 oktaf, nada akor yang disorot berwarna emas) — paling mudah untuk berkreasi di iPad; geser jari ke pad lain = hammer-on/slide. Ada juga belasan <b>synth bass</b> (gaya Juno-106, TB-303 acid, DX7 "Lately", wobble/growl dubstep, future bass, 808 trap, dll). <b>Otomatis</b>: pilih suara &amp; pola groove (jari, pick/alternate, slap &amp; pop, tapping, hammer-on/pull-off, ghost notes, walking, reggae, dll), lalu pencet akor — bass langsung jalan mengikuti BPM. Nyalakan <b>Ikuti akor Gitar</b> supaya bass ikut setiap kali Anda pencet akor di tab Gitar. <b>Manual</b>: pencet nada di fretboard 4 senar (E A D G) dengan teknik pilihan; geser jari di senar yang sama untuk hammer-on/pull-off. Efek: kompresor, octaver, chorus, envelope filter (auto-wah), delay, drive, EQ. Suara bass rendah paling terasa lewat mixer / headphone, bukan speaker iPad.</p>
   <h3>Drum Pad</h3>
   <p>Kit <b>Standar band</b>: kick, snare, rimshot, cross-stick, hi-hat (tutup/injak/buka), Tom 1, Tom 2, Floor tom, <b>3 crash</b> (16", 18", 20"), splash, ride &amp; ride bell. Ketuk <b>⋯</b> di pojok pad untuk menyetel nada, panjang dengung, volume dan posisi kiri–kanan pad itu (tersimpan &amp; ikut terekam).</p>
+  <h3>Susun Lagu (timeline ala FL Studio)</h3>
+  <p>Seperti mengedit video, tapi untuk musik. Pilih <b>akor</b> di kiri atas, lalu <b>tarik</b> Pad / Keyboard akor / Gitar genjreng / Bass groove ke bar yang diinginkan. Pola drum, pukulan (kick, snare, crash 1–3…), chimes, riser &amp; impact juga tinggal ditarik. <b>Geser</b> clip untuk memindah (bisa ke track lain), tarik <b>ujung kanan</b> untuk memanjangkan, <b>ketuk 2×</b> untuk mengedit: ganti akor, suara, pola genjrengan/groove, atau isi kotak-kotak pola drum. Rekaman dari tab Rekam bisa ditarik juga. <b>● Rekam mic</b> memutar lagu sambil merekam suara Anda ke track Vokal; <b>⤓ Import</b> memasukkan file audio. Tiap track punya Mute, Solo &amp; volume. Semua tersimpan otomatis; <b>Ekspor</b> = MP3/WAV seluruh lagu. Tempo ikut BPM di bar atas.</p>
   <h3>Mixer</h3>
   <p>Semua kanal (Pad, Arp, Keyboard, Chimes, Gitar, Bass, Drum, Click) di satu layar: volume, <b>M</b>ute, <b>S</b>olo, pan, reverb dan meter level. Bagian Master: volume, EQ Bass / Mid / Treble, kompresor "glue", limiter anti pecah dan meter L/R. Ketuk dua kali slider EQ/pan untuk kembali ke tengah. Pengaturan mixer ikut ke ekspor MP3/WAV.</p>
   <h3>Rekam &amp; Lagu (bertumpuk ala FL Studio)</h3>
@@ -881,6 +943,8 @@ u.setModules(B,G,f,b,v,a,m,z,g);G.setModules(B,g,m,a);z.setModules(G,m);f.setMod
 a.length>D&&(D=a.length,p=0|1.25*D+7200,r=new Int8Array(p));a=u.lame_encode_buffer(q,a,b,a.length,r,0,p);return new Int8Array(r.subarray(0,a))};this.flush=function(){var a=u.lame_encode_flush(q,r,0,p);return new Int8Array(r.subarray(0,a))}};lamejs.WavHeader=Fa}lamejs();
 
 </script>
+<div class="aghost" id="aGhost" style="display:none"></div>
+<div class="amod" id="aModal"><div class="abox" id="aBox"></div></div>
 <script>
 "use strict";
 /* ================= util ================= */
@@ -953,7 +1017,7 @@ function buildGraph() {
   G.musicSplit = ctx.createGain(); G.musicMono = mono(); G.limiter.connect(G.musicSplit); G.musicSplit.connect(G.musicMono); G.musicMono.connect(G.merger, 0, 1);
   G.click = ctx.createGain(); G.clickNormal = ctx.createGain(); G.click.connect(G.clickNormal); G.clickNormal.connect(G.master);
   G.clickSplit = ctx.createGain(); G.clickMono = mono(); G.click.connect(G.clickSplit); G.clickSplit.connect(G.clickMono); G.clickMono.connect(G.merger, 0, 0);
-  bus('pad'); bus('arp'); bus('sf'); bus('chime'); bus('drum'); bus('gtr'); bus('bass');
+  bus('pad'); bus('arp'); bus('sf'); bus('chime'); bus('drum'); bus('gtr'); bus('bass'); bus('aud');
   G.meter = ctx.createAnalyser(); G.meter.fftSize = 1024; G.limiter.connect(G.meter);
   MIXCH.forEach(([n]) => { const a = ctx.createAnalyser(); a.fftSize = 512; (n === 'click' ? G.click : G[n + 'Pan']).connect(a); G[n + 'Met'] = a; });
   applySplit(); applyLevels(); applyMaster();
@@ -972,7 +1036,7 @@ function holdParam(p, t) { if (p.cancelAndHoldAtTime) p.cancelAndHoldAtTime(t); 
 /* ================= state ================= */
 const DEFAULTS = { bpm: 100, sig: 4, clickVol: 70, master: 85, split: false, timbre: 'warm', chord: '5', octave: 0,
   padVol: 70, padBright: 45, padRev: 60, padFade: 30, arpOn: false, arpSound: 'pluck', arpPat: 'up', arpRate: 2, arpVol: 55,
-  kbSound: 'clarity', vel: 96, sfVol: 75, sfRev: 35, kbOct: 48, chVol: 60, chRev: 55, chColl: 60, chDecay: 100, kit: 'edm', drVol: 75, tab: 'pad', recCount: true, recSync: true, gtSound: 'steel', gtKey: 2, gtMinor: false, gtShape: 'full', gtPM: false, gtPat: 'pop', gtVol: 75, gtRev: 30, gtTone: 50, gtDrive: 50, gtChorus: false, gtDelay: false, gtDTime: 'd8', gtDFb: 30, gtDMix: 25, bsSound: 'precision', bsMode: 'auto', bsPat: 'worship', bsTech: 'finger', bsLegato: true, bsRing: false, bsVel: 100, bsVol: 80, bsRev: 12, bsLo: 60, bsMid: 55, bsHi: 42, bsDrive: 0, bsComp: true, bsOct: false, bsChorus: false, bsEnv: false, bsDelay: false, bsDTime: 'd8', bsLink: false, gtOwn: false, gtBpm: 100, gtSpd: 1, bsOwn: false, bsBpm: 100, bsSpd: 1, kbChorus: false, kbDelay: true, kbDTime: 'd8', kbDMix: 28, kbDFb: 35, kbPump: false, kbGlide: false, kbTimed: false, kbHold: 30, kbFade: 20, dset: {}, recStack: false, tlView: 'song', drRev: 50, mxLo: 0, mxMid: 0, mxHi: 0, mxGlue: false, mxGlueAmt: 40, mxLim: true, mxMute: {}, mxSolo: {}, mxPan: {} };
+  kbSound: 'clarity', vel: 96, sfVol: 75, sfRev: 35, kbOct: 48, chVol: 60, chRev: 55, chColl: 60, chDecay: 100, kit: 'edm', drVol: 75, tab: 'pad', recCount: true, recSync: true, gtSound: 'steel', gtKey: 2, gtMinor: false, gtShape: 'full', gtPM: false, gtPat: 'pop', gtVol: 75, gtRev: 30, gtTone: 50, gtDrive: 50, gtChorus: false, gtDelay: false, gtDTime: 'd8', gtDFb: 30, gtDMix: 25, bsSound: 'precision', bsMode: 'auto', bsPat: 'worship', bsTech: 'finger', bsLegato: true, bsRing: false, bsVel: 100, bsVol: 80, bsRev: 12, bsLo: 60, bsMid: 55, bsHi: 42, bsDrive: 0, bsComp: true, bsOct: false, bsChorus: false, bsEnv: false, bsDelay: false, bsDTime: 'd8', bsLink: false, gtOwn: false, gtBpm: 100, gtSpd: 1, bsOwn: false, bsBpm: 100, bsSpd: 1, kbChorus: false, kbDelay: true, kbDTime: 'd8', kbDMix: 28, kbDFb: 35, kbPump: false, kbGlide: false, kbTimed: false, kbHold: 30, kbFade: 20, audVol: 80, audRev: 15, dset: {}, recStack: false, tlView: 'song', drRev: 50, mxLo: 0, mxMid: 0, mxHi: 0, mxGlue: false, mxGlueAmt: 40, mxLim: true, mxMute: {}, mxSolo: {}, mxPan: {} };
 const S = {}; for (const k in DEFAULTS) S[k] = store.get(k, DEFAULTS[k]);
 S.arpOn = false;
 function save(k) { store.set(k, S[k]); }
@@ -984,7 +1048,7 @@ function applySplit() {
 const curve = (v, p = 1.5) => Math.pow(v / 100, p);
 // kanal mixer: [bus, nama, kunci volume, kunci reverb]
 const MIXCH = [['pad', 'Pad', 'padVol', 'padRev'], ['arp', 'Arp', 'arpVol', null], ['sf', 'Keyboard', 'sfVol', 'sfRev'], ['chime', 'Chimes', 'chVol', 'chRev'],
-  ['gtr', 'Gitar', 'gtVol', 'gtRev'], ['bass', 'Bass', 'bsVol', 'bsRev'], ['drum', 'Drum', 'drVol', 'drRev'], ['click', 'Click', 'clickVol', null]];
+  ['gtr', 'Gitar', 'gtVol', 'gtRev'], ['bass', 'Bass', 'bsVol', 'bsRev'], ['drum', 'Drum', 'drVol', 'drRev'], ['aud', 'Audio / Vokal', 'audVol', 'audRev'], ['click', 'Click', 'clickVol', null]];
 const mxOn = n => { const anySolo = MIXCH.some(([m]) => S.mxSolo[m]); return S.mxMute[n] ? 0 : anySolo && !S.mxSolo[n] && n !== 'click' ? 0 : 1; };
 function applyLevels() {
   if (!ctx) return;
@@ -995,6 +1059,7 @@ function applyLevels() {
   setP(G.sf.gain, curve(S.sfVol) * mxOn('sf')); setP(G.sfRev.gain, S.sfRev / 100 * 0.7);
   setP(G.chime.gain, curve(S.chVol) * 0.8 * mxOn('chime')); setP(G.chimeRev.gain, S.chRev / 100 * 1.2);
   setP(G.drum.gain, curve(S.drVol) * mxOn('drum')); setP(G.drumRev.gain, S.drRev / 100);
+  if (G.aud) { setP(G.aud.gain, curve(S.audVol) * mxOn('aud')); setP(G.audRev.gain, S.audRev / 100 * 0.6); }
   if (G.gtr) { setP(G.gtr.gain, curve(S.gtVol) * 1.1 * mxOn('gtr')); setP(G.gtrRev.gain, S.gtRev / 100 * 0.8); }
   if (G.bass) { setP(G.bass.gain, curve(S.bsVol) * 1.0 * mxOn('bass')); setP(G.bassRev.gain, S.bsRev / 100 * 0.6); }
 }
@@ -1129,7 +1194,9 @@ function releaseSynth(vc, t, fast) {
 /* ================= REKAM: log semua bunyi ================= */
 let replaying = false, uid = 1;
 const rec = { state: 'idle', t0: 0, events: [], bpm: 100, sig: 4, bar: 2.4, timer: null, stopAt: 0 };
-function L(ev) { if (replaying || rec.state !== 'rec' || ev.t < rec.t0 - 0.03) return; ev.t = Math.max(0, ev.t - rec.t0); rec.events.push(ev); }
+// CAP: mode "tangkap" — pola gitar/bass/chimes dijalankan tanpa bunyi untuk menghasilkan event timeline
+let CAP = null, CAPV = null, CAPCHORD = null;
+function L(ev) { if (CAP) { CAP.push(Object.assign({}, ev)); return; } if (replaying || rec.state !== 'rec' || ev.t < rec.t0 - 0.03) return; ev.t = Math.max(0, ev.t - rec.t0); rec.events.push(ev); }
 
 /* ================= PAD ================= */
 const TIMBRES = {
@@ -1460,7 +1527,7 @@ function strikeChime(i, when, vel = 1, dir = 1, quiet) {
   if (i < 0 || i >= NBARS || !ctx) return;
   const t = Math.max(when || 0, ctx.currentTime);
   vel = clamp(vel, 0.05, 1);
-  L({ type: 'chime', i, t, v: vel, d: dir });
+  L({ type: 'chime', i, t, v: vel, d: dir }); if (CAP) return null;
   // batasi jumlah suara aktif (hemat CPU iPad)
   while (chimeLive.length && chimeLive[0].end < ctx.currentTime) chimeLive.shift();
   if (chimeLive.length > 190) { const old = chimeLive.shift(); holdParam(old.out.gain, t); old.out.gain.setTargetAtTime(0, t, 0.05); }
@@ -1534,9 +1601,9 @@ function renderChimeRec() {
   $('#chSrc').classList.toggle('on', chRec.use); $('#chSrc').textContent = chRec.use ? 'Pakai rekaman: NYALA' : 'Pakai rekaman: MATI';
   if (has) $('#chRecInfo').innerHTML = `Rekaman: <b>${chRec.name}</b> (${chRec.buf.duration.toFixed(1)} dtk). ${chRec.use ? 'Tombol sapu memutar rekaman ini; sapuan jari tetap memakai suara sintesis.' : 'Tombol sapu memakai suara sintesis.'}`;
 }
-function sweep(dir, secs) {
+function sweep(dir, secs, at) {
   ensureAudio();
-  if (chRec.buf && chRec.use) { playChimeRec(); return; } const now = ctx.currentTime + 0.02;
+  if (!CAP && chRec.buf && chRec.use) { playChimeRec(); return; } const now = at ?? ctx.currentTime + 0.02;
   for (let k = 0; k < NBARS; k++) {
     const i = dir > 0 ? k : NBARS - 1 - k, x = k / (NBARS - 1);
     const tt = now + secs * (0.75 * x + 0.25 * x * x) + (Math.random() - 0.5) * 0.05;
@@ -2272,14 +2339,14 @@ function gtrVoice(sound, st, midi, vel, t, pm, voices, bus, kb) {
 function damp(v, t, tau = 0.02) { holdParam(v.out.gain, t); v.out.gain.setTargetAtTime(0, t, tau); v.srcs.forEach(s => { try { s.stop(t + tau * 8); } catch (e) {} }); }
 function gtrPluck(st, midi, vel, t, pm = S.gtPM, sound = S.gtSound) {
   ensureAudio(); t = Math.max(t || 0, ctx.currentTime);
-  L({ type: 'gtr', st, n: midi, v: vel, s: sound, pm: !!pm, t });
+  L({ type: 'gtr', st, n: midi, v: vel, s: sound, pm: !!pm, t }); if (CAP) return;
   gtrVoice(sound, st, midi, vel, t, pm, gtr.strings);
 }
-function gtrDampAll(t, tau) { t = Math.max(t || 0, ctx.currentTime); L({ type: 'gdamp', t }); gtr.strings.forEach(v => damp(v, t, tau)); gtr.strings.clear(); }
+function gtrDampAll(t, tau) { t = Math.max(t || 0, ctx.currentTime); L({ type: 'gdamp', t }); if (CAP) return; gtr.strings.forEach(v => damp(v, t, tau)); gtr.strings.clear(); }
 /* --- akor --- */
 function chordList(extra) { const flat = FLAT_KEYS.has(S.gtKey), set = CHORDSET[S.gtMinor ? 'min' : 'maj'][extra ? 'extra' : 'main'];
   return set.map(([iv, q, rn]) => { const pc = (S.gtKey + iv) % 12; return { pc, q, rn, name: noteName(pc, flat) + q }; }); }
-function curChord() { return chordList(gtr.extra)[gtr.chord] || chordList(false)[0]; }
+function curChord() { return CAPCHORD || chordList(gtr.extra)[gtr.chord] || chordList(false)[0]; }
 function curVoicing() { const c = curChord(); return isPower() && !['sus2', 'sus4', 'dim'].includes(c.q) ? powerVoicing(c.pc) : chordVoicing(c.pc, c.q); }
 function strum(dir, vel = 105, t0, onlyTop, pm) {
   ensureAudio(); t0 = Math.max(t0 || 0, ctx.currentTime);
@@ -2290,7 +2357,7 @@ function strum(dir, vel = 105, t0, onlyTop, pm) {
   let k = 0, tt = tStart;
   order.forEach(s => {
     if (onlyTop && s < 2 && !isPower()) return;
-    if (fr[s] < 0) { const v = gtr.strings.get(s); if (v) damp(v, t0); return; }
+    if (fr[s] < 0) { const v = !CAP && gtr.strings.get(s); if (v) damp(v, t0); return; }
     gtrPluck(s, TUNING[s] + fr[s], Math.min(127, vStroke * (dir > 0 ? 1 - k * 0.04 : 0.85 - k * 0.03) * (0.9 + Math.random() * 0.2)), tt, pm || S.gtPM);
     tt += sp * (0.75 + Math.random() * 0.5); k++;
   });
@@ -2637,17 +2704,18 @@ function bassLegato(v, n, t, glide) {
 }
 function bassOff(v, t, tau = 0.05) { holdParam(v.out.gain, t); v.out.gain.setTargetAtTime(0, t, tau); [...v.srcs, ...v.oscs].forEach(s => { try { s.stop(t + tau * 8 + 0.02); } catch (e) {} }); }
 const bass = { voices: new Map(), chord: 0, extra: false, auto: false, step: 0, next: 0, timer: null, queue: [] };
+const bvm = () => CAP ? CAPV : bass.voices;
 function bassPlay(n, vel, art, t, key) {
   ensureAudio(); t = Math.max(t || 0, ctx.currentTime);
-  const v = bassNote(n, vel, art, t, bass.voices, key);
+  const v = CAP ? { id: uid++ } : bassNote(n, vel, art, t, bass.voices, key); if (CAP) CAPV.set(key, v);
   L({ type: 'bass', id: v.id, n, v: vel, a: art, s: S.bsSound, k: key, t }); return v;
 }
-function bassLegatoLive(key, n, t, glide) { const v = bass.voices.get(key); if (!v) return; t = Math.max(t || 0, ctx.currentTime); bassLegato(v, n, t, glide); L({ type: 'bleg', id: v.id, n, g: glide ?? v.glide, t }); }
-function bassOffLive(key, t, tau) { const v = bass.voices.get(key); if (!v) return; t = Math.max(t || 0, ctx.currentTime); bassOff(v, t, tau); bass.voices.delete(key); L({ type: 'boff', id: v.id, tau, t }); }
+function bassLegatoLive(key, n, t, glide) { const v = bvm().get(key); if (!v) return; t = Math.max(t || 0, ctx.currentTime); if (!CAP) bassLegato(v, n, t, glide); L({ type: 'bleg', id: v.id, n, g: glide ?? v.glide, t }); }
+function bassOffLive(key, t, tau) { const v = bvm().get(key); if (!v) return; t = Math.max(t || 0, ctx.currentTime); if (!CAP) bassOff(v, t, tau); bvm().delete(key); L({ type: 'boff', id: v.id, tau, t }); }
 function bassAllOff(tau = 0.05) { if (!ctx) return; [...bass.voices.keys()].forEach(k => bassOffLive(k, ctx.currentTime, tau)); }
 /* --- akor & nada --- */
 function bassChordList(extra) { return chordList(extra); }
-function curBassChord() { return bassChordList(bass.extra)[bass.chord] || bassChordList(false)[0]; }
+function curBassChord() { return CAPCHORD || bassChordList(bass.extra)[bass.chord] || bassChordList(false)[0]; }
 function bassRoot(c) { let r = 28 + ((c.pc - 4) % 12 + 12) % 12; if ((BS[S.bsSound] || {}).low && r > 33) r -= 12; return r; }
 function degMidi(deg, c = curBassChord()) {
   const r = bassRoot(c), q = QUAL[c.q], third = q[1], fifth = q[2];
@@ -2689,8 +2757,8 @@ function bassStep(tok, i, t, pat, dur) {
   const [deg, suf] = tok.split(':'), art = suf ? SUF[suf] : ((BS[S.bsSound] || {}).art && pat.art === 'finger' ? BS[S.bsSound].art : pat.art);
   const acc = i === 0 ? 120 : i % (pat.steps / 4 || 1) === 0 ? 108 : 92;
   if (deg === 'x') { bassPlay(degMidi('R'), 70, 'ghost', t, 'auto'); return; }
-  if (deg === 'H') { if (bass.voices.get('auto')) bassLegatoLive('auto', degMidi('2'), t, 0.012); else bassPlay(degMidi('2'), acc, art, t, 'auto'); return; }
-  if (deg === 'P') { if (bass.voices.get('auto')) bassLegatoLive('auto', degMidi('R'), t, 0.012); else bassPlay(degMidi('R'), acc, art, t, 'auto'); return; }
+  if (deg === 'H') { if (bvm().get('auto')) bassLegatoLive('auto', degMidi('2'), t, 0.012); else bassPlay(degMidi('2'), acc, art, t, 'auto'); return; }
+  if (deg === 'P') { if (bvm().get('auto')) bassLegatoLive('auto', degMidi('R'), t, 0.012); else bassPlay(degMidi('R'), acc, art, t, 'auto'); return; }
   bassPlay(degMidi(deg), acc, art, t, 'auto');
   if (pat.stac) bassOffLive('auto', t + dur * 0.8, 0.03);
 }
@@ -2909,15 +2977,15 @@ async function saveTakes() {
   await idb.put('takes_v1', meta);
 }
 async function loadTakes() {
-  const meta = await idb.get('takes_v1'); if (!Array.isArray(meta)) { loadSong(); return; }
+  const meta = await idb.get('takes_v1'); if (!Array.isArray(meta)) { loadSong(); arrLoad(true); return; }
   for (const m of meta) {
     if (m.type === 'audio') { const a = await idb.get('takeaudio_' + m.id); if (!a) continue; try { m.audio = await decode(a.slice(0)); } catch (e) { continue; } }
     takes.push(m);
   }
-  selTake = takes[0] || null; renderTakes(); loadSong();
+  selTake = takes[0] || null; renderTakes(); loadSong(); arrLoad(true);
 }
 /* --- pemutaran --- */
-const BUSN = ['pad', 'arp', 'sf', 'chime', 'drum', 'gtr', 'bass'];
+const BUSN = ['pad', 'arp', 'sf', 'chime', 'drum', 'gtr', 'bass', 'aud'];
 function schedEvRaw(pl, ev, t) {
   switch (ev.type) {
     case 'padOn': pl.voices.set('p' + ev.id, schedPadOn(ev.k, ev.P, t, ev.f)); break;
@@ -2947,7 +3015,7 @@ function playTake(tk) {
   const now = ctx.currentTime;
   pl.start = (S.recSync && clk.on) ? (() => { let d = nextDownbeat(); while (d - now < 0.03) d += barDur(); return d; })() : now + 0.05;
   if (tk.type === 'audio') {
-    const s = ctx.createBufferSource(); s.buffer = tk.audio; s.loop = tk.loop; s.connect(pl.B.drum); s.start(pl.start); pl.srcs.push(s);
+    const s = ctx.createBufferSource(); s.buffer = tk.audio; s.loop = tk.loop; s.connect(pl.B.aud); s.start(pl.start); pl.srcs.push(s);
     s.onended = () => { if (players.get(tk.id) === pl) { players.delete(tk.id); renderTakes(); } };
   } else { pl.timer = setInterval(() => tickPlayer(pl), 40); tickPlayer(pl); }
   players.set(tk.id, pl); renderTakes(); requestWake();
@@ -3017,7 +3085,7 @@ function tickSong() {
   const sp = songPl; if (!sp) return; const now = ctx.currentTime, hz = now + 0.3;
   for (const P of sp.parts) for (let g = 0; g < 3000 && P.idx < P.list.length; g++) {
     const it = P.list[P.idx], t = sp.start + sp.pass * sp.len + it.t; if (t > hz) break;
-    if (it.audio) { const src = ctx.createBufferSource(); src.buffer = P.tk.audio; src.connect(P.pl.B.drum); const st = Math.max(t, now); src.start(st, Math.max(0, now - t)); src.stop(sp.start + (sp.pass + 1) * sp.len + 0.01); P.pl.srcs.push(src); }
+    if (it.audio) { const src = ctx.createBufferSource(); src.buffer = P.tk.audio; src.connect(P.pl.B.aud); const st = Math.max(t, now), ao = (P.tk.aOff || 0) + Math.max(0, now - t), du = Math.min(P.tk.len - Math.max(0, now - t), sp.start + (sp.pass + 1) * sp.len - st); if (du > 0 && ao < src.buffer.duration) { src.start(st, ao, du); P.pl.srcs.push(src); } }
     else if (t >= now - 0.08 || it.ev.type.endsWith('Off') || it.ev.type === 'boff') schedEv(P.pl, it.ev, Math.max(t, now));
     P.idx++;
   }
@@ -3073,6 +3141,7 @@ function renderSong() {
 }
 /* --- daftar --- */
 function renderTakes() {
+  if (typeof renderArrLib === 'function' && arrLibN !== takes.length) { arrLibN = takes.length; renderArrLib(); }
   const el = $('#takes'); if (!el) return; el.innerHTML = '';
   if (!takes.length) { el.innerHTML = '<div class="note" style="padding:10px">Belum ada rekaman. Tekan <b>● Rekam</b> di bar atas, mainkan pad / keyboard / drum / chimes, lalu tekan <b>■ Stop rekam</b>.</div>'; drawTimeline(); return; }
   takes.forEach(tk => {
@@ -3194,7 +3263,7 @@ async function renderMulti(items, len) {
     for (const it of items) {
       const B = {}; BUSN.forEach(n => { B[n] = off.createGain(); B[n].gain.value = it.vol / 80; B[n].connect(BUS[n]); G[n] = B[n]; });
       for (const o of it.offs) {
-        if (it.tk.type === 'audio') { const src = off.createBufferSource(); src.buffer = it.tk.audio; src.connect(B.drum); src.start(o + 0.02); if (o + it.tk.len > len) src.stop(len + 0.02); continue; }
+        if (it.tk.type === 'audio') { const src = off.createBufferSource(); src.buffer = it.tk.audio; src.connect(B.aud); const ao = it.tk.aOff || 0, du = Math.min(it.tk.len, len - o); if (du > 0 && ao < src.buffer.duration) src.start(o + 0.02, ao, du); continue; }
         const pl = { voices: new Map(), srcs: [] };
         for (const ev of it.tk.events) { const t = o + ev.t; if (t < len - 0.0005 || ev.type.endsWith('Off') || ev.type === 'boff' || ev.type === 'gdamp') schedEvRaw(pl, ev, t + 0.02); }
       }
@@ -3335,6 +3404,317 @@ function renderSplit() {
   b.innerHTML = S.split ? 'Mode ibadah: <b>NYALA</b><br><span class="note" style="color:inherit">Kiri = click · Kanan = musik (mono)</span>'
                         : 'Mode ibadah: <b>MATI</b><br><span class="note" style="color:inherit">Click &amp; musik di kedua sisi</span>';
 }
+/* ================= SUSUN LAGU (timeline drag & drop ala FL Studio) ================= */
+const ARR_TRACKS = [['pad', 'Pad', '#8a5cf6'], ['kb', 'Keyboard', '#5b8def'], ['gtr', 'Gitar', '#3fb67a'], ['bass', 'Bass', '#3a9be0'], ['drum', 'Drum', '#e2574c'],
+  ['fx', 'Efek & Chimes', '#d9a531'], ['take', 'Rekaman', '#9b7b5a'], ['vox', 'Vokal (mic)', '#2fb59b'], ['audio', 'Audio import', '#c0569a']];
+const ARR_COL = { pad: '#8a5cf6', kb: '#5b8def', gtr: '#3fb67a', bass: '#3a9be0', pat: '#e2574c', shot: '#c9473d', fxs: '#c98a2a', chime: '#d9a531', take: '#9b7b5a', mic: '#2fb59b', audio: '#c0569a' };
+const ARR_BARS = 40, AHEAD = 150;
+const arr = { clips: [], tr: {}, ppb: 26, snap: 1, loop: false, head: 0, sel: null, chord: 0, chordX: false, nid: 1, aud: [] };
+ARR_TRACKS.forEach(([id]) => arr.tr[id] = { vol: 80, mute: false, solo: false });
+const aq = () => 60 / S.bpm;
+const DROWS = [['kick', 'Kick'], ['snare', 'Snare'], ['hat', 'Hi-hat'], ['ohat', 'Hi-hat buka'], ['tom1', 'Tom 1'], ['tom2', 'Tom 2'], ['tom3', 'Floor tom'], ['crash', 'Crash']];
+const dpat = o => DROWS.map(([k]) => Array.from({ length: 16 }, (_, i) => (o[k] || []).includes(i) ? 1 : 0));
+const ARR_PATS = {
+  pop: { name: 'Beat pop', st: dpat({ kick: [0, 8, 10], snare: [4, 12], hat: [0, 2, 4, 6, 8, 10, 12, 14] }) },
+  worship: { name: 'Worship 1/8', st: dpat({ kick: [0, 7, 8], snare: [4, 12], hat: [0, 2, 4, 6, 8, 10, 12, 14] }) },
+  rock: { name: 'Beat rock', st: dpat({ kick: [0, 6, 8], snare: [4, 12], ohat: [0, 2, 4, 6, 8, 10, 12, 14] }) },
+  ballad: { name: 'Ballad halus', st: dpat({ kick: [0, 10], snare: [8], hat: [0, 4, 8, 12] }) },
+  four: { name: '4-on-floor', st: dpat({ kick: [0, 4, 8, 12], snare: [4, 12], ohat: [2, 6, 10, 14] }) },
+  fill: { name: 'Fill tom (1 bar)', st: dpat({ snare: [0, 1, 2, 3], tom1: [4, 5, 6], tom2: [8, 9, 10], tom3: [12, 13, 14], kick: [12] }) },
+  empty: { name: 'Pola kosong (isi sendiri)', st: dpat({}) }
+};
+const isAud = k => k.kind === 'audio' || k.kind === 'mic' || (k.kind === 'take' && takeOf(k) && takeOf(k).type === 'audio');
+const takeOf = k => takes.find(t => t.id === k.d.tid);
+const clipLen = k => isAud(k) ? k.sec / aq() : k.len;
+function setLen(k, b) { if (isAud(k)) k.sec = b * aq(); else k.len = b; }
+const audBuf = k => k.kind === 'take' ? (takeOf(k) || {}).audio : (arr.aud.find(a => a.aid === k.d.aid) || {}).buf;
+const padQ = q => /^m|dim/.test(q) ? 'min' : q === 'sus4' ? 'sus' : 'maj';
+function capture(fn, tmp) {
+  ensureAudio(); const keep = {}; Object.keys(tmp || {}).forEach(k => { keep[k] = S[k]; S[k] = tmp[k]; });
+  CAP = []; CAPV = new Map(); const base = ctx.currentTime + 5000; let out;
+  try { fn(base); } finally { out = CAP; CAP = null; CAPV = null; CAPCHORD = null; Object.assign(S, keep); }
+  return out.map(e => Object.assign(e, { t: e.t - base }));
+}
+// event untuk satu clip (detik, relatif ke awal clip)
+function genEvents(k, L) {
+  const d = k.d, q = aq(), id = 'a' + k.id, ev = [];
+  switch (k.kind) {
+    case 'pad': return [{ type: 'padOn', id, k: d.c.pc, P: { timbre: d.snd, chord: padQ(d.c.q), octave: S.octave, bright: S.padBright }, t: 0, f: 0.6 }, { type: 'padOff', id, t: L, f: 1.2 }];
+    case 'kb': {
+      let base = 60 + d.c.pc; if (base > 66) base -= 12; const notes = QUAL[d.c.q].map(i => base + i), on = (n, t, du, v = 92) => { const i = id + '_' + ev.length; ev.push({ type: 'kbOn', id: i, n, v, s: d.snd, p: -1, t }); ev.push({ type: 'kbOff', id: i, x: false, t: t + du }); };
+      if (d.style === 'beat') for (let t = 0; t < L - 1e-6; t += q) notes.forEach(n => on(n, t, q * 0.85, Math.round(t / q) % 4 === 0 ? 100 : 84));
+      else if (d.style === 'arp') { const seq = [...notes, notes[0] + 12, notes[1] + 12]; for (let t = 0, i = 0; t < L - 1e-6; t += q / 2, i++) on(seq[i % seq.length], t, q * 0.45, 88); }
+      else { notes.forEach(n => on(n, 0, L)); on(base - 12, 0, L, 80); }
+      return ev;
+    }
+    case 'gtr': { const P = STRUM_PATS[d.pat] || STRUM_PATS.pop; CAPCHORD = d.c;
+      return capture(b => { const du = 4 * q / P.steps; let i = 0; for (let t = 0; t < L - 1e-6; t += du, i++) { const j = i % P.steps; if (P.pick) pickStep(P.pick[j], b + t); else playStroke(P.p[j], j, b + t, P); } gtrDampAll(b + L, 0.06); },
+        { gtSound: d.snd, gtShape: d.shape || 'full', gtPM: false }); }
+    case 'bass': { const P = BASS_PATS[d.pat] || BASS_PATS.worship; CAPCHORD = d.c;
+      return capture(b => { const du = 4 * q / P.steps; let i = 0; for (let t = 0; t < L - 1e-6; t += du, i++) { const j = i % P.steps; bassStep(P.p[j], j, b + t, P, du); } bassOffLive('auto', b + L, 0.05); }, { bsSound: d.snd }); }
+    case 'pat': { const pre = d.kit + '_'; for (let t = 0, i = 0; t < L - 1e-6; t += q / 4, i++) d.st.forEach((row, r) => { if (row[i % 16]) ev.push({ type: 'drum', id: pre + DROWS[r][0], t, o: 0, b: 4 * q, x: r === 2 && i % 2 ? { tu: 0, de: 100, vo: 75, pa: 0 } : undefined }); }); return ev; }
+    case 'shot': case 'fxs': return [{ type: 'drum', id: d.id, t: 0, o: 0, b: 4 * q }];
+    case 'chime': return capture(b => sweep(d.dir, 1.6, b));
+    case 'take': { const tk = takeOf(k); if (!tk || tk.type !== 'seq' || !tk.len) return []; const pre = 'a' + k.id + '_';
+      for (let o = 0; o < L - 1e-3; o += tk.len) tk.events.forEach(e => { const t = o + e.t; if (t < L || /Off|boff|gdamp/.test(e.type)) ev.push(Object.assign({}, e, { t, id: e.type === 'drum' || e.id === undefined ? e.id : pre + o.toFixed(3) + '_' + e.id })); });
+      return ev; }
+  }
+  return [];
+}
+function clipFrom(evs, from) {
+  evs.sort((a, b) => a.t - b.t); if (from <= 0) return evs;
+  const pair = { padOn: 'padOff', kbOn: 'kbOff' }, offAfter = new Set(evs.filter(e => (e.type === 'padOff' || e.type === 'kbOff') && e.t > from).map(e => e.type + e.id)), out = [];
+  evs.forEach(e => { if (e.t >= from) out.push(Object.assign({}, e, { t: e.t - from })); else if (pair[e.type] && offAfter.has(pair[e.type] + e.id)) out.push(Object.assign({}, e, { t: 0 })); });
+  return out;
+}
+function arrEnd() { return arr.clips.reduce((m, k) => Math.max(m, k.start + clipLen(k)), 0); }
+function arrLayout(fromB, only) {
+  const q = aq(), from = fromB * q, list = only || arr.clips, anySolo = !only && Object.values(arr.tr).some(t => t.solo), items = [], byTr = {};
+  const len = (only ? Math.max(...only.map(k => k.start + clipLen(k))) : arrEnd()) * q;
+  list.forEach(k => {
+    const tr = arr.tr[k.track]; if (!only && (!tr || tr.mute || (anySolo && !tr.solo))) return;
+    const cs = k.start * q, L = clipLen(k) * q; if (cs + L <= from + 1e-4) return;
+    if (isAud(k)) { const buf = audBuf(k); if (!buf) return; const skip = Math.max(0, from - cs);
+      items.push({ tk: { type: 'audio', audio: buf, len: L - skip, aOff: (k.d.off || 0) + skip, vol: tr.vol, tr: k.track }, vol: tr.vol, offs: [Math.max(0, cs - from)] }); return; }
+    const ev = genEvents(k, L).map(e => Object.assign(e, { t: e.t + cs })); (byTr[k.track] = byTr[k.track] || []).push(...ev);
+  });
+  Object.entries(byTr).forEach(([id, ev]) => items.push({ tk: { type: 'seq', events: clipFrom(ev, from), len: len - from, vol: arr.tr[id].vol, tr: id }, vol: arr.tr[id].vol, offs: [0] }));
+  return { items, len: Math.max(0.05, len - from) };
+}
+/* --- pemutar --- */
+let arrPl = null, arrLibN = -1;
+function arrPlay(fromB, t0, only) {
+  ensureAudio(); arrStop(true, !!t0); if (!only) stopSong(false);
+  const fb = fromB ?? arr.head, Ly = arrLayout(fb, only);
+  if (!Ly.items.length) { if (!t0) toast('Timeline masih kosong — tarik suara dari kiri ke bar.'); renderArrBtns(); return false; }
+  ensureSamplesFor(Ly.items.map(i => i.tk));
+  const sp = { t0: t0 || ctx.currentTime + 0.1, fb, len: Ly.len, parts: [], only: !!only };
+  Ly.items.forEach(it => { const pl = mkPl(it.tk), list = [];
+    it.offs.forEach(o => { if (it.tk.type === 'audio') list.push({ t: o, audio: 1 }); else it.tk.events.forEach(ev => list.push({ t: o + ev.t, ev })); });
+    list.sort((a, b) => a.t - b.t); sp.parts.push({ tk: it.tk, pl, list, idx: 0, tr: it.tk.tr }); });
+  arrPl = sp; sp.timer = setInterval(arrTick, 40); arrTick(); renderArrBtns(); requestWake(); return true;
+}
+function arrTick() {
+  const sp = arrPl; if (!sp) return; const now = ctx.currentTime, hz = now + 0.3;
+  for (const P of sp.parts) for (let g = 0; g < 4000 && P.idx < P.list.length; g++) {
+    const it = P.list[P.idx], t = sp.t0 + it.t; if (t > hz) break;
+    if (it.audio) { const lag = Math.max(0, now - t), du = P.tk.len - lag; if (du > 0.01) { const s = ctx.createBufferSource(); s.buffer = P.tk.audio; s.connect(P.pl.B.aud); s.start(Math.max(t, now), (P.tk.aOff || 0) + lag, du); P.pl.srcs.push(s); } }
+    else if (t >= now - 0.08 || /Off|boff|gdamp/.test(it.ev.type)) schedEv(P.pl, it.ev, Math.max(t, now));
+    P.idx++;
+  }
+  const end = sp.t0 + sp.len;
+  if (arr.loop && !sp.only && now > end - 0.25) { arrPlay(0, end); return; }
+  if (now > end + 0.15) arrStop(false, true);
+}
+function arrStop(silent, natural) { const sp = arrPl; if (!sp) return; clearInterval(sp.timer); arrPl = null; if (ctx) sp.parts.forEach(P => killPl(P.pl, natural)); if (!silent) { renderArrBtns(); if (micA) stopMicA(); } }
+function arrBeat() { return arrPl && !arrPl.only ? arrPl.fb + (ctx.currentTime - arrPl.t0) / aq() : arr.head; }
+/* --- penyimpanan --- */
+let arrSaveT = null;
+function arrSave() { clearTimeout(arrSaveT); arrSaveT = setTimeout(() => idb.put('arr_v1', { clips: arr.clips, tr: arr.tr, ppb: arr.ppb, snap: arr.snap, loop: arr.loop, nid: arr.nid, aud: arr.aud.map(a => ({ aid: a.aid, name: a.name, kind: a.kind, sec: a.sec })) }), 500); }
+async function arrLoad(demo) {
+  const m = await idb.get('arr_v1');
+  if (m && Array.isArray(m.clips)) { Object.assign(arr, { clips: m.clips, ppb: m.ppb || 26, snap: m.snap || 1, loop: !!m.loop, nid: m.nid || 1 }); Object.assign(arr.tr, m.tr || {});
+    arr.aud = (m.aud || []).map(a => Object.assign({}, a)); for (const a of arr.aud) { try { const ab = await idb.get('arraud_' + a.aid); if (ab) { ensureAudio(); a.buf = await decode(ab.slice(0)); } } catch (e) {} } }
+  else if (demo) arrDemo();
+  $('#aSnap').value = arr.snap; $('#aLoop').classList.toggle('on', arr.loop); renderArrLib(); renderArr();
+}
+/* --- pustaka --- */
+function arrLibItems() {
+  const L = [{ h: 'Instrumen — pakai akor yang dipilih' },
+    { kind: 'pad', name: 'Pad', len: 8 }, { kind: 'kb', name: 'Keyboard akor', len: 8 }, { kind: 'gtr', name: 'Gitar genjreng', len: 8 }, { kind: 'bass', name: 'Bass groove', len: 8 },
+    { h: 'Pola drum' }, ...Object.entries(ARR_PATS).map(([p, v]) => ({ kind: 'pat', name: v.name, len: p === 'fill' ? 4 : 16, d: { p } })),
+    { h: 'Pukulan drum' }, ...['kick', 'snare', 'crash', 'crash2', 'crash3', 'splash', 'tom1', 'tom3', 'ride'].map(p => { const d = KITS.std.pads.find(x => x.id === 's_' + p); return { kind: 'shot', name: d.name, len: 1, d: { id: d.id } }; }),
+    { h: 'Efek' }, { kind: 'chime', name: 'Chimes sapu naik', len: 4, d: { dir: 1 } }, { kind: 'chime', name: 'Chimes sapu turun', len: 4, d: { dir: -1 } },
+    ...['riser', 'revcym', 'impact', 'subdrop'].map(id => { const d = KITS.edm.pads.find(x => x.id === id); return { kind: 'fxs', name: d.name, len: d.sync ? 4 : 2, d: { id } }; }),
+    { h: 'Rekaman Anda (dari tab Rekam)' }];
+  takes.forEach(tk => L.push({ kind: 'take', name: tk.name, len: Math.max(1, Math.round(tk.len / aq())), sec: tk.len, d: { tid: tk.id } }));
+  if (!takes.length) L.push({ note: 'Belum ada rekaman.' });
+  L.push({ h: 'Audio Anda (import / mic)' });
+  arr.aud.forEach(a => L.push({ kind: a.kind, name: a.name, sec: a.sec, len: a.sec / aq(), d: { aid: a.aid } }));
+  if (!arr.aud.length) L.push({ note: 'Import file atau rekam mic — hasilnya muncul di sini.' });
+  return L;
+}
+function renderArrLib() {
+  const el = $('#aLib'); if (!el) return; el.innerHTML = '';
+  const cw = document.createElement('div'); cw.className = 'achords';
+  cw.innerHTML = '<div class="sect" style="margin:0 2px 6px">Akor untuk instrumen</div>';
+  const mk = (list, x) => list.forEach((c, i) => { const b = document.createElement('button'); b.className = 'mini' + (arr.chord === i && arr.chordX === x ? ' on' : ''); b.innerHTML = `${c.name}<small>${c.rn}</small>`;
+    b.onclick = () => { arr.chord = i; arr.chordX = x; renderArrLib(); }; cw.appendChild(b); });
+  mk(chordList(false), false); mk(chordList(true), true); el.appendChild(cw);
+  arrLibItems().forEach(it => {
+    if (it.h) { const h = document.createElement('div'); h.className = 'sect'; h.textContent = it.h; el.appendChild(h); return; }
+    if (it.note) { const n = document.createElement('div'); n.className = 'note'; n.style.padding = '0 4px 6px'; n.textContent = it.note; el.appendChild(n); return; }
+    const d = document.createElement('div'); d.className = 'aitem';
+    d.innerHTML = `<i style="background:${ARR_COL[it.kind]}"></i><span></span><small>${it.len >= 4 ? Math.round(it.len / 4 * 10) / 10 + ' bar' : Math.round(it.len * 10) / 10 + ' ktk'}</small>`;
+    d.querySelector('span').textContent = it.name; d.addEventListener('pointerdown', e => arrLibDrag(e, it)); el.appendChild(d);
+  });
+}
+function clipFromItem(it, track, start) {
+  const c = chordList(arr.chordX)[arr.chord] || chordList(false)[0], cc = { pc: c.pc, q: c.q, name: c.name }, d = Object.assign({}, it.d || {});
+  if (it.kind === 'pad') Object.assign(d, { c: cc, snd: S.timbre });
+  if (it.kind === 'kb') Object.assign(d, { c: cc, snd: KB[S.kbSound] || /^gt:/.test(S.kbSound) ? S.kbSound : 'clarity', style: 'hold' });
+  if (it.kind === 'gtr') Object.assign(d, { c: cc, snd: S.gtSound, pat: S.gtPat, shape: S.gtShape });
+  if (it.kind === 'bass') Object.assign(d, { c: cc, snd: S.bsSound, pat: S.bsPat });
+  if (it.kind === 'pat') Object.assign(d, { kit: 's', st: ARR_PATS[d.p].st.map(r => r.slice()) });
+  const k = { id: arr.nid++, kind: it.kind, name: it.name, track, start, len: it.len, d };
+  if (isAud(k)) k.sec = it.sec;
+  return k;
+}
+const ARR_DEF_TRACK = { pad: 'pad', kb: 'kb', gtr: 'gtr', bass: 'bass', pat: 'drum', shot: 'drum', fxs: 'fx', chime: 'fx', take: 'take', mic: 'vox', audio: 'audio' };
+function clipLabel(k) { const c = k.d.c ? ' · ' + k.d.c.name : ''; return { pad: 'Pad', kb: 'Keyboard', gtr: 'Gitar', bass: 'Bass' }[k.kind] ? { pad: 'Pad', kb: 'Keyboard', gtr: 'Gitar', bass: 'Bass' }[k.kind] + c : k.kind === 'pat' ? (ARR_PATS[k.d.p] || {}).name || 'Pola drum' : k.name; }
+/* --- timeline --- */
+function renderArr() {
+  const g = $('#aGrid'); if (!g) return; const W = ARR_BARS * 4 * arr.ppb; g.style.width = (AHEAD + W) + 'px'; g.style.setProperty('--ppb', arr.ppb + 'px');
+  g.innerHTML = `<div class="arow aruler"><div class="ahead">BAR</div><div class="arl" id="aRuler" style="width:${W}px">${Array.from({ length: ARR_BARS }, (_, i) => `<span style="left:${i * 4 * arr.ppb}px">${i + 1}</span><b style="left:${i * 4 * arr.ppb}px"></b>`).join('')}</div></div><div class="aph" id="aPh"></div>`;
+  ARR_TRACKS.forEach(([id, name, col], ti) => {
+    const t = arr.tr[id], r = document.createElement('div'); r.className = 'arow';
+    r.innerHTML = `<div class="ahead"><div class="anm"><i style="background:${col}"></i>${name}</div><div class="actl"><button class="m ${t.mute ? 'on' : ''}">M</button><button class="s ${t.solo ? 'on' : ''}">S</button><input type="range" min="0" max="120" value="${t.vol}"></div></div><div class="alane ${ti % 2 ? 'alt' : ''}" data-t="${id}" style="width:${W}px"></div>`;
+    r.querySelector('.m').onclick = () => { t.mute = !t.mute; arrSave(); renderArr(); if (arrPl && !arrPl.only) arrPlay(arrBeat()); };
+    r.querySelector('.s').onclick = () => { t.solo = !t.solo; arrSave(); renderArr(); if (arrPl && !arrPl.only) arrPlay(arrBeat()); };
+    r.querySelector('input').oninput = e => { t.vol = +e.target.value; if (arrPl) arrPl.parts.filter(P => P.tr === id).forEach(P => BUSN.forEach(n => setP(P.pl.B[n].gain, t.vol / 80))); };
+    r.querySelector('input').onchange = arrSave;
+    g.appendChild(r);
+  });
+  arr.clips.forEach(drawAClip);
+  $('#aRuler').addEventListener('pointerdown', e => { const rc = e.currentTarget.getBoundingClientRect(); arr.head = Math.max(0, aSnap((e.clientX - rc.left) / arr.ppb)); if (arrPl && !arrPl.only) arrPlay(arr.head); });
+}
+const aSnap = b => Math.round(b / arr.snap) * arr.snap;
+function drawAClip(k) {
+  const lane = document.querySelector(`.alane[data-t="${k.track}"]`); if (!lane) return;
+  let el = document.querySelector(`.aclip[data-id="${k.id}"]`);
+  if (!el) { el = document.createElement('div'); el.className = 'aclip'; el.dataset.id = k.id; el.innerHTML = '<canvas></canvas><div class="t"></div><div class="rz"></div>'; el.addEventListener('pointerdown', e => arrClipDrag(e, k)); }
+  if (el.parentNode !== lane) lane.appendChild(el);
+  const len = clipLen(k), w = Math.max(10, Math.round(len * arr.ppb));
+  el.style.left = k.start * arr.ppb + 'px'; el.style.width = (w - 2) + 'px'; el.style.background = ARR_COL[k.kind]; el.classList.toggle('sel', arr.sel === k);
+  el.querySelector('.t').textContent = clipLabel(k) + (k.kind === 'take' && !takeOf(k) ? ' (terhapus)' : '');
+  const cv = el.querySelector('canvas'), h = 42; cv.width = w * 2; cv.height = h * 2; const x = cv.getContext('2d'); x.scale(2, 2); x.fillStyle = 'rgba(255,255,255,.55)';
+  if (k.kind === 'pat') { for (let b = 0, i = 0; b < len - 1e-6; b += .25, i++) k.d.st.forEach((row, r) => { if (row[i % 16]) x.fillRect(b * arr.ppb + 1, 18 + r * 3.4, Math.max(2, arr.ppb / 4 - 1.5), 2.4); }); }
+  else if (['gtr', 'bass', 'kb'].includes(k.kind)) { for (let b = 0; b < len - 1e-6; b += 1) x.fillRect(b * arr.ppb + 2, 30, Math.max(2, arr.ppb - 5), b % 4 === 0 ? 8 : 5); }
+  else if (k.kind === 'pad') { x.globalAlpha = .3; x.fillRect(0, 26, w, 12); }
+  else if (isAud(k)) { const buf = audBuf(k); if (buf) { const d = buf.getChannelData(0), sr = buf.sampleRate, q = aq(), off = k.d.off || 0;
+    for (let px = 0; px < w; px++) { const a = Math.floor((px / arr.ppb * q + off) * sr), bq = Math.floor(((px + 1) / arr.ppb * q + off) * sr); let m = 0; for (let i = a; i < bq && i < d.length; i += 8) m = Math.max(m, Math.abs(d[i])); const hh = Math.min(1, m * 1.6) * 13; x.fillRect(px, 31 - hh, 1, hh * 2 + 1); } } }
+}
+function arrSel(k) { const o = arr.sel; arr.sel = k; if (o) drawAClip(o); if (k) drawAClip(k); }
+const alaneAt = (x, y) => { const e = document.elementFromPoint(x, y); return e && e.closest ? e.closest('.alane') : null; };
+function arrLibDrag(e, it) {
+  e.preventDefault(); ensureAudio(); const gh = $('#aGhost'); gh.textContent = it.name; gh.style.background = ARR_COL[it.kind]; gh.style.display = 'block';
+  let over = null; const mv = ev => { gh.style.left = ev.clientX + 12 + 'px'; gh.style.top = ev.clientY - 16 + 'px'; const l = alaneAt(ev.clientX, ev.clientY); if (over && over !== l) over.classList.remove('hover'); over = l; if (l) l.classList.add('hover'); };
+  mv(e);
+  const up = ev => { removeEventListener('pointermove', mv); removeEventListener('pointerup', up); gh.style.display = 'none'; if (over) over.classList.remove('hover');
+    const l = alaneAt(ev.clientX, ev.clientY);
+    if (!l) { const k = clipFromItem(it, ARR_DEF_TRACK[it.kind], 0); arrPlay(0, 0, [k]); return; }
+    const rc = l.getBoundingClientRect(), start = Math.max(0, aSnap((ev.clientX - rc.left) / arr.ppb - 0.25)), k = clipFromItem(it, l.dataset.t, start);
+    arr.clips.push(k); drawAClip(k); arrSel(k); arrSave();
+    toast(`${clipLabel(k)} → bar ${Math.floor(start / 4) + 1} ketuk ${Math.floor(start % 4) + 1}`); if (arrPl && !arrPl.only) arrPlay(arrBeat()); };
+  addEventListener('pointermove', mv); addEventListener('pointerup', up);
+}
+let aTap = { id: 0, t: 0 };
+function arrClipDrag(e, k) {
+  e.preventDefault(); e.stopPropagation(); ensureAudio(); arrSel(k);
+  const rz = e.target.classList.contains('rz'), x0 = e.clientX, s0 = k.start, l0 = clipLen(k); let moved = false;
+  const now = performance.now(); if (aTap.id === k.id && now - aTap.t < 380) { aTap = { id: 0, t: 0 }; arrEditor(k); return; } aTap = { id: k.id, t: now };
+  const mv = ev => { if (Math.abs(ev.clientX - x0) > 4) moved = true; if (!moved) return; const db = (ev.clientX - x0) / arr.ppb;
+    if (rz) { let nl = Math.max(arr.snap, aSnap(l0 + db)); if (isAud(k)) { const b = audBuf(k); if (b) nl = Math.min(nl, (b.duration - (k.d.off || 0)) / aq()); } setLen(k, nl); }
+    else { k.start = Math.max(0, aSnap(s0 + db)); const l = alaneAt(ev.clientX, ev.clientY); if (l && l.dataset.t !== k.track) k.track = l.dataset.t; }
+    drawAClip(k); };
+  const up = () => { removeEventListener('pointermove', mv); removeEventListener('pointerup', up); if (moved) { arrSave(); if (arrPl && !arrPl.only) arrPlay(arrBeat()); } };
+  addEventListener('pointermove', mv); addEventListener('pointerup', up);
+}
+function arrDel(k) { if (!k) { toast('Ketuk sekali clip yang mau dihapus, lalu tekan Hapus.'); return; } arr.clips = arr.clips.filter(x => x !== k); const el = document.querySelector(`.aclip[data-id="${k.id}"]`); if (el) el.remove(); arr.sel = null; arrSave(); }
+/* --- editor clip --- */
+function arrEditor(k) {
+  const box = $('#aBox'), d = k.d, opt = sel => ($(sel) || {}).innerHTML || '';
+  let h = `<h2>${clipLabel(k)}</h2>`;
+  const chordChips = () => `<div class="sect">Akor</div><div class="chips">${[...chordList(false), ...chordList(true)].map(c => `<button class="mini ach ${d.c && c.name === d.c.name ? 'on' : ''}" data-pc="${c.pc}" data-q="${c.q}" data-n="${c.name}">${c.name}</button>`).join('')}</div>`;
+  if (k.kind === 'pad') h += chordChips() + `<div class="sect">Suara pad</div><select id="aeSnd">${Object.entries(TIMBRES).map(([v, t]) => `<option value="${v}">${t.name}</option>`).join('')}</select>`;
+  if (k.kind === 'kb') h += chordChips() + `<div class="sect">Suara keyboard</div><select id="aeSnd">${opt('#kbSound')}</select><div class="sect">Cara main</div><div class="chips">${[['hold', 'Tahan'], ['beat', 'Tiap ketuk'], ['arp', 'Arpeggio 1/8']].map(([v, n]) => `<button class="mini asty ${d.style === v ? 'on' : ''}" data-v="${v}">${n}</button>`).join('')}</div>`;
+  if (k.kind === 'gtr') h += chordChips() + `<div class="sect">Suara gitar</div><select id="aeSnd">${opt('#gtSound')}</select><div class="sect">Pola genjrengan</div><select id="aePat">${opt('#gtPat')}</select><div class="sect">Bentuk</div><div class="chips">${[['full', 'Akor penuh'], ['power', 'Power 2 senar'], ['power3', 'Power + oktaf']].map(([v, n]) => `<button class="mini ashp ${(d.shape || 'full') === v ? 'on' : ''}" data-v="${v}">${n}</button>`).join('')}</div>`;
+  if (k.kind === 'bass') h += chordChips() + `<div class="sect">Suara bass</div><select id="aeSnd">${opt('#bsSound')}</select><div class="sect">Pola groove</div><select id="aePat">${opt('#bsPat')}</select>`;
+  if (k.kind === 'pat') h += `<div class="note">Ketuk kotak untuk menaruh / menghapus pukulan. 16 kotak = 1 bar. Pola diulang sepanjang clip.</div><div class="sect">Kit</div><div class="chips">${[['s', 'Standar band'], ['y', 'Gaya Yamaha'], ['e', 'Head Evans']].map(([v, n]) => `<button class="mini akit ${d.kit === v ? 'on' : ''}" data-v="${v}">${n}</button>`).join('')}</div>
+    <div class="asteps">${DROWS.map(([p, n], r) => `<div class="rn">${n}</div>` + d.st[r].map((v, i) => `<div class="ast ${v ? 'on' : ''} ${Math.floor(i / 4) % 2 ? 'b' : ''}" data-r="${r}" data-i="${i}"></div>`).join('')).join('')}</div>`;
+  if (isAud(k)) h += `<div class="note">Geser untuk memindah, tarik ujung kanan untuk memotong. Volume per track di kepala track.</div>`;
+  if (['shot', 'fxs', 'chime', 'take'].includes(k.kind) && !isAud(k)) h += `<div class="note">${k.kind === 'take' ? 'Rekaman diulang sepanjang clip — tarik ujung kanan untuk memanjangkan.' : 'Geser untuk memindah posisi.'}</div>`;
+  h += `<div class="brow"><button id="aePrev" class="mini">▶ Dengar</button><button id="aeDup" class="mini">Duplikat ke kanan</button><button id="aeDel" class="mini">Hapus</button><span style="flex:1"></span><button id="aeOk" class="mini on">Selesai</button></div>`;
+  box.innerHTML = h; $('#aModal').classList.add('show');
+  const upd = () => { drawAClip(k); arrSave(); $('#aBox h2').textContent = clipLabel(k); };
+  box.querySelectorAll('.ach').forEach(b => b.onclick = () => { d.c = { pc: +b.dataset.pc, q: b.dataset.q, name: b.dataset.n }; box.querySelectorAll('.ach').forEach(x => x.classList.toggle('on', x === b)); upd(); });
+  const se = $('#aeSnd'); if (se) { se.value = d.snd; se.onchange = () => { d.snd = se.value; upd(); }; }
+  const pe = $('#aePat'); if (pe) { pe.value = d.pat; pe.onchange = () => { d.pat = pe.value; upd(); }; }
+  box.querySelectorAll('.asty').forEach(b => b.onclick = () => { d.style = b.dataset.v; box.querySelectorAll('.asty').forEach(x => x.classList.toggle('on', x === b)); upd(); });
+  box.querySelectorAll('.ashp').forEach(b => b.onclick = () => { d.shape = b.dataset.v; box.querySelectorAll('.ashp').forEach(x => x.classList.toggle('on', x === b)); upd(); });
+  box.querySelectorAll('.akit').forEach(b => b.onclick = () => { d.kit = b.dataset.v; box.querySelectorAll('.akit').forEach(x => x.classList.toggle('on', x === b)); upd(); });
+  box.querySelectorAll('.ast').forEach(c => c.addEventListener('pointerdown', () => { const r = +c.dataset.r, i = +c.dataset.i; d.st[r][i] ^= 1; c.classList.toggle('on'); if (d.st[r][i]) { const pd = DRUMS_ALL.find(x => x.id === d.kit + '_' + DROWS[r][0]); if (pd) hitDrum(pd); } upd(); }));
+  $('#aePrev').onclick = () => arrPlay(0, 0, [Object.assign({}, k, { start: 0 })]);
+  $('#aeDup').onclick = () => { const n = JSON.parse(JSON.stringify(k)); n.id = arr.nid++; n.start = k.start + clipLen(k); arr.clips.push(n); drawAClip(n); arrSel(n); arrSave(); $('#aModal').classList.remove('show'); toast('Clip diduplikat ke kanan.'); };
+  $('#aeDel').onclick = () => { arrDel(k); $('#aModal').classList.remove('show'); };
+  $('#aeOk').onclick = () => { $('#aModal').classList.remove('show'); if (arrPl && !arrPl.only) arrPlay(arrBeat()); };
+}
+/* --- import & mic --- */
+async function arrAddAudio(buf, name, kind) {
+  const aid = Date.now() + '_' + Math.floor(Math.random() * 1e4), a = { aid, name, kind, sec: buf.duration, buf }; arr.aud.push(a);
+  try { await idb.put('arraud_' + aid, encodeWav(buf).buffer); } catch (e) {}
+  const track = kind === 'mic' ? 'vox' : 'audio', k = clipFromItem({ kind, name, sec: buf.duration, len: buf.duration / aq(), d: { aid } }, track, aSnap(micA ? micA.startB : arr.head));
+  if (kind === 'mic') k.d.off = Math.min(0.3, (ctx.baseLatency || 0) + (ctx.outputLatency || 0));
+  if (kind === 'mic') k.sec = Math.max(0.1, buf.duration - k.d.off);
+  arr.clips.push(k); renderArrLib(); drawAClip(k); arrSel(k); arrSave(); return k;
+}
+let micA = null;
+async function startMicA() {
+  ensureAudio();
+  if (!navigator.mediaDevices || !window.MediaRecorder) { toast('Browser ini belum mendukung rekam mic.'); return; }
+  let stream; try { stream = await navigator.mediaDevices.getUserMedia({ audio: { echoCancellation: false, noiseSuppression: false, autoGainControl: false } }); }
+  catch (e) { toast('Mic tidak diizinkan. Izinkan akses mikrofon di pengaturan Safari untuk situs ini, lalu coba lagi.', 5000); return; }
+  const chunks = [], mr = new MediaRecorder(stream); micA = { mr, startB: aSnap(arr.head) };
+  mr.ondataavailable = ev => ev.data.size && chunks.push(ev.data);
+  mr.onstop = async () => { stream.getTracks().forEach(t => t.stop()); try { const buf = await decode(await new Blob(chunks).arrayBuffer()); const n = arr.aud.filter(a => a.kind === 'mic').length + 1; await arrAddAudio(buf, 'Rekaman mic ' + n, 'mic'); toast('Rekaman mic masuk ke track Vokal.'); } catch (e) { toast('Rekaman mic gagal diproses.'); } micA = null; renderArrBtns(); };
+  mr.start(); arrPlay(arr.head); renderArrBtns(); toast('Merekam mic… lagu diputar supaya Anda bisa bernyanyi / bermain bersama.');
+}
+function stopMicA() { if (!micA || micA.stopping) return; micA.stopping = true; micA.mr.stop(); if (arrPl) arrStop(false); }
+async function arrExport() {
+  if (!arr.clips.length) { toast('Timeline masih kosong.'); return; }
+  const Ly = arrLayout(0); exportTake({ name: 'Susunan lagu ' + new Date().toISOString().slice(0, 10) }, () => renderMulti(Ly.items, Ly.len));
+}
+function renderArrBtns() {
+  const p = $('#aPlay'); if (!p) return; const on = !!(arrPl && !arrPl.only); p.textContent = on ? '■ Stop' : '▶ Putar'; p.classList.toggle('on', on);
+  const m = $('#aMic'); m.textContent = micA ? '■ Stop rekam' : '● Rekam mic'; m.classList.toggle('rec', !!micA);
+}
+function arrDemo() {
+  const c = chordList(false), put = (kind, track, start, len, d, name) => { const k = { id: arr.nid++, kind, name: name || kind, track, start, len, d }; arr.clips.push(k); };
+  const cc = i => ({ pc: c[i].pc, q: c[i].q, name: c[i].name }), prog = [0, 1, 2, 4];
+  put('chime', 'fx', 0, 4, { dir: 1 }, 'Chimes sapu naik');
+  [0, 1].forEach(r => prog.forEach((ci, i) => put('pad', 'pad', r * 32 + i * 8, 8, { c: cc(ci), snd: 'warm' })));
+  put('fxs', 'fx', 28, 4, { id: 'riser' }, 'Riser'); put('shot', 'drum', 32, 1, { id: 's_crash' }, 'Crash 1 (16")');
+  put('pat', 'drum', 32, 28, { p: 'worship', kit: 's', st: ARR_PATS.worship.st.map(r => r.slice()) }, 'Worship 1/8');
+  put('pat', 'drum', 60, 4, { p: 'fill', kit: 's', st: ARR_PATS.fill.st.map(r => r.slice()) }, 'Fill tom (1 bar)');
+  prog.forEach((ci, i) => { put('gtr', 'gtr', 32 + i * 8, 8, { c: cc(ci), snd: 'steel', pat: 'pop', shape: 'full' }); put('bass', 'bass', 32 + i * 8, 8, { c: cc(ci), snd: 'precision', pat: 'worship' }); });
+  put('shot', 'drum', 64, 1, { id: 's_crash2' }, 'Crash 2 (18")'); put('pad', 'pad', 64, 8, { c: cc(0), snd: 'warm' });
+}
+function initArr() {
+  $('#aPlay').onclick = () => { if (arrPl && !arrPl.only) { arr.head = Math.max(0, aSnap(arrBeat())); arrStop(); } else arrPlay(arr.head); };
+  $('#aStart').onclick = () => { arr.head = 0; if (arrPl && !arrPl.only) arrPlay(0); $('#aScroll').scrollLeft = 0; };
+  $('#aLoop').onclick = e => { arr.loop = !arr.loop; e.currentTarget.classList.toggle('on', arr.loop); arrSave(); };
+  $('#aSnap').onchange = e => { arr.snap = +e.target.value; arrSave(); };
+  $('#aZoomIn').onclick = () => { arr.ppb = Math.min(80, arr.ppb + 6); renderArr(); arrSave(); };
+  $('#aZoomOut').onclick = () => { arr.ppb = Math.max(8, arr.ppb - 6); renderArr(); arrSave(); };
+  $('#aDel').onclick = () => arrDel(arr.sel);
+  $('#aClear').onclick = e => { const b = e.currentTarget; if (b.dataset.c !== '1') { b.dataset.c = '1'; b.textContent = 'Yakin?'; setTimeout(() => { b.dataset.c = ''; b.textContent = 'Kosongkan'; }, 2500); return; } arrStop(); arr.clips = []; arr.sel = null; arrSave(); renderArr(); };
+  $('#aDemo').onclick = () => { arrStop(); arr.clips = []; arrDemo(); arrSave(); renderArr(); toast('Contoh lagu dimuat (pakai kunci & suara yang sedang dipilih).'); };
+  $('#aMic').onclick = () => micA ? stopMicA() : startMicA();
+  $('#aImp').onclick = () => $('#aFile').click();
+  $('#aFile').addEventListener('change', async e => { const f = e.target.files[0]; e.target.value = ''; if (!f) return; ensureAudio();
+    try { const buf = await decode(await f.arrayBuffer()); await arrAddAudio(buf, f.name.replace(/\.[^.]+$/, ''), 'audio'); toast('Suara masuk ke track Audio import (juga ada di pustaka kiri).'); }
+    catch (err) { toast('File ini tidak bisa dibaca. Coba MP3, WAV atau M4A.'); } });
+  $('#aExport').onclick = arrExport;
+  $('#aModal').addEventListener('pointerdown', e => { if (e.target.id === 'aModal') { $('#aModal').classList.remove('show'); if (arrPl && !arrPl.only) arrPlay(arrBeat()); } });
+  addEventListener('keydown', e => { if (S.tab !== 'arr' || $('#aModal').classList.contains('show')) return; if ((e.key === 'Delete' || e.key === 'Backspace') && arr.sel) arrDel(arr.sel); });
+  (function aLoop() {
+    if (S.tab === 'arr') { const b = Math.max(0, arrBeat()), ph = $('#aPh'); if (ph) ph.style.left = (AHEAD + b * arr.ppb) + 'px';
+      $('#aPos').textContent = `${Math.floor(b / 4) + 1}.${Math.floor(b % 4) + 1}`;
+      if (arrPl && !arrPl.only) { const sc = $('#aScroll'), x = AHEAD + b * arr.ppb; if (x > sc.scrollLeft + sc.clientWidth - 60) sc.scrollLeft = x - 220; } }
+    requestAnimationFrame(aLoop);
+  })();
+}
+
 /* ================= MIXER ================= */
 function renderMixer() {
   const el = $('#mixCh'); if (!el) return; el.innerHTML = '';
@@ -3395,7 +3775,7 @@ function selectBind(id, key, after) { const el = $('#' + id); el.value = S[key];
 function syncKeys() {
   const a = $('#gtKey'), b = $('#bsKey'); if (a) a.value = S.gtKey; if (b) b.value = S.gtKey;
   document.querySelectorAll('#gtScale button, #bsScale button').forEach((x, i) => x.classList.toggle('on', (i % 2 === 1) === !!S.gtMinor));
-  renderGtrChords(); renderBassChords(); if (S.bsMode === 'manual') renderFretboard(); renderBassPads();
+  renderGtrChords(); renderBassChords(); if (S.bsMode === 'manual') renderFretboard(); renderBassPads(); renderArrLib();
 }
 function init() {
   $('#bpm').value = S.bpm; $('#sig').value = S.sig; drawDots(-1);
@@ -3409,7 +3789,7 @@ function init() {
   slider('master', 'master', applyLevels, v => v + '%');
   renderSplit();
   $('#splitBtn').addEventListener('click', () => { S.split = !S.split; save('split'); renderSplit(); applySplit(); toast(S.split ? 'Mode ibadah NYALA: click di kiri, musik di kanan.' : 'Mode ibadah MATI: semua suara di kedua sisi.'); });
-  $('#panicBtn').addEventListener('click', () => { if (rec.state === 'rec') stopRec(); if (gtr.auto) setGtrAuto(false); if (ctx) gtrDampAll(); if (bass.auto) stopBassPattern(); bassAllOff(0.03); stopAllTakes(); stopClick(); stopChimeRec(); setArp(false); padStop(); [...sfState.voices.keys()].forEach(n => kbNoteOff(n, true)); setSustain(false); kb.els.forEach(e => e.classList.remove('down')); });
+  $('#panicBtn').addEventListener('click', () => { arrStop(); if (rec.state === 'rec') stopRec(); if (gtr.auto) setGtrAuto(false); if (ctx) gtrDampAll(); if (bass.auto) stopBassPattern(); bassAllOff(0.03); stopAllTakes(); stopClick(); stopChimeRec(); setArp(false); padStop(); [...sfState.voices.keys()].forEach(n => kbNoteOff(n, true)); setSustain(false); kb.els.forEach(e => e.classList.remove('down')); });
   $('#wakeBtn').addEventListener('click', () => { if (wake) { wakeWanted = false; wake.release(); wake = null; $('#wakeBtn').classList.remove('on'); } else { wakeWanted = true; requestWake(); } });
   $('#helpBtn').addEventListener('click', () => $('#help').classList.add('show'));
   $('#helpClose').addEventListener('click', () => $('#help').classList.remove('show'));
@@ -3424,7 +3804,7 @@ function init() {
     e.addEventListener('pointerdown', ev => { ev.preventDefault(); padPress(k); }); pk.appendChild(e); });
   $('#padStop').addEventListener('click', padStop);
   slider('padVol', 'padVol', applyLevels, v => v + '%');
-  initMixer(); initPadSet();
+  initMixer(); initPadSet(); initArr();
   slider('padBright', 'padBright', updatePadFilters, v => v + '%');
   slider('padRev', 'padRev', applyLevels, v => v + '%');
   slider('padFade', 'padFade', null, v => (v / 10).toFixed(1) + ' dtk');
