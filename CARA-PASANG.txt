@@ -2,7 +2,7 @@ WORSHIP PAD STUDIO – CARA PASANG DI iPAD (aplikasi mandiri, tanpa Claude)
 =======================================================================
 
 Isi folder ini (upload SEMUA file, jangan diubah namanya):
-  index.html, manifest.webmanifest, sw.js, icon-192.png, icon-512.png, apple-touch-icon.png
+  index.html, manifest.webmanifest, sw.js, icon-192.png, icon-512.png, apple-touch-icon.png, bells.js, cues.js
 
 A. TARUH DI INTERNET (gratis) – pakai GitHub Pages
   1. Buka github.com di Safari, login (buat akun kalau belum punya).
@@ -28,3 +28,7 @@ C. CATATAN
   - Kalau nanti index.html diperbarui: upload ulang index.html DAN ubah VERSI di sw.js
     (misalnya 'wps-v1' jadi 'wps-v2'), lalu buka aplikasi 2x saat online.
   - Encoder MP3 memakai lamejs (lisensi LGPL), sudah tertanam di index.html.
+  - bells.js (celesta, kotak musik, lonceng kecil, vibraphone, choir): soundfont Musyng Kite, lisensi Creative Commons Attribution-ShareAlike 3.0 (via github.com/gleitz/midi-js-soundfonts).
+  - natal.js, lonceng.js, perkusi.js: VCSL (Versilian Community Sample Library) & VSCO 2 CE — CC0 1.0 (domain publik).
+  - orkestra_*.js (biola, cello, flute, harpa): VSCO 2 Community Edition (Versilian Studios) — CC0 1.0 (domain publik).
+  - Suara pemandu di cues.js: dibuat dengan model TTS Kokoro-82M (Apache 2.0) via kokoro-onnx (MIT).

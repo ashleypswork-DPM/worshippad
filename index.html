@@ -409,6 +409,7 @@ details.fx>.controls{border:none;border-top:1px solid var(--line);border-radius:
         <button id="chDown" class="mini">Sapu turun ↘</button>
         <button id="chSlow" class="mini">Sapu pelan</button>
         <button id="chSparkle" class="mini">Gemerincing acak</button>
+        <span class="vsep"></span><button id="chReal" class="mini" title="Tombol sapu memakai rekaman mark tree asli (VCSL)">Mark tree asli</button>
         <span class="vsep"></span>
         <button id="chImport" class="mini">Import rekaman…</button>
         <input id="chFile" type="file" accept="audio/*" hidden>
@@ -651,7 +652,7 @@ details.fx>.controls{border:none;border-top:1px solid var(--line);border-radius:
   <h3>4. Rekam &amp; Sequencer</h3>
   <p>Tekan <b>● Rekam</b> di bar atas (dengan hitung masuk 1 bar mengikuti click), lalu mainkan pad, arp, keyboard, drum, dan chimes dari tab mana saja. Tekan lagi untuk berhenti; panjangnya dibulatkan ke bar penuh. Hasilnya muncul di tab <b>Rekam &amp; Sequencer</b> lengkap dengan tampilan bar. Beberapa rekaman bisa diputar bersamaan, di-loop, diatur volumenya, dan mulai pas di ketukan 1 click. <b>Ekspor</b> menghasilkan file ZIP berisi WAV + MP3 (ketuk ZIP di aplikasi Files untuk membukanya). File audio juga bisa dimasukkan lewat <b>Import audio</b>.</p>
   <h3>Suara Natal &amp; kredit sampel</h3>
-  <p>Grup <b>Natal</b> di Keyboard: lonceng gereja (tubular bells), glockenspiel, celesta, kotak musik, lonceng kecil, vibraphone dan paduan suara "Aah" memakai <b>sampel asli</b> dari soundfont <b>FluidR3_GM</b> karya Frank Wen, lisensi <b>Creative Commons Attribution 3.0</b> (via proyek midi-js-soundfonts). Sampel dimuat sekali saat pertama dipakai (±2 MB). Lonceng gereja besar, sleigh bells, bell FM &amp; magic sparkle dibuat dengan sintesis. Synth lain diracik meniru karakter synth gratis populer (Vital, Surge XT, Dexed, OB-Xd, TAL-U-NO-LX) — bukan salinan preset aslinya.</p>
+  <p>Suara bertanda ★ dan grup <b>Orkestra</b> memakai <b>rekaman instrumen asli</b>: lonceng Natal (glockenspiel, handbell, tubular bells, sleigh bells, triangle, mark tree) dan perkusi dari <b>VCSL</b>, serta biola, cello, flute, harpa, timpani, cymbal &amp; gong dari <b>VSCO 2 Community Edition</b> — keduanya karya Versilian Studios, lisensi <b>CC0 (domain publik)</b>. Celesta, kotak musik, lonceng kecil, vibraphone &amp; choir "Aah" dari soundfont <b>Musyng Kite</b>, lisensi <b>Creative Commons Attribution-ShareAlike 3.0</b> (via proyek midi-js-soundfonts). Tiap paket dimuat sekali saat pertama dipakai lalu tersimpan untuk offline. Drum Pad punya kit <b>🎄 Natal</b>, <b>Perkusi</b>, dan <b>Orkestra &amp; ambience</b>. Synth lain diracik meniru karakter synth gratis populer (Vital, Surge XT, Dexed, OB-Xd, TAL-U-NO-LX) — bukan salinan preset aslinya.</p>
   <h3>5. Tips saat ibadah</h3>
   <ul>
     <li>Atur <b>Settings → Display &amp; Brightness → Auto-Lock → Never</b>; audio browser berhenti kalau layar terkunci atau pindah aplikasi.</li>
@@ -1070,7 +1071,7 @@ function holdParam(p, t) { if (p.cancelAndHoldAtTime) p.cancelAndHoldAtTime(t); 
 /* ================= state ================= */
 const DEFAULTS = { bpm: 100, sig: 4, clickVol: 70, master: 85, split: false, timbre: 'warm', chord: '5', octave: 0,
   padVol: 70, padBright: 45, padRev: 60, padFade: 30, arpOn: false, arpSound: 'pluck', arpPat: 'up', arpRate: 2, arpVol: 55,
-  kbSound: 'clarity', vel: 96, sfVol: 75, sfRev: 35, kbOct: 48, chVol: 60, chRev: 55, chColl: 60, chDecay: 100, kit: 'edm', drVol: 75, tab: 'pad', recCount: true, recSync: true, gtSound: 'steel', gtKey: 2, gtMinor: false, gtShape: 'full', gtPM: false, gtPat: 'pop', gtVol: 75, gtRev: 30, gtTone: 50, gtDrive: 50, gtChorus: false, gtDelay: false, gtDTime: 'd8', gtDFb: 30, gtDMix: 25, bsSound: 'precision', bsMode: 'auto', bsPat: 'worship', bsTech: 'finger', bsLegato: true, bsRing: false, bsVel: 100, bsVol: 80, bsRev: 12, bsLo: 60, bsMid: 55, bsHi: 42, bsDrive: 0, bsComp: true, bsOct: false, bsChorus: false, bsEnv: false, bsDelay: false, bsDTime: 'd8', bsLink: false, gtOwn: false, gtBpm: 100, gtSpd: 1, bsOwn: false, bsBpm: 100, bsSpd: 1, kbChorus: false, kbDelay: true, kbDTime: 'd8', kbDMix: 28, kbDFb: 35, kbPump: false, kbGlide: false, kbTimed: false, kbHold: 30, kbFade: 20, aLibHide: {}, arrKey: -1, arrMinor: -1, guideVol: 85, cueOn: true, cueVoice: 'm', cuePre: true, arrClick: false, audVol: 80, audRev: 15, dset: {}, recStack: false, tlView: 'song', drRev: 50, mxLo: 0, mxMid: 0, mxHi: 0, mxGlue: false, mxGlueAmt: 40, mxLim: true, mxMute: {}, mxSolo: {}, mxPan: {} };
+  chReal: false, kbSound: 'clarity', vel: 96, sfVol: 75, sfRev: 35, kbOct: 48, chVol: 60, chRev: 55, chColl: 60, chDecay: 100, kit: 'edm', drVol: 75, tab: 'pad', recCount: true, recSync: true, gtSound: 'steel', gtKey: 2, gtMinor: false, gtShape: 'full', gtPM: false, gtPat: 'pop', gtVol: 75, gtRev: 30, gtTone: 50, gtDrive: 50, gtChorus: false, gtDelay: false, gtDTime: 'd8', gtDFb: 30, gtDMix: 25, bsSound: 'precision', bsMode: 'auto', bsPat: 'worship', bsTech: 'finger', bsLegato: true, bsRing: false, bsVel: 100, bsVol: 80, bsRev: 12, bsLo: 60, bsMid: 55, bsHi: 42, bsDrive: 0, bsComp: true, bsOct: false, bsChorus: false, bsEnv: false, bsDelay: false, bsDTime: 'd8', bsLink: false, gtOwn: false, gtBpm: 100, gtSpd: 1, bsOwn: false, bsBpm: 100, bsSpd: 1, kbChorus: false, kbDelay: true, kbDTime: 'd8', kbDMix: 28, kbDFb: 35, kbPump: false, kbGlide: false, kbTimed: false, kbHold: 30, kbFade: 20, aLibHide: {}, arrKey: -1, arrMinor: -1, guideVol: 85, cueOn: true, cueVoice: 'm', cuePre: true, arrClick: false, audVol: 80, audRev: 15, dset: {}, recStack: false, tlView: 'song', drRev: 50, mxLo: 0, mxMid: 0, mxHi: 0, mxGlue: false, mxGlueAmt: 40, mxLim: true, mxMute: {}, mxSolo: {}, mxPan: {} };
 const S = {}; for (const k in DEFAULTS) S[k] = store.get(k, DEFAULTS[k]);
 S.arpOn = false;
 function save(k) { store.set(k, S[k]); }
@@ -1635,8 +1636,13 @@ function renderChimeRec() {
   $('#chSrc').classList.toggle('on', chRec.use); $('#chSrc').textContent = chRec.use ? 'Pakai rekaman: NYALA' : 'Pakai rekaman: MATI';
   if (has) $('#chRecInfo').innerHTML = `Rekaman: <b>${chRec.name}</b> (${chRec.buf.duration.toFixed(1)} dtk). ${chRec.use ? 'Tombol sapu memutar rekaman ini; sapuan jari tetap memakai suara sintesis.' : 'Tombol sapu memakai suara sintesis.'}`;
 }
+function playMark(i, t, pl) { const L = bellBufs.v_mark; if (!L) { loadSmp('v_mark'); return null; } const e = L.find(x => x[0] == i) || L[0], s = ctx.createBufferSource(), g = ctx.createGain(); g.gain.value = 1.1;
+  s.buffer = e[1]; s.connect(g); g.connect(G.chime); s.start(t); if (pl) pl.srcs.push(s); return s; }
 function sweep(dir, secs, at) {
   ensureAudio();
+  if (S.chReal && !(chRec.buf && chRec.use)) { const i = secs > 3.5 ? 2 : dir > 0 ? 0 : 1, t = at ?? ctx.currentTime + 0.02;
+    if (bellBufs.v_mark || CAP) { L({ type: 'mark', i, t }); if (!CAP) { playMark(i, t); chimeEls.forEach((el, k) => setTimeout(() => { el.classList.add('hit'); setTimeout(() => el.classList.remove('hit'), 90); }, (dir > 0 ? k : NBARS - 1 - k) * secs * 60)); } return; }
+    loadSmp('v_mark'); }
   if (!CAP && chRec.buf && chRec.use) { playChimeRec(); return; } const now = at ?? ctx.currentTime + 0.02;
   for (let k = 0; k < NBARS; k++) {
     const i = dir > 0 ? k : NBARS - 1 - k, x = k / (NBARS - 1);
@@ -1697,6 +1703,25 @@ const STDPARTS = [['kick', 'Kick', '#7a3b4a'], ['snare', 'Snare', '#8b6a2f', 1],
   ['tom1', 'Tom 1', '#3a8b5a', 1], ['tom2', 'Tom 2', '#3a7b5a', 1], ['tom3', 'Floor tom', '#3a6b4a', 1], ['bell', 'Ride bell', '#9b8b3f', 1],
   ['crash', 'Crash 1 (16")', '#8b8b2f', 1], ['crash2', 'Crash 2 (18")', '#8b7a2f', 1], ['crash3', 'Crash 3 (20")', '#8b6a2f', 1], ['splash', 'Splash', '#9b9b4f', 1]];
 KITS.std = { name: 'Standar band (3 crash)', pads: STDPARTS.map(([p, n, c, r]) => ({ id: 's_' + p, name: n, color: c, rev: r })) };
+// kit sampel asli: Natal (sleigh bells dll), Perkusi (conga, cajon, shaker…), Orkestra & ambience (timpani, cymbal swell, gong, ombak)
+const SMP_DRUM = { n_shake: ['v_sleigh', 2], n_shake2: ['v_sleigh', 5], n_hit: ['v_sleigh', 0], n_hit2: ['v_sleigh', 3], n_hitk: ['v_sleigh', 4], n_tri: ['v_tri', 0], n_trir: ['v_tri', 2],
+  n_markup: ['v_mark', 0], n_markdn: ['v_mark', 1], n_markslow: ['v_mark', 2], n_hbh: ['v_handbell', 84, .45], n_hbl: ['v_handbell', 72, .3] };
+['conga', 'quinto', 'tumba', 'bongoh', 'bongol', 'cajon', 'cajons', 'shkd', 'shku', 'tamb', 'tambsh', 'cabasa', 'claves', 'frame', 'bdorch', 'ocean', 'timpl', 'timpm', 'timph', 'timproll', 'timproll2', 'cymswell', 'cymsoft', 'cymroll', 'gong', 'gongl'].forEach(k => SMP_DRUM['p_' + k] = ['o_perc', k, { cajon: 1.6, shkd: 1.3, shku: 1.3, cabasa: 1.6, claves: 1.5, bongoh: 1.3 }[k] || 1]);
+KITS.natal = { name: '🎄 Natal: sleigh bells, triangle, mark tree (rekaman asli)', pads: [
+  ['n_shake', 'Sleigh bells kocok', '#8b2f3a', 1], ['n_shake2', 'Sleigh bells kocok 2', '#7b2f3a', 1], ['n_hit', 'Sleigh bells pukul', '#9b3a2f', 1], ['n_hit2', 'Sleigh bells pukul 2', '#9b4a2f', 1],
+  ['n_hitk', 'Sleigh bells keras', '#ab3a2f', 1], ['n_tri', 'Triangle', '#8b8b2f', 1], ['n_trir', 'Triangle roll', '#7b7b2f', 1], ['p_tambsh', 'Tamborin kocok', '#3a8b5a'],
+  ['n_markup', 'Mark tree naik', '#2f7f8b', 1], ['n_markdn', 'Mark tree turun', '#2f6f8b', 1], ['n_markslow', 'Mark tree pelan', '#2f5f8b', 1], ['n_hbh', 'Handbell tinggi', '#6a4a8b', 1],
+  ['n_hbl', 'Handbell rendah', '#5a3a8b', 1], ['p_tamb', 'Tamborin pukul', '#3a7b5a']].map(([id, name, color, rev]) => ({ id, name, color, rev })) };
+KITS.perc = { name: 'Perkusi: conga, bongo, cajon, shaker (rekaman asli)', pads: [
+  ['p_conga', 'Conga', '#8b5a2f'], ['p_quinto', 'Quinto (conga tinggi)', '#9b6a2f'], ['p_tumba', 'Tumba (conga rendah)', '#7b4a2f'], ['p_bongoh', 'Bongo tinggi', '#8b6a3a'],
+  ['p_bongol', 'Bongo rendah', '#7b5a3a'], ['p_cajon', 'Cajon bass', '#6a4a2f'], ['p_cajons', 'Cajon slap', '#7a5a3f'], ['p_frame', 'Frame drum', '#5a4a3a', 1],
+  ['p_shkd', 'Shaker', '#2f8b7f'], ['p_shku', 'Shaker (balik)', '#2f7b6f'], ['p_tamb', 'Tamborin', '#3a8b5a'], ['p_tambsh', 'Tamborin kocok', '#3a7b4a'],
+  ['p_cabasa', 'Cabasa', '#4a7b5a'], ['p_claves', 'Claves', '#8b7a4a'], ['n_tri', 'Triangle', '#8b8b2f', 1], ['p_bdorch', 'Bass drum konser', '#5a2f2f', 1]].map(([id, name, color, rev]) => ({ id, name, color, rev })) };
+KITS.orch = { name: 'Orkestra & ambience: timpani, cymbal swell, gong, ombak', pads: [
+  ['p_timpl', 'Timpani rendah', '#5a3a2f', 1], ['p_timpm', 'Timpani tengah', '#6a4a2f', 1], ['p_timph', 'Timpani tinggi', '#7a5a2f', 1], ['p_timproll', 'Timpani roll', '#6a3a2f', 1],
+  ['p_timproll2', 'Timpani roll 2', '#5a3a3f', 1], ['p_cymswell', 'Cymbal swell (naik)', '#8b8b2f', 1], ['p_cymsoft', 'Cymbal lembut', '#7b7b2f', 1], ['p_cymroll', 'Cymbal roll panjang', '#6b6b2f', 1],
+  ['p_gong', 'Gong besar', '#8b6a2f', 1], ['p_gongl', 'Gong lembut', '#7b5a2f', 1], ['p_ocean', 'Ombak (ocean drum)', '#2f5f8b', 1], ['p_bdorch', 'Bass drum konser', '#5a2f2f', 1],
+  ['n_markslow', 'Mark tree', '#2f6f8b', 1], ['n_trir', 'Triangle roll', '#7b7b2f', 1]].map(([id, name, color, rev]) => ({ id, name, color, rev })) };
 const DRUMS_ALL = Object.values(KITS).flatMap(k => k.pads);
 const drumCache = {}, drumCustom = {};
 /* --- kit drum akustik (sintesis): gaya Yamaha Recording/Stage Custom & gaya head Evans --- */
@@ -1750,6 +1775,9 @@ function drumBuf(id, bar = barDur()) {
   const key = id + (['riser', 'revcym', 'swell'].includes(id) ? '@' + bar.toFixed(3) : '');
   if (drumCache[key]) return drumCache[key];
   let b;
+  if (SMP_DRUM[id]) { const [inst, k] = SMP_DRUM[id], list = bellBufs[inst]; if (!list) { loadSmp(inst); return null; } const e = list.find(x => x[0] == k); if (!e) return null; let bb = e[1]; const gn = SMP_DRUM[id][2];
+    if (gn && gn !== 1) { bb = ctx.createBuffer(e[1].numberOfChannels, e[1].length, e[1].sampleRate); for (let c = 0; c < bb.numberOfChannels; c++) { const src = e[1].getChannelData(c), dst = bb.getChannelData(c); for (let i = 0; i < src.length; i++) dst[i] = src[i] * gn; } }
+    drumCache[key] = bb; return bb; }
   if (/^[yes]_/.test(id)) { b = acDrum(id[0], id.slice(2)); drumCache[key] = b; return b; }
   switch (id) {
     // EDM halus
@@ -1842,7 +1870,7 @@ function renderDrums() {
 }
 
 /* ================= SYNTH KEYBOARD (preset deklaratif) ================= */
-const KB_GROUPS = ['EDM lead', 'Pluck & chord', 'Pad worship & atmos', 'Keys & piano', 'Brass & bass', 'Natal: lonceng, celesta & choir'];
+const KB_GROUPS = ['EDM lead', 'Pluck & chord', 'Pad worship & atmos', 'Keys & piano', 'Brass & bass', 'Natal: lonceng, celesta & choir', 'Orkestra: biola, cello, flute & ambience (rekaman asli)'];
 const KB = {
   clarity:    { g: 0, name: 'Supersaw lead — gaya Clarity (Zedd)', osc: [{ type: 'sawtooth', n: 7, det: 24, spr: .9 }, { type: 'sawtooth', n: 3, det: 14, spr: .6, oct: 1, gain: .35 }], sub: .2, flt: { cut: 1800, kt: .5, q: .8, env: 5200, a: .003, d: .35, s: .45 }, amp: { a: .004, d: .4, s: .85, r: .35 }, fx: { delay: 1, dTime: 'd8', dMix: 28, dFb: 35, rev: 55 } },
   bigroom:    { g: 0, name: 'Big room lead — gaya Animals (Martin Garrix)', osc: [{ type: 'square', n: 3, det: 14, spr: .5, gain: .8 }, { type: 'sawtooth', n: 5, det: 32, spr: .9, gain: .8 }], pitch: { amt: 12, t: .025 }, drive: 3, flt: { cut: 2600, kt: .3, q: 1, env: 4000, a: .001, d: .18, s: .5 }, amp: { a: .002, d: .25, s: .75, r: .18 }, fx: { pump: 1, rev: 35 } },
@@ -1892,17 +1920,30 @@ const KB = {
   fmpiano:    { g: 3, name: 'Piano FM (gaya DX grand)', fm: { ratio: 1, idx: 3, dec: .12, tine: [4, .2, .3] }, amp: { a: .002, d: 2.5, s: .15, r: .6 }, fx: { rev: 40 } },
   jumpbrass:  { g: 4, name: 'Jump brass 80-an (gaya OB-Xa)', osc: [{ type: 'sawtooth', n: 3, det: 12, spr: .6 }], flt: { cut: 700, kt: .4, q: .8, env: 3000, a: .04, d: .35, s: .55 }, amp: { a: .01, d: .3, s: .9, r: .2 }, fx: { chorus: 1, rev: 35 } },
   softhorn:   { g: 4, name: 'Synth horn lembut', osc: [{ type: 'sawtooth', n: 2, det: 6, spr: .4 }, { type: 'triangle', gain: .5 }], flt: { cut: 600, q: .7, env: 1500, a: .1, d: .5, s: .6 }, amp: { a: .08, d: .3, s: .9, r: .4 }, fx: { rev: 50 } },
-  // ---- Natal: sampel asli FluidR3 (CC BY 3.0) + sintesis ----
-  xtubular:   { g: 5, name: 'Lonceng gereja (tubular bells) — sampel', smp: 'tubular_bells', rel: 3, fx: { delay: 0, rev: 75 } },
-  xglock:     { g: 5, name: 'Glockenspiel — sampel', smp: 'glockenspiel', rel: 2.2, fx: { delay: 1, dTime: 'd8', dMix: 15, dFb: 30, rev: 55 } },
-  xcelesta:   { g: 5, name: 'Celesta (Sugar Plum Fairy) — sampel', smp: 'celesta', rel: 2, fx: { rev: 60 } },
-  xmusicbox:  { g: 5, name: 'Kotak musik (music box) — sampel', smp: 'music_box', rel: 2.2, fx: { rev: 60 } },
-  xtinkle:    { g: 5, name: 'Lonceng kecil (tinkle bell) — sampel', smp: 'tinkle_bell', rel: 2, fx: { rev: 65 } },
-  xvibes:     { g: 5, name: 'Vibraphone — sampel', smp: 'vibraphone', rel: 1.8, fx: { rev: 45 } },
-  xchoir:     { g: 5, name: 'Paduan suara "Aah" (Natal) — sampel', smp: 'choir_aahs', rel: .8, fx: { rev: 80 } },
+  // ---- Natal: rekaman asli VCSL (CC0) + Musyng Kite (CC BY-SA 3.0) + sintesis ----
+  xjingle:    { g: 5, name: '★ Jingle Bells: glockenspiel + sleigh bells (rekaman asli)', smp: 'v_glock', smp2: 'v_sleigh', one2: [0, 1, 3], mix2: .5, rel: 2.4, fx: { delay: 1, dTime: 'd8', dMix: 12, dFb: 25, rev: 50 } },
+  xglock:     { g: 5, name: '★ Glockenspiel asli (gaya lagu Natal)', smp: 'v_glock', rel: 2.6, fx: { delay: 1, dTime: 'd8', dMix: 14, dFb: 28, rev: 55 } },
+  xhandbell:  { g: 5, name: '★ Handbell — paduan lonceng tangan Natal (asli)', smp: 'v_handbell', rel: 2.6, fx: { delay: 0, rev: 60 } },
+  xtubular:   { g: 5, name: '★ Lonceng gereja (tubular bells) asli', smp: 'v_tubular', rel: 4, fx: { delay: 0, rev: 70 } },
+  xsleigh:    { g: 5, name: '★ Sleigh bells asli (atas C4 = pukul, bawah = kocok)', smp: 'v_sleigh', one: [0, 1, 3, 4], oneLo: [2, 5], rel: 1.2, fx: { delay: 0, rev: 35 } },
+  xtri:       { g: 5, name: 'Triangle "ting" asli', smp: 'v_tri', one: [0, 1], rel: 2.5, fx: { delay: 0, rev: 45 } },
+  xcelesta:   { g: 5, name: 'Celesta (Sugar Plum Fairy)', smp: 'celesta', rel: 2, fx: { rev: 60 } },
+  xmusicbox:  { g: 5, name: 'Kotak musik (music box)', smp: 'music_box', rel: 2.2, fx: { rev: 60 } },
+  xtinkle:    { g: 5, name: 'Lonceng kecil (tinkle bell)', smp: 'tinkle_bell', rel: 2, fx: { rev: 65 } },
+  xvibes:     { g: 5, name: 'Vibraphone', smp: 'vibraphone', rel: 1.8, fx: { rev: 45 } },
+  xchoir:     { g: 5, name: 'Paduan suara "Aah" (Natal)', smp: 'choir_aahs', rel: .8, fx: { rev: 80 } },
   xbigbell:   { g: 5, name: 'Lonceng gereja besar (sintesis)', modal: [[.5, .5, 9], [1, 1, 6], [1.19, .55, 4.5], [1.5, .35, 3.5], [2, .7, 4], [2.51, .3, 2.2], [3.01, .22, 1.8], [4.07, .15, 1.2], [5.2, .08, .8]], rel: 4, fx: { rev: 85 } },
-  xsleigh:    { g: 5, name: 'Sleigh bells (gemerincing kereta salju)', jingle: 1, rel: .6, fx: { rev: 40 } },
   xfmbell:    { g: 5, name: 'Bell Natal FM (gaya Dexed)', fm: { ratio: 3.5, idx: 2, dec: .9, tine: [7, .15, .3] }, amp: { a: .001, d: 3, s: 0, r: 2 }, fx: { delay: 1, dTime: 'd8', dMix: 20, dFb: 35, rev: 70 } },
+  // ---- Orkestra: rekaman asli VSCO 2 CE (CC0) ----
+  oviolin:    { g: 6, name: 'Biola solo (vibrato)', smp: 'o_violin', att: .07, rel: .5, fx: { delay: 0, rev: 45 } },
+  ovlnens:    { g: 6, name: 'Biola seksi (strings ensemble)', smp: 'o_vlnens', att: .12, rel: .7, fx: { delay: 0, rev: 55 } },
+  ocello:     { g: 6, name: 'Cello (seksi orkestra)', smp: 'o_cello', att: .1, rel: .6, fx: { delay: 0, rev: 45 } },
+  ostrings:   { g: 6, name: 'Strings penuh: biola + cello', smp: 'o_vlnens', smp2: 'o_cello', mix2: .75, att: .15, rel: .8, fx: { delay: 0, rev: 60 } },
+  oflute:     { g: 6, name: 'Flute (seruling orkestra)', smp: 'o_flute', att: .05, rel: .4, fx: { delay: 0, rev: 50 } },
+  oharp:      { g: 6, name: 'Harpa konser', smp: 'o_harp', rel: 1.8, fx: { delay: 0, rev: 55 } },
+  oambstr:    { g: 6, name: 'Ambience: strings swell pelan & luas', smp: 'o_vlnens', smp2: 'o_cello', mix2: .7, att: 1.4, rel: 3, fx: { delay: 1, dTime: 'd4', dMix: 12, dFb: 35, rev: 95 } },
+  oambflute:  { g: 6, name: 'Ambience: flute + harpa berkilau', smp: 'o_flute', smp2: 'o_harp', mix2: .6, att: .6, rel: 2.5, fx: { delay: 1, dTime: 'd8', dMix: 18, dFb: 40, rev: 90 } },
+  oambbell:   { g: 6, name: 'Ambience: handbell + strings (Natal)', smp: 'v_handbell', smp2: 'o_vlnens', mix2: .45, rel: 3, fx: { delay: 1, dTime: 'd8', dMix: 14, dFb: 30, rev: 90 } },
   xmagic:     { g: 5, name: 'Magic sparkle (bell + shimmer)', fm: { ratio: 7, idx: 1.2, dec: .4 }, osc: [{ type: 'sine', oct: 2, gain: .2 }], amp: { a: .001, d: 2.5, s: 0, r: 2 }, fx: { delay: 1, dTime: 'q', dMix: 30, dFb: 55, rev: 100 } },
   subkb:      { g: 4, name: 'Sub bass', osc: [{ type: 'sine', oct: -1 }], drive: 1.2, amp: { a: .005, d: .2, s: 1, r: .1 }, fx: {} }
 };
@@ -1957,11 +1998,32 @@ function kbSynth(P, note, vel, t, dest, key) {
 }
 /* --- sampel lonceng & choir (FluidR3_GM, CC BY 3.0) dimuat saat pertama dipakai --- */
 const bellBufs = {}; let bellP = null, bellToast = 0;
+// paket sampel lain (lonceng asli, orkestra, perkusi): satu file per paket, dimuat saat pertama dipakai
+const PACK_FILE = { v_glock: 'natal.js', v_sleigh: 'natal.js', v_tri: 'natal.js', v_mark: 'natal.js', v_handbell: 'lonceng.js', v_tubular: 'lonceng.js',
+  o_cello: 'orkestra_cello.js', o_vlnens: 'orkestra_vlnens.js', o_violin: 'orkestra_violin.js', o_flute: 'orkestra_flute.js', o_harp: 'orkestra_harp.js', o_perc: 'perkusi.js' };
+const LOOP_INST = new Set(['o_cello', 'o_vlnens', 'o_violin', 'o_flute']), packP = {};
+function prepLoop(b, s0 = 1.4, e0 = 5.3, xf = .45) {   // sambungan loop mulus (crossfade) supaya nada panjang bisa ditahan selama apa pun
+  const sr = b.sampleRate, ls = Math.floor(s0 * sr), le = Math.min(b.length - Math.floor(Math.min(1.1, b.duration * .12) * sr), Math.floor(e0 * sr)), n = Math.floor(xf * sr); if (le - ls < n * 2) return;
+  for (let c = 0; c < b.numberOfChannels; c++) { const d = b.getChannelData(c); for (let i = 0; i < n; i++) { const a = i / n; d[le - n + i] = d[le - n + i] * Math.cos(a * Math.PI / 2) + d[ls - n + i] * Math.sin(a * Math.PI / 2); } }
+  b.loopS = ls / sr; b.loopE = le / sr;
+}
+function loadPack(inst) {
+  const f = PACK_FILE[inst]; if (!f) return loadBells(); if (packP[f]) return packP[f];
+  if (Date.now() - bellToast > 4000) { bellToast = Date.now(); toast('Memuat sampel suara… (sekali saja, lalu tersimpan untuk offline)'); }
+  packP[f] = new Promise((res, rej) => { const sc = document.createElement('script'); sc.src = f; sc.onload = res; sc.onerror = () => rej(new Error('file ' + f + ' tidak ditemukan')); document.head.appendChild(sc); })
+    .then(async () => { ensureAudio(); const all = window.SMP_PACKS || {};
+      for (const k in all) { if (bellBufs[k]) continue; const list = [];
+        for (const m in all[k]) { const bin = Uint8Array.from(atob(all[k][m]), c => c.charCodeAt(0)); try { const b = await decode(bin.buffer); if (LOOP_INST.has(k)) prepLoop(b); list.push([isNaN(+m) ? m : +m, b]); } catch (e) {} }
+        bellBufs[k] = list.sort((a, b) => (+a[0] || 0) - (+b[0] || 0)); delete all[k]; } })
+    .catch(e => { packP[f] = null; toast('Sampel gagal dimuat: ' + e.message, 4000); });
+  return packP[f];
+}
+const loadSmp = inst => PACK_FILE[inst] ? loadPack(inst) : loadBells();
 function loadBells() {
   if (bellP) return bellP;
   bellP = new Promise((res, rej) => { if (window.BELL_SAMPLES) return res(); const sc = document.createElement('script'); sc.src = 'bells.js'; sc.onload = res; sc.onerror = () => rej(new Error('file bells.js tidak ditemukan')); document.head.appendChild(sc); })
     .then(async () => { ensureAudio(); const B = window.BELL_SAMPLES || {};
-      for (const inst in B) { const list = []; for (const m in B[inst]) { const bin = Uint8Array.from(atob(B[inst][m]), c => c.charCodeAt(0)); try { list.push([+m, await decode(bin.buffer)]); } catch (e) {} } bellBufs[inst] = list.sort((a, b) => a[0] - b[0]); } })
+      for (const inst in B) { const list = []; for (const m in B[inst]) { const bin = Uint8Array.from(atob(B[inst][m]), c => c.charCodeAt(0)); try { const b = await decode(bin.buffer); if (inst === 'choir_aahs') prepLoop(b, 1.0, 2.75, .35); list.push([+m, b]); } catch (e) {} } bellBufs[inst] = list.sort((a, b) => a[0] - b[0]); } })
     .catch(e => { bellP = null; toast('Sampel lonceng gagal dimuat: ' + e.message, 4000); });
   return bellP;
 }
@@ -1973,13 +2035,18 @@ function makeJingle() {   // satu kocokan sleigh bells: puluhan lonceng kecil be
     let lp = 0; for (let i = 0; i < Math.floor(0.05 * sr); i++) { lp += ((Math.random() * 2 - 1) - lp) * 0.6; d[i] += lp * 0.25 * Math.exp(-i / (0.01 * sr)); }
     let pk = 0; for (let i = 0; i < n; i++) pk = Math.max(pk, Math.abs(d[i])); for (let i = 0; i < n; i++) d[i] *= 0.8 / pk; return b; });
 }
+const SMP_LVL = { v_glock: .9, v_handbell: .56, v_tubular: 1.45, v_sleigh: 2.9, v_tri: 5, celesta: 9, music_box: 10, tinkle_bell: 9, vibraphone: 4, choir_aahs: 6, o_violin: 1.6, o_vlnens: 1.6, o_cello: 1.6, o_flute: 1.4, o_harp: 2.5 };   // kalibrasi volume per paket
 function specialVoice(P, note, vel, t, dest, key) {
   const amp = ctx.createGain(), v = Math.pow(vel / 127, 1.3) * 0.5 * (KB_LVL[key] || 1), oscs = []; amp.connect(dest);
   if (P.smp) {
-    const list = bellBufs[P.smp];
-    if (!list || !list.length) { loadBells(); if (Date.now() - bellToast > 4000) { bellToast = Date.now(); toast('Memuat sampel lonceng… (sekali saja, ±2 MB)'); } return null; }
-    let best = list[0]; list.forEach(x => { if (Math.abs(x[0] - note) < Math.abs(best[0] - note)) best = x; });
-    const s = ctx.createBufferSource(); s.buffer = best[1]; s.playbackRate.value = Math.pow(2, (note - best[0]) / 12); s.connect(amp); amp.gain.value = v * 4; s.start(t); oscs.push(s);
+    const list = bellBufs[P.smp], l2 = P.smp2 && bellBufs[P.smp2];
+    if (!list || !list.length || (P.smp2 && !l2)) { loadSmp(P.smp); if (P.smp2) loadSmp(P.smp2); if (!PACK_FILE[P.smp] && Date.now() - bellToast > 4000) { bellToast = Date.now(); toast('Memuat sampel lonceng… (sekali saja)'); } return null; }
+    const lv = SMP_LVL[P.smp] || (PACK_FILE[P.smp] ? 1.6 : 4), pk = (L, one) => { if (one) { const c = L.filter(x => one.includes(x[0])); return (c.length ? c : L)[Math.floor(Math.random() * (c.length || L.length))]; } let b = L[0]; L.forEach(x => { if (Math.abs(x[0] - note) < Math.abs(b[0] - note)) b = x; }); return b; };
+    const play = (L, one, g) => { const e = pk(L, one), s = ctx.createBufferSource(); s.buffer = e[1]; s.playbackRate.value = one ? Math.pow(2, (note - 72) / 48) : Math.pow(2, (note - e[0]) / 12);
+      if (e[1].loopE) { s.loop = true; s.loopStart = e[1].loopS; s.loopEnd = e[1].loopE; } const sg = ctx.createGain(); sg.gain.value = g; s.connect(sg); sg.connect(amp); s.start(t); oscs.push(s); };
+    play(list, P.one ? (note < 60 && P.oneLo ? P.oneLo : P.one) : null, 1);
+    if (l2) play(l2, P.one2 || null, (P.mix2 || .6) * (SMP_LVL[P.smp2] || 1.6) / lv);
+    const tv = v * lv; if (P.att) { amp.gain.setValueAtTime(0, t); amp.gain.linearRampToValueAtTime(tv, t + P.att); } else amp.gain.value = tv;
   } else if (P.modal) {
     const f0 = mtof(note); amp.gain.value = v * 0.6;
     P.modal.forEach(([r, g, d]) => { if (f0 * r > 15000) return; const o = ctx.createOscillator(); o.frequency.value = f0 * r * (1 + (Math.random() - 0.5) * 0.002); const og = ctx.createGain();
@@ -2039,7 +2106,7 @@ function timedRelease(v, t, hold, fadeS) {
   v.oscs.forEach(o => { try { o.stop(t2 + 0.05); } catch (e) {} });
 }
 function applyKbPreset(k) {
-  const P = KB[k]; if (!P) return; const fx = P.fx || {}; if (P.smp) loadBells();
+  const P = KB[k]; if (!P) return; const fx = P.fx || {}; if (P.smp) loadSmp(P.smp); if (P.smp2) loadSmp(P.smp2);
   S.kbChorus = !!fx.chorus; S.kbDelay = !!fx.delay; S.kbPump = !!fx.pump; S.kbGlide = !!fx.glide;
   if (fx.dTime) S.kbDTime = fx.dTime; if (fx.dMix !== undefined) S.kbDMix = fx.dMix; if (fx.dFb !== undefined) S.kbDFb = fx.dFb; if (fx.rev !== undefined) S.sfRev = fx.rev;
   ['kbChorus', 'kbDelay', 'kbPump', 'kbGlide', 'kbDTime', 'kbDMix', 'kbDFb', 'sfRev'].forEach(save);
@@ -3037,6 +3104,7 @@ function schedEvRaw(pl, ev, t) {
     case 'drum': { const s = schedDrum(ev, t); if (s) pl.srcs.push(s); break; }
     case 'chime': { const c = strikeChime(ev.i, t, ev.v, ev.d, true); if (c) pl.srcs.push({ chime: c }); break; }
     case 'chrec': if (chRec.buf) pl.srcs.push(schedChimeRec(t)); break;
+    case 'mark': playMark(ev.i, t, pl); break;
     case 'gtr': { if (!pl.gs) pl.gs = new Map(); const v = gtrVoice(GT[ev.s] ? ev.s : 'steel', ev.st, ev.n, ev.v, t, ev.pm, pl.gs); pl.srcs.push({ gv: v }); break; }
     case 'gdamp': if (pl.gs) { pl.gs.forEach(v => damp(v, t)); pl.gs.clear(); } break;
     case 'bass': { if (!pl.bk) { pl.bk = new Map(); pl.bid = new Map(); } const v = bassNote(ev.n, ev.v, ev.a, t, pl.bk, ev.k, BS[ev.s] ? ev.s : 'precision'); pl.bid.set(ev.id, v); pl.srcs.push({ bv: v }); break; }
@@ -3087,7 +3155,9 @@ function stopTake(tk, natural) {
   renderTakes();
 }
 function stopAllTakes(render = true) { [...players.values()].forEach(pl => stopTake(pl.tk)); stopSong(); if (render) renderTakes(); }
-function ensureSamplesFor(tks) { const need = tks.some(t => t && t.events && t.events.some(e => e.type === 'kbOn' && KB[e.s] && KB[e.s].smp)); return need && typeof loadBells === 'function' ? loadBells() : Promise.resolve(); }
+function ensureSamplesFor(tks) { const need = new Set();
+  tks.forEach(t => t && t.events && t.events.forEach(e => { if (e.type === 'kbOn' && KB[e.s] && KB[e.s].smp) { need.add(KB[e.s].smp); if (KB[e.s].smp2) need.add(KB[e.s].smp2); } if (e.type === 'drum' && SMP_DRUM[e.id]) need.add(SMP_DRUM[e.id][0]); if (e.type === 'mark') need.add('v_mark'); }));
+  return Promise.all([...need].map(loadSmp)); }
 /* ================= LAGU: rekaman bertumpuk (multitrack / overdub) ================= */
 const song = { tracks: [], bpm: 0, sig: 4, loop: true };
 let songPl = null;
@@ -3498,6 +3568,9 @@ const ARR_PATS = {
   ballad: { name: 'Ballad halus', st: dpat({ kick: [0, 10], snare: [8], hat: [0, 4, 8, 12] }) },
   four: { name: '4-on-floor', st: dpat({ kick: [0, 4, 8, 12], snare: [4, 12], ohat: [2, 6, 10, 14] }) },
   fill: { name: 'Fill tom (1 bar)', st: dpat({ snare: [0, 1, 2, 3], tom1: [4, 5, 6], tom2: [8, 9, 10], tom3: [12, 13, 14], kick: [12] }) },
+  jingle: { name: '🎄 Sleigh bells (gaya Jingle Bells)', st: dpat({ hat: [0, 2, 4, 6, 8, 10, 12, 14], snare: [4, 12] }), ids: [null, 'n_shake', 'n_hit'] },
+  perc: { name: 'Perkusi worship (conga + shaker)', st: dpat({ kick: [0, 10], snare: [4, 12], hat: [0, 2, 4, 6, 8, 10, 12, 14], tom1: [6, 14], ohat: [3, 7, 11, 15] }), ids: ['p_tumba', 'p_quinto', 'p_shkd', 'p_shku', 'p_conga'] },
+  cajon: { name: 'Cajon akustik + tamborin', st: dpat({ kick: [0, 7, 8], snare: [4, 12], hat: [4, 12] }), ids: ['p_cajon', 'p_cajons', 'p_tamb'] },
   empty: { name: 'Pola kosong (isi sendiri)', st: dpat({}) }
 };
 const isAud = k => k.kind === 'audio' || k.kind === 'mic' || (k.kind === 'take' && takeOf(k) && takeOf(k).type === 'audio');
@@ -3606,6 +3679,7 @@ function arrLibItems() {
     { h: 'Pukulan drum' }, ...['kick', 'snare', 'crash', 'crash2', 'crash3', 'splash', 'tom1', 'tom3', 'ride'].map(p => { const d = KITS.std.pads.find(x => x.id === 's_' + p); return { kind: 'shot', name: d.name, len: 1, d: { id: d.id } }; }),
     { h: 'Efek' }, { kind: 'chime', name: 'Chimes sapu naik', len: 4, d: { dir: 1 } }, { kind: 'chime', name: 'Chimes sapu turun', len: 4, d: { dir: -1 } },
     ...['riser', 'revcym', 'impact', 'subdrop'].map(id => { const d = KITS.edm.pads.find(x => x.id === id); return { kind: 'fxs', name: d.name, len: d.sync ? 4 : 2, d: { id } }; }),
+    { h: 'Orkestra, Natal & ambience' }, ...[['p_cymswell', 'Cymbal swell', 4], ['p_timproll', 'Timpani roll', 4], ['p_timpl', 'Timpani', 2], ['p_gong', 'Gong besar', 4], ['p_ocean', 'Ombak (ambience)', 8], ['n_markdn', 'Mark tree turun', 4], ['n_shake', 'Sleigh bells kocok', 2], ['n_trir', 'Triangle roll', 4]].map(([id, name, len]) => ({ kind: 'fxs', name, len, d: { id } })),
     { h: 'Rekaman Anda' }];
   takes.forEach(tk => L.push({ kind: 'take', name: tk.name, len: Math.max(1, Math.round(tk.len / aq())), sec: tk.len, d: { tid: tk.id } }));
   if (!takes.length) L.push({ note: 'Belum ada rekaman.' });
@@ -3660,7 +3734,7 @@ function clipFromItem(it, track, start) {
   if (it.kind === 'kb') Object.assign(d, { c: cc, snd: KB[S.kbSound] || /^gt:/.test(S.kbSound) ? S.kbSound : 'clarity', style: 'hold' });
   if (it.kind === 'gtr') Object.assign(d, { c: cc, snd: S.gtSound, pat: S.gtPat, shape: S.gtShape });
   if (it.kind === 'bass') Object.assign(d, { c: cc, snd: S.bsSound, pat: S.bsPat });
-  if (it.kind === 'pat') Object.assign(d, { kit: 's', st: ARR_PATS[d.p].st.map(r => r.slice()) });
+  if (it.kind === 'pat') { Object.assign(d, { kit: 's', st: ARR_PATS[d.p].st.map(r => r.slice()) }); if (ARR_PATS[d.p].ids) { d.ids = Array.from({ length: 8 }, (_, i) => ARR_PATS[d.p].ids[i] || null); d.recIds = d.ids.slice(); } }
   const k = { id: arr.nid++, kind: it.kind, name: it.name, track, start, len: it.len, d };
   if (isAud(k)) k.sec = it.sec;
   return k;
@@ -4320,7 +4394,7 @@ function init() {
   // chimes
   buildChimes();
   $('#chUp').addEventListener('click', () => sweep(1, 2.6)); $('#chDown').addEventListener('click', () => sweep(-1, 2.6));
-  $('#chSlow').addEventListener('click', () => sweep(-1, 4.5)); $('#chSparkle').addEventListener('click', sparkle);
+  $('#chSlow').addEventListener('click', () => sweep(-1, 4.5)); $('#chReal').classList.toggle('on', !!S.chReal); $('#chReal').addEventListener('click', e => { S.chReal = !S.chReal; save('chReal'); e.currentTarget.classList.toggle('on', S.chReal); if (S.chReal) { ensureAudio(); loadSmp('v_mark'); } toast(S.chReal ? 'Tombol sapu sekarang memakai rekaman mark tree asli.' : 'Tombol sapu memakai suara sintesis.'); }); $('#chSparkle').addEventListener('click', sparkle);
   $('#chImport').addEventListener('click', () => $('#chFile').click());
   $('#chFile').addEventListener('change', async e => {
     const f = e.target.files[0]; e.target.value = ''; if (!f) return;
@@ -4332,7 +4406,7 @@ function init() {
   slider('chColl', 'chColl', null, v => v == 0 ? 'mati' : v + '%'); slider('chDecay', 'chDecay', null, v => v + '%');
   slider('chVol', 'chVol', applyLevels, v => v + '%'); slider('chRev', 'chRev', applyLevels, v => v + '%');
   // drum
-  chips('#kits', ['std', 'yamaha', 'evans', 'basic', 'edm'].filter(k => KITS[k]).map(k => [k, KITS[k].name]), 'kit', renderDrums);
+  chips('#kits', ['std', 'yamaha', 'evans', 'perc', 'orch', 'natal', 'basic', 'edm'].filter(k => KITS[k]).map(k => [k, KITS[k].name]), 'kit', renderDrums);
   renderDrums();
   slider('drVol', 'drVol', applyLevels, v => v + '%');
   $('#dmClose').addEventListener('click', () => $('#drumMenu').classList.remove('show'));
