@@ -221,8 +221,9 @@ details.fx>.controls{border:none;border-top:1px solid var(--line);border-radius:
 .actl input{width:70px}
 .alane{position:relative;flex:none;height:100%;background-image:linear-gradient(90deg,#2a2f3a 1px,transparent 1px),linear-gradient(90deg,#1c2029 1px,transparent 1px);background-size:calc(var(--ppb)*4) 100%,var(--ppb) 100%}
 .alane.alt{background-color:#14171d}.alane.hover{background-color:#1d2a26}
-.agrid.selmode .alane{touch-action:none;cursor:crosshair}
-.amarq{position:absolute;display:none;z-index:8;border:1.5px dashed #fff;background:rgba(79,195,169,.15);border-radius:4px;pointer-events:none}
+.agrid.selmode .alane,.agrid.selmode .aclip,.agrid.selmode .arow>.ahead{touch-action:none;cursor:crosshair}
+.arow:not(.aruler):not(.amrow):not(.addrow)>.ahead{cursor:crosshair}
+.amarq{position:absolute;display:none;z-index:3;border:1.5px dashed #fff;background:rgba(79,195,169,.15);border-radius:4px;pointer-events:none}
 .anm .tn{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis}.anm .tmenu{padding:0 6px;font-size:14px;line-height:18px;border-radius:6px;background:transparent;border:1px solid transparent;color:var(--mute)}
 .anm .tmenu:hover{border-color:var(--line);color:var(--text)}
 .addrow{height:44px;border-bottom:none}.addrow .ahead{justify-content:center}.addrow .ahead button{padding:6px 8px;font-size:12.5px}
@@ -231,6 +232,8 @@ details.fx>.controls{border:none;border-top:1px solid var(--line);border-radius:
 .aclip .t{position:absolute;left:7px;top:3px;right:12px;font-size:12px;font-weight:700;color:#fff;text-shadow:0 1px 2px rgba(0,0,0,.6);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;pointer-events:none;z-index:2}
 .aclip canvas{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
 .aclip .rz{position:absolute;right:0;top:0;bottom:0;width:14px;cursor:ew-resize;background:linear-gradient(90deg,transparent,rgba(255,255,255,.25))}
+@media (pointer:coarse){.aclip .rz,.aclip .rzl{width:20px}}
+.aclip .rzl{position:absolute;left:0;top:0;bottom:0;width:14px;cursor:ew-resize;background:linear-gradient(270deg,transparent,rgba(255,255,255,.25))}
 .aclip.sel{outline:2px solid #fff;outline-offset:1px}
 .amrow{height:40px;background:#12151b}.amrow .amlane{cursor:copy}.amrow .ahead{background:#151821;gap:3px}.aguide{padding:2px 6px!important;font-size:11.5px;align-self:flex-start}
 .amlane{position:relative;flex:none;height:100%;background-image:linear-gradient(90deg,#2a2f3a 1px,transparent 1px);background-size:calc(var(--ppb)*4) 100%;cursor:copy}
@@ -240,7 +243,8 @@ details.fx>.controls{border:none;border-top:1px solid var(--line);border-radius:
 .secgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:6px}.secgrid button{text-align:left}
 .asecgrid{display:grid;grid-template-columns:1fr 1fr;gap:5px;margin-bottom:4px}
 .asec{padding:6px 7px;border-radius:8px;background:var(--panel2);border:1px solid var(--line);border-left:5px solid;font-size:12px;cursor:grab;touch-action:none;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.aph{position:absolute;top:0;bottom:0;width:22px;margin-left:-10px;z-index:7;cursor:ew-resize;touch-action:none;background:linear-gradient(90deg,transparent 10px,var(--accent2) 10px,var(--accent2) 12px,transparent 12px)}
+.aph{position:absolute;top:0;bottom:0;width:22px;margin-left:-10px;z-index:7;pointer-events:none;background:linear-gradient(90deg,transparent 10px,var(--accent2) 10px,var(--accent2) 12px,transparent 12px)}
+.aph .aphh{position:absolute;top:0;left:0;width:22px;height:30px;pointer-events:auto;cursor:ew-resize;touch-action:none}
 .aph::before{content:"";position:absolute;top:0;left:3px;border-left:8px solid transparent;border-right:8px solid transparent;border-top:12px solid var(--accent2);filter:drop-shadow(0 0 4px var(--accent2))}
 .aph.drag{background:linear-gradient(90deg,transparent 9px,#fff 9px,#fff 13px,transparent 13px)}
 .agrid{-webkit-touch-callout:none}
@@ -548,7 +552,7 @@ details.fx>.controls{border:none;border-top:1px solid var(--line);border-radius:
       <div class="amain">
         <div class="alib" id="aLib"></div>
         <div class="aarr"><div class="ascroll" id="aScroll"><div class="agrid" id="aGrid"></div></div>
-          <div class="afoot"><b>Tarik</b> suara dari kiri ke bar · <b>geser</b> clip · tarik <b>ujung kanan</b> untuk memanjangkan · <b>ketuk 2×</b> clip untuk mengedit · tarik <b>garis hijau</b> untuk pindah posisi · <b>tahan lama</b> (iPad) / klik kanan = salin, potong, tempel · Ctrl+C/X/V, Delete, Ctrl+Z</div></div>
+          <div class="afoot"><b>Tarik</b> suara dari kiri ke bar · <b>geser</b> clip · tarik <b>ujung kiri / kanan</b> untuk memotong atau memanjangkan · <b>ketuk 2×</b> clip untuk mengedit · tarik <b>segitiga hijau / angka bar</b> untuk pindah posisi · <b>seret kotak</b> dari area kosong atau nama track untuk pilih banyak · <b>tahan lama</b> (iPad) / klik kanan = salin, potong, tempel · Ctrl+C/X/V, Delete, Ctrl+Z</div></div>
       </div>
     </section>
 
@@ -635,7 +639,7 @@ details.fx>.controls{border:none;border-top:1px solid var(--line);border-radius:
   <h3>Drum Pad</h3>
   <p>Kit <b>Standar band</b>: kick, snare, rimshot, cross-stick, hi-hat (tutup/injak/buka), Tom 1, Tom 2, Floor tom, <b>3 crash</b> (16", 18", 20"), splash, ride &amp; ride bell. Ketuk <b>⋯</b> di pojok pad untuk menyetel nada, panjang dengung, volume dan posisi kiri–kanan pad itu (tersimpan &amp; ikut terekam).</p>
   <h3>Susun Lagu (timeline ala FL Studio)</h3>
-  <p>Seperti mengedit video, tapi untuk musik. Pilih <b>akor</b> di kiri atas, lalu <b>tarik</b> Pad / Keyboard akor / Gitar genjreng / Bass groove ke bar yang diinginkan. Pola drum, pukulan (kick, snare, crash 1–3…), chimes, riser &amp; impact juga tinggal ditarik. <b>Geser</b> clip untuk memindah (bisa ke track lain), tarik <b>ujung kanan</b> untuk memanjangkan, <b>ketuk 2×</b> untuk mengedit: ganti akor, suara, pola genjrengan/groove, atau isi kotak-kotak pola drum. Rekaman dari tab Rekam bisa ditarik juga. <b>● Rekam mic</b> memutar lagu sambil merekam suara Anda ke track Vokal; <b>⤓ Import</b> memasukkan file audio. <b>Garis hijau</b> bisa ditarik (jari atau mouse); ketuk bar kosong untuk memindahnya; Putar selalu mulai dari garis hijau. <b>Salin / potong / tempel</b>: di iPad tahan agak lama pada clip (atau bar kosong untuk Tempel di sini); di komputer Ctrl+C, Ctrl+X, Ctrl+V (tempel di garis hijau), Ctrl+D duplikat, Delete hapus, Ctrl+Z undo, Shift/Ctrl+klik atau <b>seret kotak di area kosong</b> untuk memilih banyak clip (di iPad nyalakan <b>⬚ Pilih</b> dulu), <b>＋ Tambah track</b> di bawah daftar track untuk menambah Pad 2, Efek 2, dst. (menu ⋯ tiap track: ganti nama, duplikat, naik/turun, hapus), Spasi = putar/stop. Tiap track punya Mute, Solo &amp; volume. Semua tersimpan otomatis; <b>Ekspor</b> = MP3/WAV seluruh lagu. Tempo ikut BPM di bar atas.</p>
+  <p>Seperti mengedit video, tapi untuk musik. Pilih <b>akor</b> di kiri atas, lalu <b>tarik</b> Pad / Keyboard akor / Gitar genjreng / Bass groove ke bar yang diinginkan. Pola drum, pukulan (kick, snare, crash 1–3…), chimes, riser &amp; impact juga tinggal ditarik. <b>Geser</b> clip untuk memindah (bisa ke track lain), tarik <b>ujung kiri / kanan</b> untuk memotong atau memanjangkan, <b>ketuk 2×</b> untuk mengedit: ganti akor, suara, pola genjrengan/groove, atau isi kotak-kotak pola drum. Rekaman dari tab Rekam bisa ditarik juga. <b>● Rekam mic</b> memutar lagu sambil merekam suara Anda ke track Vokal; <b>⤓ Import</b> memasukkan file audio. <b>Garis hijau</b> bisa ditarik (jari atau mouse); ketuk bar kosong untuk memindahnya; Putar selalu mulai dari garis hijau. <b>Salin / potong / tempel</b>: di iPad tahan agak lama pada clip (atau bar kosong untuk Tempel di sini); di komputer Ctrl+C, Ctrl+X, Ctrl+V (tempel di garis hijau), Ctrl+D duplikat, Delete hapus, Ctrl+Z undo, Shift/Ctrl+klik atau <b>seret kotak di area kosong</b> untuk memilih banyak clip (di iPad nyalakan <b>⬚ Pilih</b> dulu), <b>＋ Tambah track</b> di bawah daftar track untuk menambah Pad 2, Efek 2, dst. (menu ⋯ tiap track: ganti nama, duplikat, naik/turun, hapus), Spasi = putar/stop. Tiap track punya Mute, Solo &amp; volume. Semua tersimpan otomatis; <b>Ekspor</b> = MP3/WAV seluruh lagu. Tempo ikut BPM di bar atas.</p>
   <h3>Bagian lagu &amp; suara pemandu (guide)</h3>
   <p>Di Susun Lagu ada jalur <b>Bagian lagu</b> di atas track. Tarik nama bagian (Intro, Verse 1–4, Pre-Chorus, Chorus, Post-Chorus, Bridge, Interlude, Instrumental, Solo gitar/drum/keyboard/bass, Modulasi, Breakdown, Build, Tag, Ulang 2×/3×/4×, Terakhir kali, Semua masuk, Acapella, Tahan, Outro, Ending, Stop) ke bar, atau ketuk jalur itu di bar yang diinginkan. Saat lagu diputar, suara pemandu menyebut nama bagian 1 bar sebelumnya lalu “3, 4” (atau 2 bar sebelumnya lalu “1, 2, 3, 4”) — atur dengan ketuk 2× pada penanda. Kalau lagu dimulai tepat di sebuah bagian, otomatis ada hitung masuk. <b>Modulasi</b> benar-benar menaikkan kunci semua akor pad/keyboard/gitar/bass sesudahnya. Menu <b>🎙 Pemandu</b>: nyala/mati, suara pria/wanita, hitung masuk, dan click yang ikut lagu. Pemandu &amp; click ikut jalur click (Mode ibadah: hanya ke pemain) dan tidak ikut ekspor. Suara pemandu dibuat dengan model TTS <b>Kokoro-82M</b> (lisensi Apache 2.0).</p>
   <h3>Mixer</h3>
@@ -3545,7 +3549,7 @@ function arrLayout(fromB, only) {
     const cs = k.start * q, L = clipLen(k) * q; if (cs + L <= from + 1e-4) return;
     if (isAud(k)) { const buf = audBuf(k); if (!buf) return; const skip = Math.max(0, from - cs);
       items.push({ tk: { type: 'audio', audio: buf, len: L - skip, aOff: (k.d.off || 0) + skip, vol: tr.vol, tr: k.track }, vol: tr.vol, offs: [Math.max(0, cs - from)] }); return; }
-    const ev = genEvents(k, L).map(e => Object.assign(e, { t: e.t + cs })); (byTr[k.track] = byTr[k.track] || []).push(...ev);
+    const co = (k.d.cut || 0) * q, ev = (co > 0 ? clipFrom(genEvents(k, L + co), co).filter(e => e.t < L || /Off|boff|gdamp/.test(e.type)) : genEvents(k, L)).map(e => Object.assign(e, { t: e.t + cs })); (byTr[k.track] = byTr[k.track] || []).push(...ev);
   });
   Object.entries(byTr).forEach(([id, ev]) => items.push({ tk: { type: 'seq', events: clipFrom(ev, from), len: len - from, vol: arr.tr[id].vol, tr: id }, vol: arr.tr[id].vol, offs: [0] }));
   return { items, len: Math.max(0.05, len - from) };
@@ -3662,7 +3666,7 @@ function clipLabel(k) { const st = k.d.c ? semiAt(k.start) : 0, c = k.d.c ? ' ·
 /* --- timeline --- */
 function renderArr() {
   const g = $('#aGrid'); if (!g) return; const W = ARR_BARS * 4 * arr.ppb; g.style.width = (AHEAD + W) + 'px'; g.style.setProperty('--ppb', arr.ppb + 'px');
-  g.innerHTML = `<div class="arow aruler"><div class="ahead">BAR</div><div class="arl" id="aRuler" style="width:${W}px">${Array.from({ length: ARR_BARS }, (_, i) => `<span style="left:${i * 4 * arr.ppb}px">${i + 1}</span><b style="left:${i * 4 * arr.ppb}px"></b>`).join('')}</div></div><div class="aph" id="aPh"></div>
+  g.innerHTML = `<div class="arow aruler"><div class="ahead">BAR</div><div class="arl" id="aRuler" style="width:${W}px">${Array.from({ length: ARR_BARS }, (_, i) => `<span style="left:${i * 4 * arr.ppb}px">${i + 1}</span><b style="left:${i * 4 * arr.ppb}px"></b>`).join('')}</div></div><div class="aph" id="aPh"><div class="aphh"></div></div>
     <div class="arow amrow"><div class="ahead"><div class="anm">Bagian lagu</div><button id="aGuide" class="mini aguide">🎙 Pemandu ▾</button></div><div class="amlane" id="aMarks" style="width:${W}px"></div></div>`;
   fixTracks();
   arr.tracks.forEach((T, ti) => {
@@ -3683,6 +3687,9 @@ function renderArr() {
   $('#aRuler').addEventListener('pointerdown', e => arrScrub(e));
   $('#aPh').addEventListener('pointerdown', e => arrScrub(e));
   document.querySelectorAll('.alane').forEach(l => l.addEventListener('pointerdown', e => arrLaneDown(e, l)));
+  // seret dari kolom nama track (kiri) = kotak pilih mulai dari bar 1
+  document.querySelectorAll('.arow:not(.aruler):not(.amrow):not(.addrow) > .ahead').forEach(h => h.addEventListener('pointerdown', e => {
+    if (e.button || e.target.closest('button,input') || (e.pointerType !== 'mouse' && !arr.selMode)) return; arrMarquee(e, null); }));
   renderMarks();
   $('#aGuide').onclick = e => { e.stopPropagation(); const r = e.currentTarget.getBoundingClientRect(); guideMenu(r.left, r.bottom + 4); };
   $('#aMarks').addEventListener('pointerdown', e => { if (e.target.id !== 'aMarks') return; const l = e.currentTarget, x0 = e.clientX, y0 = e.clientY, beat = (x0 - l.getBoundingClientRect().left) / arr.ppb; let moved = false;
@@ -3701,8 +3708,8 @@ function arrScrub(e) {
   addEventListener('pointermove', mv); addEventListener('pointerup', up); addEventListener('pointercancel', up);
 }
 // seret kotak di area kosong = pilih banyak clip (mouse langsung; iPad nyalakan ⬚ Pilih)
-function arrMarquee(e, beat) {
-  e.preventDefault(); const g = $('#aGrid'), sc = $('#aScroll'), bx = $('#aMarq'), add = e.shiftKey || e.ctrlKey || e.metaKey;
+function arrMarquee(e, beat, k0) {
+  e.preventDefault(); e.stopPropagation(); const g = $('#aGrid'), sc = $('#aScroll'), bx = $('#aMarq'), add = e.shiftKey || e.ctrlKey || e.metaKey;
   const gr0 = g.getBoundingClientRect(), sx = e.clientX - gr0.left, sy = e.clientY - gr0.top; let drawn = false, base = add ? new Set(arr.selSet) : new Set();
   const mv = ev => { const r = sc.getBoundingClientRect(); if (ev.clientX > r.right - 30) sc.scrollLeft += 14; else if (ev.clientX < r.left + AHEAD + 20) sc.scrollLeft -= 14;
     const gr = g.getBoundingClientRect(), cx = ev.clientX - gr.left, cy = ev.clientY - gr.top;
@@ -3713,7 +3720,8 @@ function arrMarquee(e, beat) {
     document.querySelectorAll('.aclip').forEach(el => { const c = el.getBoundingClientRect(); if (c.right > box.l && c.left < box.r && c.bottom > box.t && c.top < box.b) { const k = arr.clips.find(x => x.id == el.dataset.id); if (k) sel.add(k); } });
     const old = arr.selSet; arr.selSet = sel; arr.sel = [...sel][0] || null; arr.clips.forEach(k => { if (old.has(k) !== sel.has(k)) drawAClip(k); }); };
   const up = () => { removeEventListener('pointermove', mv); removeEventListener('pointerup', up); removeEventListener('pointercancel', up); bx.style.display = 'none';
-    if (!drawn) { if (!add) arrSel(null); arr.head = Math.max(0, aSnap(beat)); if (arrPl && !arrPl.only) arrPlay(arr.head); }
+    if (!drawn && k0) { arrSel(k0, true); }
+    else if (!drawn) { if (beat == null) return; if (!add) arrSel(null); arr.head = Math.max(0, aSnap(beat)); if (arrPl && !arrPl.only) arrPlay(arr.head); }
     else if (arr.selSet.size) toast(`${arr.selSet.size} clip dipilih — Delete / 🗑 untuk hapus, Ctrl+C untuk salin, atau seret salah satunya untuk memindah semua.`, 3500); };
   addEventListener('pointermove', mv); addEventListener('pointerup', up); addEventListener('pointercancel', up);
 }
@@ -3733,13 +3741,13 @@ const aSnap = b => Math.round(b / arr.snap) * arr.snap;
 function drawAClip(k) {
   const lane = document.querySelector(`.alane[data-t="${k.track}"]`); if (!lane) return;
   let el = document.querySelector(`.aclip[data-id="${k.id}"]`);
-  if (!el) { el = document.createElement('div'); el.className = 'aclip'; el.dataset.id = k.id; el.innerHTML = '<canvas></canvas><div class="t"></div><div class="rz"></div>'; el.addEventListener('pointerdown', e => arrClipDrag(e, k)); }
+  if (!el) { el = document.createElement('div'); el.className = 'aclip'; el.dataset.id = k.id; el.innerHTML = '<canvas></canvas><div class="t"></div><div class="rz"></div><div class="rzl"></div>'; el.addEventListener('pointerdown', e => arrClipDrag(e, k)); }
   if (el.parentNode !== lane) lane.appendChild(el);
   const len = clipLen(k), w = Math.max(10, Math.round(len * arr.ppb));
   el.style.left = k.start * arr.ppb + 'px'; el.style.width = (w - 2) + 'px'; el.style.background = ARR_COL[k.kind]; el.classList.toggle('sel', arr.selSet.has(k));
   el.querySelector('.t').textContent = clipLabel(k) + (k.kind === 'take' && !takeOf(k) ? ' (terhapus)' : '');
   const cv = el.querySelector('canvas'), h = 42; cv.width = w * 2; cv.height = h * 2; const x = cv.getContext('2d'); x.scale(2, 2); x.fillStyle = 'rgba(255,255,255,.55)';
-  if (k.kind === 'pat') { for (let b = 0, i = 0; b < len - 1e-6; b += .25, i++) k.d.st.forEach((row, r) => { if (row[i % 16]) x.fillRect(b * arr.ppb + 1, 18 + r * 3.4, Math.max(2, arr.ppb / 4 - 1.5), 2.4); }); }
+  if (k.kind === 'pat') { const c4 = Math.round((k.d.cut || 0) * 4); for (let b = 0, i = c4; b < len - 1e-6; b += .25, i++) k.d.st.forEach((row, r) => { if (row[i % 16]) x.fillRect(b * arr.ppb + 1, 18 + r * 3.4, Math.max(2, arr.ppb / 4 - 1.5), 2.4); }); }
   else if (['gtr', 'bass', 'kb'].includes(k.kind)) { for (let b = 0; b < len - 1e-6; b += 1) x.fillRect(b * arr.ppb + 2, 30, Math.max(2, arr.ppb - 5), b % 4 === 0 ? 8 : 5); }
   else if (k.kind === 'pad') { x.globalAlpha = .3; x.fillRect(0, 26, w, 12); }
   else if (isAud(k)) { const buf = audBuf(k); if (buf) { const d = buf.getChannelData(0), sr = buf.sampleRate, q = aq(), off = k.d.off || 0;
@@ -3807,13 +3815,18 @@ function arrClipDrag(e, k) {
   e.preventDefault(); e.stopPropagation(); ensureAudio(); $('#aCtx').classList.remove('show'); if (arr.selMark) { arr.selMark = null; renderMarks(); }
   const lb = b => (b - document.querySelector('.alane').getBoundingClientRect().left) / arr.ppb;
   if (e.button === 2) { if (!arr.selSet.has(k)) arrSel(k); arrCtx(e.clientX, e.clientY, k, k.track, lb(e.clientX)); return; }
+  if (arr.selMode || e.altKey) { arrMarquee(e, null, k); return; }   // mode Pilih / Alt+seret: kotak pilih boleh mulai di atas clip
   if (e.shiftKey || e.ctrlKey || e.metaKey) { arrSel(k, true); return; }
   if (!arr.selSet.has(k)) arrSel(k);
-  const rz = e.target.classList.contains('rz'), x0 = e.clientX, y0 = e.clientY, l0 = clipLen(k), grp = [...arr.selSet].map(c => [c, c.start]), snap0 = arrSnap(); let moved = false, done = false;
+  const rz = e.target.classList.contains('rz'), rzl = e.target.classList.contains('rzl'), st0 = k.start, off0 = k.d.off || 0, cut0 = k.d.cut || 0, x0 = e.clientX, y0 = e.clientY, l0 = clipLen(k), grp = [...arr.selSet].map(c => [c, c.start]), snap0 = arrSnap(); let moved = false, done = false;
   const now = performance.now(); if (aTap.id === k.id && now - aTap.t < 380) { aTap = { id: 0, t: 0 }; arrPush(snap0); arrEditor(k); return; } aTap = { id: k.id, t: now };
   const lp = setTimeout(() => { if (!moved) { done = true; cleanup(); arrCtx(x0, y0, k, k.track, lb(x0)); } }, 550);   // tahan agak lama = menu
   const mv = ev => { if (done) return; if (Math.abs(ev.clientX - x0) > 6 || Math.abs(ev.clientY - y0) > 6) { moved = true; clearTimeout(lp); } if (!moved) return; const db = (ev.clientX - x0) / arr.ppb;
-    if (rz) { let nl = Math.max(arr.snap, aSnap(l0 + db)); if (isAud(k)) { const b = audBuf(k); if (b) nl = Math.min(nl, (b.duration - (k.d.off || 0)) / aq()); } setLen(k, nl); drawAClip(k); }
+    if (rzl) {   // potong dari kiri: awal clip maju/mundur, isi tetap di tempatnya
+      const aud = isAud(k), b = aud ? audBuf(k) : null, minD = aud ? -off0 / aq() : -cut0;
+      let d = Math.min(l0 - arr.snap, Math.max(minD, -st0, aSnap(st0 + db) - st0)); if (aud && d < minD + 1e-6) d = minD;
+      k.start = st0 + d; setLen(k, l0 - d); if (aud) k.d.off = Math.max(0, off0 + d * aq()); else k.d.cut = Math.max(0, cut0 + d); drawAClip(k); }
+    else if (rz) { let nl = Math.max(arr.snap, aSnap(l0 + db)); if (isAud(k)) { const b = audBuf(k); if (b) nl = Math.min(nl, (b.duration - (k.d.off || 0)) / aq()); } setLen(k, nl); drawAClip(k); }
     else { const mn = Math.min(...grp.map(g => g[1])), d = Math.max(-mn, aSnap(db)); grp.forEach(([c, s0]) => { c.start = s0 + d; drawAClip(c); });
       if (grp.length === 1) { const l = alaneAt(ev.clientX, ev.clientY); if (l && l.dataset.t !== k.track) { k.track = l.dataset.t; drawAClip(k); } } } };
   const cleanup = () => { clearTimeout(lp); removeEventListener('pointermove', mv); removeEventListener('pointerup', up); removeEventListener('pointercancel', up); };
