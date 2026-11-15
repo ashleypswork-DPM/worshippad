@@ -371,6 +371,10 @@ details.fx>.controls{border:none;border-top:1px solid var(--line);border-radius:
       <div class="tool">
         <span class="lbl">Suara</span>
         <select id="kbSound" style="max-width:380px;min-width:260px"></select>
+        <button id="kbDualBtn" class="mini" title="Dual: mainkan dua suara sekaligus (tumpuk), mis. piano + strings">Dual</button>
+        <span id="kbDualBox" class="row2" style="display:none"><span class="lbl">+ Suara 2</span><select id="kbSound2" style="max-width:300px;min-width:200px"></select>
+          <select id="kbOct2" class="mini" title="Oktaf suara 2"><option value="-2">-2 okt</option><option value="-1">-1 okt</option><option value="0">0 okt</option><option value="1">+1 okt</option><option value="2">+2 okt</option></select>
+          <div class="slider" style="max-width:170px;min-width:130px"><div class="row"><span>Imbang 1 ↔ 2</span><span id="kbBalV"></span></div><input id="kbBal" type="range" min="0" max="100" value="50"></div></span>
         <button id="sf2Import" class="mini">Import SF2…</button>
         <input id="sf2File" type="file" accept=".sf2,.SF2,application/octet-stream" hidden>
         <select id="sf2Preset" class="mini" style="max-width:240px;display:none"></select>
@@ -651,10 +655,12 @@ details.fx>.controls{border:none;border-top:1px solid var(--line);border-radius:
   <p>Pilih mode <b>Tumpuk</b>, tekan <b>● Rekam track baru</b> lalu mainkan drum. Tekan lagi untuk berhenti — jadi Track 1. Tekan <b>● Rekam track baru</b> lagi: Track 1 ikut diputar dari bar 1 (setelah hitung masuk) sambil Anda merekam keyboard, gitar atau bass — jadi Track 2, dan seterusnya. Tiap track punya Mute, Solo, volume dan <b>⟲ Ulang</b> (track pendek, mis. drum 4 bar, diulang sampai lagu selesai). <b>Gabungkan jadi 1 track</b> me-render semua track menjadi satu track audio (rekaman aslinya tetap ada), lalu Anda bisa terus menumpuk di atasnya. <b>Ekspor lagu</b> = MP3/WAV seluruh lagu.</p>
   <h3>4. Rekam &amp; Sequencer</h3>
   <p>Tekan <b>● Rekam</b> di bar atas (dengan hitung masuk 1 bar mengikuti click), lalu mainkan pad, arp, keyboard, drum, dan chimes dari tab mana saja. Tekan lagi untuk berhenti; panjangnya dibulatkan ke bar penuh. Hasilnya muncul di tab <b>Rekam &amp; Sequencer</b> lengkap dengan tampilan bar. Beberapa rekaman bisa diputar bersamaan, di-loop, diatur volumenya, dan mulai pas di ketukan 1 click. <b>Ekspor</b> menghasilkan file ZIP berisi WAV + MP3 (ketuk ZIP di aplikasi Files untuk membukanya). File audio juga bisa dimasukkan lewat <b>Import audio</b>.</p>
+  <h3>Keyboard: grand piano, Rhodes, organ &amp; mode Dual</h3>
+  <p>Di grup <b>Keys &amp; piano</b> ada <b>★ Grand piano</b> (rekaman Yamaha C5 asli, 2 lapis kekuatan tekan — main pelan terdengar lembut, keras terdengar terang), versi <b>stage terang</b> (gaya Nord/Yamaha CP), <b>lembut &amp; luas</b>, dan <b>pop</b>; <b>★ Rhodes Mark I</b> asli (3 lapis kekuatan tekan, versi chorus, tremolo stereo, dan worship); serta <b>Organ</b> baru dengan registrasi drawbar (888000000, 888800000, 888888888, 008800000), key-click, dan simulasi Leslie. Tombol <b>Dual</b> menumpuk dua suara sekaligus (mis. piano + strings): pilih <b>Suara 2</b>, oktafnya, dan geser <b>Imbang 1 ↔ 2</b>. Dual ikut terekam dan bisa dipakai dari keyboard MIDI.</p>
   <h3>Proyek (simpan &amp; buka) + contoh Overture Natal</h3>
   <p>Di Susun Lagu tekan <b>📁 Proyek ▾</b>: <b>Simpan proyek</b> membuat file <b>.wps</b> berisi seluruh susunan, rekaman, dan audio — di iPad pilih <i>Simpan ke File</i> lalu Google Drive / iCloud. <b>Buka file proyek</b> memuatnya lagi di perangkat mana saja. Di menu yang sama ada contoh <b>🎄 Overture Natal</b> (±9 menit): intro EDM halus + air terjun, biola Malam Kudus, lalu band + orkestra dengan Joy to the World, Hark the Herald, Deck the Halls, Jingle Bells, modulasi D → B → F# → A♭, dan penutup Malam Kudus. Semua bagian bisa diedit.</p>
   <h3>Suara Natal &amp; kredit sampel</h3>
-  <p>Suara bertanda ★ dan grup <b>Orkestra</b> memakai <b>rekaman instrumen asli</b>: lonceng Natal (glockenspiel, handbell, tubular bells, sleigh bells, triangle, mark tree) dan perkusi dari <b>VCSL</b>, serta biola, cello, flute, harpa, timpani, cymbal &amp; gong dari <b>VSCO 2 Community Edition</b> — keduanya karya Versilian Studios, lisensi <b>CC0 (domain publik)</b>. Celesta, kotak musik, lonceng kecil, vibraphone &amp; choir "Aah" dari soundfont <b>Musyng Kite</b>, lisensi <b>Creative Commons Attribution-ShareAlike 3.0</b> (via proyek midi-js-soundfonts). Tiap paket dimuat sekali saat pertama dipakai lalu tersimpan untuk offline. Drum Pad punya kit <b>🎄 Natal</b>, <b>Perkusi</b>, dan <b>Orkestra &amp; ambience</b>. Synth lain diracik meniru karakter synth gratis populer (Vital, Surge XT, Dexed, OB-Xd, TAL-U-NO-LX) — bukan salinan preset aslinya.</p>
+  <p>Suara bertanda ★ dan grup <b>Orkestra</b> memakai <b>rekaman instrumen asli</b>: lonceng Natal (glockenspiel, handbell, tubular bells, sleigh bells, triangle, mark tree) dan perkusi dari <b>VCSL</b>, serta biola, cello, flute, harpa, timpani, cymbal &amp; gong dari <b>VSCO 2 Community Edition</b> — keduanya karya Versilian Studios, lisensi <b>CC0 (domain publik)</b>. <b>Grand piano</b> dari <b>Salamander Grand Piano V3</b> (Yamaha C5, oleh Alexander Holm — CC BY 3.0). <b>Rhodes</b> dari <b>jRhodes3c</b> (Rhodes Mark I, oleh Jeff Learman — CC BY-NC-SA 4.0, khusus pemakaian non-komersial). Celesta, kotak musik, lonceng kecil, vibraphone &amp; choir "Aah" dari soundfont <b>Musyng Kite</b>, lisensi <b>Creative Commons Attribution-ShareAlike 3.0</b> (via proyek midi-js-soundfonts). Tiap paket dimuat sekali saat pertama dipakai lalu tersimpan untuk offline. Drum Pad punya kit <b>🎄 Natal</b>, <b>Perkusi</b>, dan <b>Orkestra &amp; ambience</b>. Synth lain diracik meniru karakter synth gratis populer (Vital, Surge XT, Dexed, OB-Xd, TAL-U-NO-LX) — bukan salinan preset aslinya.</p>
   <h3>5. Tips saat ibadah</h3>
   <ul>
     <li>Atur <b>Settings → Display &amp; Brightness → Auto-Lock → Never</b>; audio browser berhenti kalau layar terkunci atau pindah aplikasi.</li>
@@ -1073,7 +1079,7 @@ function holdParam(p, t) { if (p.cancelAndHoldAtTime) p.cancelAndHoldAtTime(t); 
 /* ================= state ================= */
 const DEFAULTS = { bpm: 100, sig: 4, clickVol: 70, master: 85, split: false, timbre: 'warm', chord: '5', octave: 0,
   padVol: 70, padBright: 45, padRev: 60, padFade: 30, arpOn: false, arpSound: 'pluck', arpPat: 'up', arpRate: 2, arpVol: 55,
-  chReal: false, projName: '', midiSus: true, kbSound: 'clarity', vel: 96, sfVol: 75, sfRev: 35, kbOct: 48, chVol: 60, chRev: 55, chColl: 60, chDecay: 100, kit: 'edm', drVol: 75, tab: 'pad', recCount: true, recSync: true, gtSound: 'steel', gtKey: 2, gtMinor: false, gtShape: 'full', gtPM: false, gtPat: 'pop', gtVol: 75, gtRev: 30, gtTone: 50, gtDrive: 50, gtChorus: false, gtDelay: false, gtDTime: 'd8', gtDFb: 30, gtDMix: 25, bsSound: 'precision', bsMode: 'auto', bsPat: 'worship', bsTech: 'finger', bsLegato: true, bsRing: false, bsVel: 100, bsVol: 80, bsRev: 12, bsLo: 60, bsMid: 55, bsHi: 42, bsDrive: 0, bsComp: true, bsOct: false, bsChorus: false, bsEnv: false, bsDelay: false, bsDTime: 'd8', bsLink: false, gtOwn: false, gtBpm: 100, gtSpd: 1, bsOwn: false, bsBpm: 100, bsSpd: 1, kbChorus: false, kbDelay: true, kbDTime: 'd8', kbDMix: 28, kbDFb: 35, kbPump: false, kbGlide: false, kbTimed: false, kbHold: 30, kbFade: 20, aLibHide: {}, arrKey: -1, arrMinor: -1, guideVol: 85, cueOn: true, cueVoice: 'm', cuePre: true, arrClick: false, audVol: 80, audRev: 15, dset: {}, recStack: false, tlView: 'song', drRev: 50, mxLo: 0, mxMid: 0, mxHi: 0, mxGlue: false, mxGlueAmt: 40, mxLim: true, mxMute: {}, mxSolo: {}, mxPan: {} };
+  chReal: false, projName: '', midiSus: true, kbDual: false, kbSound2: 'ovlnens', kbOct2: 0, kbBal: 50, kbSound: 'clarity', vel: 96, sfVol: 75, sfRev: 35, kbOct: 48, chVol: 60, chRev: 55, chColl: 60, chDecay: 100, kit: 'edm', drVol: 75, tab: 'pad', recCount: true, recSync: true, gtSound: 'steel', gtKey: 2, gtMinor: false, gtShape: 'full', gtPM: false, gtPat: 'pop', gtVol: 75, gtRev: 30, gtTone: 50, gtDrive: 50, gtChorus: false, gtDelay: false, gtDTime: 'd8', gtDFb: 30, gtDMix: 25, bsSound: 'precision', bsMode: 'auto', bsPat: 'worship', bsTech: 'finger', bsLegato: true, bsRing: false, bsVel: 100, bsVol: 80, bsRev: 12, bsLo: 60, bsMid: 55, bsHi: 42, bsDrive: 0, bsComp: true, bsOct: false, bsChorus: false, bsEnv: false, bsDelay: false, bsDTime: 'd8', bsLink: false, gtOwn: false, gtBpm: 100, gtSpd: 1, bsOwn: false, bsBpm: 100, bsSpd: 1, kbChorus: false, kbDelay: true, kbDTime: 'd8', kbDMix: 28, kbDFb: 35, kbPump: false, kbGlide: false, kbTimed: false, kbHold: 30, kbFade: 20, aLibHide: {}, arrKey: -1, arrMinor: -1, guideVol: 85, cueOn: true, cueVoice: 'm', cuePre: true, arrClick: false, audVol: 80, audRev: 15, dset: {}, recStack: false, tlView: 'song', drRev: 50, mxLo: 0, mxMid: 0, mxHi: 0, mxGlue: false, mxGlueAmt: 40, mxLim: true, mxMute: {}, mxSolo: {}, mxPan: {} };
 const S = {}; for (const k in DEFAULTS) S[k] = store.get(k, DEFAULTS[k]);
 S.arpOn = false;
 function save(k) { store.set(k, S[k]); }
@@ -1449,14 +1455,17 @@ function sfVoices(note, vel, now, preset = sfState.preset, dest) {
   return list;
 }
 function schedKb(ev, t) {
-  return kbVoices(ev.s, ev.n, ev.v, t, ev.s === 'sf2' && sfState.sf ? sfState.sf.presets[ev.p] : null);
+  return kbVoices(ev.s, ev.n, ev.v, t, ev.s === 'sf2' && sfState.sf ? sfState.sf.presets[ev.p] : null, ev.g ?? 1);
 }
 function kbNoteOn(note, vel) {
   ensureAudio(); kbNoteOff(note, true);
   const now = ctx.currentTime + 0.005;
-  const list = kbVoices(S.kbSound, note, vel, now);
+  const dual = S.kbDual && S.kbSound2, g1 = dual ? Math.min(1, (100 - S.kbBal) / 50) : 1, g2 = Math.min(1, S.kbBal / 50);
+  const list = kbVoices(S.kbSound, note, vel, now, null, g1);
   list.id = uid++; sfState.voices.set(note, list);
-  L({ type: 'kbOn', id: list.id, n: note, v: vel, s: S.kbSound, p: sfState.sf ? sfState.sf.presets.indexOf(sfState.preset) : -1, t: now });
+  L({ type: 'kbOn', id: list.id, n: note, v: vel, s: S.kbSound, p: sfState.sf ? sfState.sf.presets.indexOf(sfState.preset) : -1, t: now, ...(dual ? { g: g1 } : {}) });
+  if (dual) { const n2 = note + 12 * (+S.kbOct2 || 0); if (n2 >= 12 && n2 <= 120) { const l2 = kbVoices(S.kbSound2, n2, vel, now, null, g2); list.id2 = uid++; list.push(...l2);
+    L({ type: 'kbOn', id: list.id2, n: n2, v: vel, s: S.kbSound2, p: -1, t: now, g: g2 }); } }
   let total = 0; sfState.voices.forEach(v => total += v.length);
   if (total > 72) { const first = sfState.voices.keys().next().value; if (first !== note) kbNoteOff(first, true); }
 }
@@ -1466,10 +1475,10 @@ function kbNoteOff(note, force) {
   sfState.voices.delete(note); sfState.sustained.delete(note);
   if (!force && S.kbTimed) {
     const tr = [S.kbHold / 10, S.kbFade / 10];
-    L({ type: 'kbOff', id: list.id, t: ctx.currentTime, x: false, tr });
+    L({ type: 'kbOff', id: list.id, t: ctx.currentTime, x: false, tr }); if (list.id2) L({ type: 'kbOff', id: list.id2, t: ctx.currentTime, x: false, tr });
     list.forEach(v => timedRelease(v, ctx.currentTime, tr[0], tr[1])); return;
   }
-  L({ type: 'kbOff', id: list.id, t: ctx.currentTime, x: !!force });
+  L({ type: 'kbOff', id: list.id, t: ctx.currentTime, x: !!force }); if (list.id2) L({ type: 'kbOff', id: list.id2, t: ctx.currentTime, x: !!force });
   list.forEach(v => releaseSynth(v, ctx.currentTime, force));
 }
 function setSustain(on) {
@@ -1486,6 +1495,7 @@ function fillSoundSelect() {
   if (sfState.sf) { const o = document.createElement('option'); o.value = 'sf2'; o.textContent = 'SF2: ' + sfState.name; sel.appendChild(o); }
   if ((S.kbSound === 'sf2' && !sfState.sf) || !(KB[S.kbSound] || SYNTHS[S.kbSound] || S.kbSound === 'sf2' || (S.kbSound.startsWith('gt:') && GT[S.kbSound.slice(3)]))) S.kbSound = 'clarity';
   sel.value = S.kbSound; $('#sf2Preset').style.display = S.kbSound === 'sf2' ? '' : 'none';
+  const s2 = $('#kbSound2'); if (s2) { s2.innerHTML = sel.innerHTML; [...s2.querySelectorAll('option[value="sf2"]')].forEach(o => o.remove()); if (!s2.querySelector(`option[value="${S.kbSound2}"]`)) S.kbSound2 = 'ovlnens'; s2.value = S.kbSound2; }
 }
 async function loadSF2(ab, name, persist) {
   try {
@@ -1904,10 +1914,22 @@ const KB = {
   juno:       { g: 2, name: 'Analog strings (Juno)', osc: [{ type: 'sawtooth', n: 2, det: 9, spr: .6 }, { type: 'square', gain: .25 }], flt: { cut: 2400, q: .5 }, amp: { a: .35, d: .5, s: .9, r: .9 }, fx: { chorus: 1, rev: 55 } },
   warmstr:    { g: 2, name: 'Warm strings pad', osc: [{ type: 'sawtooth', n: 5, det: 14, spr: .9 }], vib: { rate: 5, depth: 6, delay: .2 }, flt: { cut: 2600, q: .5 }, amp: { a: .4, d: .5, s: .9, r: 1.2 }, fx: { rev: 70 } },
   airpad:     { g: 2, name: 'Air pad (napas)', osc: [{ type: 'sine', n: 2, det: 5, spr: .6, gain: .6 }], noise: { gain: .12, f: 2500, q: 1.5 }, amp: { a: 1, d: 1, s: 1, r: 2.5 }, fx: { rev: 90 } },
-  rhodes:     { g: 3, name: 'Rhodes (EP klasik)', fm: { ratio: 1, idx: 1.8, dec: .3, tine: [14, .12, .06] }, trem: { rate: 4.5, depth: .08 }, amp: { a: .003, d: 1.6, s: .25, r: .4 }, fx: { chorus: 1, rev: 30 } },
+  kgrand:     { g: 3, name: '★ Grand piano (Yamaha C5, rekaman asli)', vl: ['k_piano_p', 'k_piano_f'], rel: .3, fx: { delay: 0, rev: 26 } },
+  kgrandb:    { g: 3, name: '★ Stage grand terang (gaya Nord / Yamaha CP)', vl: ['k_piano_p', 'k_piano_f'], tone: { lo: -1.5, mid: -1.5, mf: 500, hi: 4.5 }, rel: .25, fx: { delay: 0, rev: 18 } },
+  kgrandw:    { g: 3, name: '★ Grand piano lembut & luas (ballad / worship)', vl: ['k_piano_p', 'k_piano_f'], tone: { hi: -3, lo: 1 }, rel: .45, fx: { delay: 1, dTime: 'd4', dMix: 8, dFb: 25, rev: 55 } },
+  kgrandpop:  { g: 3, name: '★ Grand piano pop (cerah + kompak)', vl: ['k_piano_p', 'k_piano_f'], tone: { lo: -3, mid: 2, mf: 2500, hi: 2.5 }, rel: .22, fx: { delay: 0, rev: 14 } },
+  krhodes:    { g: 3, name: '★ Rhodes Mark I (rekaman asli)', vl: ['k_rh_p', 'k_rh_m', 'k_rh_f'], rel: .3, fx: { delay: 0, rev: 24 } },
+  krhodesc:   { g: 3, name: '★ Rhodes + chorus (gaya Nord)', vl: ['k_rh_p', 'k_rh_m', 'k_rh_f'], rel: .3, fx: { chorus: 1, delay: 0, rev: 28 } },
+  krhodest:   { g: 3, name: '★ Rhodes tremolo stereo (suitcase)', vl: ['k_rh_p', 'k_rh_m', 'k_rh_f'], ap: { rate: 4.2, depth: .7 }, rel: .3, fx: { delay: 0, rev: 30 } },
+  krhodesw:   { g: 3, name: '★ Rhodes lembut + delay (worship)', vl: ['k_rh_p', 'k_rh_m', 'k_rh_f'], tone: { hi: -2 }, rel: .5, fx: { chorus: 1, delay: 1, dTime: 'd8', dMix: 14, dFb: 30, rev: 45 } },
+  b3jazz:     { g: 3, name: 'Organ B3 jazz 888000000 (Leslie pelan)', organ: [[.5, 1], [1.5, 1], [1, 1]], click: 1, perc: 1, leslie: { rate: .8, dop: .0004, am: .12 }, amp: { a: .003, d: .1, s: 1, r: .05 }, fx: { rev: 22 } },
+  b3gospel:   { g: 3, name: 'Organ gospel 888800000 (Leslie cepat, gaya Nord C2D)', organ: [[.5, 1], [1.5, 1], [1, 1], [2, 1]], click: 1, leslie: { rate: 6.4, dop: .00022, am: .22 }, drive: 1.6, amp: { a: .003, d: .1, s: 1, r: .05 }, fx: { rev: 25 } },
+  b3full:     { g: 3, name: 'Organ rock 888888888 (drive + Leslie)', organ: [[.5, 1], [1.5, 1], [1, 1], [2, 1], [3, .9], [4, .9], [5, .8], [6, .8], [8, .7]], click: 1, leslie: { rate: 6.4, dop: .00022, am: .22 }, drive: 2.6, flt: { cut: 5200 }, amp: { a: .003, d: .1, s: 1, r: .05 }, fx: { rev: 20 } },
+  b3soft:     { g: 3, name: 'Organ lembut 008800000 (ibadah / hymn)', organ: [[1, 1], [2, .9]], leslie: { rate: .8, dop: .0004, am: .1 }, amp: { a: .02, d: .1, s: 1, r: .12 }, fx: { rev: 45 } },
+  rhodes:     { g: 3, name: 'Rhodes sintetis (FM)', fm: { ratio: 1, idx: 1.8, dec: .3, tine: [14, .12, .06] }, trem: { rate: 4.5, depth: .08 }, amp: { a: .003, d: 1.6, s: .25, r: .4 }, fx: { chorus: 1, rev: 30 } },
   dxep:       { g: 3, name: 'DX EP 80-an (ballad)', fm: { ratio: 1, idx: 1.2, dec: .6, tine: [14, .25, .12] }, amp: { a: .002, d: 2, s: .2, r: .5 }, fx: { chorus: 1, rev: 45 } },
   wurly:      { g: 3, name: 'Wurlitzer', fm: { ratio: 1, idx: 2.4, dec: .2 }, drive: 2, trem: { rate: 5.5, depth: .12 }, amp: { a: .002, d: 1.2, s: .3, r: .25 }, fx: { rev: 25 } },
-  b3:         { g: 3, name: 'Organ B3 + Leslie', organ: [[.5, .8], [1, 1], [1.5, .6], [2, .7], [3, .3], [4, .35], [6, .15]], trem: { rate: 6, depth: .18 }, perc: 1, amp: { a: .005, d: .1, s: 1, r: .07 }, fx: { rev: 25 } },
+  b3:         { g: 3, name: 'Organ B3 + Leslie (versi lama)', organ: [[.5, .8], [1, 1], [1.5, .6], [2, .7], [3, .3], [4, .35], [6, .15]], trem: { rate: 6, depth: .18 }, perc: 1, amp: { a: .005, d: .1, s: 1, r: .07 }, fx: { rev: 25 } },
   marimba:    { g: 3, name: 'Marimba / kalimba', fm: { ratio: 3.99, idx: 1.2, dec: .04 }, amp: { a: .001, d: .5, s: 0, r: .3 }, fx: { rev: 35 } },
   bells:      { g: 3, name: 'Bell / glockenspiel', fm: { ratio: 3.5, idx: 3, dec: .5 }, amp: { a: .002, d: 2.2, s: 0, r: 1.2 }, fx: { delay: 1, dTime: 'd8', dMix: 20, dFb: 30, rev: 60 } },
   edmbrass:   { g: 4, name: 'EDM brass stab', osc: [{ type: 'sawtooth', n: 5, det: 20, spr: .8 }, { type: 'square', gain: .4 }], drive: 2, flt: { cut: 900, kt: .4, q: 1.2, env: 3500, a: .02, d: .15, s: .3 }, amp: { a: .004, d: .2, s: .5, r: .15 }, fx: { pump: 1, rev: 30 } },
@@ -1962,7 +1984,7 @@ const KB = {
   xmagic:     { g: 5, name: 'Magic sparkle (bell + shimmer)', fm: { ratio: 7, idx: 1.2, dec: .4 }, osc: [{ type: 'sine', oct: 2, gain: .2 }], amp: { a: .001, d: 2.5, s: 0, r: 2 }, fx: { delay: 1, dTime: 'q', dMix: 30, dFb: 55, rev: 100 } },
   subkb:      { g: 4, name: 'Sub bass', osc: [{ type: 'sine', oct: -1 }], drive: 1.2, amp: { a: .005, d: .2, s: 1, r: .1 }, fx: {} }
 };
-const KB_LVL = {trance: 0.95, hoover: 0.5, synthwave: 0.69, syncld: 0.44, vitalpluck: 1.71, arp80: 2.21, kpluck: 1.06, m1organ: 3.51, junopad: 0.47, obxpad: 0.67, glasspad: 0.29, evolve: 0.59, choirsyn: 0.38, solina: 0.49, dexedep: 0.73, lofikeys: 0.57, clav: 0.79, harp: 0.69, fmpiano: 0.56, jumpbrass: 0.75, softhorn: 0.67, xtubular: 1.38, xglock: 2.11, xcelesta: 1.42, xmusicbox: 1.68, xtinkle: 2.2, xvibes: 2.23, xchoir: 2.34, xbigbell: 0.36, xsleigh: 1.5, xfmbell: 0.6, xmagic: 0.61, clarity: 1.08, bigroom: 0.49, prog: 0.75, sawmono: 0.89, whistle: 0.44, chip: 0.42, guettapluck: 0.93, festpluck: 0.89, futurebass: 1.07, tropical: 0.85, stab: 0.84, hillsong: 0.91, shimmer: 0.88, oceans: 0.79, juno: 0.84, warmstr: 0.9, airpad: 0.98, rhodes: 0.42, dxep: 0.45, wurly: 0.59, b3: 0.81, marimba: 0.75, bells: 0.63, edmbrass: 0.78, brass80: 1.02, wobble: 0.44, subkb: 0.37};
+const KB_LVL = {kgrandb: 1.22, kgrandpop: 1.05, krhodes: .5, krhodesc: .47, krhodest: .8, krhodesw: .55, b3jazz: 1.45, b3soft: 2.1, b3gospel: 1.15, b3full: .95, trance: 0.95, hoover: 0.5, synthwave: 0.69, syncld: 0.44, vitalpluck: 1.71, arp80: 2.21, kpluck: 1.06, m1organ: 3.51, junopad: 0.47, obxpad: 0.67, glasspad: 0.29, evolve: 0.59, choirsyn: 0.38, solina: 0.49, dexedep: 0.73, lofikeys: 0.57, clav: 0.79, harp: 0.69, fmpiano: 0.56, jumpbrass: 0.75, softhorn: 0.67, xtubular: 1.38, xglock: 2.11, xcelesta: 1.42, xmusicbox: 1.68, xtinkle: 2.2, xvibes: 2.23, xchoir: 2.34, xbigbell: 0.36, xsleigh: 1.5, xfmbell: 0.6, xmagic: 0.61, clarity: 1.08, bigroom: 0.49, prog: 0.75, sawmono: 0.89, whistle: 0.44, chip: 0.42, guettapluck: 0.93, festpluck: 0.89, futurebass: 1.07, tropical: 0.85, stab: 0.84, hillsong: 0.91, shimmer: 0.88, oceans: 0.79, juno: 0.84, warmstr: 0.9, airpad: 0.98, rhodes: 0.42, dxep: 0.45, wurly: 0.59, b3: 0.81, marimba: 0.75, bells: 0.63, edmbrass: 0.78, brass80: 1.02, wobble: 0.44, subkb: 0.37};
 let kbNoiseBuf = null, kbLastNote = null;
 function kbNoise() { if (!kbNoiseBuf) kbNoiseBuf = synthBuf(2, () => rnd(), 0.9); return kbNoiseBuf; }
 function kbSynth(P, note, vel, t, dest, key) {
@@ -2003,8 +2025,16 @@ function kbSynth(P, note, vel, t, dest, key) {
     if (P.fm.tine) { const [r, gn, dc] = P.fm.tine, o = ctx.createOscillator(), g = ctx.createGain(); o.frequency.value = f0 * r; g.gain.setValueAtTime(gn * vel / 127, t); g.gain.setTargetAtTime(0, t, dc); o.connect(g); g.connect(mixIn); oscs.push(o); }
   }
   if (P.organ) {
-    P.organ.forEach(([r, gn]) => { const o = ctx.createOscillator(); o.frequency.value = f0 * r; const g = ctx.createGain(); g.gain.value = gn * 0.35; o.connect(g); g.connect(mixIn); oscs.push(o); });
-    if (P.perc) { const o = ctx.createOscillator(); o.frequency.value = f0 * 3; const g = ctx.createGain(); g.gain.setValueAtTime(0.35, t); g.gain.setTargetAtTime(0, t, 0.08); o.connect(g); g.connect(mixIn); oscs.push(o); }
+    let oin = mixIn;
+    if (P.leslie) {   // simulasi Leslie: doppler (delay bergetar) + amplitudo + putaran stereo, fase acak per nada
+      const Lz = P.leslie, li = ctx.createGain(), d = ctx.createDelay(0.02); d.delayTime.value = 0.004; const l = ctx.createOscillator(); l.frequency.value = Lz.rate * (0.97 + Math.random() * 0.06);
+      const lg = ctx.createGain(); lg.gain.value = Lz.dop; l.connect(lg); lg.connect(d.delayTime); const am = ctx.createGain(); am.gain.value = 1 - Lz.am; const ag = ctx.createGain(); ag.gain.value = Lz.am; l.connect(ag); ag.connect(am.gain);
+      li.connect(d); d.connect(am); if (ctx.createStereoPanner) { const pn = ctx.createStereoPanner(), pg = ctx.createGain(); pg.gain.value = .55; l.connect(pg); pg.connect(pn.pan); am.connect(pn); pn.connect(mixIn); } else am.connect(mixIn);
+      oscs.push(l); oin = li; }
+    const tw = P.organ.length > 4 ? 0.22 : 0.35;
+    P.organ.forEach(([r, gn]) => { if (f0 * r > 9000) return; const o = ctx.createOscillator(); o.frequency.value = f0 * r; o.detune.value = (Math.random() - 0.5) * 1.6; const g = ctx.createGain(); g.gain.value = gn * tw; o.connect(g); g.connect(oin); oscs.push(o); });
+    if (P.perc) { const o = ctx.createOscillator(); o.frequency.value = f0 * 3; const g = ctx.createGain(); g.gain.setValueAtTime(0.35, t); g.gain.setTargetAtTime(0, t, 0.08); o.connect(g); g.connect(oin); oscs.push(o); }
+    if (P.click) { const s = ctx.createBufferSource(); s.buffer = kbNoise(); const hp = ctx.createBiquadFilter(); hp.type = 'bandpass'; hp.frequency.value = 2500 + Math.random() * 1500; hp.Q.value = .7; const g = ctx.createGain(); g.gain.setValueAtTime(0.18 * vel / 127, t); g.gain.setTargetAtTime(0, t + 0.002, 0.004); s.connect(hp); hp.connect(g); g.connect(oin); s.start(t); s.stop(t + 0.05); }
   }
   const a = A.a || 0.003; amp.gain.setValueAtTime(0, t); amp.gain.linearRampToValueAtTime(v, t + a); amp.gain.setTargetAtTime(v * (A.s ?? 1), t + a, (A.d || 0.3) / 3);
   oscs.forEach(o => o.start(t));
@@ -2015,7 +2045,8 @@ function kbSynth(P, note, vel, t, dest, key) {
 const bellBufs = {}; let bellP = null, bellToast = 0;
 // paket sampel lain (lonceng asli, orkestra, perkusi): satu file per paket, dimuat saat pertama dipakai
 const PACK_FILE = { v_glock: 'natal.js', v_sleigh: 'natal.js', v_tri: 'natal.js', v_mark: 'natal.js', v_handbell: 'lonceng.js', v_tubular: 'lonceng.js',
-  o_cello: 'orkestra_cello.js', o_vlnens: 'orkestra_vlnens.js', o_violin: 'orkestra_violin.js', o_flute: 'orkestra_flute.js', o_harp: 'orkestra_harp.js', o_perc: 'perkusi.js' };
+  o_cello: 'orkestra_cello.js', o_vlnens: 'orkestra_vlnens.js', o_violin: 'orkestra_violin.js', o_flute: 'orkestra_flute.js', o_harp: 'orkestra_harp.js', o_perc: 'perkusi.js',
+  k_piano_p: 'piano.js', k_piano_f: 'piano.js', k_rh_p: 'rhodes.js', k_rh_m: 'rhodes.js', k_rh_f: 'rhodes.js' };
 const LOOP_INST = new Set(['o_cello', 'o_vlnens', 'o_violin', 'o_flute']), packP = {};
 function prepLoop(b, s0 = 1.4, e0 = 5.3, xf = .45) {   // sambungan loop mulus (crossfade) supaya nada panjang bisa ditahan selama apa pun
   const sr = b.sampleRate, ls = Math.floor(s0 * sr), le = Math.min(b.length - Math.floor(Math.min(1.1, b.duration * .12) * sr), Math.floor(e0 * sr)), n = Math.floor(xf * sr); if (le - ls < n * 2) return;
@@ -2050,10 +2081,20 @@ function makeJingle() {   // satu kocokan sleigh bells: puluhan lonceng kecil be
     let lp = 0; for (let i = 0; i < Math.floor(0.05 * sr); i++) { lp += ((Math.random() * 2 - 1) - lp) * 0.6; d[i] += lp * 0.25 * Math.exp(-i / (0.01 * sr)); }
     let pk = 0; for (let i = 0; i < n; i++) pk = Math.max(pk, Math.abs(d[i])); for (let i = 0; i < n; i++) d[i] *= 0.8 / pk; return b; });
 }
-const SMP_LVL = { v_glock: .9, v_handbell: .56, v_tubular: 1.45, v_sleigh: 2.9, v_tri: 5, celesta: 9, music_box: 10, tinkle_bell: 9, vibraphone: 4, choir_aahs: 6, o_violin: 1.6, o_vlnens: 1.6, o_cello: 1.6, o_flute: 1.4, o_harp: 2.5 };   // kalibrasi volume per paket
+const SMP_LVL = { k_piano_p: 1.6, k_rh_p: 1.6, v_glock: .9, v_handbell: .56, v_tubular: 1.45, v_sleigh: 2.9, v_tri: 5, celesta: 9, music_box: 10, tinkle_bell: 9, vibraphone: 4, choir_aahs: 6, o_violin: 1.6, o_vlnens: 1.6, o_cello: 1.6, o_flute: 1.4, o_harp: 2.5 };   // kalibrasi volume per paket
 function specialVoice(P, note, vel, t, dest, key) {
   const amp = ctx.createGain(), v = Math.pow(vel / 127, 1.3) * 0.5 * (KB_LVL[key] || 1), oscs = []; amp.connect(dest);
-  if (P.smp) {
+  if (P.vl) {   // instrumen multi-velocity (grand piano, Rhodes): pukulan lembut ↔ keras dicampur halus
+    const Ls = P.vl.map(k => bellBufs[k]); if (Ls.some(l => !l || !l.length)) { P.vl.forEach(loadSmp); return null; }
+    const lv = SMP_LVL[P.vl[0]] || 1.6, x = Math.min(1, Math.max(0, (vel - 20) / 100)) * (Ls.length - 1), i0 = Math.min(Ls.length - 2, Math.floor(x)), fr = x - i0;
+    let out = amp; const tn = P.tone || {};
+    if (tn.hi || tn.lo || tn.mid) { const lo = ctx.createBiquadFilter(), hi = ctx.createBiquadFilter(), md = ctx.createBiquadFilter(); lo.type = 'lowshelf'; lo.frequency.value = 180; lo.gain.value = tn.lo || 0; md.type = 'peaking'; md.frequency.value = tn.mf || 900; md.Q.value = .8; md.gain.value = tn.mid || 0; hi.type = 'highshelf'; hi.frequency.value = tn.hf || 3500; hi.gain.value = tn.hi || 0; lo.connect(md); md.connect(hi); hi.connect(amp); out = lo; }
+    if (P.ap && ctx.createStereoPanner) { const pn = ctx.createStereoPanner(), l = ctx.createOscillator(), lg = ctx.createGain(); l.frequency.value = P.ap.rate; lg.gain.value = P.ap.depth; l.connect(lg); lg.connect(pn.pan); pn.connect(out); out = pn; l.start(t); oscs.push(l); }
+    const nearest = L => { let b = L[0]; L.forEach(e => { if (Math.abs(e[0] - note) < Math.abs(b[0] - note)) b = e; }); return b; };
+    [[i0, Math.cos(fr * Math.PI / 2)], [i0 + 1, Math.sin(fr * Math.PI / 2)]].forEach(([i, g]) => { if (g < 0.02) return; const e = nearest(Ls[i]), s = ctx.createBufferSource(); s.buffer = e[1]; s.playbackRate.value = Math.pow(2, (note - e[0]) / 12);
+      const sg = ctx.createGain(); sg.gain.value = g; s.connect(sg); sg.connect(out); s.start(t); oscs.push(s); });
+    amp.gain.value = v * lv * (0.55 + 0.45 * vel / 127);
+  } else if (P.smp) {
     const list = bellBufs[P.smp], l2 = P.smp2 && bellBufs[P.smp2];
     if (!list || !list.length || (P.smp2 && !l2)) { loadSmp(P.smp); if (P.smp2) loadSmp(P.smp2); if (!PACK_FILE[P.smp] && Date.now() - bellToast > 4000) { bellToast = Date.now(); toast('Memuat sampel lonceng… (sekali saja)'); } return null; }
     const lv = SMP_LVL[P.smp] || (PACK_FILE[P.smp] ? 1.6 : 4), pk = (L, one) => { if (one) { const c = L.filter(x => one.includes(x[0])); return (c.length ? c : L)[Math.floor(Math.random() * (c.length || L.length))]; } let b = L[0]; L.forEach(x => { if (Math.abs(x[0] - note) < Math.abs(b[0] - note)) b = x; }); return b; };
@@ -2078,15 +2119,18 @@ const kbFxMap = new WeakMap(), allKbFx = [];
 function kbFx(bus) {
   let fx = kbFxMap.get(bus); if (fx) return fx;
   const inp = ctx.createGain(), mix = ctx.createGain(), pump = ctx.createGain(); inp.connect(mix); mix.connect(pump); pump.connect(bus);
-  const cd = ctx.createDelay(0.05); cd.delayTime.value = 0.013; const lfo = ctx.createOscillator(); lfo.frequency.value = 0.8; const lg = ctx.createGain(); lg.gain.value = 0.0035; lfo.connect(lg); lg.connect(cd.delayTime); lfo.start();
-  const cg = ctx.createGain(); inp.connect(cd); cd.connect(cg); cg.connect(mix);
+  // chorus stereo gaya Juno/Nord: dua delay pendek, LFO berlawanan fase, kedalaman kecil (±6 sen) supaya lebar tapi tidak sember
+  const cg = ctx.createGain(), lfo = ctx.createOscillator(); lfo.frequency.value = 0.55; lfo.start();
+  [[0.0072, 1, -0.85], [0.0091, -1, 0.85]].forEach(([dt, sg, pan]) => { const cd = ctx.createDelay(0.05); cd.delayTime.value = dt; const lg = ctx.createGain(); lg.gain.value = 0.0011 * sg; lfo.connect(lg); lg.connect(cd.delayTime);
+    const lp = ctx.createBiquadFilter(); lp.type = 'lowpass'; lp.frequency.value = 9000; inp.connect(cd); cd.connect(lp); const pn = ctx.createStereoPanner ? ctx.createStereoPanner() : null; if (pn) { pn.pan.value = pan; lp.connect(pn); pn.connect(cg); } else lp.connect(cg); });
+  cg.connect(mix);
   const dl = ctx.createDelay(2), dlp = ctx.createBiquadFilter(); dlp.frequency.value = 4000; const dfb = ctx.createGain(), dmix = ctx.createGain();
   mix.connect(dl); dl.connect(dlp); dlp.connect(dfb); dfb.connect(dl); dlp.connect(dmix); dmix.connect(pump);
   fx = { inp, cg, dl, dfb, dmix, pump, c: ctx }; kbFxMap.set(bus, fx); allKbFx.push(fx); applyKbFx(fx, true); return fx;
 }
 function applyKbFx(fx, now) {
   const t = now ? 0.001 : 0.05, q = 60 / S.bpm;
-  setP(fx.cg.gain, S.kbChorus ? 0.55 : 0, t);
+  setP(fx.cg.gain, S.kbChorus ? 0.5 : 0, t);
   setP(fx.dl.delayTime, clamp(S.kbDTime === 'q' ? q : S.kbDTime === 'e' ? q / 2 : q * 0.75, 0.05, 1.9), t * 2);
   setP(fx.dfb.gain, S.kbDelay ? S.kbDFb / 100 * 0.85 : 0, t); setP(fx.dmix.gain, S.kbDelay ? S.kbDMix / 100 * 0.9 : 0, t);
   if (!S.kbPump) setP(fx.pump.gain, 1, 0.05);
@@ -2104,24 +2148,24 @@ function gtrKbVoice(sound, note, vel, t) {
   const st = clamp(Math.floor((note - 40) / 6), 0, 5), v = gtrVoice(sound, st, note, vel, t, false, new Map(), G.sf, true);
   return { amp: v.out, oscs: v.srcs, rel: 0.18 };
 }
-function kbVoices(sound, note, vel, t, preset) {
+function kbVoices(sound, note, vel, t, preset, mul = 1) {
   // tiap nada lewat "fader" sendiri supaya sustain berwaktu bisa memudarkannya tanpa merusak envelope suara
-  const fade = ctx.createGain(); fade.connect(kbFx(G.sf).inp); const dest = fade, tag = l => { l.forEach(v => v.fade = fade); return l; };
+  const fade = ctx.createGain(); fade.gain.value = mul; fade.base = mul; fade.connect(kbFx(G.sf).inp); const dest = fade, tag = l => { l.forEach(v => v.fade = fade); return l; };
   if (sound === 'sf2') { if (!sfState.sf) return []; const p = preset || sfState.preset; return p ? tag(sfVoices(note, vel, t, p, dest)) : []; }
   if (sound.startsWith('gt:')) { const g = sound.slice(3); return [gtrKbVoice(GT[g] ? g : 'steel', note, vel, t)]; }
-  if (KB[sound] && (KB[sound].smp || KB[sound].modal || KB[sound].jingle)) { const v = specialVoice(KB[sound], note, vel, t, dest, sound); return v ? tag([v]) : []; }
+  if (KB[sound] && (KB[sound].smp || KB[sound].vl || KB[sound].modal || KB[sound].jingle)) { const v = specialVoice(KB[sound], note, vel, t, dest, sound); return v ? tag([v]) : []; }
   if (KB[sound]) return tag([kbSynth(KB[sound], note, vel, t, dest, sound)]);
   return tag([synthNote(SYNTHS[sound] ? sound : 'supersaw', note, vel, t, dest)]);
 }
 // sustain berwaktu: bunyi bertahan `hold` detik lalu memudar selama `fadeS` detik
 function timedRelease(v, t, hold, fadeS) {
   const t1 = t + hold, t2 = t1 + fadeS;
-  if (v.fade) { const g = v.fade.gain; g.setValueAtTime(1, t1); g.linearRampToValueAtTime(0, t2); }
+  if (v.fade) { const g = v.fade.gain; g.setValueAtTime(v.fade.base ?? 1, t1); g.linearRampToValueAtTime(0, t2); }
   else { const g = v.amp.gain; g.setValueAtTime(g.value, t1); g.linearRampToValueAtTime(0, t2); }
   v.oscs.forEach(o => { try { o.stop(t2 + 0.05); } catch (e) {} });
 }
 function applyKbPreset(k) {
-  const P = KB[k]; if (!P) return; const fx = P.fx || {}; if (P.smp) loadSmp(P.smp); if (P.smp2) loadSmp(P.smp2);
+  const P = KB[k]; if (!P) return; const fx = P.fx || {}; if (P.smp) loadSmp(P.smp); if (P.smp2) loadSmp(P.smp2); if (P.vl) P.vl.forEach(loadSmp);
   S.kbChorus = !!fx.chorus; S.kbDelay = !!fx.delay; S.kbPump = !!fx.pump; S.kbGlide = !!fx.glide;
   if (fx.dTime) S.kbDTime = fx.dTime; if (fx.dMix !== undefined) S.kbDMix = fx.dMix; if (fx.dFb !== undefined) S.kbDFb = fx.dFb; if (fx.rev !== undefined) S.sfRev = fx.rev;
   ['kbChorus', 'kbDelay', 'kbPump', 'kbGlide', 'kbDTime', 'kbDMix', 'kbDFb', 'sfRev'].forEach(save);
@@ -3171,7 +3215,7 @@ function stopTake(tk, natural) {
 }
 function stopAllTakes(render = true) { [...players.values()].forEach(pl => stopTake(pl.tk)); stopSong(); if (render) renderTakes(); }
 function ensureSamplesFor(tks) { const need = new Set();
-  tks.forEach(t => t && t.events && t.events.forEach(e => { if (e.type === 'kbOn' && KB[e.s] && KB[e.s].smp) { need.add(KB[e.s].smp); if (KB[e.s].smp2) need.add(KB[e.s].smp2); } if (e.type === 'drum' && SMP_DRUM[e.id]) need.add(SMP_DRUM[e.id][0]); if (e.type === 'mark') need.add('v_mark'); }));
+  tks.forEach(t => t && t.events && t.events.forEach(e => { if (e.type === 'kbOn' && KB[e.s] && (KB[e.s].smp || KB[e.s].vl)) { if (KB[e.s].smp) need.add(KB[e.s].smp); if (KB[e.s].smp2) need.add(KB[e.s].smp2); (KB[e.s].vl || []).forEach(k => need.add(k)); } if (e.type === 'drum' && SMP_DRUM[e.id]) need.add(SMP_DRUM[e.id][0]); if (e.type === 'mark') need.add('v_mark'); }));
   return Promise.all([...need].map(loadSmp)); }
 /* ================= LAGU: rekaman bertumpuk (multitrack / overdub) ================= */
 const song = { tracks: [], bpm: 0, sig: 4, loop: true };
@@ -4171,7 +4215,8 @@ function initArr() {
   $('#aClear').onclick = e => { const b = e.currentTarget; if (b.dataset.c !== '1') { b.dataset.c = '1'; b.textContent = 'Yakin?'; setTimeout(() => { b.dataset.c = ''; b.textContent = 'Kosongkan'; }, 2500); return; } arrStop(); arrPush(); arr.clips = []; arr.marks = []; arr.sel = null; arr.selSet.clear(); arrSave(); renderArr(); };
   $('#aDemo').onclick = e => { const r = e.currentTarget.getBoundingClientRect(); showMenu($('#aCtx'), r.left, r.bottom + 4, [['💾 Simpan proyek ke file… (Files / Google Drive)', projSave], ['📂 Buka file proyek (.wps)…', () => $('#aProjFile').click()], ['Contoh — menggantikan susunan sekarang (simpan dulu kalau perlu):', null],
     ['♪ Contoh sederhana (kunci & suara yang sedang dipilih)', () => { arrStop(); arrPush(); arr.clips = []; arr.marks = []; arrDemo(); arrSave(); renderArr(); toast('Contoh lagu dimuat (pakai kunci & suara yang sedang dipilih).'); }],
-    ['🎄 Overture Natal (±9 menit, orkestra + band)', () => loadDemoProject('overture.js', 'DEMO_OVERTURE')]]); };
+    ['🎄 Overture Natal (±9 menit, orkestra + band)', () => loadDemoProject('overture.js', 'DEMO_OVERTURE')],
+    ['🎄 Gita Sorga Bergema — versi pop (±3¾ menit, D → E)', () => loadDemoProject('gita.js', 'DEMO_GITA')]]); };
   $('#aProjFile').onchange = async e => { const f = e.target.files[0]; e.target.value = ''; if (!f) return; try { await projLoad(JSON.parse(await f.text())); } catch (err) { toast('File proyek tidak bisa dibuka: ' + err.message, 4000); } };
   $('#aMic').onclick = e => { if (micA) return stopMicA(); if (rec.state === 'rec') return stopRec(); const r = e.currentTarget.getBoundingClientRect(); arrRecMenu(r.left, r.bottom + 4); };
   $('#aImp').onclick = () => $('#aFile').click();
@@ -4431,6 +4476,13 @@ function init() {
   // keyboard
   fillSoundSelect(); buildKeyboard(); setupKeyboard();
   { const b = $('#midiSusBtn'); b.classList.toggle('on', S.midiSus !== false); b.addEventListener('click', () => { S.midiSus = S.midiSus === false; save('midiSus'); b.classList.toggle('on', S.midiSus); if (!S.midiSus) setSustain(false); toast(S.midiSus ? 'Pedal sustain dari keyboard MIDI diikuti.' : 'Pedal sustain dari keyboard MIDI diabaikan — nada berhenti saat tuts dilepas.'); }); }
+  { const db = $('#kbDualBtn'), bx = $('#kbDualBox'), upd = () => { db.classList.toggle('on', !!S.kbDual); bx.style.display = S.kbDual ? '' : 'none'; };
+    upd(); $('#kbOct2').value = String(S.kbOct2 || 0);
+    db.addEventListener('click', () => { S.kbDual = !S.kbDual; save('kbDual'); upd(); [...sfState.voices.keys()].forEach(n => kbNoteOff(n, true)); const P2 = KB[S.kbSound2]; if (S.kbDual && P2) { ensureAudio(); if (P2.smp) loadSmp(P2.smp); if (P2.smp2) loadSmp(P2.smp2); if (P2.vl) P2.vl.forEach(loadSmp); }
+      toast(S.kbDual ? 'Dual aktif: setiap tuts memainkan 2 suara. Atur keseimbangan & oktaf suara 2.' : 'Dual mati.'); });
+    $('#kbSound2').addEventListener('change', e => { S.kbSound2 = e.target.value; save('kbSound2'); [...sfState.voices.keys()].forEach(n => kbNoteOff(n, true)); const P2 = KB[S.kbSound2]; if (P2) { ensureAudio(); if (P2.smp) loadSmp(P2.smp); if (P2.smp2) loadSmp(P2.smp2); if (P2.vl) P2.vl.forEach(loadSmp); } });
+    $('#kbOct2').addEventListener('change', e => { S.kbOct2 = +e.target.value; save('kbOct2'); });
+    slider('kbBal', 'kbBal', null, v => v < 50 ? `1 lebih keras` : v > 50 ? `2 lebih keras` : 'sama'); }
   $('#kbSound').addEventListener('change', e => { S.kbSound = e.target.value; save('kbSound'); [...sfState.voices.keys()].forEach(n => kbNoteOff(n, true)); fillSoundSelect(); kbLastNote = null; if (KB[S.kbSound]) applyKbPreset(S.kbSound); });
   [['kbChorusBtn', 'kbChorus'], ['kbDelayBtn', 'kbDelay'], ['kbPumpBtn', 'kbPump'], ['kbGlideBtn', 'kbGlide']].forEach(([id, k]) => $('#' + id).addEventListener('click', () => { S[k] = !S[k]; save(k); syncKbControls(); updateKbFx(); }));
   $('#kbDTime').addEventListener('change', e => { S.kbDTime = e.target.value; save('kbDTime'); updateKbFx(); });
