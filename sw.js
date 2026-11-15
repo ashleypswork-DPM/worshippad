@@ -1,6 +1,6 @@
 // Worship Pad Studio – cache offline. Naikkan VERSI setiap kali index.html diperbarui.
-const VERSI = 'wps-v24';
-const FILES = ['./', './index.html', './manifest.webmanifest', './icon-192.png', './icon-512.png', './apple-touch-icon.png', './bells.js', './cues.js', './natal.js', './lonceng.js', './perkusi.js', './orkestra_cello.js', './orkestra_vlnens.js', './orkestra_violin.js', './orkestra_flute.js', './orkestra_harp.js', './overture.js', './piano.js', './rhodes.js', './gita.js'];
+const VERSI = 'wps-v23';
+const FILES = ['./', './index.html', './manifest.webmanifest', './icon-192.png', './icon-512.png', './apple-touch-icon.png', './bells.js', './cues.js', './natal.js', './lonceng.js', './perkusi.js', './orkestra_cello.js', './orkestra_vlnens.js', './orkestra_violin.js', './orkestra_flute.js', './orkestra_harp.js', './overture.js', './piano.js', './rhodes.js'];
 self.addEventListener('install', e => { e.waitUntil(caches.open(VERSI).then(c => c.addAll(FILES)).then(() => self.skipWaiting())); });
 self.addEventListener('activate', e => { e.waitUntil(caches.keys().then(ks => Promise.all(ks.filter(k => k !== VERSI).map(k => caches.delete(k)))).then(() => self.clients.claim())); });
 self.addEventListener('fetch', e => {
