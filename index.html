@@ -82,6 +82,12 @@ body.studio .dockbar{display:flex;grid-row:2;align-items:center;gap:6px;backgrou
 .dockbar{cursor:ns-resize;touch-action:none} .dockbar button{cursor:pointer}
 body.studio main.dragging .panel.dock{overflow:hidden}
 .dkinfo{font-size:12px;color:var(--mute)}
+.pchint{display:none;position:fixed;right:14px;bottom:14px;z-index:50;background:#14202c;border:1px solid #2c4b68;color:#bfe3ff;border-radius:10px;padding:8px 12px;font:13px/1.45 ui-monospace,Menlo,Consolas,monospace;pointer-events:none;max-width:460px}
+.pchint.show{display:block}
+.pcflash{outline:3px solid #8fd0ff!important;filter:brightness(1.35)}
+.drum{position:relative}.drum .keys{position:absolute;left:10px;bottom:6px;pointer-events:none;font:600 11px/1.2 ui-monospace,Menlo,monospace;color:#cfe6ff;opacity:.9}
+.drum.learn{outline:3px dashed #ffd36b;outline-offset:-3px}
+#drums.learning .drum{cursor:crosshair}
 body.studio .arow.trsel>.ahead{background:#3a4a63;box-shadow:inset 3px 0 0 #6fb1ff}
 .panel{display:none;height:100%;flex-direction:column;gap:10px}
 .panel.show{display:flex;overflow-y:auto;-webkit-overflow-scrolling:touch}
@@ -405,6 +411,7 @@ details.fx>.controls{border:none;border-top:1px solid var(--line);border-radius:
         <span class="lbl">Suara</span>
         <select id="kbSound" style="max-width:380px;min-width:260px"></select>
         <select id="kbPatch" class="mini" title="Patch gereja siap pakai: dua suara langsung ditumpuk" style="max-width:250px"></select>
+        <button class="mini pcKeysBtn" title="Mainkan dengan keyboard komputer (seperti Musical Typing di Logic)">⌨ Keyboard PC</button>
         <button id="kbDualBtn" class="mini" title="Dual: mainkan dua suara sekaligus (tumpuk), mis. piano + strings">Dual</button>
         <span id="kbDualBox" class="row2" style="display:none"><span class="lbl">+ Suara 2</span><select id="kbSound2" style="max-width:300px;min-width:200px"></select>
           <select id="kbOct2" class="mini" title="Oktaf suara 2"><option value="-2">-2 okt</option><option value="-1">-1 okt</option><option value="0">0 okt</option><option value="1">+1 okt</option><option value="2">+2 okt</option></select>
@@ -600,6 +607,7 @@ details.fx>.controls{border:none;border-top:1px solid var(--line);border-radius:
     <!-- MIXER -->
     <div id="dockBar" class="dockbar"><span class="dkgrip" id="dockGrip" title="Seret baris ini: ke bawah = tutup editor, ke atas = buka / tinggikan"></span><span id="dockTabs" class="dktabs"></span><span style="flex:1"></span>
       <span class="dkinfo" id="dockInfo"></span><button class="mini" id="dockMin" title="Kecilkan / besarkan editor">▾</button></div>
+    <div id="pcHint" class="pchint"></div>
     <section class="panel" id="tab-mix">
       <div class="mixwrap">
         <div class="tool mixlist">
@@ -628,6 +636,8 @@ details.fx>.controls{border:none;border-top:1px solid var(--line);border-radius:
       <div class="tool">
         <span class="lbl">Kit</span><div class="chips" id="kits"></div>
         <span style="flex:1"></span>
+        <span class="lbl">Tuts → drum</span><select id="drMapSel" class="mini" title="Tuts keyboard musik (MIDI) mana memainkan bunyi drum apa"><option value="seq">Urutan (tuts kiri = pad 1)</option><option value="wb">Putih = Kick · Hitam = Snare</option><option value="wbh">Putih = Kick · Hitam = Snare & Hi-hat</option><option value="gm">General MIDI (Kick C · Snare D · Hi-hat F#)</option></select><button id="drLearnBtn" class="mini" title="Klik pad, lalu tekan tuts di keyboard musik">🎹 Atur tuts sendiri</button><button id="drLearnClr" class="mini" title="Hapus pengaturan tuts sendiri untuk kit ini">✕</button>
+        <button class="mini pcKeysBtn" title="Pukul drum pad dengan keyboard komputer">⌨ Keyboard PC</button>
         <div class="slider" style="max-width:200px;min-width:140px"><div class="row"><span>Volume drum</span><span id="drVolV"></span></div><input id="drVol" type="range" min="0" max="100" value="75"></div>
       </div>
       <div class="drums" id="drums"></div>
@@ -694,6 +704,8 @@ details.fx>.controls{border:none;border-top:1px solid var(--line);border-radius:
   <h3>Keyboard: grand piano, Rhodes, organ &amp; mode Dual</h3>
   <p>Di grup <b>Keys &amp; piano</b> ada <b>★ Grand piano</b> (rekaman Yamaha C5 asli, 2 lapis kekuatan tekan — main pelan terdengar lembut, keras terdengar terang), versi <b>stage terang</b> (gaya Nord/Yamaha CP), <b>lembut &amp; luas</b>, dan <b>pop</b>; <b>★ Rhodes Mark I</b> asli (3 lapis kekuatan tekan, versi chorus, tremolo stereo, dan worship); serta <b>Organ</b> baru dengan registrasi drawbar (888000000, 888800000, 888888888, 008800000), key-click, dan simulasi Leslie. Tombol <b>Dual</b> menumpuk dua suara sekaligus (mis. piano + strings): pilih <b>Suara 2</b>, oktafnya, dan geser <b>Imbang 1 ↔ 2</b>. Dual ikut terekam dan bisa dipakai dari keyboard MIDI.</p>
   <p><b>Import MIDI &amp; peta tempo (baru).</b> Di <b>Susun Lagu</b> tekan <b>⤓ Import</b> lalu pilih file <b>.mid</b> (mis. dari Cakewalk): tiap alat langsung jadi clip di track masing-masing dan dimainkan suara aplikasi (piano, bass, gitar, strings, sax, flute, drum akustik). Kalau tempo lagunya berubah di tengah (mis. intro 63, lagu 109, melambat di akhir), perubahan itu ikut terbawa. Tombol <b>♩ Tempo</b> membuka <b>peta tempo</b>: tiap baris <code>bar tempo</code> (mis. <code>9 95</code>) atau perubahan perlahan <code>87-93 109&gt;97</code>. Tekan <b>Satu tempo</b> untuk kembali ke satu tempo. Click di Susun Lagu ikut peta tempo.</p>
+  <p><b>🥁 Main drum dari keyboard musik.</b> Di Drum, pilih <b>Tuts → drum</b>: <i>Urutan</i> (tuts kiri = pad 1), <i>Putih = Kick · Hitam = Snare</i>, <i>Putih = Kick · Hitam = Snare &amp; Hi-hat</i>, atau <i>General MIDI</i> (sama seperti Cakewalk). <b>🎹 Atur tuts sendiri</b>: klik pad, tekan tuts di keyboard — tuts itu sekarang memainkan pad tersebut (✕ untuk menghapus). Nama tuts tampil di tiap pad. Cara meniru lagu: <b>⤓ Import</b> MP3 lagu ke Susun Lagu, samakan tempo, pilih track Drum, <b>● Rekam</b>, mainkan beberapa bar sambil mendengar lagu, lalu pilih clip-nya → klik kanan / tahan → <b>🔁 Ulangi sampai akhir lagu</b>.</p>
+  <p><b>⌨ Keyboard komputer jadi keyboard musik.</b> Di Keyboard (dan Pad, Gitar, Bass, Chimes): baris <b>A S D F G H J K L ;</b> = tuts putih, <b>W E T Y U O P</b> = tuts hitam (A = C, W = C#, S = D, …). <b>Z / X</b> = oktaf turun/naik, <b>C / V</b> = lebih pelan/keras. Di Drum: <b>A S D F G H J K L ;</b> dan <b>Q W E R T Y U I O P</b> = drum pad 1–20. Bisa direkam seperti keyboard MIDI. Matikan/nyalakan dengan tombol <b>⌨ Keyboard PC</b>. Catatan: kebanyakan keyboard laptop hanya bisa membaca 3–4 tombol sekaligus, jadi akor besar bisa ada nada yang hilang.</p>
   <p><b>🎛 Studio (gaya Logic) — tampilan baru.</b> Tekan tombol <b>🎛 Studio</b> di kanan atas (tekan <b>📱 Versi klasik</b> untuk kembali; tampilan lama tidak berubah). Semua dalam satu halaman: transport &amp; layar posisi (bar.ketuk · waktu · tempo) di atas, track di tengah, editor di bawah (Keyboard, Drum, Pad, Gitar, Bass, Chimes, Mixer). <b>Klik nama track</b> → editor di bawah otomatis berganti (track Drum → Drum Pad, track Keyboard → Keyboard). <b>● Rekam</b> di atas langsung merekam alat yang terbuka di bawah ke track yang dipilih, mulai dari posisi playhead — tanpa pindah menu. <b>Seret baris tab editor</b> ke bawah untuk menutupnya (seperti menutup jendela), seret ke atas untuk membuka atau meninggikan; <b>▾ / ▴</b> juga bisa.</p>
   <p><b>★ Drum akustik asli.</b> Kit baru di Drum Pad: rekaman drum akustik dari 5 mic (Virtuosity Drums, CC0) dengan beberapa lapis kekuatan pukulan — dipukul pelan terdengar lembut, keras terdengar tegas — dan bunyi bergantian supaya tidak terdengar seperti mesin.</p>
   <h3>Proyek (simpan &amp; buka) + contoh Overture Natal</h3>
@@ -1116,7 +1128,7 @@ function setP(param, v, t = 0.05) { if (ctx) param.setTargetAtTime(v, ctx.curren
 function holdParam(p, t) { if (p.cancelAndHoldAtTime) p.cancelAndHoldAtTime(t); else { p.cancelScheduledValues(t); p.setValueAtTime(p.value, t); } }
 
 /* ================= state ================= */
-const DEFAULTS = {uiMode: 'classic', dockTab: 'kb', stTrk: null, dockH: 0, dockMin: false,  bpm: 100, sig: 4, clickVol: 70, master: 85, split: false, timbre: 'warm', chord: '5', octave: 0,
+const DEFAULTS = {drMapMode: 'seq', drKeyMap: {}, pcKeys: true, pcOct: 60, pcVel: 100, uiMode: 'classic', dockTab: 'kb', stTrk: null, dockH: 0, dockMin: false,  bpm: 100, sig: 4, clickVol: 70, master: 85, split: false, timbre: 'warm', chord: '5', octave: 0,
   padVol: 70, padBright: 45, padRev: 60, padFade: 30, arpOn: false, arpSound: 'pluck', arpPat: 'up', arpRate: 2, arpVol: 55,
   chReal: false, projName: '', midiSus: true, kbDual: false, kbSound2: 'ovlnens', kbOct2: 0, kbBal: 50, kbSound: 'clarity', vel: 96, sfVol: 75, sfRev: 35, kbOct: 48, chVol: 60, chRev: 55, chColl: 60, chDecay: 100, kit: 'edm', drVol: 75, tab: 'pad', recCount: true, recSync: true, gtSound: 'steel', gtKey: 2, gtMinor: false, gtShape: 'full', gtPM: false, gtPat: 'pop', gtVol: 75, gtRev: 30, gtTone: 50, gtDrive: 50, gtChorus: false, gtDelay: false, gtDTime: 'd8', gtDFb: 30, gtDMix: 25, bsSound: 'precision', bsMode: 'auto', bsPat: 'worship', bsTech: 'finger', bsLegato: true, bsRing: false, bsVel: 100, bsVol: 80, bsRev: 12, bsLo: 60, bsMid: 55, bsHi: 42, bsDrive: 0, bsComp: true, bsOct: false, bsChorus: false, bsEnv: false, bsDelay: false, bsDTime: 'd8', bsLink: false, gtOwn: false, gtBpm: 100, gtSpd: 1, bsOwn: false, bsBpm: 100, bsSpd: 1, kbChorus: false, kbDelay: true, kbDTime: 'd8', kbDMix: 28, kbDFb: 35, kbPump: false, kbGlide: false, kbTimed: false, kbHold: 30, kbFade: 20, aLibHide: {}, arrKey: -1, arrMinor: -1, guideVol: 85, cueOn: true, cueVoice: 'm', cuePre: true, arrClick: false, audVol: 80, audRev: 15, dset: {}, recStack: false, tlView: 'song', drRev: 50, mxLo: 0, mxMid: 0, mxHi: 0, mxGlue: false, mxGlueAmt: 40, mxLim: true, mxMute: {}, mxSolo: {}, mxPan: {} };
 const S = {}; for (const k in DEFAULTS) S[k] = store.get(k, DEFAULTS[k]);
@@ -1922,7 +1934,7 @@ function initPadSet() {
 }
 function renderDrums() {
   const el = $('#drums'); if (!el) return; el.innerHTML = '';
-  const np = KITS[S.kit].pads.length; el.style.gridTemplateColumns = innerWidth > 820 ? (np === 16 ? 'repeat(4,1fr)' : np > 12 ? 'repeat(5,1fr)' : '') : '';
+  const np = KITS[S.kit].pads.length; el.classList.toggle('learning', !!drLearn); el.style.gridTemplateColumns = innerWidth > 820 ? (np === 16 ? 'repeat(4,1fr)' : np > 12 ? 'repeat(5,1fr)' : '') : '';
   // siapkan suara kit di latar belakang supaya pukulan pertama tidak tersendat
   if (ctx) { const ids = KITS[S.kit].pads.map(d => d.id); let i = 0; (function warm() { if (i >= ids.length) return; try { if (!drumCustom[ids[i]]) drumBuf(ids[i]); } catch (e) {} i++; setTimeout(warm, 15); })(); }
   KITS[S.kit].pads.forEach(d => {
@@ -1933,7 +1945,9 @@ function renderDrums() {
     b.addEventListener('pointerdown', e => e.stopPropagation());
     b.addEventListener('click', e => { e.stopPropagation(); editingDrum = d; $('#drumMenuTitle').textContent = 'Pad ' + d.name; syncPadSet(); $('#drumMenu').classList.add('show'); });
     p.appendChild(b);
-    p.addEventListener('pointerdown', e => { e.preventDefault(); hitDrum(d); p.classList.add('hit'); setTimeout(() => p.classList.remove('hit'), 90); });
+    const ks = drKeysFor(KITS[S.kit].pads.indexOf(d)); if (ks.length) { const kl = document.createElement('div'); kl.className = 'keys'; kl.textContent = '🎹 ' + ks.slice(0, 4).map(nName).join(' ') + (ks.length > 4 ? ` +${ks.length - 4}` : ''); p.appendChild(kl); }
+    if (drLearn && drLearn.pad === d.id) p.classList.add('learn');
+    p.addEventListener('pointerdown', e => { e.preventDefault(); if (drLearn) { drLearn.pad = d.id; renderDrums(); toast(`Sekarang tekan tuts di keyboard untuk "${d.name}" (bisa beberapa tuts). Tekan 🎹 Selesai kalau sudah.`, 3500); return; } hitDrum(d); p.classList.add('hit'); setTimeout(() => p.classList.remove('hit'), 90); });
     el.appendChild(p);
   });
 }
@@ -3607,7 +3621,8 @@ function onMidi(ev) {
   const [st, d1, d2] = ev.data, type = st & 0xf0, chn = st & 0x0f, pads = KITS[S.kit].pads;
   if (type === 0x90 && d2 > 0) {
     const prev = midiOn.get(d1); if (prev === 'kb') { sfState.held.delete(d1); kbNoteOff(d1, true); }
-    if (chn === 9 || S.tab === 'drum') { midiOn.set(d1, 'drum'); const d = pads[d1 - 36]; if (d) hitDrum(d); return; }
+    if (S.tab === 'drum' && drLearn && !ev.pc) { if (drLearn.pad) { const m = (S.drKeyMap[S.kit] = S.drKeyMap[S.kit] || {}); m[d1] = drLearn.pad; save('drKeyMap'); const d = pads.find(x => x.id === drLearn.pad); if (d) hitDrum(d); renderDrums(); toast(`Tuts ${nName(d1)} → ${d ? d.name : ''}`, 1500); } else toast('Klik dulu pad drum yang mau diatur, lalu tekan tutsnya.'); return; }
+    if (chn === 9 || S.tab === 'drum') { midiOn.set(d1, 'drum'); const d = ev.pc ? pads[d1 - 36] : drumForNote(d1); if (d) hitDrum(d); return; }
     if (S.tab === 'bass') { midiOn.set(d1, 'bass'); if (S.bsMode !== 'auto') bassPlay(d1, d2, S.bsTech, 0, 'midi' + d1); else { const pc = d1 % 12; let i = chordList(false).findIndex(c => c.pc === pc); if (i >= 0) pressBassChord(i, false); } return; }
     if (S.tab === 'gtr') { midiOn.set(d1, 'gtr'); const pc = d1 % 12; let i = chordList(false).findIndex(c => c.pc === pc); if (i >= 0) pressChord(i, false); else { i = chordList(true).findIndex(c => c.pc === pc); if (i >= 0) pressChord(i, true); } return; }
     if (S.tab === 'pad') { midiOn.set(d1, 'pad'); padPress(d1 % 12); }
@@ -4189,11 +4204,20 @@ function arrPaste(at, track) {
   arr.selSet.clear(); out.forEach(k => { arr.selSet.add(k); drawAClip(k); }); arr.sel = out[0]; renderArr(); arrSave();
   toast(`${out.length} clip ditempel di bar ${Math.floor(start / 4) + 1} ketuk ${Math.floor(start % 4) + 1}.`); if (arrPl && !arrPl.only) arrPlay(arrBeat());
 }
+function arrRepeat(n) {
+  const sel = [...arr.selSet]; if (!sel.length) { toast('Pilih clip dulu (bisa beberapa: seret kotak atau Shift+klik).'); return; }
+  const s0 = Math.min(...sel.map(k => k.start)), e0 = Math.max(...sel.map(k => k.start + clipLen(k))), span = Math.ceil((e0 - s0) / arr.snap - 1e-6) * arr.snap;
+  const others = arr.clips.filter(k => !arr.selSet.has(k)), songEnd = Math.max(e0, ...others.map(k => k.start + clipLen(k)));
+  if (!n) n = Math.max(0, Math.floor((songEnd - e0 + 1e-6) / span));
+  if (!n) { toast('Sudah sampai akhir lagu.'); return; }
+  for (let i = 0; i < n; i++) arrDup();
+  toast(`Diulang ${n}× (${span / 4} bar sekali) sampai bar ${Math.round((s0 + span * (n + 1)) / 4)}.`, 3500);
+}
 function arrDup() { const sel = [...arr.selSet]; if (!sel.length) { toast('Pilih clip dulu.'); return; } const end = Math.max(...sel.map(k => k.start + clipLen(k))), s0 = Math.min(...sel.map(k => k.start)); const keep = arr.clip; arrCopy(false); arrPaste(s0 + Math.ceil((end - s0) / arr.snap) * arr.snap); arr.clip = keep; }
 /* --- menu tahan lama (iPad) / klik kanan (komputer) --- */
 function arrCtx(x, y, k, lane, beat) {
   const m = $('#aCtx'), items = [];
-  if (k) items.push(['✎ Edit', () => arrEditor(k)], ['⧉ Salin', () => arrCopy(false)], ['✂ Potong', () => arrCopy(true)], ['⎘ Duplikat ke kanan', arrDup], ['🗑 Hapus', () => arrDel()]);
+  if (k) items.push(['✎ Edit', () => arrEditor(k)], ['⧉ Salin', () => arrCopy(false)], ['✂ Potong', () => arrCopy(true)], ['⎘ Duplikat ke kanan', arrDup], ['🔁 Ulangi 4× ke kanan', () => arrRepeat(4)], ['🔁 Ulangi 8× ke kanan', () => arrRepeat(8)], ['🔁 Ulangi sampai akhir lagu', () => arrRepeat(0)], ['🗑 Hapus', () => arrDel()]);
   if (arr.clip && arr.clip.length) items.push(['📋 Tempel di sini', () => arrPaste(aSnap(beat ?? (k ? k.start : arr.head)), lane)]);
   items.push(['▶ Putar dari sini', () => { arr.head = Math.max(0, aSnap(beat ?? (k ? k.start : 0))); arrPlay(arr.head); }]);
   if (!k) { items.push(['⬚ Pilih semua clip', () => { arr.selSet = new Set(arr.clips); arr.clips.forEach(drawAClip); toast(arr.clips.length + ' clip dipilih.'); }]);
@@ -4499,7 +4523,7 @@ function initArr() {
   $('#aScroll').addEventListener('contextmenu', e => e.preventDefault());
   $('#aModal').addEventListener('pointerdown', e => { if (e.target.id === 'aModal') { $('#aModal').classList.remove('show'); if (arrPl && !arrPl.only) arrPlay(arrBeat()); } });
   addEventListener('keydown', e => {
-    if (S.tab !== 'arr' || $('#aModal').classList.contains('show') || /INPUT|SELECT|TEXTAREA/.test((e.target || {}).tagName || '')) return;
+    if ((S.tab !== 'arr' && !document.body.classList.contains('studio')) || $('#aModal').classList.contains('show') || /INPUT|SELECT|TEXTAREA/.test((e.target || {}).tagName || '')) return;
     const c = e.ctrlKey || e.metaKey, key = e.key.toLowerCase();
     if (c && key === 'c') { e.preventDefault(); arrCopy(false); }
     else if (c && key === 'x') { e.preventDefault(); arrCopy(true); }
@@ -4701,12 +4725,66 @@ function initMixer() {
   })();
 }
 
+
+
+/* ===================== v35: tuts keyboard musik → bunyi drum (bisa diatur) ===================== */
+let drLearn = null;
+const isBlack = n => [1, 3, 6, 8, 10].includes(n % 12);
+function drRole(pads, re) { return pads.find(p => re.test(p.name)) || null; }
+function drumForNote(n) {
+  const pads = KITS[S.kit].pads, cm = (S.drKeyMap || {})[S.kit];
+  if (cm && cm[n]) { const d = pads.find(x => x.id === cm[n]); if (d) return d; }
+  const mode = S.drMapMode || 'seq';
+  const kick = drRole(pads, /kick|bass ?drum/i) || pads[0], snare = drRole(pads, /snare|clap/i) || pads[1], hat = drRole(pads, /hat|shaker/i) || pads[2];
+  if (mode === 'wb') return isBlack(n) ? snare : kick;
+  if (mode === 'wbh') return isBlack(n) ? ([1, 6, 10].includes(n % 12) ? snare : hat) : kick;
+  if (mode === 'gm') {
+    const R = { 35: /kick/i, 36: /kick/i, 37: /cross|stick/i, 38: /snare/i, 39: /clap/i, 40: /rim|snare/i, 41: /floor|tom ?3/i, 42: /hat/i, 43: /floor|tom ?3/i, 44: /injak|pedal|hat/i,
+      45: /tom ?2/i, 46: /buka|open/i, 47: /tom ?2/i, 48: /tom ?1/i, 49: /crash/i, 50: /tom ?1/i, 51: /ride/i, 52: /crash ?3|china/i, 53: /bell/i, 54: /tamb/i, 55: /splash/i, 56: /cowbell/i, 57: /crash ?2|crash/i, 59: /ride/i };
+    const re = R[n]; if (re) { const d = drRole(pads, re); if (d) return d; }
+    return null;
+  }
+  return pads[n - 36] || null;
+}
+function drKeysFor(i) {
+  const pads = KITS[S.kit].pads, d = pads[i]; if (!d) return [];
+  const cm = (S.drKeyMap || {})[S.kit] || {}, own = Object.keys(cm).filter(n => cm[n] === d.id).map(Number);
+  if (S.drMapMode === 'wb' || S.drMapMode === 'wbh') {
+    const base = []; if (d === drumForNote(48)) base.push('semua putih'); if (d === drumForNote(49)) base.push(S.drMapMode === 'wb' ? 'semua hitam' : 'hitam C# F# A#'); if (S.drMapMode === 'wbh' && d === drumForNote(51)) base.push('hitam D# G#');
+    return [...base, ...own];
+  }
+  const out = []; for (let n = 36; n <= 96; n++) if (drumForNote(n) === d) out.push(n); return out;
+}
+/* ===================== v34: keyboard komputer sebagai keyboard musik (gaya "Musical Typing") ===================== */
+const PCK = { KeyA: 0, KeyW: 1, KeyS: 2, KeyE: 3, KeyD: 4, KeyF: 5, KeyT: 6, KeyG: 7, KeyY: 8, KeyH: 9, KeyU: 10, KeyJ: 11, KeyK: 12, KeyO: 13, KeyL: 14, KeyP: 15, Semicolon: 16, Quote: 17 };
+const PCDR = ['KeyA', 'KeyS', 'KeyD', 'KeyF', 'KeyG', 'KeyH', 'KeyJ', 'KeyK', 'KeyL', 'Semicolon', 'KeyQ', 'KeyW', 'KeyE', 'KeyR', 'KeyT', 'KeyY', 'KeyU', 'KeyI', 'KeyO', 'KeyP'];
+const PC_TABS = ['kb', 'drum', 'pad', 'gtr', 'bass', 'chime'], pcHeld = new Map();
+const NN = ['C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#', 'A', 'A#', 'B'], nName = n => typeof n === 'string' ? n : NN[n % 12] + (Math.floor(n / 12) - 1);
+function pcActive() { return S.pcKeys && PC_TABS.includes(S.tab); }
+function pcHintShow(txt, ms = 1800) { const h = $('#pcHint'); if (!h) return; h.innerHTML = txt; h.classList.add('show'); clearTimeout(h._t); h._t = setTimeout(() => h.classList.remove('show'), ms); }
+function pcLegend() {
+  if (S.tab === 'drum') { const pads = KITS[S.kit].pads; return `⌨ Drum: ${PCDR.slice(0, Math.min(pads.length, 20)).map((c, i) => `<b>${c.replace('Key', '').replace('Semicolon', ';')}</b>=${pads[i].name}`).join(' · ')}<br>C / V = pukulan lebih pelan / keras (${S.pcVel})`; }
+  return `⌨ <b>A W S E D F T G Y H U J K O L P ; '</b> = ${nName(S.pcOct)} … ${nName(S.pcOct + 17)}<br><b>Z / X</b> = oktaf turun / naik · <b>C / V</b> = pelan / keras (${S.pcVel})`;
+}
+function pcSync() { document.querySelectorAll('.pcKeysBtn').forEach(b => { b.classList.toggle('on', !!S.pcKeys); b.textContent = S.pcKeys ? '⌨ Keyboard PC: NYALA' : '⌨ Keyboard PC: MATI'; }); }
+function pcFlash(i) { const el = document.querySelectorAll('#drums > *')[i]; if (!el) return; el.classList.add('pcflash'); setTimeout(() => el.classList.remove('pcflash'), 120); }
+addEventListener('keydown', e => {
+  if (!pcActive() || e.ctrlKey || e.metaKey || e.altKey || /INPUT|SELECT|TEXTAREA/.test((e.target || {}).tagName || '') || ($('#aModal') && $('#aModal').classList.contains('show'))) return;
+  const c = e.code;
+  if (c === 'KeyZ' || c === 'KeyX') { if (S.tab === 'drum') return; e.preventDefault(); if (e.repeat) return; S.pcOct = clamp(S.pcOct + (c === 'KeyZ' ? -12 : 12), 24, 96); save('pcOct'); pcHintShow(pcLegend()); return; }
+  if (c === 'KeyC' || c === 'KeyV') { e.preventDefault(); S.pcVel = clamp(S.pcVel + (c === 'KeyC' ? -12 : 12), 16, 127); save('pcVel'); pcHintShow(pcLegend()); return; }
+  if (S.tab === 'drum') { const i = PCDR.indexOf(c); if (i < 0) return; e.preventDefault(); if (e.repeat) return; ensureAudio(); onMidi({ data: [0x99, 36 + i, S.pcVel], pc: true }); pcFlash(i); return; }
+  if (!(c in PCK)) return; e.preventDefault(); if (e.repeat || pcHeld.has(c)) return;
+  ensureAudio(); const n = S.pcOct + PCK[c]; pcHeld.set(c, n); onMidi({ data: [0x90, n, S.pcVel] });
+});
+addEventListener('keyup', e => { const n = pcHeld.get(e.code); if (n === undefined) return; pcHeld.delete(e.code); onMidi({ data: [0x80, n, 0] }); });
+addEventListener('blur', () => { pcHeld.forEach(n => onMidi({ data: [0x80, n, 0] })); pcHeld.clear(); });
 /* ===================== v31: tampilan Studio satu halaman (gaya Logic) ===================== */
 const DOCK_TABS = [['kb', '🎹 Keyboard'], ['drum', '🥁 Drum'], ['pad', '🎛 Pad'], ['gtr', '🎸 Gitar'], ['bass', '🎸 Bass'], ['chime', '🔔 Chimes'], ['mix', '🎚 Mixer'], ['rec', '⏺ Rekaman take']];
 const DOCK_REC = ['kb', 'drum', 'pad', 'gtr', 'bass', 'chime'];
 const TYPE_DOCK = { pad: 'pad', kb: 'kb', gtr: 'gtr', bass: 'bass', drum: 'drum', fx: 'chime' };
 function dockTo(t) {
-  if (!DOCK_TABS.some(d => d[0] === t)) t = 'kb';
+  if (!DOCK_TABS.some(d => d[0] === t)) t = 'kb'; if (S.pcKeys && PC_TABS.includes(t) && t !== S.dockTab) setTimeout(() => pcHintShow(pcLegend(), 3500), 50);
   S.dockTab = t; save('dockTab'); S.tab = t; save('tab');
   document.querySelectorAll('.panel').forEach(p => p.classList.toggle('dock', p.id === 'tab-' + t));
   document.querySelectorAll('#dockTabs button').forEach(b => b.classList.toggle('on', b.dataset.dock === t));
@@ -4787,6 +4865,10 @@ function init() {
   $('#helpClose').addEventListener('click', () => $('#help').classList.remove('show'));
   document.querySelectorAll('nav button').forEach(b => b.addEventListener('click', () => showTab(b.dataset.tab)));
   showTab(S.tab); initStudio();
+  { const ms = $('#drMapSel'); ms.value = S.drMapMode || 'seq'; ms.addEventListener('change', () => { S.drMapMode = ms.value; save('drMapMode'); renderDrums(); toast({ seq: 'Tuts paling kiri (C) = pad 1, tuts sebelahnya = pad berikutnya.', wb: 'Semua tuts putih = Kick, semua tuts hitam = Snare.', wbh: 'Tuts putih = Kick · hitam C#, F#, A# = Snare · hitam D#, G# = Hi-hat.', gm: 'Susunan General MIDI: Kick di C, Snare di D, Hi-hat di F#, Crash di C# atas — sama seperti Cakewalk.' }[ms.value], 4000); });
+    const lb = $('#drLearnBtn'); lb.addEventListener('click', () => { drLearn = drLearn ? null : { pad: null }; lb.classList.toggle('on', !!drLearn); lb.textContent = drLearn ? '🎹 Selesai' : '🎹 Atur tuts sendiri'; renderDrums(); if (drLearn) toast('Atur tuts: klik pad drum, lalu tekan tuts di keyboard musik. Ulangi untuk pad lain. Tekan 🎹 Selesai kalau sudah.', 5000); });
+    $('#drLearnClr').addEventListener('click', () => { if (!(S.drKeyMap || {})[S.kit]) return toast('Belum ada tuts yang diatur sendiri untuk kit ini.'); if (!confirm('Hapus semua tuts yang diatur sendiri untuk kit ini?')) return; delete S.drKeyMap[S.kit]; save('drKeyMap'); renderDrums(); toast('Pengaturan tuts sendiri dihapus.'); }); }
+  document.querySelectorAll('.pcKeysBtn').forEach(b => b.addEventListener('click', () => { S.pcKeys = !S.pcKeys; save('pcKeys'); pcSync(); if (S.pcKeys) pcHintShow(pcLegend(), 5000); })); pcSync();
   // pad
   chips('#timbres', Object.entries(TIMBRES).map(([k, t]) => [k, t.name]), 'timbre', () => { applyLevels(); padRefresh(); });
   chips('#chords', Object.entries(CHORDS).map(([k, c]) => [k, c.name]), 'chord', padRefresh);
