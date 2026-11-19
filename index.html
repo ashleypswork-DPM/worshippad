@@ -697,7 +697,7 @@ details.fx>.controls{border:none;border-top:1px solid var(--line);border-radius:
   <p><b>🎛 Studio (gaya Logic) — tampilan baru.</b> Tekan tombol <b>🎛 Studio</b> di kanan atas (tekan <b>📱 Versi klasik</b> untuk kembali; tampilan lama tidak berubah). Semua dalam satu halaman: transport &amp; layar posisi (bar.ketuk · waktu · tempo) di atas, track di tengah, editor di bawah (Keyboard, Drum, Pad, Gitar, Bass, Chimes, Mixer). <b>Klik nama track</b> → editor di bawah otomatis berganti (track Drum → Drum Pad, track Keyboard → Keyboard). <b>● Rekam</b> di atas langsung merekam alat yang terbuka di bawah ke track yang dipilih, mulai dari posisi playhead — tanpa pindah menu. <b>Seret baris tab editor</b> ke bawah untuk menutupnya (seperti menutup jendela), seret ke atas untuk membuka atau meninggikan; <b>▾ / ▴</b> juga bisa.</p>
   <p><b>★ Drum akustik asli.</b> Kit baru di Drum Pad: rekaman drum akustik dari 5 mic (Virtuosity Drums, CC0) dengan beberapa lapis kekuatan pukulan — dipukul pelan terdengar lembut, keras terdengar tegas — dan bunyi bergantian supaya tidak terdengar seperti mesin.</p>
   <h3>Proyek (simpan &amp; buka) + contoh Overture Natal</h3>
-  <p>Di Susun Lagu tekan <b>📁 Proyek ▾</b>: <b>Simpan proyek</b> membuat file <b>.wps</b> berisi seluruh susunan, rekaman, dan audio — di iPad pilih <i>Simpan ke File</i> lalu Google Drive / iCloud. <b>Buka file proyek</b> memuatnya lagi di perangkat mana saja. Di menu yang sama ada contoh <b>🎄 Overture Natal</b> (±9 menit): intro EDM halus + air terjun, biola Malam Kudus, lalu band + orkestra dengan Joy to the World, Hark the Herald, Deck the Halls, Jingle Bells, modulasi D → B → F# → A♭, dan penutup Malam Kudus. Semua bagian bisa diedit.</p>
+  <p>Di Susun Lagu tekan <b>📁 Proyek ▾</b>: <b>Proyek baru</b> mengosongkan susunan (track standar, tanpa peta tempo; bisa ↶ Undo), <b>Simpan proyek</b> membuat file <b>.wps</b> berisi seluruh susunan, rekaman, dan audio — di iPad pilih <i>Simpan ke File</i> lalu Google Drive / iCloud. <b>Buka file proyek</b> memuatnya lagi di perangkat mana saja. Di menu yang sama ada contoh <b>🎄 Overture Natal</b> (±9 menit): intro EDM halus + air terjun, biola Malam Kudus, lalu band + orkestra dengan Joy to the World, Hark the Herald, Deck the Halls, Jingle Bells, modulasi D → B → F# → A♭, dan penutup Malam Kudus. Semua bagian bisa diedit.</p>
   <h3>Suara Natal &amp; kredit sampel</h3>
   <p>Suara bertanda ★ dan grup <b>Orkestra</b> memakai <b>rekaman instrumen asli</b>: lonceng Natal (glockenspiel, handbell, tubular bells, sleigh bells, triangle, mark tree) dan perkusi dari <b>VCSL</b>, serta biola, cello, flute, harpa, timpani, cymbal &amp; gong dari <b>VSCO 2 Community Edition</b> — keduanya karya Versilian Studios, lisensi <b>CC0 (domain publik)</b>. <b>Grand piano</b> dari <b>Salamander Grand Piano V3</b> (Yamaha C5, oleh Alexander Holm — CC BY 3.0). <b>Rhodes</b> dari <b>jRhodes3c</b> (Rhodes Mark I, oleh Jeff Learman — CC BY-NC-SA 4.0, khusus pemakaian non-komersial). Celesta, kotak musik, lonceng kecil, vibraphone &amp; choir "Aah" dari soundfont <b>Musyng Kite</b>, lisensi <b>Creative Commons Attribution-ShareAlike 3.0</b> (via proyek midi-js-soundfonts). Tiap paket dimuat sekali saat pertama dipakai lalu tersimpan untuk offline. Drum Pad punya kit <b>🎄 Natal</b>, <b>Perkusi</b>, dan <b>Orkestra &amp; ambience</b>. Synth lain diracik meniru karakter synth gratis populer (Vital, Surge XT, Dexed, OB-Xd, TAL-U-NO-LX) — bukan salinan preset aslinya.</p>
   <h3>5. Tips saat ibadah</h3>
@@ -3938,6 +3938,16 @@ function realBuf(id, vo) {
   const li = Math.max(0, Math.min(n - 1, Math.floor(clamp(vo, 1, 127) / 113 * n))), rr = realRR[id] = (realRR[id] || 0) ^ 1;
   const e = list.find(x => x[0] === p + '_' + li + '_' + rr) || list.find(x => x[0] === p + '_' + li + '_0'); return e ? e[1] : null;
 }
+function projNew() {
+  if (arr.clips.length && !confirm('Mulai proyek baru yang kosong?\n\nSusunan sekarang akan dikosongkan. Kalau masih perlu, batalkan dulu lalu pilih "💾 Simpan proyek". (Bisa dibatalkan dengan ↶ Undo.)')) return;
+  arrStop(); if (rec.state === 'rec') stopRec(); arrPush();
+  arr.clips = []; arr.marks = []; arr.tempo = null; arr.sel = null; arr.selSet.clear(); arr.head = 0;
+  arr.tracks = ARR_TRACKS.map(([id, n]) => ({ id, type: id, name: n })); arr.tr = {}; ARR_TRACKS.forEach(([id]) => arr.tr[id] = { vol: 80, mute: false, solo: false });
+  S.projName = ''; save('projName'); S.stTrk = null; save('stTrk');
+  const sc = $('#aScroll'); if (sc) sc.scrollLeft = 0;
+  arrSave(); renderArr(); renderTempoBtn(); if (typeof renderArrLib === 'function') renderArrLib();
+  toast(`Proyek baru: kosong, tempo ${S.bpm} bpm, track standar. Pilih track lalu tekan ● Rekam, atau tarik pola dari kiri.`, 4500);
+}
 /* --- pemutar --- */
 let arrPl = null, arrLibN = -1;
 function arrPlay(fromB, t0, only) {
@@ -4471,7 +4481,7 @@ function initArr() {
   $('#aZoomOut').onclick = () => { arr.ppb = Math.max(8, arr.ppb - 6); renderArr(); arrSave(); };
   $('#aDel').onclick = () => arrDel(); $('#aUndo').onclick = arrUndo; $('#aRedo').onclick = arrRedo; $('#aSelBtn').onclick = toggleSelMode;
   $('#aClear').onclick = e => { const b = e.currentTarget; if (b.dataset.c !== '1') { b.dataset.c = '1'; b.textContent = 'Yakin?'; setTimeout(() => { b.dataset.c = ''; b.textContent = 'Kosongkan'; }, 2500); return; } arrStop(); arrPush(); arr.clips = []; arr.marks = []; arr.tempo = null; arr.sel = null; arr.selSet.clear(); arrSave(); renderArr(); renderTempoBtn(); };
-  $('#aDemo').onclick = e => { const r = e.currentTarget.getBoundingClientRect(); showMenu($('#aCtx'), r.left, r.bottom + 4, [['💾 Simpan proyek ke file… (Files / Google Drive)', projSave], ['📂 Buka file proyek (.wps)…', () => $('#aProjFile').click()], ['Contoh — menggantikan susunan sekarang (simpan dulu kalau perlu):', null],
+  $('#aDemo').onclick = e => { const r = e.currentTarget.getBoundingClientRect(); showMenu($('#aCtx'), r.left, r.bottom + 4, [['📄 Proyek baru (kosong)', projNew], ['💾 Simpan proyek ke file… (Files / Google Drive)', projSave], ['📂 Buka file proyek (.wps)…', () => $('#aProjFile').click()], ['Contoh — menggantikan susunan sekarang (simpan dulu kalau perlu):', null],
     ['♪ Contoh sederhana (kunci & suara yang sedang dipilih)', () => { arrStop(); arrPush(); arr.clips = []; arr.marks = []; arrDemo(); arrSave(); renderArr(); toast('Contoh lagu dimuat (pakai kunci & suara yang sedang dipilih).'); }],
     ['🎄 Overture Natal (±9 menit, orkestra + band)', () => loadDemoProject('overture.js', 'DEMO_OVERTURE')],
     ['🎄 Gita Sorga Bergema — pop gaya overture (90 bpm, ±4 menit, D → E)', () => loadDemoProject('gita.js', 'DEMO_GITA')]]); };
