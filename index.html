@@ -1241,7 +1241,9 @@ let replaying = false, uid = 1;
 const rec = { state: 'idle', t0: 0, events: [], bpm: 100, sig: 4, bar: 2.4, timer: null, stopAt: 0 };
 // CAP: mode "tangkap" — pola gitar/bass/chimes dijalankan tanpa bunyi untuk menghasilkan event timeline
 let CAP = null, CAPV = null, CAPCHORD = null;
-function L(ev) { if (CAP) { CAP.push(Object.assign({}, ev)); return; } if (replaying || rec.state !== 'rec' || ev.t < rec.t0 - 0.03) return; ev.t = Math.max(0, ev.t - rec.t0); rec.events.push(ev); }
+function L(ev) { if (CAP) { CAP.push(Object.assign({}, ev)); return; } if (replaying || rec.state !== 'rec') return;
+  if (ev.t < rec.t0 - 0.03) { if (ev.t >= (rec.tStart ?? rec.t0) - 0.05) (rec.pre = rec.pre || []).push(ev); return; }   // dimainkan saat hitungan masuk: disimpan, tidak dibuang
+  ev.t = Math.max(0, ev.t - rec.t0); rec.events.push(ev); }
 
 /* ================= PAD ================= */
 const TIMBRES = {
@@ -3100,6 +3102,7 @@ function renderRecBtn() {
   if (now < rec.t0) { b.classList.add('wait'); b.classList.remove('rec'); b.textContent = '● Hitung masuk… ' + Math.ceil((rec.t0 - now) / (rec.bar / beatsPerBar())); }
   else { b.classList.add('rec'); b.classList.remove('wait'); const pos = (now - rec.t0) / rec.bar; b.textContent = `■ Stop rekam · bar ${Math.floor(pos) + 1}`; }
   if (sb) { sb.className = 'mini ' + b.className; sb.textContent = b.textContent; }
+  if (rec.arr && typeof renderArrBtns === 'function') renderArrBtns();
 }
 function startRec() {
   ensureAudio();
@@ -3107,7 +3110,7 @@ function startRec() {
   const stack = S.recStack && songLayout().items.length > 0;
   if (stack && song.bpm && (song.bpm !== S.bpm || song.sig != S.sig)) { S.sig = song.sig; save('sig'); const sg = $('#sig'); if (sg) sg.value = S.sig; setBpm(song.bpm); toast(`Tempo disamakan dengan lagu: ${song.bpm} BPM`); }
   if (!clk.on && (S.recCount || stack)) startClick();
-  rec.bpm = S.bpm; rec.sig = S.sig; rec.bar = barDur(); rec.events = [];
+  rec.bpm = S.bpm; rec.sig = S.sig; rec.bar = barDur(); rec.events = []; rec.pre = []; rec.tStart = ctx.currentTime;
   const now = ctx.currentTime; let t0;
   if (clk.on) {
     t0 = nextDownbeat();
@@ -3129,7 +3132,17 @@ function stopRec() {
   rec.state = 'idle'; renderRecBtn();
   const AR = rec.arr; rec.arr = null; if (AR) { if (arrPl) arrStop(true); stopClick(); renderArrBtns(); }
   if (rec.stack) stopSong();
-  if (now < rec.t0 + 0.1) { toast('Rekaman dibatalkan (belum mulai).'); return; }
+  const pre = (rec.pre || []).filter(e => !/Off|boff|gdamp/.test(e.type) || true); rec.pre = [];
+  if (pre.some(e => !/Off|boff|gdamp/.test(e.type))) {
+    const first = Math.min(...pre.filter(e => !/Off|boff|gdamp/.test(e.type)).map(e => e.t));
+    let n = Math.ceil((rec.t0 - first) / rec.bar - 1e-6); if (AR) n = Math.min(n, Math.floor(AR.startB / 4 + 1e-6));
+    const nt0 = rec.t0 - n * rec.bar;
+    rec.events.forEach(e => e.t += n * rec.bar);
+    pre.forEach(e => { e.t = Math.max(0, e.t - nt0); rec.events.push(e); });
+    rec.t0 = nt0; if (AR) AR.startB -= n * 4;
+    toast(n ? `Not yang dimainkan saat hitungan masuk ikut terekam (rekaman mulai ${n} bar lebih awal).` : 'Not sebelum bar 1 digeser ke awal rekaman.', 4000);
+  }
+  if (now < rec.t0 + 0.1 && !rec.events.length) { toast('Rekaman dibatalkan (belum mulai).'); return; }
   const bars = Math.max(1, Math.ceil((now - rec.t0) / rec.bar - 0.03)), len = bars * rec.bar;
   const ev = rec.events.filter(e => e.t < len).sort((a, b) => a.t - b.t);
   if (!ev.length) { toast('Tidak ada bunyi yang terekam.'); return; }
@@ -3802,7 +3815,7 @@ function gmVoice(prog, name) {
   const nm = (name || '').toLowerCase();
   if (prog >= 32 && prog <= 37) return { g: 'bass', s: { 32: 'precision', 33: 'precision', 34: 'yamahabb', 35: 'jazz', 36: 'slapfunk', 37: 'slapfunk' }[prog] };
   if (prog === 38 || prog === 39) return { g: 'kb', s: 'subkb' };
-  if (prog >= 24 && prog <= 31) return { g: 'gtr', s: { 24: 'nylon', 25: 'steel', 26: 'clean', 27: 'clean', 28: 'clean' }[prog] || (GT.cleanch ? 'cleanch' : 'clean') };
+  if (prog >= 24 && prog <= 31) return { g: 'gtr', s: { 24: 'nylon', 25: 'steel', 26: 'clean', 27: 'clean', 28: 'clean', 29: 'andralead', 30: 'andra' }[prog] || (GT.cleanch ? 'cleanch' : 'clean') };
   const K = [[0, 3, 'kgrandw'], [4, 5, 'krhodes'], [6, 7, 'clav'], [8, 8, 'xcelesta'], [9, 9, 'xglock'], [10, 10, 'xmusicbox'], [11, 11, 'xvibes'], [12, 13, 'marimba'], [14, 14, 'xtubular'], [15, 15, 'bells'],
     [16, 18, 'b3gospel'], [19, 23, 'b3soft'], [40, 40, 'oviolin'], [41, 41, 'ovlnens'], [42, 43, 'ocello'], [44, 45, 'ovlnens'], [46, 46, 'oharp'], [47, 47, 'ocello'], [48, 48, 'ostrings'], [49, 49, 'oambstr'],
     [50, 51, 'juno'], [52, 54, 'xchoir'], [55, 55, 'edmbrass'], [56, 63, 'softhorn'], [64, 67, 'osax'], [68, 79, 'oflute'], [80, 80, 'chip'], [81, 87, 'sawmono'], [88, 89, 'hillsong'], [90, 90, 'junopad'],
@@ -4251,12 +4264,12 @@ function arrRecStart(tab) {
   if (clk.on) stopClick();
   clk.on = true; clk.beat = 0; clk.next = t0 - nb * beatDur(); clk.queue = []; clk.timer = setInterval(scheduler, 25); scheduler();
   $('#clickBtn').classList.add('on'); $('#clickBtn').textContent = '■ Stop click';
-  rec.bpm = S.bpm; rec.sig = S.sig; rec.bar = 4 * q; rec.events = []; rec.t0 = t0; rec.state = 'rec'; rec.stack = false; rec.arr = { startB, tab };
+  rec.bpm = S.bpm; rec.sig = S.sig; rec.bar = 4 * q; rec.events = []; rec.pre = []; rec.tStart = ctx.currentTime; rec.t0 = t0; rec.state = 'rec'; rec.stack = false; rec.arr = { startB, tab };
   arr.head = startB; if (arrPlay(startB, t0) && arrPl) arrPl.noLoop = true;
   setTimeout(() => { if (rec.state !== 'rec' || !pad.voice) return; const v = pad.voice; if (!rec.events.some(e => e.type === 'padOn' && e.id === v.id)) rec.events.unshift({ type: 'padOn', id: v.id, k: v.k, P: v.P, t: 0, f: 0.05 }); }, Math.max(0, (t0 - ctx.currentTime) * 1000 + 30));
   rec.timer = setInterval(renderRecBtn, 100); renderRecBtn(); renderArrBtns(); requestWake();
   showTab(tab);
-  toast(`Hitung masuk 1 bar… lalu mainkan mulai bar ${startB / 4 + 1}. Tekan ■ Stop rekam (tombol merah di atas) kalau sudah selesai.`, 5000);
+  toast(`Hitung masuk 1 bar (lihat tombol merah)… lalu mainkan mulai bar ${startB / 4 + 1}. Kalau terlanjur main saat hitungan, tetap ikut terekam. Tekan ■ Stop rekam (tombol merah di atas) kalau sudah selesai.`, 5000);
 }
 function arrRecTrack(type, s, e) {
   const busy = t => arr.clips.some(k => k.track === t.id && k.start < e - 1e-6 && k.start + clipLen(k) > s + 1e-6);
@@ -4349,7 +4362,8 @@ function arrRecFinish(AR, ev, bars, len) {
 }
 function renderArrBtns() {
   const p = $('#aPlay'); if (!p) return; const on = !!(arrPl && !arrPl.only); p.textContent = on ? '■ Stop' : '▶ Putar'; p.classList.toggle('on', on);
-  const m = $('#aMic'), rr = rec.state === 'rec' && rec.arr; m.textContent = micA ? '■ Stop mic' : rr ? '■ Stop rekam' : '● Rekam'; m.classList.toggle('rec', !!(micA || rr));
+  const m = $('#aMic'), rr = rec.state === 'rec' && rec.arr, cnt = rr && ctx && ctx.currentTime < rec.t0;
+  m.textContent = micA ? '■ Stop mic' : cnt ? '● Hitung masuk… ' + Math.ceil((rec.t0 - ctx.currentTime) / (rec.bar / beatsPerBar())) : rr ? `■ Stop rekam · bar ${Math.floor((ctx.currentTime - rec.t0) / rec.bar) + rec.arr.startB / 4 + 1}` : '● Rekam'; m.classList.toggle('rec', !!(micA || rr));
 }
 /* --- proyek: simpan ke file / buka dari file (susunan + rekaman + audio) --- */
 const b64of = ab => { const u = new Uint8Array(ab); let s = ''; for (let i = 0; i < u.length; i += 0x8000) s += String.fromCharCode.apply(null, u.subarray(i, i + 0x8000)); return btoa(s); };
