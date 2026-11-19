@@ -53,6 +53,36 @@ nav{display:flex;gap:8px}
 nav button{flex:1;padding:12px 6px;font-weight:600}
 nav button.on{background:var(--text);color:var(--bg);border-color:var(--text)}
 main{flex:1;min-height:0;position:relative}
+.sttr,.stlcd,.dockbar{display:none}
+/* ===== Studio (gaya Logic): satu halaman ===== */
+body.studio{--bg:#1b1c1f;--panel:#26272b;--panel2:#323338;--line:#3d3f45}
+body.studio .app{padding:6px 8px calc(6px + env(safe-area-inset-bottom));gap:6px}
+body.studio header h1{font-size:15px}
+body.studio nav{display:none}
+body.studio .bar{padding:5px 8px;gap:8px;background:linear-gradient(#2c2d32,#232428)}
+body.studio .sttr{display:flex;gap:4px;align-items:center}
+body.studio .sttr button{min-width:44px;padding:8px 10px;font-size:16px;border-radius:7px}
+body.studio .sttr #aMic{color:#ff6b5e} body.studio .sttr #aMic.rec{background:#c62d22;color:#fff;border-color:#c62d22}
+body.studio .stlcd{display:flex;align-items:baseline;gap:12px;background:#0d1a26;border:1px solid #20384f;border-radius:8px;padding:5px 14px;
+  font:600 15px/1.2 ui-monospace,Menlo,Consolas,monospace;color:#9fd4ff;min-width:250px}
+body.studio .stlcd b{font-size:21px;color:#d8efff;min-width:86px} body.studio .stlcd span{color:#7fb8e6}
+body.studio:not(.dock-rec) #recBtn{display:none}
+body.studio main{display:grid;grid-template-rows:minmax(150px,1fr) auto var(--dockH,44vh);gap:0}
+body.studio.dockmin main{grid-template-rows:minmax(150px,1fr) auto 0}
+body.studio .panel,body.studio .panel.show{display:none}
+body.studio #tab-arr{display:flex;grid-row:1;overflow:hidden;min-height:0}
+body.studio #tab-arr>.tool{padding:2px 0}
+body.studio #aPos,body.studio .afoot{display:none}
+body.studio main{--dockH:40vh}
+body.studio .panel.dock{display:flex;grid-row:3;overflow-y:auto;min-height:0;background:var(--panel);border:1px solid var(--line);border-top:none;border-radius:0 0 var(--r) var(--r);padding:8px}
+body.studio.dockmin .panel.dock{display:none}
+body.studio .dockbar{display:flex;grid-row:2;align-items:center;gap:6px;background:#2f3035;border:1px solid var(--line);border-radius:var(--r) var(--r) 0 0;padding:4px 6px;margin-top:6px}
+.dktabs{display:flex;gap:4px;flex-wrap:wrap} .dktabs button{padding:6px 11px;font-size:13px;border-radius:7px}
+.dkgrip{cursor:ns-resize;padding:0 8px;display:flex;align-items:center}.dkgrip::before{content:'';width:38px;height:5px;border-radius:3px;background:#6b6e76}
+.dockbar{cursor:ns-resize;touch-action:none} .dockbar button{cursor:pointer}
+body.studio main.dragging .panel.dock{overflow:hidden}
+.dkinfo{font-size:12px;color:var(--mute)}
+body.studio .arow.trsel>.ahead{background:#3a4a63;box-shadow:inset 3px 0 0 #6fb1ff}
 .panel{display:none;height:100%;flex-direction:column;gap:10px}
 .panel.show{display:flex;overflow-y:auto;-webkit-overflow-scrolling:touch}
 .panel.show>*{flex-shrink:0}
@@ -298,12 +328,15 @@ details.fx>.controls{border:none;border-top:1px solid var(--line);border-radius:
 <div class="app">
   <header>
     <h1>Worship Pad Studio <small>untuk iPad</small></h1>
+    <button id="uiModeBtn" class="mini" title="Pindah antara versi klasik dan tampilan Studio satu halaman (gaya Logic)">🎛 Studio (gaya Logic)</button>
     <button id="wakeBtn" class="mini">Layar tetap nyala</button>
     <button id="panicBtn" class="mini" style="border-color:var(--danger);color:#ffb3b0">Stop semua</button>
     <button id="helpBtn" class="mini">? Bantuan</button>
   </header>
 
   <section class="bar">
+    <div id="stTransport" class="sttr"></div>
+    <div id="stLcd" class="stlcd" title="Posisi lagu: bar.ketuk · waktu · tempo"><b id="stBar">1.1.1</b><span id="stTime">0:00.0</span><span id="stTempo">♩ 100</span></div>
     <button id="clickBtn">▶ Click</button>
     <button id="recBtn" class="recbtn">● Rekam</button>
     <div class="group">
@@ -371,6 +404,7 @@ details.fx>.controls{border:none;border-top:1px solid var(--line);border-radius:
       <div class="tool">
         <span class="lbl">Suara</span>
         <select id="kbSound" style="max-width:380px;min-width:260px"></select>
+        <select id="kbPatch" class="mini" title="Patch gereja siap pakai: dua suara langsung ditumpuk" style="max-width:250px"></select>
         <button id="kbDualBtn" class="mini" title="Dual: mainkan dua suara sekaligus (tumpuk), mis. piano + strings">Dual</button>
         <span id="kbDualBox" class="row2" style="display:none"><span class="lbl">+ Suara 2</span><select id="kbSound2" style="max-width:300px;min-width:200px"></select>
           <select id="kbOct2" class="mini" title="Oktaf suara 2"><option value="-2">-2 okt</option><option value="-1">-1 okt</option><option value="0">0 okt</option><option value="1">+1 okt</option><option value="2">+2 okt</option></select>
@@ -564,6 +598,8 @@ details.fx>.controls{border:none;border-top:1px solid var(--line);border-radius:
     </section>
 
     <!-- MIXER -->
+    <div id="dockBar" class="dockbar"><span class="dkgrip" id="dockGrip" title="Seret baris ini: ke bawah = tutup editor, ke atas = buka / tinggikan"></span><span id="dockTabs" class="dktabs"></span><span style="flex:1"></span>
+      <span class="dkinfo" id="dockInfo"></span><button class="mini" id="dockMin" title="Kecilkan / besarkan editor">▾</button></div>
     <section class="panel" id="tab-mix">
       <div class="mixwrap">
         <div class="tool mixlist">
@@ -658,6 +694,7 @@ details.fx>.controls{border:none;border-top:1px solid var(--line);border-radius:
   <h3>Keyboard: grand piano, Rhodes, organ &amp; mode Dual</h3>
   <p>Di grup <b>Keys &amp; piano</b> ada <b>★ Grand piano</b> (rekaman Yamaha C5 asli, 2 lapis kekuatan tekan — main pelan terdengar lembut, keras terdengar terang), versi <b>stage terang</b> (gaya Nord/Yamaha CP), <b>lembut &amp; luas</b>, dan <b>pop</b>; <b>★ Rhodes Mark I</b> asli (3 lapis kekuatan tekan, versi chorus, tremolo stereo, dan worship); serta <b>Organ</b> baru dengan registrasi drawbar (888000000, 888800000, 888888888, 008800000), key-click, dan simulasi Leslie. Tombol <b>Dual</b> menumpuk dua suara sekaligus (mis. piano + strings): pilih <b>Suara 2</b>, oktafnya, dan geser <b>Imbang 1 ↔ 2</b>. Dual ikut terekam dan bisa dipakai dari keyboard MIDI.</p>
   <p><b>Import MIDI &amp; peta tempo (baru).</b> Di <b>Susun Lagu</b> tekan <b>⤓ Import</b> lalu pilih file <b>.mid</b> (mis. dari Cakewalk): tiap alat langsung jadi clip di track masing-masing dan dimainkan suara aplikasi (piano, bass, gitar, strings, sax, flute, drum akustik). Kalau tempo lagunya berubah di tengah (mis. intro 63, lagu 109, melambat di akhir), perubahan itu ikut terbawa. Tombol <b>♩ Tempo</b> membuka <b>peta tempo</b>: tiap baris <code>bar tempo</code> (mis. <code>9 95</code>) atau perubahan perlahan <code>87-93 109&gt;97</code>. Tekan <b>Satu tempo</b> untuk kembali ke satu tempo. Click di Susun Lagu ikut peta tempo.</p>
+  <p><b>🎛 Studio (gaya Logic) — tampilan baru.</b> Tekan tombol <b>🎛 Studio</b> di kanan atas (tekan <b>📱 Versi klasik</b> untuk kembali; tampilan lama tidak berubah). Semua dalam satu halaman: transport &amp; layar posisi (bar.ketuk · waktu · tempo) di atas, track di tengah, editor di bawah (Keyboard, Drum, Pad, Gitar, Bass, Chimes, Mixer). <b>Klik nama track</b> → editor di bawah otomatis berganti (track Drum → Drum Pad, track Keyboard → Keyboard). <b>● Rekam</b> di atas langsung merekam alat yang terbuka di bawah ke track yang dipilih, mulai dari posisi playhead — tanpa pindah menu. <b>Seret baris tab editor</b> ke bawah untuk menutupnya (seperti menutup jendela), seret ke atas untuk membuka atau meninggikan; <b>▾ / ▴</b> juga bisa.</p>
   <p><b>★ Drum akustik asli.</b> Kit baru di Drum Pad: rekaman drum akustik dari 5 mic (Virtuosity Drums, CC0) dengan beberapa lapis kekuatan pukulan — dipukul pelan terdengar lembut, keras terdengar tegas — dan bunyi bergantian supaya tidak terdengar seperti mesin.</p>
   <h3>Proyek (simpan &amp; buka) + contoh Overture Natal</h3>
   <p>Di Susun Lagu tekan <b>📁 Proyek ▾</b>: <b>Simpan proyek</b> membuat file <b>.wps</b> berisi seluruh susunan, rekaman, dan audio — di iPad pilih <i>Simpan ke File</i> lalu Google Drive / iCloud. <b>Buka file proyek</b> memuatnya lagi di perangkat mana saja. Di menu yang sama ada contoh <b>🎄 Overture Natal</b> (±9 menit): intro EDM halus + air terjun, biola Malam Kudus, lalu band + orkestra dengan Joy to the World, Hark the Herald, Deck the Halls, Jingle Bells, modulasi D → B → F# → A♭, dan penutup Malam Kudus. Semua bagian bisa diedit.</p>
@@ -1079,7 +1116,7 @@ function setP(param, v, t = 0.05) { if (ctx) param.setTargetAtTime(v, ctx.curren
 function holdParam(p, t) { if (p.cancelAndHoldAtTime) p.cancelAndHoldAtTime(t); else { p.cancelScheduledValues(t); p.setValueAtTime(p.value, t); } }
 
 /* ================= state ================= */
-const DEFAULTS = { bpm: 100, sig: 4, clickVol: 70, master: 85, split: false, timbre: 'warm', chord: '5', octave: 0,
+const DEFAULTS = {uiMode: 'classic', dockTab: 'kb', stTrk: null, dockH: 0, dockMin: false,  bpm: 100, sig: 4, clickVol: 70, master: 85, split: false, timbre: 'warm', chord: '5', octave: 0,
   padVol: 70, padBright: 45, padRev: 60, padFade: 30, arpOn: false, arpSound: 'pluck', arpPat: 'up', arpRate: 2, arpVol: 55,
   chReal: false, projName: '', midiSus: true, kbDual: false, kbSound2: 'ovlnens', kbOct2: 0, kbBal: 50, kbSound: 'clarity', vel: 96, sfVol: 75, sfRev: 35, kbOct: 48, chVol: 60, chRev: 55, chColl: 60, chDecay: 100, kit: 'edm', drVol: 75, tab: 'pad', recCount: true, recSync: true, gtSound: 'steel', gtKey: 2, gtMinor: false, gtShape: 'full', gtPM: false, gtPat: 'pop', gtVol: 75, gtRev: 30, gtTone: 50, gtDrive: 50, gtChorus: false, gtDelay: false, gtDTime: 'd8', gtDFb: 30, gtDMix: 25, bsSound: 'precision', bsMode: 'auto', bsPat: 'worship', bsTech: 'finger', bsLegato: true, bsRing: false, bsVel: 100, bsVol: 80, bsRev: 12, bsLo: 60, bsMid: 55, bsHi: 42, bsDrive: 0, bsComp: true, bsOct: false, bsChorus: false, bsEnv: false, bsDelay: false, bsDTime: 'd8', bsLink: false, gtOwn: false, gtBpm: 100, gtSpd: 1, bsOwn: false, bsBpm: 100, bsSpd: 1, kbChorus: false, kbDelay: true, kbDTime: 'd8', kbDMix: 28, kbDFb: 35, kbPump: false, kbGlide: false, kbTimed: false, kbHold: 30, kbFade: 20, aLibHide: {}, arrKey: -1, arrMinor: -1, guideVol: 85, cueOn: true, cueVoice: 'm', cuePre: true, arrClick: false, audVol: 80, audRev: 15, dset: {}, recStack: false, tlView: 'song', drRev: 50, mxLo: 0, mxMid: 0, mxHi: 0, mxGlue: false, mxGlueAmt: 40, mxLim: true, mxMute: {}, mxSolo: {}, mxPan: {} };
 const S = {}; for (const k in DEFAULTS) S[k] = store.get(k, DEFAULTS[k]);
@@ -1902,7 +1939,7 @@ function renderDrums() {
 }
 
 /* ================= SYNTH KEYBOARD (preset deklaratif) ================= */
-const KB_GROUPS = ['EDM lead', 'Pluck & chord', 'Pad worship & atmos', 'Keys & piano', 'Brass & bass', 'Natal: lonceng, celesta & choir', 'Orkestra: biola, cello, flute & ambience (rekaman asli)'];
+const KB_GROUPS = ['EDM lead', 'Pluck & chord', 'Pad worship & atmos', 'Keys & piano', 'Brass & bass', 'Natal: lonceng, celesta & choir', 'Orkestra: biola, cello, flute & ambience (rekaman asli)', 'Modern Worship 2026 (gaya gereja besar)'];
 const KB = {
   clarity:    { g: 0, name: 'Supersaw lead — gaya Clarity (Zedd)', osc: [{ type: 'sawtooth', n: 7, det: 24, spr: .9 }, { type: 'sawtooth', n: 3, det: 14, spr: .6, oct: 1, gain: .35 }], sub: .2, flt: { cut: 1800, kt: .5, q: .8, env: 5200, a: .003, d: .35, s: .45 }, amp: { a: .004, d: .4, s: .85, r: .35 }, fx: { delay: 1, dTime: 'd8', dMix: 28, dFb: 35, rev: 55 } },
   bigroom:    { g: 0, name: 'Big room lead — gaya Animals (Martin Garrix)', osc: [{ type: 'square', n: 3, det: 14, spr: .5, gain: .8 }, { type: 'sawtooth', n: 5, det: 32, spr: .9, gain: .8 }], pitch: { amt: 12, t: .025 }, drive: 3, flt: { cut: 2600, kt: .3, q: 1, env: 4000, a: .001, d: .18, s: .5 }, amp: { a: .002, d: .25, s: .75, r: .18 }, fx: { pump: 1, rev: 35 } },
@@ -1984,6 +2021,15 @@ const KB = {
   ocello:     { g: 6, name: 'Cello (seksi orkestra)', smp: 'o_cello', att: .1, rel: .6, fx: { delay: 0, rev: 45 } },
   ostrings:   { g: 6, name: 'Strings penuh: biola + cello', smp: 'o_vlnens', smp2: 'o_cello', mix2: .75, att: .15, rel: .8, fx: { delay: 0, rev: 60 } },
   oflute:     { g: 6, name: 'Flute (seruling orkestra)', smp: 'o_flute', att: .05, rel: .4, fx: { delay: 0, rev: 50 } },
+  mfelt:      { g: 7, name: '★ Felt piano lembut (gaya "Wispy Felt")', vl: ['m_felt_p', 'm_felt_f'], rel: .5, fx: { delay: 1, dTime: 'q', dMix: 9, dFb: 22, rev: 45 } },
+  mfelth:     { g: 7, name: 'Felt piano + hall luas (intro / doa)', vl: ['m_felt_p', 'm_felt_f'], rel: .9, fx: { delay: 1, dTime: 'q', dMix: 16, dFb: 35, rev: 92 } },
+  mshim:      { g: 7, name: '★ Shimmer pad lebar', smp: 'm_shim', att: 1.1, rel: 3.2, fx: { delay: 1, dTime: 'q', dMix: 10, dFb: 35, rev: 90 } },
+  mmshim:     { g: 7, name: 'Muted shimmer pad (lembut, gelap)', smp: 'm_mshim', att: 1.3, rel: 3.5, fx: { delay: 1, dTime: 'q', dMix: 8, dFb: 30, rev: 92 } },
+  mober:      { g: 7, name: 'Soft Ober pad (hangat, analog)', smp: 'm_ober', att: .7, rel: 2.2, fx: { delay: 0, rev: 70 } },
+  mdef:       { g: 7, name: 'Definitive pad lebar (filter membuka)', smp: 'm_def', att: .25, rel: 2.5, fx: { delay: 1, dTime: 'e', dMix: 8, dFb: 25, rev: 75 } },
+  msines:     { g: 7, name: 'Rewind sines lebar (tipis, melayang)', smp: 'm_sines', att: .04, rel: 1.6, fx: { delay: 1, dTime: 'd8', dMix: 18, dFb: 38, rev: 80 } },
+  mbell:      { g: 7, name: 'Retro bell soft pad', smp: 'm_bell', att: .005, rel: 2, fx: { delay: 1, dTime: 'q', dMix: 15, dFb: 32, rev: 80 } },
+  msub:       { g: 7, name: 'Sub bass (tangan kiri / build-up)', smp: 'm_sub', att: .01, rel: .18, fx: { delay: 0, rev: 0 } },
   osax:       { g: 6, name: 'Saxophone tenor (rekaman asli)', smp: 'o_sax', att: .04, rel: .3, fx: { delay: 0, rev: 35 } },
   osaxw:      { g: 6, name: 'Saxophone tenor lembut + delay (worship)', smp: 'o_sax', att: .08, rel: .5, tone: { hi: -2 }, fx: { delay: 1, dTime: 'd8', dMix: 14, dFb: 28, rev: 50 } },
   oharp:      { g: 6, name: 'Harpa konser', smp: 'o_harp', rel: 1.8, fx: { delay: 0, rev: 55 } },
@@ -1993,7 +2039,7 @@ const KB = {
   xmagic:     { g: 5, name: 'Magic sparkle (bell + shimmer)', fm: { ratio: 7, idx: 1.2, dec: .4 }, osc: [{ type: 'sine', oct: 2, gain: .2 }], amp: { a: .001, d: 2.5, s: 0, r: 2 }, fx: { delay: 1, dTime: 'q', dMix: 30, dFb: 55, rev: 100 } },
   subkb:      { g: 4, name: 'Sub bass', osc: [{ type: 'sine', oct: -1 }], drive: 1.2, amp: { a: .005, d: .2, s: 1, r: .1 }, fx: {} }
 };
-const KB_LVL = {kgrandb: 1.22, kgrandpop: 1.05, krhodes: .5, krhodesc: .47, krhodest: .8, krhodesw: .55, b3jazz: 1.45, b3soft: 2.1, b3gospel: 1.15, b3full: .95, trance: 0.95, hoover: 0.5, synthwave: 0.69, syncld: 0.44, vitalpluck: 1.71, arp80: 2.21, kpluck: 1.06, m1organ: 3.51, junopad: 0.47, obxpad: 0.67, glasspad: 0.29, evolve: 0.59, choirsyn: 0.38, solina: 0.49, dexedep: 0.73, lofikeys: 0.57, clav: 0.79, harp: 0.69, fmpiano: 0.56, jumpbrass: 0.75, softhorn: 0.67, xtubular: 1.38, xglock: 2.11, xcelesta: 1.42, xmusicbox: 1.68, xtinkle: 2.2, xvibes: 2.23, xchoir: 2.34, xbigbell: 0.36, xsleigh: 1.5, xfmbell: 0.6, xmagic: 0.61, clarity: 1.08, bigroom: 0.49, prog: 0.75, sawmono: 0.89, whistle: 0.44, chip: 0.42, guettapluck: 0.93, festpluck: 0.89, futurebass: 1.07, tropical: 0.85, stab: 0.84, hillsong: 0.91, shimmer: 0.88, oceans: 0.79, juno: 0.84, warmstr: 0.9, airpad: 0.98, rhodes: 0.42, dxep: 0.45, wurly: 0.59, b3: 0.81, marimba: 0.75, bells: 0.63, edmbrass: 0.78, brass80: 1.02, wobble: 0.44, subkb: 0.37};
+const KB_LVL = {mfelt: .9, mfelth: .9, mshim: .84, mmshim: .72, mober: .62, mdef: .76, msines: .26, mbell: .71, msub: .67, kgrandb: 1.22, kgrandpop: 1.05, krhodes: .5, krhodesc: .47, krhodest: .8, krhodesw: .55, b3jazz: 1.45, b3soft: 2.1, b3gospel: 1.15, b3full: .95, trance: 0.95, hoover: 0.5, synthwave: 0.69, syncld: 0.44, vitalpluck: 1.71, arp80: 2.21, kpluck: 1.06, m1organ: 3.51, junopad: 0.47, obxpad: 0.67, glasspad: 0.29, evolve: 0.59, choirsyn: 0.38, solina: 0.49, dexedep: 0.73, lofikeys: 0.57, clav: 0.79, harp: 0.69, fmpiano: 0.56, jumpbrass: 0.75, softhorn: 0.67, xtubular: 1.38, xglock: 2.11, xcelesta: 1.42, xmusicbox: 1.68, xtinkle: 2.2, xvibes: 2.23, xchoir: 2.34, xbigbell: 0.36, xsleigh: 1.5, xfmbell: 0.6, xmagic: 0.61, clarity: 1.08, bigroom: 0.49, prog: 0.75, sawmono: 0.89, whistle: 0.44, chip: 0.42, guettapluck: 0.93, festpluck: 0.89, futurebass: 1.07, tropical: 0.85, stab: 0.84, hillsong: 0.91, shimmer: 0.88, oceans: 0.79, juno: 0.84, warmstr: 0.9, airpad: 0.98, rhodes: 0.42, dxep: 0.45, wurly: 0.59, b3: 0.81, marimba: 0.75, bells: 0.63, edmbrass: 0.78, brass80: 1.02, wobble: 0.44, subkb: 0.37};
 let kbNoiseBuf = null, kbLastNote = null;
 function kbNoise() { if (!kbNoiseBuf) kbNoiseBuf = synthBuf(2, () => rnd(), 0.9); return kbNoiseBuf; }
 function kbSynth(P, note, vel, t, dest, key) {
@@ -2056,7 +2102,9 @@ const bellBufs = {}; let bellP = null, bellToast = 0;
 const PACK_FILE = { v_glock: 'natal.js', v_sleigh: 'natal.js', v_tri: 'natal.js', v_mark: 'natal.js', v_handbell: 'lonceng.js', v_tubular: 'lonceng.js',
   o_cello: 'orkestra_cello.js', o_vlnens: 'orkestra_vlnens.js', o_violin: 'orkestra_violin.js', o_flute: 'orkestra_flute.js', o_harp: 'orkestra_harp.js', o_sax: 'orkestra_sax.js', o_perc: 'perkusi.js',
   k_piano_p: 'piano.js', k_piano_f: 'piano.js', k_rh_p: 'rhodes.js', k_rh_m: 'rhodes.js', k_rh_f: 'rhodes.js' };
-const LOOP_INST = new Set(['o_cello', 'o_vlnens', 'o_violin', 'o_flute', 'o_sax']), packP = {};
+const LOOP_INST = new Set(['o_cello', 'o_vlnens', 'o_violin', 'o_flute', 'o_sax', 'm_shim', 'm_mshim', 'm_ober', 'm_def', 'm_sines', 'm_bell', 'm_sub']), packP = {};
+Object.assign(PACK_FILE, { m_felt_p: 'modern_felt.js', m_felt_f: 'modern_felt.js', m_sines: 'modern_keys.js', m_bell: 'modern_keys.js', m_shim: 'modern_pads.js', m_mshim: 'modern_pads.js', m_ober: 'modern_pads.js', m_def: 'modern_pads.js', m_sub: 'modern_pads.js' });
+const LOOP_REG = { m_shim: [3, 5.9, .6], m_mshim: [3, 5.9, .6], m_ober: [2, 5.8, .6], m_def: [3, 5.9, .6], m_sines: [1.5, 5.6, .6], m_bell: [3.2, 5.9, .5], m_sub: [1, 3.8, .2] };
 function prepLoop(b, s0 = 1.4, e0 = 5.3, xf = .45) {   // sambungan loop mulus (crossfade) supaya nada panjang bisa ditahan selama apa pun
   const sr = b.sampleRate, ls = Math.floor(s0 * sr), le = Math.min(b.length - Math.floor(Math.min(1.1, b.duration * .12) * sr), Math.floor(e0 * sr)), n = Math.floor(xf * sr); if (le - ls < n * 2) return;
   for (let c = 0; c < b.numberOfChannels; c++) { const d = b.getChannelData(c); for (let i = 0; i < n; i++) { const a = i / n; d[le - n + i] = d[le - n + i] * Math.cos(a * Math.PI / 2) + d[ls - n + i] * Math.sin(a * Math.PI / 2); } }
@@ -2068,7 +2116,7 @@ function loadPack(inst) {
   packP[f] = new Promise((res, rej) => { const sc = document.createElement('script'); sc.src = f; sc.onload = res; sc.onerror = () => rej(new Error('file ' + f + ' tidak ditemukan')); document.head.appendChild(sc); })
     .then(async () => { ensureAudio(); const all = window.SMP_PACKS || {};
       for (const k in all) { if (bellBufs[k]) continue; const list = [];
-        for (const m in all[k]) { const bin = Uint8Array.from(atob(all[k][m]), c => c.charCodeAt(0)); try { const b = await decode(bin.buffer); if (LOOP_INST.has(k)) prepLoop(b); list.push([isNaN(+m) ? m : +m, b]); } catch (e) {} }
+        for (const m in all[k]) { const bin = Uint8Array.from(atob(all[k][m]), c => c.charCodeAt(0)); try { const b = await decode(bin.buffer); if (LOOP_INST.has(k)) prepLoop(b, ...(LOOP_REG[k] || [])); list.push([isNaN(+m) ? m : +m, b]); } catch (e) {} }
         bellBufs[k] = list.sort((a, b) => (+a[0] || 0) - (+b[0] || 0)); delete all[k]; } })
     .catch(e => { packP[f] = null; toast('Sampel gagal dimuat: ' + e.message, 4000); });
   return packP[f];
@@ -4015,7 +4063,8 @@ function renderArr() {
     r.querySelector('.s').onclick = () => { t.solo = !t.solo; arrSave(); renderArr(); if (arrPl && !arrPl.only) arrPlay(arrBeat()); };
     r.querySelector('input').oninput = e => { t.vol = +e.target.value; if (arrPl) arrPl.parts.filter(P => P.tr === id).forEach(P => BUSN.forEach(n => setP(P.pl.B[n].gain, t.vol / 80))); };
     r.querySelector('input').onchange = arrSave;
-    r.querySelector('.tn').textContent = T.name;
+    r.querySelector('.tn').textContent = T.name; if (S.stTrk === id) r.classList.add('trsel');
+    r.querySelector('.anm').addEventListener('click', e => { if (e.target.closest('button')) return; selectTrk(id); });
     r.querySelector('.tmenu').onclick = e => { e.stopPropagation(); const rc = e.currentTarget.getBoundingClientRect(); trackMenu(rc.left, rc.bottom + 4, T); };
     g.appendChild(r);
   });
@@ -4108,6 +4157,7 @@ function arrSel(k, add) {
   const old = [...arr.selSet]; if (!add) arr.selSet.clear();
   if (k) { if (add && arr.selSet.has(k)) arr.selSet.delete(k); else arr.selSet.add(k); }
   arr.sel = k && arr.selSet.has(k) ? k : [...arr.selSet].pop() || null; old.forEach(drawAClip); arr.selSet.forEach(drawAClip);
+  if (k && document.body.classList.contains('studio')) selectTrk(k.track);
 }
 /* --- undo / redo --- */
 function arrSnap() { return JSON.stringify({ c: arr.clips, m: arr.marks, t: arr.tracks, r: arr.tr, p: arr.tempo || null }); }
@@ -4273,6 +4323,7 @@ function arrRecStart(tab) {
 }
 function arrRecTrack(type, s, e) {
   const busy = t => arr.clips.some(k => k.track === t.id && k.start < e - 1e-6 && k.start + clipLen(k) > s + 1e-6);
+  const pt = document.body.classList.contains('studio') && trkOf(S.stTrk); if (pt && pt.type === type && !busy(pt)) return pt.id;
   const same = arr.tracks.filter(t => t.type === type), free = same.find(t => !busy(t));
   if (free) return free.id;
   const t = addTrack(type, same.length ? same[same.length - 1].id : null); return t.id;
@@ -4425,7 +4476,9 @@ function initArr() {
     ['🎄 Overture Natal (±9 menit, orkestra + band)', () => loadDemoProject('overture.js', 'DEMO_OVERTURE')],
     ['🎄 Gita Sorga Bergema — pop gaya overture (90 bpm, ±4 menit, D → E)', () => loadDemoProject('gita.js', 'DEMO_GITA')]]); };
   $('#aProjFile').onchange = async e => { const f = e.target.files[0]; e.target.value = ''; if (!f) return; try { await projLoad(JSON.parse(await f.text())); } catch (err) { toast('File proyek tidak bisa dibuka: ' + err.message, 4000); } };
-  $('#aMic').onclick = e => { if (micA) return stopMicA(); if (rec.state === 'rec') return stopRec(); const r = e.currentTarget.getBoundingClientRect(); arrRecMenu(r.left, r.bottom + 4); };
+  $('#aMic').onclick = e => { if (micA) return stopMicA(); if (rec.state === 'rec') return stopRec();
+    if (document.body.classList.contains('studio') && DOCK_REC.includes(S.dockTab)) return arrRecStart(S.dockTab);
+    const r = e.currentTarget.getBoundingClientRect(); arrRecMenu(r.left, r.bottom + 4); };
   $('#aImp').onclick = () => $('#aFile').click();
   $('#aFile').addEventListener('change', async e => { const f = e.target.files[0]; e.target.value = ''; if (!f) return; ensureAudio(); if (/\.midi?$/i.test(f.name) || /midi/.test(f.type)) { importMidiFile(f); return; }
     try { const buf = await decode(await f.arrayBuffer()); await arrAddAudio(buf, f.name.replace(/\.[^.]+$/, ''), 'audio'); toast('Suara masuk ke track Audio import (juga ada di pustaka kiri).'); }
@@ -4451,7 +4504,9 @@ function initArr() {
   });
   document.addEventListener('pointerdown', e => { if (!e.target.closest('#aCtx')) $('#aCtx').classList.remove('show'); }, true);
   (function aLoop() {
-    if (S.tab === 'arr') { const b = Math.max(0, arrBeat()), ph = $('#aPh'); if (ph) ph.style.left = (AHEAD + b * arr.ppb) + 'px';
+    const stu = document.body.classList.contains('studio');
+    if (stu) { const b = Math.max(0, arrBeat()), sec = b2s(b); $('#stBar').textContent = `${Math.floor(b / 4) + 1}.${Math.floor(b % 4) + 1}.${Math.floor((b % 1) * 4) + 1}`; $('#stTime').textContent = `${Math.floor(sec / 60)}:${(sec % 60).toFixed(1).padStart(4, '0')}`; $('#stTempo').textContent = '♩ ' + (Math.round(bpmAt(b) * 10) / 10); }
+    if (S.tab === 'arr' || stu) { const b = Math.max(0, arrBeat()), ph = $('#aPh'); if (ph) ph.style.left = (AHEAD + b * arr.ppb) + 'px';
       $('#aPos').textContent = `${Math.floor(b / 4) + 1}.${Math.floor(b % 4) + 1}`;
       if (arrPl && !arrPl.only) { const sc = $('#aScroll'), x = AHEAD + b * arr.ppb; if (x > sc.scrollLeft + sc.clientWidth - 60) sc.scrollLeft = x - 220; } }
     requestAnimationFrame(aLoop);
@@ -4635,7 +4690,64 @@ function initMixer() {
     requestAnimationFrame(loop);
   })();
 }
+
+/* ===================== v31: tampilan Studio satu halaman (gaya Logic) ===================== */
+const DOCK_TABS = [['kb', '🎹 Keyboard'], ['drum', '🥁 Drum'], ['pad', '🎛 Pad'], ['gtr', '🎸 Gitar'], ['bass', '🎸 Bass'], ['chime', '🔔 Chimes'], ['mix', '🎚 Mixer'], ['rec', '⏺ Rekaman take']];
+const DOCK_REC = ['kb', 'drum', 'pad', 'gtr', 'bass', 'chime'];
+const TYPE_DOCK = { pad: 'pad', kb: 'kb', gtr: 'gtr', bass: 'bass', drum: 'drum', fx: 'chime' };
+function dockTo(t) {
+  if (!DOCK_TABS.some(d => d[0] === t)) t = 'kb';
+  S.dockTab = t; save('dockTab'); S.tab = t; save('tab');
+  document.querySelectorAll('.panel').forEach(p => p.classList.toggle('dock', p.id === 'tab-' + t));
+  document.querySelectorAll('#dockTabs button').forEach(b => b.classList.toggle('on', b.dataset.dock === t));
+  [...document.body.classList].filter(c => c.startsWith('dock-')).forEach(c => document.body.classList.remove(c)); document.body.classList.add('dock-' + t);
+  const T = trkOf(S.stTrk), inf = $('#dockInfo');
+  if (inf) inf.textContent = DOCK_REC.includes(t) ? `● Rekam → ${T && TYPE_DOCK[T.type] === t ? 'track "' + T.name + '"' : 'track ' + (DOCK_TABS.find(d => d[0] === t)[1].replace(/^\S+ /, ''))} mulai bar ${Math.floor(arr.head / 4 + 1e-6) + 1}` : '';
+  if (t === 'rec') setTimeout(drawTimeline, 0);
+  setTimeout(() => window.dispatchEvent(new Event('resize')), 30);
+}
+function selectTrk(id) {
+  S.stTrk = id; save('stTrk');
+  document.querySelectorAll('#aGrid .arow').forEach(r => r.classList.remove('trsel'));
+  const T = trkOf(id); if (!T) return;
+  const i = arr.tracks.indexOf(T), rows = document.querySelectorAll('#aGrid .arow:not(.aruler):not(.amrow):not(.addrow)'); if (rows[i]) rows[i].classList.add('trsel');
+  if (document.body.classList.contains('studio') && TYPE_DOCK[T.type]) dockTo(TYPE_DOCK[T.type]); else if (document.body.classList.contains('studio')) dockTo(S.dockTab);
+}
+function setUiMode(m) {
+  const st = m === 'studio'; S.uiMode = st ? 'studio' : 'classic'; save('uiMode');
+  if (st && S.tab !== 'arr' && DOCK_TABS.some(d => d[0] === S.tab)) S.dockTab = S.tab;
+  document.body.classList.toggle('studio', st);
+  ['aStart', 'aPlay', 'aMic', 'aLoop'].forEach(id => { const el = $('#' + id); if (!el) return;
+    if (!el._home) { el._home = document.createComment('asal ' + id); el.parentNode.insertBefore(el._home, el); }
+    if (st) $('#stTransport').appendChild(el); else el._home.parentNode.insertBefore(el, el._home.nextSibling); });
+  $('#uiModeBtn').textContent = st ? '📱 Versi klasik' : '🎛 Studio (gaya Logic)';
+  if (st) { const dh = +S.dockH || 0; if (dh) $('main').style.setProperty('--dockH', dh + 'px'); document.body.classList.toggle('dockmin', !!S.dockMin); dockTo(S.dockTab || 'kb'); renderArr(); }
+  else { document.querySelectorAll('.panel').forEach(p => p.classList.remove('dock')); showTab(S.tab || 'pad'); }
+  setTimeout(() => { window.dispatchEvent(new Event('resize')); if (st) renderArr(); }, 60);
+}
+function initStudio() {
+  $('#dockTabs').innerHTML = DOCK_TABS.map(([t, n]) => `<button class="mini" data-dock="${t}">${n}</button>`).join('');
+  $('#dockTabs').addEventListener('click', e => { const b = e.target.closest('button'); if (!b) return; if (document.body.classList.contains('dockmin')) { S.dockMin = false; save('dockMin'); document.body.classList.remove('dockmin'); } dockTo(b.dataset.dock); });
+  $('#dockMin').onclick = () => { S.dockMin = !document.body.classList.contains('dockmin'); save('dockMin'); document.body.classList.toggle('dockmin', S.dockMin); $('#dockMin').textContent = S.dockMin ? '▴' : '▾'; setTimeout(() => window.dispatchEvent(new Event('resize')), 30); };
+  // seret baris editor (seperti menutup jendela): ke bawah = tutup, ke atas = buka / tinggikan
+  const bar = $('#dockBar'), m = $('main');
+  bar.addEventListener('pointerdown', e => {
+    if (e.button || e.target.closest('button,select,input')) return; e.preventDefault(); bar.setPointerCapture(e.pointerId);
+    const r = m.getBoundingClientRect(), y0 = e.clientY, wasMin = document.body.classList.contains('dockmin');
+    const h0 = wasMin ? 0 : (parseFloat(getComputedStyle(m).gridTemplateRows.split(' ').pop()) || r.height * .4); let h = h0, moved = false;
+    m.style.setProperty('--dockH', h0 + 'px'); document.body.classList.remove('dockmin'); m.classList.add('dragging');
+    const mv = ev => { const dy = y0 - ev.clientY; if (Math.abs(dy) > 4) moved = true; h = Math.max(0, Math.min(r.height - 160, h0 + dy)); m.style.setProperty('--dockH', h + 'px'); };
+    const up = () => { bar.removeEventListener('pointermove', mv); bar.removeEventListener('pointerup', up); bar.removeEventListener('pointercancel', up); m.classList.remove('dragging');
+      if (!moved) { if (wasMin) document.body.classList.add('dockmin'); return; }
+      const close = h < 90; S.dockMin = close; save('dockMin'); document.body.classList.toggle('dockmin', close);
+      if (!close) { S.dockH = Math.round(h); save('dockH'); } else m.style.setProperty('--dockH', (S.dockH || r.height * .4) + 'px');
+      $('#dockMin').textContent = close ? '▴' : '▾'; window.dispatchEvent(new Event('resize')); };
+    bar.addEventListener('pointermove', mv); bar.addEventListener('pointerup', up); bar.addEventListener('pointercancel', up); });
+  $('#uiModeBtn').onclick = () => setUiMode(document.body.classList.contains('studio') ? 'classic' : 'studio');
+  if (S.uiMode === 'studio') setUiMode('studio');
+}
 function showTab(t) {
+  if (document.body.classList.contains('studio')) { if (t !== 'arr') dockTo(t); return; }
   S.tab = t; save('tab');
   document.querySelectorAll('nav button').forEach(b => b.classList.toggle('on', b.dataset.tab === t));
   document.querySelectorAll('.panel').forEach(p => p.classList.toggle('show', p.id === 'tab-' + t));
@@ -4664,7 +4776,7 @@ function init() {
   $('#helpBtn').addEventListener('click', () => $('#help').classList.add('show'));
   $('#helpClose').addEventListener('click', () => $('#help').classList.remove('show'));
   document.querySelectorAll('nav button').forEach(b => b.addEventListener('click', () => showTab(b.dataset.tab)));
-  showTab(S.tab);
+  showTab(S.tab); initStudio();
   // pad
   chips('#timbres', Object.entries(TIMBRES).map(([k, t]) => [k, t.name]), 'timbre', () => { applyLevels(); padRefresh(); });
   chips('#chords', Object.entries(CHORDS).map(([k, c]) => [k, c.name]), 'chord', padRefresh);
@@ -4691,6 +4803,16 @@ function init() {
     $('#kbSound2').addEventListener('change', e => { S.kbSound2 = e.target.value; save('kbSound2'); [...sfState.voices.keys()].forEach(n => kbNoteOff(n, true)); const P2 = KB[S.kbSound2]; if (P2) { ensureAudio(); if (P2.smp) loadSmp(P2.smp); if (P2.smp2) loadSmp(P2.smp2); if (P2.vl) P2.vl.forEach(loadSmp); } });
     $('#kbOct2').addEventListener('change', e => { S.kbOct2 = +e.target.value; save('kbOct2'); });
     slider('kbBal', 'kbBal', null, v => v < 50 ? `1 lebih keras` : v > 50 ? `2 lebih keras` : 'sama'); }
+  { const PATCH = [['', '★ Patch gereja siap pakai…'], ['mfelt|mshim|0|38', 'Felt piano + Shimmer pad (lagu pelan)'], ['mfelt|mober|0|42', 'Felt piano + Ober pad hangat'],
+      ['kgrandw|mshim|0|38', 'Grand piano + Shimmer (ballad besar)'], ['msines|mmshim|0|50', 'Rewind sines + Muted shimmer (intro / doa)'], ['mbell|mdef|0|50', 'Retro bell + Definitive pad (bridge naik)'],
+      ['mdef|msub|-1|42', 'Definitive pad + Sub bass (build-up)'], ['mfelth||0|50', 'Felt piano + hall (sendiri)'], ['mshim||0|50', 'Shimmer pad (sendiri)']];
+    const ps = $('#kbPatch'); ps.innerHTML = PATCH.map(([v, n]) => `<option value="${v}">${n}</option>`).join('');
+    ps.addEventListener('change', () => { const v = ps.value; if (!v) return; const [a, b, o, bal] = v.split('|'); ensureAudio(); [...sfState.voices.keys()].forEach(n => kbNoteOff(n, true));
+      S.kbSound = a; save('kbSound'); $('#kbSound').value = a; fillSoundSelect(); kbLastNote = null; applyKbPreset(a);
+      S.kbDual = !!b; save('kbDual'); if (b) { S.kbSound2 = b; save('kbSound2'); $('#kbSound2').value = b; S.kbOct2 = +o; save('kbOct2'); $('#kbOct2').value = o; S.kbBal = +bal; save('kbBal'); const bi = $('#kbBal'); if (bi) { bi.value = bal; bi.dispatchEvent(new Event('input')); } }
+      $('#kbDualBtn').classList.toggle('on', !!S.kbDual); $('#kbDualBox').style.display = S.kbDual ? '' : 'none';
+      [a, b].filter(Boolean).forEach(k => { const P = KB[k]; if (!P) return; if (P.smp) loadSmp(P.smp); if (P.smp2) loadSmp(P.smp2); if (P.vl) P.vl.forEach(loadSmp); });
+      toast('Patch: ' + ps.options[ps.selectedIndex].text + (b ? ' — dua suara ditumpuk (atur Imbang 1 ↔ 2).' : ''), 3500); ps.value = ''; }); }
   $('#kbSound').addEventListener('change', e => { S.kbSound = e.target.value; save('kbSound'); [...sfState.voices.keys()].forEach(n => kbNoteOff(n, true)); fillSoundSelect(); kbLastNote = null; if (KB[S.kbSound]) applyKbPreset(S.kbSound); });
   [['kbChorusBtn', 'kbChorus'], ['kbDelayBtn', 'kbDelay'], ['kbPumpBtn', 'kbPump'], ['kbGlideBtn', 'kbGlide']].forEach(([id, k]) => $('#' + id).addEventListener('click', () => { S[k] = !S[k]; save(k); syncKbControls(); updateKbFx(); }));
   $('#kbDTime').addEventListener('change', e => { S.kbDTime = e.target.value; save('kbDTime'); updateKbFx(); });
