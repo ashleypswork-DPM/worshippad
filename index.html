@@ -85,7 +85,7 @@ body.studio main.dragging .panel.dock{overflow:hidden}
 .pchint{display:none;position:fixed;right:14px;bottom:14px;z-index:50;background:#14202c;border:1px solid #2c4b68;color:#bfe3ff;border-radius:10px;padding:8px 12px;font:13px/1.45 ui-monospace,Menlo,Consolas,monospace;pointer-events:none;max-width:460px}
 .pchint.show{display:block}
 .pcflash{outline:3px solid #8fd0ff!important;filter:brightness(1.35)}
-.drum{position:relative}.drum .keys{position:absolute;left:10px;bottom:6px;pointer-events:none;font:600 11px/1.2 ui-monospace,Menlo,monospace;color:#cfe6ff;opacity:.9}
+.drum{position:relative}.drum .dkeys{position:absolute;left:10px;bottom:6px;pointer-events:none;font:600 11px/1.2 ui-monospace,Menlo,monospace;color:#cfe6ff;opacity:.9}
 .drum.learn{outline:3px dashed #ffd36b;outline-offset:-3px}
 #drums.learning .drum{cursor:crosshair}
 body.studio .arow.trsel>.ahead{background:#3a4a63;box-shadow:inset 3px 0 0 #6fb1ff}
@@ -269,6 +269,10 @@ details.fx>.controls{border:none;border-top:1px solid var(--line);border-radius:
 .aclip{position:absolute;top:3px;bottom:3px;border-radius:9px;border:1px solid rgba(255,255,255,.18);overflow:hidden;touch-action:none;cursor:grab;box-shadow:0 2px 6px rgba(0,0,0,.35)}
 .aclip .t{position:absolute;left:7px;top:3px;right:12px;font-size:12px;font-weight:700;color:#fff;text-shadow:0 1px 2px rgba(0,0,0,.6);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;pointer-events:none;z-index:2}
 .aclip canvas{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
+.arecl{position:absolute;top:3px;bottom:3px;border-radius:9px;border:1.5px solid rgba(255,90,80,.95);overflow:hidden;pointer-events:none;z-index:5;box-shadow:0 0 0 1px rgba(0,0,0,.3),0 2px 8px rgba(255,60,60,.35)}
+.arecl canvas{position:absolute;inset:0;width:100%;height:100%}
+.arecl .t{position:absolute;left:7px;top:3px;right:6px;font-size:12px;font-weight:700;color:#fff;text-shadow:0 1px 2px rgba(0,0,0,.6);white-space:nowrap;overflow:hidden;z-index:2}
+.arecl.cnt{border-style:dashed;opacity:.75}
 .aclip .rz{position:absolute;right:0;top:0;bottom:0;width:14px;cursor:ew-resize;background:linear-gradient(90deg,transparent,rgba(255,255,255,.25))}
 @media (pointer:coarse){.aclip .rz,.aclip .rzl{width:20px}}
 .aclip .rzl{position:absolute;left:0;top:0;bottom:0;width:14px;cursor:ew-resize;background:linear-gradient(270deg,transparent,rgba(255,255,255,.25))}
@@ -1945,7 +1949,7 @@ function renderDrums() {
     b.addEventListener('pointerdown', e => e.stopPropagation());
     b.addEventListener('click', e => { e.stopPropagation(); editingDrum = d; $('#drumMenuTitle').textContent = 'Pad ' + d.name; syncPadSet(); $('#drumMenu').classList.add('show'); });
     p.appendChild(b);
-    const ks = drKeysFor(KITS[S.kit].pads.indexOf(d)); if (ks.length) { const kl = document.createElement('div'); kl.className = 'keys'; kl.textContent = '🎹 ' + ks.slice(0, 4).map(nName).join(' ') + (ks.length > 4 ? ` +${ks.length - 4}` : ''); p.appendChild(kl); }
+    const ks = drKeysFor(KITS[S.kit].pads.indexOf(d)); if (ks.length) { const kl = document.createElement('div'); kl.className = 'dkeys'; kl.textContent = '🎹 ' + ks.slice(0, 4).map(nName).join(' ') + (ks.length > 4 ? ` +${ks.length - 4}` : ''); p.appendChild(kl); }
     if (drLearn && drLearn.pad === d.id) p.classList.add('learn');
     p.addEventListener('pointerdown', e => { e.preventDefault(); if (drLearn) { drLearn.pad = d.id; renderDrums(); toast(`Sekarang tekan tuts di keyboard untuk "${d.name}" (bisa beberapa tuts). Tekan 🎹 Selesai kalau sudah.`, 3500); return; } hitDrum(d); p.classList.add('hit'); setTimeout(() => p.classList.remove('hit'), 90); });
     el.appendChild(p);
@@ -3192,7 +3196,7 @@ function stopRec() {
   clearInterval(rec.timer); const now = ctx.currentTime;
   if (rec.state !== 'rec') return;
   rec.state = 'idle'; renderRecBtn();
-  const AR = rec.arr; rec.arr = null; if (AR) { if (arrPl) arrStop(true); stopClick(); renderArrBtns(); }
+  const AR = rec.arr; rec.arr = null; drawRecLive(); if (AR) { if (arrPl) arrStop(true); stopClick(); renderArrBtns(); }
   if (rec.stack) stopSong();
   const pre = (rec.pre || []).filter(e => !/Off|boff|gdamp/.test(e.type) || true); rec.pre = [];
   if (pre.some(e => !/Off|boff|gdamp/.test(e.type))) {
@@ -4445,6 +4449,47 @@ function arrRecFinish(AR, ev, bars, len) {
   const sc = $('#aScroll'); if (sc) sc.scrollLeft = Math.max(0, AR.startB * arr.ppb - 60);
   toast(`Masuk ke Susun Lagu: ${[...new Set(made.map(k => trkOf(k.track).name))].join(', ')} · bar ${AR.startB / 4 + 1}–${AR.startB / 4 + bars} (${bars} bar). Tekan ● Rekam lagi untuk menumpuk alat berikutnya.`, 5500);
 }
+/* kotak rekaman langsung muncul & memanjang selama merekam (seperti Logic) */
+const REC_TAB_TYPE = { kb: 'kb', drum: 'drum', pad: 'pad', gtr: 'gtr', bass: 'bass', chime: 'fx' };
+let recLiveT = 0;
+function recLiveTrack(AR) {
+  const ty = REC_TAB_TYPE[AR.tab]; if (!ty) return null;
+  const busy = t => arr.clips.some(k => k.track === t.id && k.start < AR.startB + 4 - 1e-6 && k.start + clipLen(k) > AR.startB + 1e-6);
+  const pt = trkOf(S.stTrk); if (pt && pt.type === ty && !busy(pt)) return pt;
+  const same = arr.tracks.filter(t => t.type === ty); return same.find(t => !busy(t)) || same[0] || null;
+}
+function drawRecLive() {
+  let el = document.getElementById('aRecLive'); const AR = rec.state === 'rec' && rec.arr;
+  if (!AR) { if (el) el.remove(); return; }
+  if (!AR.trk) AR.trk = recLiveTrack(AR); const T = AR.trk; const lane = T && document.querySelector(`.alane[data-t="${T.id}"]`);
+  if (!lane) { if (el) el.remove(); return; }
+  if (!el) { el = document.createElement('div'); el.id = 'aRecLive'; el.className = 'arecl'; el.innerHTML = '<canvas></canvas><div class="t"></div>'; }
+  if (el.parentNode !== lane) { lane.appendChild(el); const sc = $('#aScroll'), row = lane.parentNode;
+    if (sc && row) { const r = row.getBoundingClientRect(), v = sc.getBoundingClientRect(); if (r.top < v.top + 50 || r.bottom > v.bottom - 12) sc.scrollTop += r.top - v.top - 50; } }
+  const q = 60 / rec.bpm, cnt = ctx.currentTime < rec.t0, pre = (rec.pre || []).filter(e => !/Off|boff|gdamp/.test(e.type));
+  const preB = pre.length ? Math.max(0, Math.ceil((rec.t0 - Math.min(...pre.map(e => e.t))) / q / 4 - 1e-6) * 4) : 0;
+  const s0 = Math.max(0, AR.startB - preB), now = cnt ? AR.startB + 0.25 : Math.max(AR.startB + 0.25, AR.startB + (ctx.currentTime - rec.t0) / q);
+  const g = { kb: 'kb', pad: 'pad', gtr: 'gtr', bass: 'bass', drum: 'pat', chime: 'chime' }[AR.tab] || 'take';
+  el.classList.toggle('cnt', cnt); el.style.left = s0 * arr.ppb + 'px'; el.style.width = Math.max(10, (now - s0) * arr.ppb) + 'px';
+  el.style.background = ARR_COL[g];
+  const bar = Math.floor((now - AR.startB) / 4) + 1;
+  el.querySelector('.t').textContent = cnt ? '● Hitung masuk…' : `● Rekam · ${T.name} · ${bar} bar`;
+  if (performance.now() - recLiveT < 120) return; recLiveT = performance.now();
+  const cv = el.querySelector('canvas'), W = cv.clientWidth, H = cv.clientHeight; if (!W || !H) return;
+  cv.width = W * 2; cv.height = H * 2; const x = cv.getContext('2d'); x.scale(2, 2);
+  const evs = pre.map(e => Object.assign({}, e, { bb: AR.startB + (e.t - rec.t0) / q })).concat(rec.events.map(e => Object.assign({}, e, { bb: AR.startB + e.t / q })));
+  const X = b => (b - s0) * arr.ppb, top = 18, hh = H - top - 4; x.fillStyle = 'rgba(255,255,255,.92)';
+  const ns = evs.filter(e => typeof e.n === 'number' && !/Off|boff/.test(e.type)).map(e => e.n);
+  const lo = ns.length ? Math.min(...ns) - 1 : 0, hi = ns.length ? Math.max(...ns) + 1 : 1;
+  evs.forEach(e => {
+    if (/Off|boff|gdamp/.test(e.type)) return;
+    if (e.type === 'drum') { const r = drumRow(e.id); x.fillRect(X(e.bb) - 1, top + (r / 8) * hh, 3, Math.max(2, hh / 8 - 1)); return; }
+    if (e.type === 'padOn') { x.fillStyle = 'rgba(255,255,255,.35)'; x.fillRect(X(e.bb), top + 2, Math.max(3, X(now) - X(e.bb)), hh - 4); x.fillStyle = 'rgba(255,255,255,.92)'; return; }
+    if (typeof e.n === 'number') { let d = e.d || q / 4; if (e.type === 'kbOn') { const off = evs.find(f => f.type === 'kbOff' && f.id === e.id && f.bb >= e.bb); d = ((off ? off.bb : now) - e.bb) * q; }
+      x.fillRect(X(e.bb), top + (hi - e.n) / Math.max(1, hi - lo) * (hh - 3), Math.max(3, d / q * arr.ppb - 1), 3); return; }
+    x.fillRect(X(e.bb) - 1, top + hh / 2 - 3, 3, 6);
+  });
+}
 function renderArrBtns() {
   const p = $('#aPlay'); if (!p) return; const on = !!(arrPl && !arrPl.only); p.textContent = on ? '■ Stop' : '▶ Putar'; p.classList.toggle('on', on);
   const m = $('#aMic'), rr = rec.state === 'rec' && rec.arr, cnt = rr && ctx && ctx.currentTime < rec.t0;
@@ -4540,6 +4585,7 @@ function initArr() {
   (function aLoop() {
     const stu = document.body.classList.contains('studio');
     if (stu) { const b = Math.max(0, arrBeat()), sec = b2s(b); $('#stBar').textContent = `${Math.floor(b / 4) + 1}.${Math.floor(b % 4) + 1}.${Math.floor((b % 1) * 4) + 1}`; $('#stTime').textContent = `${Math.floor(sec / 60)}:${(sec % 60).toFixed(1).padStart(4, '0')}`; $('#stTempo').textContent = '♩ ' + (Math.round(bpmAt(b) * 10) / 10); }
+    if (S.tab === 'arr' || stu) drawRecLive();
     if (S.tab === 'arr' || stu) { const b = Math.max(0, arrBeat()), ph = $('#aPh'); if (ph) ph.style.left = (AHEAD + b * arr.ppb) + 'px';
       $('#aPos').textContent = `${Math.floor(b / 4) + 1}.${Math.floor(b % 4) + 1}`;
       if (arrPl && !arrPl.only) { const sc = $('#aScroll'), x = AHEAD + b * arr.ppb; if (x > sc.scrollLeft + sc.clientWidth - 60) sc.scrollLeft = x - 220; } }
