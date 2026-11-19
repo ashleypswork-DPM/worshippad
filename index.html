@@ -552,9 +552,9 @@ details.fx>.controls{border:none;border-top:1px solid var(--line);border-radius:
         <span class="grp"><span class="lbl">Snap</span><select id="aSnap" class="mini"><option value="4">1 bar</option><option value="1">1 ketuk</option><option value="0.5">1/8</option><option value="0.25">1/16</option></select></span>
         <span class="grp"><span class="lbl">Zoom</span><button id="aZoomOut" class="mini">−</button><button id="aZoomIn" class="mini">+</button></span>
         <span class="vsep"></span>
-        <button id="aMic" class="mini" title="Rekam langsung ke Susun Lagu: Pad, Keyboard, Gitar, Bass, Drum, Chimes, atau mic">● Rekam</button><button id="aImp" class="mini">⤓ Import</button><input id="aFile" type="file" accept="audio/*" hidden>
+        <button id="aMic" class="mini" title="Rekam langsung ke Susun Lagu: Pad, Keyboard, Gitar, Bass, Drum, Chimes, atau mic">● Rekam</button><button id="aImp" class="mini" title="Import audio (MP3/WAV) atau file MIDI (.mid) — MIDI langsung jadi clip per alat + peta tempo">⤓ Import</button><input id="aFile" type="file" accept="audio/*,.mid,.midi,audio/midi,audio/x-midi" hidden>
         <span style="flex:1"></span>
-        <button id="aSelBtn" class="mini" title="Mode pilih (iPad): seret jari untuk memilih banyak clip">⬚ Pilih</button><button id="aUndo" class="mini" title="Undo (Ctrl+Z)">↶</button><button id="aRedo" class="mini" title="Redo (Ctrl+Y)">↷</button><button id="aDel" class="mini" title="Hapus (Delete)">🗑</button><button id="aClear" class="mini" title="Kosongkan semua">🧹</button><button id="aDemo" class="mini" title="Simpan / buka proyek, dan contoh lagu (termasuk 🎄 Overture Natal)">📁 Proyek ▾</button><input id="aProjFile" type="file" accept=".wps,.json,application/json" hidden><button id="aExport" class="mini">Ekspor</button>
+        <button id="aSelBtn" class="mini" title="Mode pilih (iPad): seret jari untuk memilih banyak clip">⬚ Pilih</button><button id="aUndo" class="mini" title="Undo (Ctrl+Z)">↶</button><button id="aRedo" class="mini" title="Redo (Ctrl+Y)">↷</button><button id="aDel" class="mini" title="Hapus (Delete)">🗑</button><button id="aClear" class="mini" title="Kosongkan semua">🧹</button><button id="aDemo" class="mini" title="Simpan / buka proyek, dan contoh lagu (termasuk 🎄 Overture Natal)">📁 Proyek ▾</button><input id="aProjFile" type="file" accept=".wps,.json,application/json" hidden><button id="aTempo" class="mini" title="Peta tempo: tempo berubah di tengah lagu (mis. intro 63, lagu 109, melambat di akhir)">♩ Tempo</button><button id="aExport" class="mini">Ekspor</button>
       </div>
       <div class="amain">
         <div class="alib" id="aLib"></div>
@@ -657,6 +657,8 @@ details.fx>.controls{border:none;border-top:1px solid var(--line);border-radius:
   <p>Tekan <b>● Rekam</b> di bar atas (dengan hitung masuk 1 bar mengikuti click), lalu mainkan pad, arp, keyboard, drum, dan chimes dari tab mana saja. Tekan lagi untuk berhenti; panjangnya dibulatkan ke bar penuh. Hasilnya muncul di tab <b>Rekam &amp; Sequencer</b> lengkap dengan tampilan bar. Beberapa rekaman bisa diputar bersamaan, di-loop, diatur volumenya, dan mulai pas di ketukan 1 click. <b>Ekspor</b> menghasilkan file ZIP berisi WAV + MP3 (ketuk ZIP di aplikasi Files untuk membukanya). File audio juga bisa dimasukkan lewat <b>Import audio</b>.</p>
   <h3>Keyboard: grand piano, Rhodes, organ &amp; mode Dual</h3>
   <p>Di grup <b>Keys &amp; piano</b> ada <b>★ Grand piano</b> (rekaman Yamaha C5 asli, 2 lapis kekuatan tekan — main pelan terdengar lembut, keras terdengar terang), versi <b>stage terang</b> (gaya Nord/Yamaha CP), <b>lembut &amp; luas</b>, dan <b>pop</b>; <b>★ Rhodes Mark I</b> asli (3 lapis kekuatan tekan, versi chorus, tremolo stereo, dan worship); serta <b>Organ</b> baru dengan registrasi drawbar (888000000, 888800000, 888888888, 008800000), key-click, dan simulasi Leslie. Tombol <b>Dual</b> menumpuk dua suara sekaligus (mis. piano + strings): pilih <b>Suara 2</b>, oktafnya, dan geser <b>Imbang 1 ↔ 2</b>. Dual ikut terekam dan bisa dipakai dari keyboard MIDI.</p>
+  <p><b>Import MIDI &amp; peta tempo (baru).</b> Di <b>Susun Lagu</b> tekan <b>⤓ Import</b> lalu pilih file <b>.mid</b> (mis. dari Cakewalk): tiap alat langsung jadi clip di track masing-masing dan dimainkan suara aplikasi (piano, bass, gitar, strings, sax, flute, drum akustik). Kalau tempo lagunya berubah di tengah (mis. intro 63, lagu 109, melambat di akhir), perubahan itu ikut terbawa. Tombol <b>♩ Tempo</b> membuka <b>peta tempo</b>: tiap baris <code>bar tempo</code> (mis. <code>9 95</code>) atau perubahan perlahan <code>87-93 109&gt;97</code>. Tekan <b>Satu tempo</b> untuk kembali ke satu tempo. Click di Susun Lagu ikut peta tempo.</p>
+  <p><b>★ Drum akustik asli.</b> Kit baru di Drum Pad: rekaman drum akustik dari 5 mic (Virtuosity Drums, CC0) dengan beberapa lapis kekuatan pukulan — dipukul pelan terdengar lembut, keras terdengar tegas — dan bunyi bergantian supaya tidak terdengar seperti mesin.</p>
   <h3>Proyek (simpan &amp; buka) + contoh Overture Natal</h3>
   <p>Di Susun Lagu tekan <b>📁 Proyek ▾</b>: <b>Simpan proyek</b> membuat file <b>.wps</b> berisi seluruh susunan, rekaman, dan audio — di iPad pilih <i>Simpan ke File</i> lalu Google Drive / iCloud. <b>Buka file proyek</b> memuatnya lagi di perangkat mana saja. Di menu yang sama ada contoh <b>🎄 Overture Natal</b> (±9 menit): intro EDM halus + air terjun, biola Malam Kudus, lalu band + orkestra dengan Joy to the World, Hark the Herald, Deck the Halls, Jingle Bells, modulasi D → B → F# → A♭, dan penutup Malam Kudus. Semua bagian bisa diedit.</p>
   <h3>Suara Natal &amp; kredit sampel</h3>
@@ -1147,7 +1149,7 @@ function drawDots(active) {
   if (ctx && clk.on) { let cur = null; while (clk.queue.length && clk.queue[0].t <= ctx.currentTime) cur = clk.queue.shift(); if (cur) drawDots(cur.b); }
   requestAnimationFrame(anim);
 })();
-function setBpm(v) { S.bpm = clamp(Math.round(v), 30, 240); $('#bpm').value = S.bpm; save('bpm'); if (ctx) { updateGtrFx(); updateBassFx(); updateKbFx(); } if (typeof refreshTempoUIs === 'function') refreshTempoUIs(); }
+function setBpm(v) { S.bpm = clamp(Math.round(v), 30, 240); $('#bpm').value = S.bpm; save('bpm'); if (ctx) { updateGtrFx(); updateBassFx(); updateKbFx(); } if (typeof refreshTempoUIs === 'function') refreshTempoUIs(); if (typeof renderTempoBtn === 'function') renderTempoBtn(); }
 let taps = [];
 function tap() {
   const now = performance.now(); taps = taps.filter(t => now - t < 2500); taps.push(now);
@@ -1848,7 +1850,8 @@ function padChain(d, buf, x, t) {
 function hitDrum(d) {
   ensureAudio();
   const custom = drumCustom[d.id], buf = custom ? custom.buf : drumBuf(d.id); if (!buf) return;
-  const x = dset(d.id), s = padChain(d, buf, x, ctx.currentTime);
+  const x = dset(d.id); if (!custom && typeof REAL_TU !== 'undefined' && REAL_TU[d.id]) x.tu = (x.tu || 0) + REAL_TU[d.id];
+  const s = padChain(d, buf, x, ctx.currentTime);
   const now = ctx.currentTime; let st = now, off = 0;
   if (d.sync && !custom && clk.on) {
     // berakhir tepat di ketukan 1 berikutnya
@@ -1862,8 +1865,10 @@ function hitDrum(d) {
 }
 function schedDrum(ev, t) {
   const d = DRUMS_ALL.find(x => x.id === ev.id); if (!d) return null;
-  const custom = drumCustom[d.id], buf = custom ? custom.buf : drumBuf(d.id, ev.b); if (!buf) return null;
-  const s = padChain(d, buf, Object.assign({}, DSET0, ev.x || {}), t);
+  const custom = drumCustom[d.id]; let buf = custom ? custom.buf : drumBuf(d.id, ev.b); const x = Object.assign({}, DSET0, ev.x || {});
+  if (!custom && typeof REAL_VL !== 'undefined' && REAL_VL[d.id]) { const rb = realBuf(d.id, x.vo); if (rb) buf = rb; x.vo = 55 + 0.45 * x.vo; x.tu = (x.tu || 0) + (REAL_TU[d.id] || 0); }
+  if (!buf) return null;
+  const s = padChain(d, buf, x, t);
   s.start(t, ev.o || 0); return s;
 }
 let editingDrum = null;
@@ -1977,6 +1982,8 @@ const KB = {
   ocello:     { g: 6, name: 'Cello (seksi orkestra)', smp: 'o_cello', att: .1, rel: .6, fx: { delay: 0, rev: 45 } },
   ostrings:   { g: 6, name: 'Strings penuh: biola + cello', smp: 'o_vlnens', smp2: 'o_cello', mix2: .75, att: .15, rel: .8, fx: { delay: 0, rev: 60 } },
   oflute:     { g: 6, name: 'Flute (seruling orkestra)', smp: 'o_flute', att: .05, rel: .4, fx: { delay: 0, rev: 50 } },
+  osax:       { g: 6, name: 'Saxophone tenor (rekaman asli)', smp: 'o_sax', att: .04, rel: .3, fx: { delay: 0, rev: 35 } },
+  osaxw:      { g: 6, name: 'Saxophone tenor lembut + delay (worship)', smp: 'o_sax', att: .08, rel: .5, tone: { hi: -2 }, fx: { delay: 1, dTime: 'd8', dMix: 14, dFb: 28, rev: 50 } },
   oharp:      { g: 6, name: 'Harpa konser', smp: 'o_harp', rel: 1.8, fx: { delay: 0, rev: 55 } },
   oambstr:    { g: 6, name: 'Ambience: strings swell pelan & luas', smp: 'o_vlnens', smp2: 'o_cello', mix2: .7, att: 1.4, rel: 3, fx: { delay: 1, dTime: 'd4', dMix: 12, dFb: 35, rev: 95 } },
   oambflute:  { g: 6, name: 'Ambience: flute + harpa berkilau', smp: 'o_flute', smp2: 'o_harp', mix2: .6, att: .6, rel: 2.5, fx: { delay: 1, dTime: 'd8', dMix: 18, dFb: 40, rev: 90 } },
@@ -2045,9 +2052,9 @@ function kbSynth(P, note, vel, t, dest, key) {
 const bellBufs = {}; let bellP = null, bellToast = 0;
 // paket sampel lain (lonceng asli, orkestra, perkusi): satu file per paket, dimuat saat pertama dipakai
 const PACK_FILE = { v_glock: 'natal.js', v_sleigh: 'natal.js', v_tri: 'natal.js', v_mark: 'natal.js', v_handbell: 'lonceng.js', v_tubular: 'lonceng.js',
-  o_cello: 'orkestra_cello.js', o_vlnens: 'orkestra_vlnens.js', o_violin: 'orkestra_violin.js', o_flute: 'orkestra_flute.js', o_harp: 'orkestra_harp.js', o_perc: 'perkusi.js',
+  o_cello: 'orkestra_cello.js', o_vlnens: 'orkestra_vlnens.js', o_violin: 'orkestra_violin.js', o_flute: 'orkestra_flute.js', o_harp: 'orkestra_harp.js', o_sax: 'orkestra_sax.js', o_perc: 'perkusi.js',
   k_piano_p: 'piano.js', k_piano_f: 'piano.js', k_rh_p: 'rhodes.js', k_rh_m: 'rhodes.js', k_rh_f: 'rhodes.js' };
-const LOOP_INST = new Set(['o_cello', 'o_vlnens', 'o_violin', 'o_flute']), packP = {};
+const LOOP_INST = new Set(['o_cello', 'o_vlnens', 'o_violin', 'o_flute', 'o_sax']), packP = {};
 function prepLoop(b, s0 = 1.4, e0 = 5.3, xf = .45) {   // sambungan loop mulus (crossfade) supaya nada panjang bisa ditahan selama apa pun
   const sr = b.sampleRate, ls = Math.floor(s0 * sr), le = Math.min(b.length - Math.floor(Math.min(1.1, b.duration * .12) * sr), Math.floor(e0 * sr)), n = Math.floor(xf * sr); if (le - ls < n * 2) return;
   for (let c = 0; c < b.numberOfChannels; c++) { const d = b.getChannelData(c); for (let i = 0; i < n; i++) { const a = i / n; d[le - n + i] = d[le - n + i] * Math.cos(a * Math.PI / 2) + d[ls - n + i] * Math.sin(a * Math.PI / 2); } }
@@ -3140,7 +3147,7 @@ function stopRec() {
   if (S.tab === 'rec') drawTimeline();
 }
 async function saveTakes() {
-  const meta = takes.map(t => t.type === 'audio' ? { id: t.id, name: t.name, type: 'audio', len: t.len, vol: t.vol, loop: t.loop } : { id: t.id, name: t.name, type: 'seq', bpm: t.bpm, sig: t.sig, bars: t.bars, len: t.len, events: t.events, vol: t.vol, loop: t.loop });
+  const meta = takes.map(t => t.type === 'audio' ? { id: t.id, name: t.name, type: 'audio', len: t.len, vol: t.vol, loop: t.loop } : { id: t.id, name: t.name, type: 'seq', bpm: t.bpm, qref: t.qref, sig: t.sig, bars: t.bars, len: t.len, events: t.events, vol: t.vol, loop: t.loop });
   await idb.put('takes_v1', meta);
 }
 async function loadTakes() {
@@ -3625,6 +3632,14 @@ function showMenu(m, x, y, items) {
   m.classList.add('show'); const r = m.getBoundingClientRect(); m.style.left = Math.max(4, Math.min(x, innerWidth - r.width - 8)) + 'px'; m.style.top = Math.max(4, Math.min(y, innerHeight - r.height - 8)) + 'px';
 }
 const aq = () => 60 / S.bpm;
+// ---- peta tempo Susun Lagu (v27): arr.tempo = [[ketuk, bpm], …] urut dari ketuk 0; kosong/null = satu tempo (S.bpm) ----
+const tmap = () => (arr.tempo && arr.tempo.length > 1) ? arr.tempo : null;
+function b2s(b) { const M = tmap(); if (!M) return b * aq(); if (b <= M[0][0]) return (b - M[0][0]) * 60 / M[0][1];
+  let s = 0; for (let i = 0; i < M.length; i++) { const b0 = M[i][0], b1 = i + 1 < M.length ? M[i + 1][0] : Infinity, q = 60 / M[i][1]; if (b <= b1) return s + (b - b0) * q; s += (b1 - b0) * q; } return s; }
+function s2b(t) { const M = tmap(); if (!M) return t / aq(); if (t <= 0) return M[0][0] + t * M[0][1] / 60;
+  let s = 0; for (let i = 0; i < M.length; i++) { const b0 = M[i][0], b1 = i + 1 < M.length ? M[i + 1][0] : Infinity, q = 60 / M[i][1], d = (b1 - b0) * q; if (t <= s + d) return b0 + (t - s) / q; s += d; } return 0; }
+function bpmAt(b) { const M = tmap(); if (!M) return S.bpm; let v = M[0][1]; for (const [b0, x] of M) { if (b0 <= b + 1e-9) v = x; else break; } return v; }
+const takeQ = tk => (tk && tk.qref) ? tk.qref : aq();
 const DROWS = [['kick', 'Kick'], ['snare', 'Snare'], ['hat', 'Hi-hat'], ['ohat', 'Hi-hat buka'], ['tom1', 'Tom 1'], ['tom2', 'Tom 2'], ['tom3', 'Floor tom'], ['crash', 'Crash']];
 const dpat = o => DROWS.map(([k]) => Array.from({ length: 16 }, (_, i) => (o[k] || []).includes(i) ? 1 : 0));
 const ARR_PATS = {
@@ -3645,8 +3660,8 @@ Object.entries(MODERN).forEach(([k, v]) => { ARR_PATS[k] = { name: (v.cat === 'f
 
 const isAud = k => k.kind === 'audio' || k.kind === 'mic' || (k.kind === 'take' && takeOf(k) && takeOf(k).type === 'audio');
 const takeOf = k => takes.find(t => t.id === k.d.tid);
-const clipLen = k => isAud(k) ? k.sec / aq() : k.len;
-function setLen(k, b) { if (isAud(k)) k.sec = b * aq(); else k.len = b; }
+const clipLen = k => isAud(k) ? (tmap() ? s2b(b2s(k.start) + k.sec) - k.start : k.sec / aq()) : k.len;
+function setLen(k, b) { if (isAud(k)) k.sec = tmap() ? b2s(k.start + b) - b2s(k.start) : b * aq(); else k.len = b; }
 const audBuf = k => k.kind === 'take' ? (takeOf(k) || {}).audio : (arr.aud.find(a => a.aid === k.d.aid) || {}).buf;
 const padQ = q => q === '5' ? '5' : /^m|dim/.test(q) ? 'min' : q === 'sus4' ? 'sus' : 'maj';
 function capture(fn, tmp) {
@@ -3691,27 +3706,186 @@ function clipFrom(evs, from) {
 }
 function arrEnd() { return arr.clips.reduce((m, k) => Math.max(m, k.start + clipLen(k)), 0); }
 function arrLayout(fromB, only) {
-  const q = aq(), from = fromB * q, list = only || arr.clips, anySolo = !only && Object.values(arr.tr).some(t => t.solo), items = [], byTr = {};
-  const len = (only ? Math.max(...only.map(k => k.start + clipLen(k))) : Math.max(arrEnd(), ...arr.marks.map(m => m.beat))) * q;
+  const from = b2s(fromB), list = only || arr.clips, anySolo = !only && Object.values(arr.tr).some(t => t.solo), items = [], byTr = {};
+  const len = b2s(only ? Math.max(...only.map(k => k.start + clipLen(k))) : Math.max(arrEnd(), ...arr.marks.map(m => m.beat)));
   list.forEach(k => {
     const tr = arr.tr[k.track]; if (!only && (!tr || tr.mute || (anySolo && !tr.solo))) return;
-    const cs = k.start * q, L = clipLen(k) * q; if (cs + L <= from + 1e-4) return;
+    const cs = b2s(k.start), L = b2s(k.start + clipLen(k)) - cs; if (cs + L <= from + 1e-4) return;
     if (isAud(k)) { const buf = audBuf(k); if (!buf) return; const skip = Math.max(0, from - cs);
       items.push({ tk: { type: 'audio', audio: buf, len: L - skip, aOff: (k.d.off || 0) + skip, vol: tr.vol, tr: k.track }, vol: tr.vol, offs: [Math.max(0, cs - from)] }); return; }
-    const co = (k.d.cut || 0) * q, ev = (co > 0 ? clipFrom(genEvents(k, L + co), co).filter(e => e.t < L || /Off|boff|gdamp/.test(e.type)) : genEvents(k, L)).map(e => Object.assign(e, { t: e.t + cs })); (byTr[k.track] = byTr[k.track] || []).push(...ev);
+    const qs = k.kind === 'take' ? takeQ(takeOf(k)) : aq(), Ls = clipLen(k) * qs, co = (k.d.cut || 0) * qs, warp = !!tmap() || Math.abs(qs - aq()) > 1e-9;
+    const ev = (co > 0 ? clipFrom(genEvents(k, Ls + co), co).filter(e => e.t < Ls || /Off|boff|gdamp/.test(e.type)) : genEvents(k, Ls)).map(e => Object.assign(e, { t: warp ? b2s(k.start + e.t / qs) : e.t + cs })); (byTr[k.track] = byTr[k.track] || []).push(...ev);
   });
   Object.entries(byTr).forEach(([id, ev]) => items.push({ tk: { type: 'seq', events: clipFrom(ev, from), len: len - from, vol: arr.tr[id].vol, tr: id }, vol: arr.tr[id].vol, offs: [0] }));
   return { items, len: Math.max(0.05, len - from) };
+}
+
+/* ===================== v27: peta tempo, import MIDI, kit drum akustik ===================== */
+function renderTempoBtn() { const b = $('#aTempo'); if (!b) return; const M = tmap(); b.textContent = M ? '♩ Peta tempo' : '♩ ' + S.bpm; b.classList.toggle('on', !!M); }
+const posTxt = b => { const bar = Math.floor(b / 4 + 1e-9) + 1, k = Math.round((b - (bar - 1) * 4) * 100) / 100 + 1; return k === 1 ? String(bar) : bar + '.' + k; };
+const parsePos = x => { const m = String(x).trim().match(/^(\d+)(?:\.(\d+(?:\.\d+)?))?$/); if (!m) return NaN; return (+m[1] - 1) * 4 + (m[2] ? +m[2] - 1 : 0); };
+function tempoToText(M) {
+  const L = []; let i = 0;
+  while (i < M.length) {
+    let j = i; const d = i + 1 < M.length ? M[i + 1][1] - M[i][1] : 0;
+    while (j + 1 < M.length && Math.abs(M[j + 1][0] - M[j][0] - 1) < 1e-6 && Math.abs((M[j + 1][1] - M[j][1]) - d) < 0.06 && Math.abs(d) > 1e-6) j++;
+    if (j - i >= 2) { L.push(`${posTxt(M[i][0])}-${posTxt(M[j][0])}  ${+M[i][1].toFixed(2)}>${+M[j][1].toFixed(2)}`); i = j + 1; }
+    else { L.push(`${posTxt(M[i][0])}  ${+M[i][1].toFixed(2)}`); i++; }
+  }
+  return L.join('\n');
+}
+function textToTempo(txt) {
+  const M = [];
+  for (const raw of txt.split(/\n/)) { const ln = raw.replace(/#.*/, '').trim(); if (!ln) continue;
+    let m = ln.match(/^([\d.]+)\s*-\s*([\d.]+)\s+([\d.]+)\s*>\s*([\d.]+)$/);
+    if (m) { const a = parsePos(m[1]), b = parsePos(m[2]), v1 = +m[3], v2 = +m[4]; if (!(b > a)) throw new Error('baris "' + ln + '": akhir harus setelah awal'); const n = Math.round(b - a); for (let k = 0; k <= n; k++) M.push([a + k, v1 + (v2 - v1) * k / n]); continue; }
+    m = ln.match(/^([\d.]+)\s+([\d.]+)$/); if (m) { const a = parsePos(m[1]); if (isNaN(a)) throw new Error('posisi salah: ' + ln); M.push([a, +m[2]]); continue; }
+    throw new Error('tidak dimengerti: "' + ln + '"');
+  }
+  M.forEach(([b, v]) => { if (!(v >= 20 && v <= 300)) throw new Error('tempo ' + v + ' di luar 20–300'); });
+  M.sort((a, b) => a[0] - b[0]); const out = []; M.forEach(x => { if (out.length && Math.abs(out[out.length - 1][0] - x[0]) < 1e-6) out[out.length - 1] = x; else out.push(x); });
+  if (!out.length) return null; if (out[0][0] > 0) out.unshift([0, out[0][1]]);
+  const comp = out.filter((x, i) => i === 0 || Math.abs(x[1] - out[i - 1][1]) > 1e-6); return comp.length > 1 ? comp : (setBpm(comp[0][1]), null);
+}
+function tempoEditor() {
+  let ov = $('#tempoOv'); if (ov) ov.remove();
+  ov = document.createElement('div'); ov.id = 'tempoOv';
+  ov.style.cssText = 'position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:9999;display:flex;align-items:center;justify-content:center;padding:14px';
+  const M = tmap();
+  ov.innerHTML = `<div style="background:var(--panel,#1b1e27);color:var(--text,#e8eaf0);border-radius:14px;max-width:520px;width:100%;padding:16px;box-shadow:0 10px 40px rgba(0,0,0,.5)">
+    <div style="font-weight:700;font-size:17px;margin-bottom:6px">♩ Peta tempo Susun Lagu</div>
+    <div style="font-size:13px;opacity:.85;line-height:1.45;margin-bottom:8px">Satu baris = satu perubahan. <b>bar tempo</b> → mulai bar itu tempo tetap (mis. <code>9 95</code>). <b>bar.ketuk</b> boleh (mis. <code>17.3 100</code>).<br><b>awal-akhir t1&gt;t2</b> → berubah perlahan tiap ketuk (mis. <code>87-93 109&gt;97</code> = melambat tiap ketuk sampai 97 di bar 93). Kosongkan / tekan "Satu tempo" untuk kembali ke tempo tunggal.</div>
+    <textarea id="tempoTxt" spellcheck="false" style="width:100%;min-height:190px;font:14px/1.5 ui-monospace,Menlo,monospace;border-radius:8px;padding:8px;background:rgba(0,0,0,.25);color:inherit;border:1px solid rgba(255,255,255,.15)">${M ? tempoToText(M) : '1  ' + S.bpm}</textarea>
+    <div id="tempoErr" style="color:#ff8a7a;font-size:13px;min-height:18px;margin:4px 0"></div>
+    <div style="display:flex;gap:8px;flex-wrap:wrap;justify-content:flex-end">
+      <button class="mini" id="tempoOne">Satu tempo</button><button class="mini" id="tempoNo">Batal</button><button class="mini on" id="tempoOk">Simpan</button></div></div>`;
+  document.body.appendChild(ov);
+  const close = () => ov.remove(), apply = M2 => { arrStop(); arrPush(); arr.tempo = M2; arrSave(); renderTempoBtn(); renderArr(); close(); toast(M2 ? `Peta tempo dipakai: ${M2.length} titik perubahan.` : `Satu tempo: ${S.bpm} bpm.`); };
+  ov.onclick = e => { if (e.target === ov) close(); };
+  $('#tempoNo').onclick = close; $('#tempoOne').onclick = () => apply(null);
+  $('#tempoOk').onclick = () => { try { apply(textToTempo($('#tempoTxt').value)); } catch (er) { $('#tempoErr').textContent = er.message; } };
+}
+// ---- pembaca file MIDI (SMF tipe 0/1) ----
+function parseMidi(ab) {
+  const d = new DataView(ab); let p = 0;
+  const str = n => { let r = ''; for (let i = 0; i < n; i++) r += String.fromCharCode(d.getUint8(p + i)); p += n; return r; };
+  const u32 = () => { const v = d.getUint32(p); p += 4; return v; }, u16 = () => { const v = d.getUint16(p); p += 2; return v; };
+  const vlq = () => { let v = 0, b; do { b = d.getUint8(p++); v = (v << 7) | (b & 127); } while (b & 128); return v; };
+  if (str(4) !== 'MThd') throw new Error('bukan file MIDI'); const hl = u32(), fmt = u16(), nt = u16(), div = u16(); p = 8 + hl;
+  if (div & 0x8000) throw new Error('format waktu SMPTE belum didukung');
+  const tracks = [];
+  for (let t = 0; t < nt && p < d.byteLength; t++) {
+    const id = str(4), len = u32(), end = p + len; if (id !== 'MTrk') { p = end; continue; }
+    const ev = []; let tick = 0, run = 0, name = '';
+    while (p < end) {
+      tick += vlq(); let st = d.getUint8(p);
+      if (st === 0xFF) { p++; const ty = d.getUint8(p++), l = vlq(), s0 = p;
+        if (ty === 0x51) ev.push({ tick, k: 'tempo', us: (d.getUint8(s0) << 16) | (d.getUint8(s0 + 1) << 8) | d.getUint8(s0 + 2) });
+        else if (ty === 0x03) { name = new TextDecoder().decode(new Uint8Array(ab, s0, l)); }
+        else if (ty === 0x06) ev.push({ tick, k: 'marker', text: new TextDecoder().decode(new Uint8Array(ab, s0, l)) });
+        else if (ty === 0x58) ev.push({ tick, k: 'sig', num: d.getUint8(s0) });
+        p = s0 + l; continue; }
+      if (st === 0xF0 || st === 0xF7) { p++; p += vlq(); continue; }
+      if (st & 0x80) { run = st; p++; } else st = run;
+      const ty = st & 0xF0, ch = st & 15, a = d.getUint8(p++), b = (ty === 0xC0 || ty === 0xD0) ? 0 : d.getUint8(p++);
+      if (ty === 0x90 && b > 0) ev.push({ tick, k: 'on', ch, n: a, v: b });
+      else if (ty === 0x80 || (ty === 0x90 && b === 0)) ev.push({ tick, k: 'off', ch, n: a });
+      else if (ty === 0xC0) ev.push({ tick, k: 'prog', ch, prog: a });
+      else if (ty === 0xB0 && a === 7) ev.push({ tick, k: 'vol', ch, v: b });
+    }
+    p = end; tracks.push({ name, ev });
+  }
+  return { fmt, ppq: div, tracks };
+}
+// alat GM → suara aplikasi
+function gmVoice(prog, name) {
+  const nm = (name || '').toLowerCase();
+  if (prog >= 32 && prog <= 37) return { g: 'bass', s: { 32: 'precision', 33: 'precision', 34: 'yamahabb', 35: 'jazz', 36: 'slapfunk', 37: 'slapfunk' }[prog] };
+  if (prog === 38 || prog === 39) return { g: 'kb', s: 'subkb' };
+  if (prog >= 24 && prog <= 31) return { g: 'gtr', s: { 24: 'nylon', 25: 'steel', 26: 'clean', 27: 'clean', 28: 'clean' }[prog] || (GT.cleanch ? 'cleanch' : 'clean') };
+  const K = [[0, 3, 'kgrandw'], [4, 5, 'krhodes'], [6, 7, 'clav'], [8, 8, 'xcelesta'], [9, 9, 'xglock'], [10, 10, 'xmusicbox'], [11, 11, 'xvibes'], [12, 13, 'marimba'], [14, 14, 'xtubular'], [15, 15, 'bells'],
+    [16, 18, 'b3gospel'], [19, 23, 'b3soft'], [40, 40, 'oviolin'], [41, 41, 'ovlnens'], [42, 43, 'ocello'], [44, 45, 'ovlnens'], [46, 46, 'oharp'], [47, 47, 'ocello'], [48, 48, 'ostrings'], [49, 49, 'oambstr'],
+    [50, 51, 'juno'], [52, 54, 'xchoir'], [55, 55, 'edmbrass'], [56, 63, 'softhorn'], [64, 67, 'osax'], [68, 79, 'oflute'], [80, 80, 'chip'], [81, 87, 'sawmono'], [88, 89, 'hillsong'], [90, 90, 'junopad'],
+    [91, 91, 'choirsyn'], [92, 92, 'glasspad'], [93, 93, 'shimmer'], [94, 94, 'airpad'], [95, 95, 'evolve'], [96, 103, 'shimmer'], [104, 111, 'kpluck'], [112, 119, 'xglock']];
+  const hit = K.find(([a, b]) => prog >= a && prog <= b); let sn = hit ? hit[2] : 'kgrandw';
+  if (/pad/.test(nm) && prog < 88) sn = 'hillsong'; if (/string/.test(nm) && prog < 40) sn = 'ostrings';
+  return { g: 'kb', s: KB[sn] ? sn : 'kgrandw' };
+}
+const GM_DRUM = { 35: 'r_kick', 36: 'r_kick', 37: 'r_xstick', 38: 'r_snare', 39: 'clap', 40: 'r_rim', 41: 'r_tom3', 42: 'r_hat', 43: 'r_tom3', 44: 'r_phat', 45: 'r_tom2', 46: 'r_ohat', 47: 'r_tom2', 48: 'r_tom1', 49: 'r_crash',
+  50: 'r_tom1', 51: 'r_ride', 52: 'r_crash3', 53: 'r_bell', 54: 'p_tamb', 55: 'r_splash', 56: 's_bell', 57: 'r_crash2', 59: 'r_ride', 69: 'p_cabasa', 70: 'p_shkd', 75: 'p_claves', 81: 'n_tri', 83: 'n_shake', 84: 'n_markdn' };
+const gStr = n => n < 45 ? 6 : n < 50 ? 5 : n < 55 ? 4 : n < 59 ? 3 : n < 64 ? 2 : 1;
+async function importMidiFile(f) {
+  let M; try { M = parseMidi(await f.arrayBuffer()); } catch (e) { toast('MIDI tidak bisa dibaca: ' + e.message, 4500); return; }
+  const ppq = M.ppq, Q = 0.5, all = M.tracks.flatMap(t => t.ev);
+  // peta tempo
+  const tp = all.filter(e => e.k === 'tempo').sort((a, b) => a.tick - b.tick).map(e => [e.tick / ppq, Math.round(60e6 / e.us * 1000) / 1000]);
+  const tm = []; tp.forEach(x => { if (tm.length && Math.abs(tm[tm.length - 1][0] - x[0]) < 1e-6) tm[tm.length - 1] = x; else tm.push(x); }); if (!tm.length || tm[0][0] > 0) tm.unshift([0, tm.length ? tm[0][1] : 120]);
+  const tmc = tm.filter((x, i) => i === 0 || Math.abs(x[1] - tm[i - 1][1]) > 1e-6);
+  // kumpulkan not per track
+  const parts = [];
+  M.tracks.forEach((T, ti) => {
+    if (/click|metronom|klik/i.test(T.name)) return;
+    const ons = T.ev.filter(e => e.k === 'on'); if (!ons.length) return;
+    const chCount = {}; ons.forEach(e => chCount[e.ch] = (chCount[e.ch] || 0) + 1);
+    Object.keys(chCount).forEach(chs => { const ch = +chs, my = T.ev.filter(e => e.ch === ch || e.ch === undefined);
+      const pr = T.ev.find(e => e.k === 'prog' && e.ch === ch) || all.find(e => e.k === 'prog' && e.ch === ch);
+      const notes = [], open = {};
+      my.forEach(e => { if (e.k === 'on') { (open[e.n] = open[e.n] || []).push(e); } else if (e.k === 'off' && open[e.n] && open[e.n].length) { const o = open[e.n].shift(); notes.push({ b: o.tick / ppq, d: Math.max(1 / 32, (e.tick - o.tick) / ppq), n: o.n, v: o.v }); } });
+      Object.values(open).flat().forEach(o => notes.push({ b: o.tick / ppq, d: .5, n: o.n, v: o.v }));
+      if (notes.length) parts.push({ name: (T.name || 'Track ' + (ti + 1)).trim(), ch, prog: pr ? pr.prog : 0, notes: notes.sort((a, b) => a.b - b.b) }); });
+  });
+  if (!parts.length) { toast('File MIDI tidak berisi not.'); return; }
+  const endB = Math.max(...parts.map(P => Math.max(...P.notes.map(x => x.b + x.d)))), bars = Math.ceil((endB - 1e-6) / 4), L = bars * 4;
+  const msg = `Import MIDI "${f.name}"?\n${parts.length} alat · ${bars} bar · ${tmc.length > 1 ? 'tempo berubah (' + tmc.length + ' titik)' : tmc[0][1] + ' bpm'}.\n\nOK = ganti susunan sekarang (bisa ↶ Undo). Batal = tidak jadi.`;
+  if (arr.clips.length && !confirm(msg)) return;
+  arrStop(); arrPush(); ensureAudio();
+  arr.clips = []; arr.marks = []; arr.sel = null; arr.selSet.clear();
+  if (tmc.length > 1) arr.tempo = tmc.map(x => [x[0], x[1]]); else { arr.tempo = null; setBpm(tmc[0][1]); }
+  const made = [], usedTr = new Set(); let idn = Date.now();
+  parts.forEach((P, i) => {
+    const ev = [], drum = P.ch === 9, V = drum ? null : gmVoice(P.prog, P.name), g = drum ? 'drum' : V.g; let u = 0;
+    if (drum) P.notes.forEach(x => { const id = GM_DRUM[x.n]; if (!id) return; ev.push({ type: 'drum', id, t: x.b * Q, o: 0, b: 4 * Q, x: { tu: 0, de: 100, vo: Math.round(x.v / 127 * 112), pa: 0 } }); });
+    else if (g === 'bass') P.notes.forEach(x => { const id = 'mb' + (u++); ev.push({ type: 'bass', id, n: x.n, v: x.v, a: 'finger', s: V.s, k: id, t: x.b * Q }, { type: 'boff', id, tau: .05, t: (x.b + x.d) * Q }); });
+    else if (g === 'gtr') { let lastEnd = 0; P.notes.forEach(x => { if (lastEnd && x.b - lastEnd > 1.5) ev.push({ type: 'gdamp', t: lastEnd * Q }); ev.push({ type: 'gtr', st: gStr(x.n), n: x.n, v: x.v, s: V.s, pm: P.prog === 28, t: x.b * Q }); lastEnd = Math.max(lastEnd, x.b + x.d); }); ev.push({ type: 'gdamp', t: lastEnd * Q }); }
+    else P.notes.forEach(x => { const id = 'mk' + (u++); ev.push({ type: 'kbOn', id, n: x.n, v: x.v, s: V.s, p: -1, t: x.b * Q }, { type: 'kbOff', id, x: false, t: (x.b + x.d) * Q }); });
+    if (!ev.length) return;
+    ev.sort((a, b) => a.t - b.t);
+    const tk = { id: idn++, name: 'MIDI · ' + P.name, type: 'seq', bpm: 120, qref: Q, sig: 4, bars, len: L * Q, events: ev, vol: 80, loop: false }; takes.unshift(tk);
+    const ty = g === 'kb' && KB[V.s] && KB[V.s].g === 2 ? 'pad' : g;
+    let tr = arr.tracks.find(t => t.type === ty && !usedTr.has(t.id)); if (!tr) tr = addTrack(ty); usedTr.add(tr.id); tr.name = P.name.slice(0, 40);
+    const k = { id: arr.nid++, kind: 'take', name: P.name, track: tr.id, start: 0, len: L, d: { tid: tk.id, col: (REC_GRP_N[g] || REC_GRP_N.take)[1] } }; arr.clips.push(k); made.push(k);
+  });
+  const mk = all.filter(e => e.k === 'marker');
+  selTake = takes[0]; saveTakes(); renderTakes(); fixTracks(); arrSave(); renderArrLib(); showTab('arr'); renderArr(); renderTempoBtn();
+  ensureSamplesFor(arrLayout(0).items.map(i => i.tk));
+  toast(`MIDI masuk: ${made.length} alat · ${bars} bar${arr.tempo ? ' · peta tempo ' + arr.tempo.length + ' titik (♩ Peta tempo untuk melihat/ubah)' : ''}${mk.length ? ' · ' + mk.length + ' marker' : ''}.`, 6000);
+}
+// ---- kit drum akustik asli (Virtuosity Drums, CC0): lapisan kekuatan pukulan + bergantian (round robin) ----
+const REAL_VL = { r_kick: ['kick', 3], r_snare: ['snare', 4], r_rim: ['rim', 3], r_xstick: ['xstick', 2], r_hat: ['hat', 3], r_phat: ['phat', 2], r_ohat: ['ohat', 2], r_hhalf: ['hhalf', 2],
+  r_tom1: ['tom1', 3], r_tom2: ['tom1', 3], r_tom3: ['tom3', 3], r_crash: ['crash', 2], r_crash2: ['crash', 2], r_crash3: ['crash', 2], r_splash: ['crash', 2], r_ride: ['ride', 2], r_bell: ['bell', 2] };
+const REAL_TU = { r_tom2: -3, r_crash2: -2, r_crash3: -4, r_splash: 5 };
+Object.entries(REAL_VL).forEach(([id, [p, n]]) => SMP_DRUM[id] = ['d_real', p + '_' + (n - 1) + '_0', id === 'r_splash' ? .6 : 1]);
+PACK_FILE.d_real = 'akustik.js';
+KITS.real = { name: '★ Drum akustik asli (rekaman 5 mic, dinamis)', pads: [['kick', 'Kick', '#7a3b4a'], ['snare', 'Snare', '#8b6a2f', 1], ['rim', 'Rimshot', '#9a5a2a', 1], ['xstick', 'Cross-stick', '#7a5a3a'],
+  ['hat', 'Hi-hat tutup', '#2f6f8b'], ['phat', 'Hi-hat injak', '#2f5f7b'], ['hhalf', 'Hi-hat setengah', '#2f6f9b', 1], ['ohat', 'Hi-hat buka', '#2f7f8b', 1], ['tom1', 'Tom 1', '#3a8b5a', 1], ['tom2', 'Tom 2', '#3a7b5a', 1],
+  ['tom3', 'Floor tom', '#3a6b4a', 1], ['ride', 'Ride', '#7b7b3f', 1], ['bell', 'Ride bell', '#9b8b3f', 1], ['crash', 'Crash 1', '#8b8b2f', 1], ['crash2', 'Crash 2', '#8b7a2f', 1], ['crash3', 'Crash 3', '#8b6a2f', 1], ['splash', 'Splash', '#9b9b4f', 1]]
+  .map(([p, n, c, r]) => ({ id: 'r_' + p, name: n, color: c, rev: r })) };
+DRUMS_ALL.push(...KITS.real.pads);
+const realRR = {};
+function realBuf(id, vo) {
+  const [p, n] = REAL_VL[id], list = bellBufs.d_real; if (!list) { loadSmp('d_real'); return null; }
+  const li = Math.max(0, Math.min(n - 1, Math.floor(clamp(vo, 1, 127) / 113 * n))), rr = realRR[id] = (realRR[id] || 0) ^ 1;
+  const e = list.find(x => x[0] === p + '_' + li + '_' + rr) || list.find(x => x[0] === p + '_' + li + '_0'); return e ? e[1] : null;
 }
 /* --- pemutar --- */
 let arrPl = null, arrLibN = -1;
 function arrPlay(fromB, t0, only) {
   ensureAudio(); arrStop(true, !!t0); if (!only) stopSong(false);
-  const fb = fromB ?? arr.head, Ly = arrLayout(fb, only), C = only ? { pre: 0, list: [] } : arrCues(fb, !!t0, fb + Ly.len / aq());
+  const fb = fromB ?? arr.head, Ly = arrLayout(fb, only), C = only ? { pre: 0, list: [] } : arrCues(fb, !!t0, s2b(b2s(fb) + Ly.len));
   if (!Ly.items.length && !C.list.length) { if (!t0) toast('Timeline masih kosong — tarik suara dari kiri ke bar.'); renderArrBtns(); return false; }
   ensureSamplesFor(Ly.items.map(i => i.tk)); if (C.list.length) loadCues();
-  const sp = { t0: t0 || ctx.currentTime + 0.1 + C.pre * aq(), fb, len: Ly.len, parts: [], only: !!only, pre: C.pre };
-  if (C.list.length) sp.parts.push({ cue: 1, srcs: [], idx: 0, list: C.list.map(o => Object.assign(o, { t: (o.b - fb) * aq() })).sort((a, b) => a.t - b.t) });
+  const sp = { t0: t0 || ctx.currentTime + 0.1 + (b2s(fb) - b2s(fb - C.pre)), fb, len: Ly.len, parts: [], only: !!only, pre: C.pre };
+  if (C.list.length) sp.parts.push({ cue: 1, srcs: [], idx: 0, list: C.list.map(o => Object.assign(o, { t: b2s(o.b) - b2s(fb) })).sort((a, b) => a.t - b.t) });
   Ly.items.forEach(it => { const pl = mkPl(it.tk), list = [];
     it.offs.forEach(o => { if (it.tk.type === 'audio') list.push({ t: o, audio: 1 }); else it.tk.events.forEach(ev => list.push({ t: o + ev.t, ev })); });
     list.sort((a, b) => a.t - b.t); sp.parts.push({ tk: it.tk, pl, list, idx: 0, tr: it.tk.tr }); });
@@ -3731,13 +3905,13 @@ function arrTick() {
   if (now > end + 0.15) arrStop(false, true);
 }
 function arrStop(silent, natural) { const sp = arrPl; if (!sp) return; clearInterval(sp.timer); arrPl = null; if (ctx) sp.parts.forEach(P => P.cue ? (natural || P.srcs.forEach(x => { try { x.stop(); } catch (e) {} })) : killPl(P.pl, natural)); if (!silent) { renderArrBtns(); if (micA) stopMicA(); } }
-function arrBeat() { return arrPl && !arrPl.only ? arrPl.fb + (ctx.currentTime - arrPl.t0) / aq() : arr.head; }
+function arrBeat() { return arrPl && !arrPl.only ? s2b(b2s(arrPl.fb) + (ctx.currentTime - arrPl.t0)) : arr.head; }
 /* --- penyimpanan --- */
 let arrSaveT = null;
-function arrSave() { clearTimeout(arrSaveT); arrSaveT = setTimeout(() => idb.put('arr_v1', { clips: arr.clips, marks: arr.marks, tracks: arr.tracks, tr: arr.tr, ppb: arr.ppb, snap: arr.snap, loop: arr.loop, nid: arr.nid, aud: arr.aud.map(a => ({ aid: a.aid, name: a.name, kind: a.kind, sec: a.sec })) }), 500); }
+function arrSave() { clearTimeout(arrSaveT); arrSaveT = setTimeout(() => idb.put('arr_v1', { tempo: arr.tempo || null, clips: arr.clips, marks: arr.marks, tracks: arr.tracks, tr: arr.tr, ppb: arr.ppb, snap: arr.snap, loop: arr.loop, nid: arr.nid, aud: arr.aud.map(a => ({ aid: a.aid, name: a.name, kind: a.kind, sec: a.sec })) }), 500); }
 async function arrLoad(demo) {
   const m = await idb.get('arr_v1');
-  if (m && Array.isArray(m.clips)) { if (Array.isArray(m.tracks) && m.tracks.length) arr.tracks = m.tracks; arr.marks = Array.isArray(m.marks) ? m.marks : []; if (arr.marks.length) loadCues(); Object.assign(arr, { clips: m.clips, ppb: m.ppb || 26, snap: m.snap || 1, loop: !!m.loop, nid: m.nid || 1 }); Object.assign(arr.tr, m.tr || {});
+  if (m && Array.isArray(m.clips)) { if (Array.isArray(m.tracks) && m.tracks.length) arr.tracks = m.tracks; arr.marks = Array.isArray(m.marks) ? m.marks : []; if (arr.marks.length) loadCues(); arr.tempo = Array.isArray(m.tempo) ? m.tempo : null; Object.assign(arr, { clips: m.clips, ppb: m.ppb || 26, snap: m.snap || 1, loop: !!m.loop, nid: m.nid || 1 }); Object.assign(arr.tr, m.tr || {});
     arr.aud = (m.aud || []).map(a => Object.assign({}, a)); for (const a of arr.aud) { try { const ab = await idb.get('arraud_' + a.aid); if (ab) { ensureAudio(); a.buf = await decode(ab.slice(0)); } } catch (e) {} } }
   else if (demo) arrDemo();
   $('#aSnap').value = arr.snap; $('#aLoop').classList.toggle('on', arr.loop); renderArrLib(); renderArr();
@@ -3755,7 +3929,7 @@ function arrLibItems() {
     ...['riser', 'revcym', 'impact', 'subdrop'].map(id => { const d = KITS.edm.pads.find(x => x.id === id); return { kind: 'fxs', name: d.name, len: d.sync ? 4 : 2, d: { id } }; }),
     { h: 'Orkestra, Natal & ambience' }, ...[['p_cymswell', 'Cymbal swell', 4], ['p_timproll', 'Timpani roll', 4], ['p_timpl', 'Timpani', 2], ['p_gong', 'Gong besar', 4], ['p_ocean', 'Ombak (ambience)', 8], ['p_falls', 'Air terjun (ambience)', 7], ['n_markdn', 'Mark tree turun', 4], ['n_shake', 'Sleigh bells kocok', 2], ['n_trir', 'Triangle roll', 4]].map(([id, name, len]) => ({ kind: 'fxs', name, len, d: { id } })),
     { h: 'Rekaman Anda' }];
-  takes.forEach(tk => L.push({ kind: 'take', name: tk.name, len: Math.max(1, Math.round(tk.len / aq())), sec: tk.len, d: { tid: tk.id } }));
+  takes.forEach(tk => L.push({ kind: 'take', name: tk.name, len: Math.max(1, Math.round(tk.len / takeQ(tk))), sec: tk.len, d: { tid: tk.id } }));
   if (!takes.length) L.push({ note: 'Belum ada rekaman.' });
   L.push({ h: 'Audio Anda (import/mic)' });
   arr.aud.forEach(a => L.push({ kind: a.kind, name: a.name, sec: a.sec, len: a.sec / aq(), d: { aid: a.aid } }));
@@ -3904,13 +4078,13 @@ function drawAClip(k) {
   else if (['gtr', 'bass', 'kb'].includes(k.kind)) { for (let b = 0; b < len - 1e-6; b += 1) x.fillRect(b * arr.ppb + 2, 30, Math.max(2, arr.ppb - 5), b % 4 === 0 ? 8 : 5); }
   else if (k.kind === 'pad') { x.globalAlpha = .3; x.fillRect(0, 26, w, 12); }
   else if (k.kind === 'take' && takeOf(k) && takeOf(k).type === 'seq') {   // tampilkan rekaman sebagai pola (drum per baris, not sebagai balok)
-    const tk = takeOf(k), tl = tk.len / aq(), ev = tk.events, ns = ev.filter(e => typeof e.n === 'number').map(e => e.n), lo = Math.min(...ns), hi = Math.max(...ns), yN = n => 33 - (hi > lo ? (n - lo) / (hi - lo) : .5) * 15, P = arr.ppb;
+    const tk = takeOf(k), tl = tk.len / takeQ(tk), ev = tk.events, ns = ev.filter(e => typeof e.n === 'number').map(e => e.n), lo = Math.min(...ns), hi = Math.max(...ns), yN = n => 33 - (hi > lo ? (n - lo) / (hi - lo) : .5) * 15, P = arr.ppb;
     for (let o = 0; o < len - 1e-6; o += tl) ev.forEach(e => {
-      const b = o + e.t / aq(); if (b >= len - 1e-6) return; const X = b * P;
+      const b = o + e.t / takeQ(tk); if (b >= len - 1e-6) return; const X = b * P;
       if (e.type === 'drum') { x.fillRect(X + 1, 17 + drumRow(e.id) * 3.2, Math.max(2, P / 4 - 1.5), 2.4); }
-      else if (e.type === 'padOn' || e.type === 'kbOn') { const ot = e.type === 'padOn' ? 'padOff' : 'kbOff', off = ev.find(f => f.type === ot && f.id === e.id && f.t >= e.t), w = ((off ? off.t : tk.len) - e.t) / aq() * P;
+      else if (e.type === 'padOn' || e.type === 'kbOn') { const ot = e.type === 'padOn' ? 'padOff' : 'kbOff', off = ev.find(f => f.type === ot && f.id === e.id && f.t >= e.t), w = ((off ? off.t : tk.len) - e.t) / takeQ(tk) * P;
         x.fillRect(X, e.type === 'padOn' ? 22 : yN(e.n), Math.max(2, Math.min(w, (len - b) * P) - 1), e.type === 'padOn' ? 14 : 2.6); }
-      else if (typeof e.n === 'number') x.fillRect(X, yN(e.n), Math.max(2, Math.min(P / 4, (e.d ? e.d / aq() * P : P / 4)) - 1), 2.6);
+      else if (typeof e.n === 'number') x.fillRect(X, yN(e.n), Math.max(2, Math.min(P / 4, (e.d ? e.d / takeQ(tk) * P : P / 4)) - 1), 2.6);
       else if (/chime|chrec/.test(e.type)) x.fillRect(X, 20, 2, 16);
     }); }
 
@@ -3923,9 +4097,9 @@ function arrSel(k, add) {
   arr.sel = k && arr.selSet.has(k) ? k : [...arr.selSet].pop() || null; old.forEach(drawAClip); arr.selSet.forEach(drawAClip);
 }
 /* --- undo / redo --- */
-function arrSnap() { return JSON.stringify({ c: arr.clips, m: arr.marks, t: arr.tracks, r: arr.tr }); }
+function arrSnap() { return JSON.stringify({ c: arr.clips, m: arr.marks, t: arr.tracks, r: arr.tr, p: arr.tempo || null }); }
 function arrPush(snap) { arr.undo.push(snap ?? arrSnap()); if (arr.undo.length > 60) arr.undo.shift(); arr.redo = []; }
-function arrRestore(from, to) { if (!from.length) { toast('Tidak ada yang bisa di-' + (from === arr.undo ? 'undo' : 'redo') + '.'); return; } to.push(arrSnap()); const ids = new Set([...arr.selSet].map(k => k.id)); const o = JSON.parse(from.pop()); arr.clips = Array.isArray(o) ? o : o.c; if (!Array.isArray(o)) { arr.marks = o.m || []; if (o.t) arr.tracks = o.t; if (o.r) arr.tr = o.r; } arr.selMark = null; fixTracks(); arr.selSet = new Set(arr.clips.filter(k => ids.has(k.id))); arr.sel = [...arr.selSet][0] || null; arrSave(); renderArr(); if (arrPl && !arrPl.only) arrPlay(arrBeat()); }
+function arrRestore(from, to) { if (!from.length) { toast('Tidak ada yang bisa di-' + (from === arr.undo ? 'undo' : 'redo') + '.'); return; } to.push(arrSnap()); const ids = new Set([...arr.selSet].map(k => k.id)); const o = JSON.parse(from.pop()); arr.clips = Array.isArray(o) ? o : o.c; if (!Array.isArray(o)) { arr.marks = o.m || []; if (o.t) arr.tracks = o.t; if (o.r) arr.tr = o.r; arr.tempo = o.p || null; } arr.selMark = null; fixTracks(); arr.selSet = new Set(arr.clips.filter(k => ids.has(k.id))); arr.sel = [...arr.selSet][0] || null; arrSave(); renderArr(); if (arrPl && !arrPl.only) arrPlay(arrBeat()); }
 const arrUndo = () => arrRestore(arr.undo, arr.redo), arrRedo = () => arrRestore(arr.redo, arr.undo);
 /* --- salin / potong / tempel --- */
 function arrCopy(cut) {
@@ -4183,8 +4357,8 @@ async function projData(name) {
   const used = new Set(arr.clips.filter(k => k.kind === 'take').map(k => k.d.tid)), aud = [];
   for (const a of arr.aud) { const ab = await idb.get('arraud_' + a.aid); if (ab) aud.push({ aid: a.aid, name: a.name, kind: a.kind, sec: a.sec, b64: b64of(ab) }); }
   return { app: 'WorshipPadStudio', v: 1, name, bpm: S.bpm, sig: S.sig,
-    arr: { clips: arr.clips, marks: arr.marks, tracks: arr.tracks, tr: arr.tr, ppb: arr.ppb, snap: arr.snap, loop: arr.loop, nid: arr.nid },
-    takes: takes.filter(t => used.has(t.id) && t.type === 'seq').map(t => ({ id: t.id, name: t.name, type: 'seq', bpm: t.bpm, sig: t.sig, bars: t.bars, len: t.len, events: t.events, vol: t.vol, loop: t.loop })), aud };
+    arr: { tempo: arr.tempo || null, clips: arr.clips, marks: arr.marks, tracks: arr.tracks, tr: arr.tr, ppb: arr.ppb, snap: arr.snap, loop: arr.loop, nid: arr.nid },
+    takes: takes.filter(t => used.has(t.id) && t.type === 'seq').map(t => ({ id: t.id, name: t.name, type: 'seq', bpm: t.bpm, qref: t.qref, sig: t.sig, bars: t.bars, len: t.len, events: t.events, vol: t.vol, loop: t.loop })), aud };
 }
 async function projSave() {
   const name = prompt('Nama proyek:', S.projName || 'Lagu saya'); if (!name) return; S.projName = name; save('projName');
@@ -4198,7 +4372,7 @@ async function projLoad(P, quiet) {
   if (P.bpm && typeof setBpm === 'function') setBpm(P.bpm);
   (P.takes || []).forEach(t => { if (!takes.some(x => x.id === t.id)) takes.push(Object.assign({}, t)); });
   for (const a of (P.aud || [])) { if (arr.aud.some(x => x.aid === a.aid)) continue; try { const bin = Uint8Array.from(atob(a.b64), c => c.charCodeAt(0)).buffer; await idb.put('arraud_' + a.aid, bin.slice(0)); arr.aud.push({ aid: a.aid, name: a.name, kind: a.kind, sec: a.sec, buf: await decode(bin) }); } catch (e) {} }
-  const A = JSON.parse(JSON.stringify(P.arr)); if (Array.isArray(A.tracks) && A.tracks.length) arr.tracks = A.tracks;
+  const A = JSON.parse(JSON.stringify(P.arr)); if (Array.isArray(A.tracks) && A.tracks.length) arr.tracks = A.tracks; arr.tempo = Array.isArray(A.tempo) ? A.tempo : null;
   Object.assign(arr, { clips: A.clips || [], marks: A.marks || [], ppb: A.ppb || arr.ppb, snap: A.snap || 1, loop: !!A.loop, nid: Math.max(arr.nid, A.nid || 1), selSet: new Set(), sel: null, head: 0 });
   arr.tr = Object.assign({}, A.tr || {}); fixTracks(); arr.tracks.forEach(t => { if (!arr.tr[t.id]) arr.tr[t.id] = { vol: 80, mute: false, solo: false }; });
   S.projName = P.name || S.projName; save('projName');
@@ -4231,7 +4405,7 @@ function initArr() {
   $('#aZoomIn').onclick = () => { arr.ppb = Math.min(80, arr.ppb + 6); renderArr(); arrSave(); };
   $('#aZoomOut').onclick = () => { arr.ppb = Math.max(8, arr.ppb - 6); renderArr(); arrSave(); };
   $('#aDel').onclick = () => arrDel(); $('#aUndo').onclick = arrUndo; $('#aRedo').onclick = arrRedo; $('#aSelBtn').onclick = toggleSelMode;
-  $('#aClear').onclick = e => { const b = e.currentTarget; if (b.dataset.c !== '1') { b.dataset.c = '1'; b.textContent = 'Yakin?'; setTimeout(() => { b.dataset.c = ''; b.textContent = 'Kosongkan'; }, 2500); return; } arrStop(); arrPush(); arr.clips = []; arr.marks = []; arr.sel = null; arr.selSet.clear(); arrSave(); renderArr(); };
+  $('#aClear').onclick = e => { const b = e.currentTarget; if (b.dataset.c !== '1') { b.dataset.c = '1'; b.textContent = 'Yakin?'; setTimeout(() => { b.dataset.c = ''; b.textContent = 'Kosongkan'; }, 2500); return; } arrStop(); arrPush(); arr.clips = []; arr.marks = []; arr.tempo = null; arr.sel = null; arr.selSet.clear(); arrSave(); renderArr(); renderTempoBtn(); };
   $('#aDemo').onclick = e => { const r = e.currentTarget.getBoundingClientRect(); showMenu($('#aCtx'), r.left, r.bottom + 4, [['💾 Simpan proyek ke file… (Files / Google Drive)', projSave], ['📂 Buka file proyek (.wps)…', () => $('#aProjFile').click()], ['Contoh — menggantikan susunan sekarang (simpan dulu kalau perlu):', null],
     ['♪ Contoh sederhana (kunci & suara yang sedang dipilih)', () => { arrStop(); arrPush(); arr.clips = []; arr.marks = []; arrDemo(); arrSave(); renderArr(); toast('Contoh lagu dimuat (pakai kunci & suara yang sedang dipilih).'); }],
     ['🎄 Overture Natal (±9 menit, orkestra + band)', () => loadDemoProject('overture.js', 'DEMO_OVERTURE')],
@@ -4239,10 +4413,11 @@ function initArr() {
   $('#aProjFile').onchange = async e => { const f = e.target.files[0]; e.target.value = ''; if (!f) return; try { await projLoad(JSON.parse(await f.text())); } catch (err) { toast('File proyek tidak bisa dibuka: ' + err.message, 4000); } };
   $('#aMic').onclick = e => { if (micA) return stopMicA(); if (rec.state === 'rec') return stopRec(); const r = e.currentTarget.getBoundingClientRect(); arrRecMenu(r.left, r.bottom + 4); };
   $('#aImp').onclick = () => $('#aFile').click();
-  $('#aFile').addEventListener('change', async e => { const f = e.target.files[0]; e.target.value = ''; if (!f) return; ensureAudio();
+  $('#aFile').addEventListener('change', async e => { const f = e.target.files[0]; e.target.value = ''; if (!f) return; ensureAudio(); if (/\.midi?$/i.test(f.name) || /midi/.test(f.type)) { importMidiFile(f); return; }
     try { const buf = await decode(await f.arrayBuffer()); await arrAddAudio(buf, f.name.replace(/\.[^.]+$/, ''), 'audio'); toast('Suara masuk ke track Audio import (juga ada di pustaka kiri).'); }
     catch (err) { toast('File ini tidak bisa dibaca. Coba MP3, WAV atau M4A.'); } });
   $('#aExport').onclick = arrExport;
+  $('#aTempo').onclick = tempoEditor; renderTempoBtn();
   $('#aScroll').addEventListener('wheel', e => { const sc = e.currentTarget, vert = sc.scrollHeight > sc.clientHeight + 2; if (Math.abs(e.deltaY) > Math.abs(e.deltaX) && (e.shiftKey || !vert)) { sc.scrollLeft += e.deltaY; e.preventDefault(); } }, { passive: false });
   $('#aScroll').addEventListener('contextmenu', e => e.preventDefault());
   $('#aModal').addEventListener('pointerdown', e => { if (e.target.id === 'aModal') { $('#aModal').classList.remove('show'); if (arrPl && !arrPl.only) arrPlay(arrBeat()); } });
@@ -4537,7 +4712,7 @@ function init() {
   slider('chColl', 'chColl', null, v => v == 0 ? 'mati' : v + '%'); slider('chDecay', 'chDecay', null, v => v + '%');
   slider('chVol', 'chVol', applyLevels, v => v + '%'); slider('chRev', 'chRev', applyLevels, v => v + '%');
   // drum
-  chips('#kits', ['std', 'yamaha', 'evans', 'perc', 'orch', 'natal', 'basic', 'edm'].filter(k => KITS[k]).map(k => [k, KITS[k].name]), 'kit', renderDrums);
+  chips('#kits', ['real', 'std', 'yamaha', 'evans', 'perc', 'orch', 'natal', 'basic', 'edm'].filter(k => KITS[k]).map(k => [k, KITS[k].name]), 'kit', renderDrums);
   renderDrums();
   slider('drVol', 'drVol', applyLevels, v => v + '%');
   $('#dmClose').addEventListener('click', () => $('#drumMenu').classList.remove('show'));
